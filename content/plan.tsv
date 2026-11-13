@@ -1,0 +1,293 @@
+slug	hub	name	keyword	notes
+house-affordability-calculator	mortgage	How Much House Can I Afford Calculator	how much house can i afford calculator	HOTTEST PAGE 1500-2200 words. income, monthly debts, down payment, rate, term, property tax %, insurance, HOA -> max price via 28/36 rule; show conservative/stretch
+mortgage-calculator	mortgage	Mortgage Payment Calculator	how to calculate mortgage payment	PITI monthly payment, total interest, amortization summary by year table
+mortgage-payoff-calculator	mortgage	Mortgage Payoff Calculator	how do i calculate paying off mortgage early	extra monthly payment -> months saved, interest saved, payoff date
+refinance-calculator	mortgage	Refinance Calculator	should i refinance my mortgage calculator	old vs new payment, closing costs, break-even months
+rent-or-sell-house-calculator	mortgage	Rent or Sell My House Calculator	should i rent or sell my house calculator	compare net proceeds now vs rental cash flow + appreciation over N years
+heloc-payment-calculator	mortgage	HELOC Payment Calculator	how to calculate heloc payments	interest-only draw period payment and repayment-period payment
+dti-calculator	mortgage	Debt-to-Income Ratio Calculator	how to calculate debt-to-income ratio	front-end and back-end DTI, compare to 28/36 and 43% QM
+ltv-calculator	mortgage	LTV & CLTV Calculator	how to calculate cltv	loan-to-value and combined LTV, PMI threshold 80%
+home-sale-proceeds-calculator	mortgage	Cost to Sell a House Calculator	how much does it cost to sell a house calculator	commission, closing costs, payoff -> net proceeds
+property-tax-calculator	mortgage	Property Tax Calculator	how to calculate property taxes	assessed value x rate or mill rate, exemptions; California Prop 13 note
+rental-property-calculator	mortgage	Rental Property Cash Flow Calculator	how to calculate cash flow on rental property	cash flow, cap rate, cash-on-cash ROI, rental yield
+cap-rate-calculator	mortgage	Commercial Property Value Calculator	how to value commercial property calculator	NOI / cap rate -> value; solve cap rate
+rent-affordability-calculator	mortgage	3x Rent Calculator	how to calculate 3 times the rent	income needed = rent x3; max rent from income
+rent-increase-calculator	mortgage	Rent Increase Calculator	how to calculate rent increase percentage	percent increase, new rent, annual cost difference
+commercial-rent-calculator	mortgage	Commercial Rent Calculator	how to calculate commercial rent	$/sq ft/yr -> monthly; NNN/CAM add-ons
+vacancy-rate-calculator	mortgage	Vacancy Rate Calculator	how to calculate vacancy rate	physical vacancy and economic occupancy
+section-8-rent-calculator	mortgage	Section 8 Rent Calculator	how is section 8 rent calculated	HUD TTP: greater of 30% adjusted monthly income or 10% gross; deductions $480/dependent, $525 elderly (2024 HOTMA); cite HUD
+acreage-calculator	construction	Acreage Calculator	how to calculate acreage of an irregular lot	length x width or 4 sides -> acres, sq ft; yard size
+loan-calculator	loans	Loan Payment Calculator	how to calculate interest rate per month on loan	monthly payment, total interest; monthly rate = APR/12
+car-loan-calculator	loans	Car Loan Calculator	how do i calculate interest rate on a car loan	price, down, trade-in, sales tax, rate, term -> payment
+simple-interest-calculator	loans	Simple Interest Calculator	how to calculate interest payment	I = P r t; 365 vs 360 day basis; monthly interest
+amortization-calculator	loans	Amortization Schedule Calculator	how to calculate loan amortization	full monthly schedule table (first 12 + yearly)
+loan-payoff-calculator	loans	Loan Payoff Calculator	when will my loan be paid off calculator	balance, rate, payment -> months to payoff, payoff date
+credit-card-minimum-payment-calculator	loans	Credit Card Minimum Payment Calculator	how is minimum payment calculated	1% + interest or % of balance; time to pay off at minimum
+credit-card-interest-calculator	loans	Credit Card Interest Calculator	how to calculate average daily balance	average daily balance method, daily periodic rate
+apr-calculator	loans	APR Calculator	how do you calculate apr for a mortgage	APR including fees via rate solve
+apy-calculator	loans	APY Calculator	how to calculate effective interest rate	APR to APY / effective annual rate by compounding
+student-loan-payoff-calculator	loans	Student Loan Payoff Calculator	how to pay off student loans faster calculator	extra payment effect on months and interest
+lease-calculator	loans	Car Lease Calculator	how to calculate the money factor on a lease	money factor x2400 = APR; depreciation + finance fee payment
+car-affordability-calculator	loans	How Much Car Can I Afford Calculator	how much should i spend on a car calculator	20/4/10 rule, max price
+car-depreciation-calculator	loans	Car Depreciation Calculator	how to calculate depreciation car	value after N years, residual/salvage value
+compound-interest-calculator	investing	Compound Interest Calculator	how to calculate interest earned	principal, monthly deposits, rate, compounding, years
+cd-calculator	investing	CD Calculator	how to calculate interest on a cd	APY/rate, term months, compounding -> interest earned, maturity value
+inflation-calculator	investing	Inflation Calculator	how to calculate inflation	inflation rate between two CPI values or years (CPI-U annual averages 1913-2025, BLS)
+dollar-value-calculator	investing	Dollar Value Calculator	how much was $20 in 1932	what $X in YEAR is worth today using BLS CPI-U table; table of popular years
+how-long-will-money-last-calculator	investing	How Long Will My Money Last Calculator	how long will my money last calculator	HOT 1500+ words. savings, monthly withdrawal, return, inflation -> years/months until depleted
+retirement-calculator	investing	Retirement Savings Calculator	how much do i need to retire calculator	expenses, 4% rule, years to retirement -> target nest egg and monthly savings needed
+retirement-age-calculator	investing	When Can I Retire Calculator	when do i retire calculator	current savings, contributions, return, target -> retirement age
+fire-calculator	investing	FIRE Number Calculator	how to calculate fire number	annual expenses / withdrawal rate; years to FI
+coast-fire-calculator	investing	Coast FIRE Calculator	how to calculate coast fi number	coast number = FI / (1+r)^years
+millionaire-calculator	investing	Save a Million Calculator	how to save a million dollars in 10 years calculator	monthly savings needed for $1M in N years; years to $1M
+rmd-calculator	investing	RMD Calculator	how do i calculate my rmd	HOT. balance Dec 31 / IRS Uniform Lifetime Table divisor; RMD age 73; full table
+irr-calculator	investing	IRR Calculator	how to calculate irr	cash flow list -> IRR via Newton/bisection; NPV at IRR
+npv-calculator	investing	NPV Calculator	how to calculate npv	discount rate + cash flows -> NPV, profitability index
+roi-calculator	investing	ROI Calculator	how to calculate an investment return	ROI % and annualized ROI; marketing ROI section
+cagr-calculator	investing	CAGR Calculator	how to calculate average annual growth rate	start, end, years -> CAGR
+wacc-calculator	investing	WACC Calculator	how do i calculate wacc	E, D, cost of equity, cost of debt, tax rate
+capm-calculator	investing	CAPM Required Return Calculator	how to calculate required rate of return	rf + beta x market risk premium
+beta-calculator	investing	Stock Beta Calculator	how is beta calculated	stock & market returns lists -> beta = cov/var; unlevered beta option
+dividend-payout-ratio-calculator	investing	Dividend Payout Ratio Calculator	how to calculate dividend payout ratio	dividends / net income; per-share; yield
+eps-calculator	investing	EPS Calculator	how are eps calculated	(net income - preferred dividends) / weighted shares
+pe-ratio-calculator	investing	P/E Ratio Calculator	how to calculate peg	price / EPS; forward P/E; PEG
+net-worth-calculator	investing	Net Worth Calculator	how do i calculate net worth	assets - liabilities
+pension-calculator	investing	Pension Lump Sum Calculator	how to calculate a lump sum pension payout	PV of monthly pension vs lump sum offer
+social-security-calculator	investing	Social Security Benefits Calculator	how social security benefits are calculated	AIME -> PIA with 2026 bend points $1,286/$7,749 (90/32/15); claiming age adjustments; spousal 50%; cite SSA
+401k-contribution-calculator	investing	401(k) Paycheck Contribution Calculator	how to calculate 401k contribution on paycheck	% of pay per paycheck, employer match, 2026 limit $24,500 (+$8,000 catch-up 50+, $11,250 age 60-63)
+magi-calculator	investing	MAGI Calculator for Roth IRA	how to calculate magi for roth ira	AGI + addbacks; 2026 Roth phase-out single $153k-$168k, MFJ $242k-$252k; reduced contribution; also AGI
+salary-to-hourly-calculator	pay	Salary to Hourly Calculator	how to calculate yearly salary into hourly rate	both directions; hours/week, weeks/year; weekly, biweekly, monthly
+overtime-calculator	pay	Overtime Calculator	how to calculate overtime	HOT. hourly rate, regular hrs, OT hrs, double time; FLSA 40hr; California daily OT section
+overtime-tax-deduction-calculator	pay	No Tax on Overtime Deduction Calculator	how to calculate overtime tax credit	2025-2028 deduction of OT premium (half-time portion) up to $12,500 ($25,000 MFJ), phase-out $100 per $1,000 MAGI over $150k/$300k; tax saved at marginal rate; cite IRS
+holiday-pay-calculator	pay	Holiday Pay Calculator	how to calculate holiday pay	hours x rate x multiplier (1.5/2); holiday + OT
+gross-pay-calculator	pay	Gross Pay Calculator	how to calculate gross pay	hourly/salary -> gross per period, gross monthly income
+biweekly-pay-calculator	pay	Biweekly Pay Calculator	how to calculate annual income biweekly	biweekly x 26; annual -> biweekly; 27-paycheck years
+semi-monthly-pay-calculator	pay	Semi-Monthly Pay Calculator	how to calculate semi monthly pay	annual/24; hourly semi-monthly; vs biweekly
+take-home-pay-calculator	pay	Take-Home Pay Calculator	how to calculate net pay from gross	2026 federal brackets + std deduction, FICA 7.65% (SS wage base $184,500), flat state % -> net per paycheck; gross from net
+income-tax-calculator	pay	Federal Income Tax Calculator 2026	how to calculate tax on income	2026 brackets single/MFJ/HoH, standard deduction $16,100/$32,200/$24,150; marginal & effective rate; bracket table
+self-employment-tax-calculator	pay	1099 Self-Employment Tax Calculator	how to calculate 1099 taxes owed	15.3% x 92.35% net earnings, half deductible, quarterly estimates
+leave-loading-calculator	pay	Leave Loading Calculator	how to calculate annual leave loading	Australia 17.5% of base weekly pay x weeks leave; AUD; Fair Work source
+pto-accrual-calculator	pay	PTO Accrual Calculator	how to calculate pto accrual per hour	hours accrued per hour worked / per pay period; PTO payout value
+lost-wages-calculator	pay	Lost Wages Calculator	how to calculate lost wages for salaried employee	daily rate x days missed; hourly; documentation
+raise-calculator	pay	Pay Raise Calculator	how to calculate 3 raise	new salary/hourly from %; % from new pay
+ytd-income-calculator	pay	Year-to-Date Income Calculator	how to calculate year to date income	YTD from pay stubs, annualized income
+sales-tax-calculator	pay	Sales Tax Calculator	how calculate sales tax	add tax or reverse from total (backwards); table of state base rates
+capital-gains-tax-calculator	pay	Capital Gains Tax Calculator	how to calculate the capital gains tax	2026 LTCG 0/15/20% thresholds single $49,450/$545,500, MFJ $98,900/$613,700; short-term at ordinary; NIIT 3.8%
+depreciation-calculator	business	Depreciation Calculator	how do you calculate depreciation on equipment	straight-line, double-declining; rental property 27.5 yrs option; schedule table
+gratuity-calculator	pay	Gratuity Calculator	how to calculate gratuity amount	India: last salary x 15/26 x years; cap Rs 20 lakh; INR formatting
+profit-margin-calculator	business	Profit Margin Calculator	how to calculate net profit margin	gross, operating (EBIT), net margins from revenue & costs
+markup-calculator	business	Markup Calculator	how to calculate markup price	cost + markup % -> price; margin vs markup; retail from wholesale
+break-even-calculator	business	Break-Even Point Calculator	how to calculate break even point	fixed costs / (price - variable cost); contribution margin
+roas-calculator	business	ROAS Calculator	how to calculate break even roas	ROAS, break-even ROAS = 1/margin, blended ROAS
+cogs-calculator	business	Cost of Goods Sold Calculator	how do you calculate cost of goods sold	BI + purchases - EI; solve for beginning or ending inventory
+average-inventory-calculator	business	Average Inventory Calculator	how to calculate average inventory	(BI+EI)/2 or multi-period; inventory turnover, days
+safety-stock-calculator	business	Safety Stock Calculator	how to calculate safety stock	max-avg method and Z x sigma x sqrt(LT); reorder point
+days-of-supply-calculator	business	Days of Supply Calculator	how to calculate weeks of supply	on hand / avg daily usage; weeks of supply
+accounts-receivable-turnover-calculator	business	AR Turnover Calculator	how to calculate accounts receivable turnover	net credit sales / avg AR; DSO
+current-ratio-calculator	business	Current Ratio Calculator	how to calculate current ratio	current assets / liabilities; quick ratio
+debt-to-equity-calculator	business	Debt-to-Equity Ratio Calculator	how to calculate debt to equity ratio	total liabilities / equity
+debt-to-asset-ratio-calculator	business	Debt-to-Asset Ratio Calculator	how to calculate debt to asset ratio	total debt / total assets
+clv-calculator	business	Customer Lifetime Value Calculator	how to calculate clv	AOV x frequency x lifespan x margin; churn-based
+tam-sam-som-calculator	business	TAM SAM SOM Calculator	how to calculate tam sam som	top-down market sizing
+utilization-rate-calculator	business	Utilization Rate Calculator	how to calculate utilization	billable / available hours
+productivity-calculator	business	Productivity Calculator	how to calculate productivity	output / input; labor productivity per hour/employee
+total-cost-calculator	business	Total Cost Calculator	how to calculate total cost	TC = FC + VC; ATC, AVC, AFC, variable cost per unit
+trir-calculator	business	TRIR Calculator	how to calculate trir	recordables x 200,000 / hours; DART; OSHA source
+conversion-rate-calculator	business	Conversion Rate Calculator	how to calculate cvr	conversions / visitors
+nominal-gdp-calculator	business	Nominal GDP Calculator	how do you calculate nominal gdp	sum P x Q or real GDP x deflator/100; real GDP
+unemployment-rate-calculator	business	Unemployment Rate Calculator	how is the unemployment rate calculated	unemployed / labor force; LFPR; BLS
+payback-period-calculator	business	Payback Period Calculator	how to calculate the payback period	even and uneven cash flows; discounted
+business-valuation-calculator	business	Business Valuation Calculator	how to calculate the value of a business for sale	SDE x multiple, EBITDA multiple
+shark-tank-valuation-calculator	business	Shark Tank Valuation Calculator	how to calculate shark tank valuation	ask / equity% -> valuation; counter offers
+fuel-surcharge-calculator	business	Fuel Surcharge Calculator	how do you calculate a fuel surcharge	(current - base price)/mpg x miles; % method
+dimensional-weight-calculator	business	Dimensional Weight Calculator	how to calculate dimensional weight	L x W x H / 139 (UPS/FedEx), /166 USPS, /5000 cm-kg; chargeable weight
+bmi-calculator	health	BMI Calculator	how to calculate body mass index	imperial/metric, categories CDC; BMI prime
+bmr-calculator	health	BMR Calculator	how to calculate the basal metabolic rate	Mifflin-St Jeor, Harris-Benedict
+calorie-calculator	health	Calorie Calculator	how to calculate your calories	TDEE with activity multipliers; maintenance/loss/gain
+calorie-deficit-calculator	health	Calorie Deficit Calculator	how to calculate a calorie deficit	TDEE - deficit; weeks to goal; 3500 kcal rule caveat
+net-carbs-calculator	health	Net Carbs Calculator	how to calculate net carbs on atkins diet	HOT. total carbs - fiber - sugar alcohols (erythritol full, others half); Atkins phases
+macro-calculator	health	Macro Calculator	how to calculate macros for body recomp	calories -> protein/fat/carb grams
+protein-calculator	health	Protein Intake Calculator	how to calculate the amount of protein you need	0.8 g/kg RDA up to 1.6-2.2 g/kg athletes
+max-heart-rate-calculator	health	Max Heart Rate Calculator	how to calculate max heart rate	HOT. 220-age, Tanaka 208-0.7xage, Gulati women; zones table
+target-heart-rate-calculator	health	Target Heart Rate Calculator	how do i calculate target heart rate	Karvonen heart rate reserve zones
+vo2-max-calculator	health	VO2 Max Calculator	how to calculate vo2 max	Uth (15.3 x HRmax/HRrest), Cooper 12-min, 1.5-mile; norms by age
+body-fat-calculator	health	Body Fat Calculator	how can you calculate your body fat	US Navy method; ACE categories
+ideal-weight-calculator	health	Ideal Body Weight Calculator	how do i calculate ideal body weight	Devine, Robinson, Miller, Hamwi; BMI range
+one-rep-max-calculator	health	One Rep Max Calculator	how do you calculate 1rm	Epley, Brzycki; percentage table
+due-date-calculator	health	Due Date Calculator	how to calculate your due date	LMP + 280 days, cycle length adj; conception/IVF; ACOG
+conception-calculator	health	Conception Date Calculator	how do i calculate conception date	from due date or LMP; window
+pregnancy-weeks-calculator	health	How Far Along Am I Calculator	how do you calculate pregnancy weeks	weeks+days from LMP; trimester
+ovulation-calculator	health	Ovulation & Period Calculator	how to calculate my fertile window	next period, ovulation, fertile window for 3 cycles
+luteal-phase-calculator	health	Luteal Phase Calculator	how to calculate luteal phase	cycle length - ovulation day
+sleep-calculator	health	Sleep Calculator	how much sleep do i need calculator	bedtime/wake time by 90-min cycles; hours by age (AASM/CDC)
+water-intake-calculator	health	Water Intake Calculator	how much water should you drink in a day calculator	weight, activity, climate; National Academies 3.7/2.7 L; breastfeeding
+bac-calculator	health	Blood Alcohol (BAC) Calculator	how to calculate blood alcohol content	Widmark; time until 0.00; NHTSA; not for driving decisions
+stride-length-calculator	health	Stride Length Calculator	how do i calculate stride length	height x 0.413/0.415; measured method; steps per mile
+calories-burned-calculator	health	Calories Burned Calculator	how to calculate calories burned in a workout	MET x kg x hours; activity select (Compendium)
+map-calculator	health	Mean Arterial Pressure Calculator	how do you calculate map	(SBP + 2xDBP)/3; normal 70-100; StatPearls
+cardiac-output-calculator	health	Cardiac Output Calculator	how to calculate cardiac output	HR x SV; cardiac index with BSA
+anc-calculator	health	Absolute Neutrophil Count Calculator	how to calculate anc	WBC x (segs + bands)%; neutropenia grades
+ecg-heart-rate-calculator	health	ECG Heart Rate Calculator	how to calculate heart rate of ecg	300/large boxes, 1500/small boxes, 6-second method
+ldl-cholesterol-calculator	health	LDL Cholesterol Calculator	how is cholesterol calculated	Friedewald LDL, non-HDL, TG/HDL ratio, TC/HDL
+iv-drip-rate-calculator	health	IV Drip Rate Calculator	how to calculate drop per minute	gtt/min = volume x drop factor / minutes; mL/hr
+tidal-volume-calculator	health	Tidal Volume Calculator	how do you calculate tidal volume	6-8 mL/kg ideal body weight (ARDSnet)
+breast-milk-calculator	health	Breast Milk Feeding Calculator	how much expressed milk to feed baby calculator	~2.5 oz per lb/day up to ~32 oz; per feeding by feeds/day; CDC
+gpa-calculator	education	GPA Calculator	how to calculate gpa	HOTTEST 1500-2200 words. course rows (grade, credits), +/- 4.0 scale, cumulative with prior GPA & credits
+high-school-gpa-calculator	education	High School GPA Calculator	how to calculate high school gpa	weighted (honors +0.5, AP/IB +1.0) and unweighted
+final-grade-calculator	education	Final Grade Calculator	how to calculate final grade	current grade, final weight, target -> score needed
+grade-calculator	education	What If Grade Calculator	what if grade calculator	weighted categories rows; what-if new scores
+class-rank-calculator	education	Class Rank Calculator	how to calculate class rank	rank & class size -> percentile, top %
+credit-hours-calculator	education	Credit Hours Calculator	how to calculate credit hours	contact hours -> credit; semester to quarter
+gpa-to-percentage-calculator	education	GPA to Percentage Calculator	how to calculate percentage from gpa	4.0 and 10-point CGPA (x9.5) conversions
+words-per-minute-calculator	education	Words Per Minute Calculator	how to calculate words per minute	reading WPM, WCPM fluency, typing WPM, keystrokes per hour
+graduation-year-calculator	education	Graduation Year Calculator	what year will my child graduate high school calculator	birth date + cutoff -> kindergarten, grad year
+what-grade-calculator	education	What Grade Was I In Calculator	what grade was i in year calculator	grad year or birth year + a year -> grade then; what grade should my child be in
+attendance-percentage-calculator	education	Attendance Percentage Calculator	how to calculate attendance percentage	attended/total; classes needed to reach 75%
+test-score-calculator	education	Test Score Calculator	how to calculate percentage for marks	correct/total -> percent & letter grade; table per wrong answer
+psat-score-calculator	education	PSAT Selection Index Calculator	how to calculate psat score for national merit	(RW x2 + Math)/10... index = 2xRW+Math sections /10 per College Board; state cutoffs note
+square-footage-calculator	construction	Square Footage Calculator	how is square footage calculated	HOT. rooms rows L x W (ft+in), shapes; sq yd, m2; cost per sq ft
+square-meters-calculator	construction	Square Meter Calculator	how do we calculate square meters	m/cm/ft inputs -> m2, ft2
+linear-feet-calculator	construction	Linear Feet Calculator	how to calculate linear feet	HOT. pieces x length; sq ft -> linear ft by width; fence, trim, boards
+cubic-feet-calculator	construction	Cubic Feet Calculator	how can i calculate cubic feet	L x W x H in ft/in -> ft3, yd3, gallons
+cubic-yards-calculator	construction	Cubic Yards Calculator	how to calculate cubic yards of dirt	dirt, soil, topsoil, fill; depth in inches; bags
+gravel-calculator	construction	Gravel Calculator	how to calculate how much gravel i need	area x depth -> yd3 and tons (pea gravel, crushed, river rock densities)
+mulch-calculator	construction	Mulch Calculator	how to calculate bark mulch coverage	area x depth -> yd3, 2 cu ft bags
+concrete-calculator	construction	Concrete Calculator	how to calculate concrete slab	slab/footing/column -> yd3, 60/80 lb bags
+concrete-block-calculator	construction	Concrete Block Calculator	how to calculate concrete blocks needed	wall L x H / 0.889 sq ft per 8x16 block; mortar
+asphalt-calculator	construction	Asphalt Calculator	how to calculate asphalt tonnage	area x thickness x 145 lb/ft3 -> tons
+cubic-yards-to-tons-calculator	construction	Cubic Yards to Tons Calculator	how to convert cubic yards to tons calculator	material density table both directions
+flooring-calculator	construction	Flooring Calculator	how do you calculate square feet for flooring	area + waste 10% -> boxes
+tile-calculator	construction	Tile Calculator	how to calculate square feet for tile	area, tile size, grout, waste -> tiles, boxes; backsplash
+countertop-square-footage-calculator	construction	Countertop Square Footage Calculator	how do you calculate square footage of a countertop	segments in inches -> sq ft, cost
+roof-pitch-calculator	construction	Roof Pitch Calculator	how to calculate roof pitch in degrees	rise/run -> x/12, degrees, multiplier table
+roofing-calculator	construction	Roofing Calculator	how do i calculate square footage of a roof	footprint x pitch multiplier -> squares, bundles
+drywall-calculator	construction	Drywall Calculator	how to calculate drywall	walls/ceiling -> 4x8/4x12 sheets, mud, tape
+wallpaper-calculator	construction	Wallpaper Calculator	how to calculate how much wallpaper i need	roll size, pattern repeat -> rolls
+board-foot-calculator	construction	Board Foot Calculator	how calculate board feet	T x W x L /144; log Doyle scale
+framing-calculator	construction	Framing Nails & Stud Calculator	how many framing nails should i order calculator	wall length, stud spacing -> studs, plates, nails (lb)
+stair-calculator	construction	Stair Calculator	how to calculate steps in staircase	total rise -> risers, treads, stringer length, angle; IRC 7.75 in
+btu-calculator	electrical	BTU Calculator	how do you calculate btu for a room	sq ft x 20 + adjustments; AC tons
+cfm-calculator	electrical	CFM Calculator	how to calculate air changes per hour	room volume x ACH /60; bathroom fan
+generator-size-calculator	electrical	Generator Size Calculator	how to calculate what size generator i need	appliance watts + largest starting watts
+can-light-spacing-calculator	construction	Recessed Light Spacing Calculator	can light spacing calculator	ceiling height/2 spacing; room -> count, layout
+pool-volume-calculator	construction	Pool Volume Calculator	how to calculate how many gallons in a pool	rectangle/round/oval, shallow/deep; pond
+pool-chlorine-calculator	construction	Pool Chlorine Calculator	how much chlorine to add to pool calculator	gallons, current/target ppm, product strength (liquid 10/12.5%, cal-hypo 65%, dichlor, trichlor)
+tank-volume-calculator	construction	Tank Volume Calculator	how to calculate gallons in a tank	vertical/horizontal cylinder, rectangular; fill height; fish tank
+firewood-cord-calculator	construction	Firewood Cord Calculator	how to calculate a cord of wood	stack dims /128; face cord
+yarn-calculator	construction	Yarn Calculator	how much yarn do i need for a blanket calculator	blanket size, yarn weight -> yards, skeins
+quilt-backing-calculator	construction	Quilt Backing Calculator	how to calculate backing for a quilt	quilt size + overage, fabric width -> yards; binding strips
+rolling-offset-calculator	construction	Rolling Offset Calculator	how to calculate a rolling offset	roll, set -> true offset, travel at 45/22.5/60
+pipe-volume-calculator	construction	Pipe Volume Calculator	how to calculate volume of a pipe	ID, length -> gallons, liters
+amps-calculator	electrical	Amps Calculator	how to calculate amps	watts/volts -> amps (DC, AC 1ph PF, 3ph); amps to watts
+ohms-law-calculator	electrical	Ohm's Law Calculator	how is voltage calculated	any two of V,I,R,P; voltage drop across resistor
+kw-calculator	electrical	kW Calculator	how to calculate kw	amps x volts x PF (1ph/3ph); kW to hp; kWh
+kva-calculator	electrical	kVA Calculator	how to calculate kva	V x A /1000 (x1.732); volt-amps, kVA to amps
+amp-hours-calculator	electrical	Amp Hours Calculator	how to calculate amp hours	Wh/V, mAh; battery capacity
+watt-hours-calculator	electrical	Watt Hours Calculator	how to calculate watt hours	Ah x V; device runtime
+battery-life-calculator	electrical	Battery Life Calculator	how to calculate how long a battery will last	capacity, load, DoD, inverter efficiency
+electricity-cost-calculator	electrical	Electricity Cost Calculator	how to calculate your electric bill	watts x hours x rate; kWh from amps; meter reading
+ev-charging-cost-calculator	electrical	EV Charging Cost Calculator	how to calculate the cost of charging an electric car	battery kWh, %, rate, efficiency loss; cost per mile
+solar-panel-calculator	electrical	Solar Panel Calculator	how to calculate solar system size	monthly kWh, peak sun hours -> kW, panels, battery
+torque-calculator	electrical	Torque & Horsepower Calculator	how to calculate torque of an electric motor	HP = T x RPM / 5252; kW <-> Nm
+compression-ratio-calculator	electrical	Compression Ratio Calculator	how to calculate compression ratio	bore, stroke, chamber, gasket, deck, piston volume
+engine-displacement-calculator	electrical	Engine Displacement Calculator	how to calculate cubic inches of an engine	bore x stroke x cylinders; cc <-> ci
+gear-ratio-calculator	electrical	Gear Ratio Calculator	how to calculate gear ratio and rpm	teeth -> ratio, output RPM, torque; final drive; speed at rpm
+pulley-calculator	electrical	Pulley Calculator	how to calculate ima of a pulley	diameters -> ratio/RPM; IMA = supporting strands; efficiency
+gpm-calculator	electrical	GPM Calculator	how to calculate gpm of a pump	bucket test; pipe diameter & velocity; psi orifice
+pump-head-calculator	electrical	Pump Head Calculator	how to calculate head pressure	ft head <-> psi (2.31); total dynamic head
+superheat-calculator	electrical	Superheat Calculator	how to calculate superheat	suction line temp - saturation temp from pressure; R-410A, R-22, R-32, R-454B PT tables; target superheat
+subcooling-calculator	electrical	Subcooling Calculator	how to calculate subcooling	saturation (liquid pressure) - liquid line temp; same PT tables
+wire-size-calculator	electrical	Wire Size Calculator	how to calculate wire size	amps + distance + voltage drop 3% -> AWG; NEC 310.16 75C table
+wheel-offset-calculator	electrical	Wheel Offset Calculator	how to calculate wheel offset	backspacing, width -> offset mm; compare two wheels
+mpg-calculator	everyday	MPG Calculator	how to calculate mpg	HOT-ish. miles / gallons; L/100km; trip log
+trip-gas-cost-calculator	everyday	Gas Cost Calculator	how to calculate gas price for a trip	distance, mpg, price -> cost, per person, round trip, cost per mile
+percentage-calculator	math	Percentage Calculator	how do you calculate percentage of a number	HOT. X% of Y, X is what % of Y, X is Y% of what
+percentage-change-calculator	math	Percentage Change Calculator	how do you calculate percentage change	HOT. increase/decrease, YoY, percent difference; sales growth section
+fraction-calculator	math	Fraction Calculator	how do you simplify a fraction on a calculator	simplify, + - x /, compare, decimal, mixed numbers
+scientific-notation-calculator	math	Scientific Notation Calculator	how to calculate scientific notation	convert, multiply/divide, e-notation
+root-calculator	math	Square Root & Cube Root Calculator	how to cube root on a calculator	sqrt, cbrt, nth root, simplify radical
+exponent-calculator	math	Exponent Calculator	how to put an exponent on a calculator	a^b, negative, fractional exponents
+log-calculator	math	Logarithm Calculator	how to calculate ln in excel	log10, ln, log base b, antilog
+slope-calculator	math	Slope Calculator	how to calculate slope with two points	slope, y-intercept, equation, angle
+midpoint-calculator	math	Midpoint Calculator	how to calculate midpoint	midpoint, distance between points
+circle-calculator	math	Circle Calculator	how do you calculate radius from diameter	radius, diameter, circumference, area from any one
+cylinder-volume-calculator	math	Cylinder Volume Calculator	how to calculate volume for cylinder	r/d, h, units -> volume, gallons, surface area
+right-triangle-calculator	math	Right Triangle Calculator	how to calculate side length of triangle	Pythagorean; angles; any two inputs
+ratio-calculator	math	Ratio Calculator	how do i calculate ratios	simplify, scale, solve A:B = C:x
+average-calculator	math	Average Calculator	how to calculate the mean of a sample	mean, median, mode, range, trimmed mean from list
+weighted-average-calculator	math	Weighted Average Calculator	how to calculate weighted mean	values & weights rows; grand mean
+factor-pair-calculator	math	What Multiplies To and Adds To Calculator	what multiplies to and adds to calculator	find two numbers with product P and sum S (quadratic factoring)
+binary-hex-calculator	math	Binary to Hex Converter	how to calculate binary to hexadecimal	binary/decimal/hex/octal conversions
+standard-deviation-calculator	statistics	Standard Deviation Calculator	how to calculate standard deviation	sample & population SD, variance, SE; pooled SD; Excel/Sheets formulas
+confidence-interval-calculator	statistics	Confidence Interval Calculator	how to calculate 95 confidence interval	mean, SD, n, level -> CI (z and t); proportion CI
+p-value-calculator	statistics	P-Value Calculator	how do you calculate p value	from z, t (df), chi-square, F; one/two tailed; Excel functions
+z-score-calculator	statistics	Z-Score Calculator	how to calculate a z score in excel	z from x, mean, SD; probability; percentile
+correlation-coefficient-calculator	statistics	Correlation Coefficient Calculator	how to calculate correlation coefficient in excel	Pearson r from x,y lists; t-stat, p
+r-squared-calculator	statistics	R-Squared Calculator	how to calculate r squared	regression line, R2, adjusted R2 from x,y lists
+t-critical-value-calculator	statistics	T Critical Value Calculator	how to calculate critical value of t	alpha, df, tails -> t*; t table
+chi-square-calculator	statistics	Chi-Square Calculator	how to calculate a chi square statistic	observed/expected lists -> chi2, df, p; expected counts
+margin-of-error-calculator	statistics	Margin of Error Calculator	how to calculate margin of error	proportion or mean; sample size
+outlier-calculator	statistics	Outlier Calculator	how to calculate upper and lower fences	Q1, Q3, IQR, fences, outliers list
+point-estimate-calculator	statistics	Point Estimate Calculator	how to calculate p hat	p-hat, sample mean, MLE/Wilson/Laplace
+coefficient-of-variation-calculator	statistics	Coefficient of Variation Calculator	how to calculate cv in excel	SD/mean x100
+moving-average-calculator	statistics	Moving Average Calculator	how to calculate moving average in excel	SMA/EMA window over list
+weibull-calculator	statistics	Weibull Reliability Calculator	how to calculate expected number of failures in weibull	beta, eta, t, population -> F(t), R(t), expected failures
+density-calculator	science	Density Calculator	how to calculate volume from mass and density	solve density/mass/volume; materials table
+dilution-calculator	science	Dilution Calculator	how to calculate dilution	C1V1=C2V2; dilution factor; serial
+moles-calculator	science	Moles Calculator	how to calculate moles to molecules	grams <-> moles <-> molecules, mL of solution; Avogadro
+theoretical-yield-calculator	science	Theoretical Yield Calculator	how to calculate theoretical yield	limiting reagent moles x ratio x MW; percent yield
+ph-calculator	science	pH Calculator	how to calculate the hydrogen ion concentration from ph	pH <-> [H+], pOH, [OH-]
+titration-calculator	science	Titration Calculator	how to calculate equivalence point	equivalence volume, pH at equivalence (strong/weak)
+half-life-calculator	science	Half-Life Calculator	how to calculate half life	N = N0 (1/2)^(t/T); first & zero order
+doubling-time-calculator	science	Doubling Time Calculator	how do you calculate doubling time	rule of 70 vs exact ln2/ln(1+r)
+population-growth-calculator	science	Population Growth Rate Calculator	how to calculate the population growth rate	(births-deaths+net migration)/pop; exponential projection
+microscope-magnification-calculator	science	Microscope Magnification Calculator	how to calculate total magnification of microscope	eyepiece x objective; image size / actual size
+field-of-view-calculator	science	Microscope Field of View Calculator	how to calculate field of view microscope	FN / objective; FOV at higher power; cell size estimate
+telescope-magnification-calculator	science	Telescope Magnification Calculator	how to calculate telescope magnification power	focal lengths, barlow, max useful 50x per inch, exit pupil
+wave-calculator	science	Wave Period & Frequency Calculator	how to calculate period of a wave	T=1/f, v=f lambda; oscilloscope divisions x time/div
+orbital-period-calculator	science	Orbital Period Calculator	how to calculate orbital period	Kepler third law; around Earth/Sun
+joules-calculator	science	Energy in Joules Calculator	how to calculate energy in joules	KE, PE, W x s, cal/kWh conversion
+force-calculator	science	Force Calculator	how to calculate forces	F=ma, weight, average force from impulse
+specific-heat-calculator	science	Specific Heat Calculator	how to calculate specific heat of water	q = m c dT solve any
+efficiency-calculator	science	Efficiency Calculator	how do we calculate efficiency	useful out / in x100; energy transfer; motor
+temperature-converter	science	Celsius to Fahrenheit Converter	how to calculate degree centigrade to fahrenheit	C, F, K; table
+wind-chill-calculator	science	Wind Chill Calculator	how to calculate the wind chill	NWS 2001 formula; frostbite times
+punnett-square-calculator	science	Punnett Square Calculator	how to calculate genotypic ratio	mono/dihybrid -> genotype & phenotype ratios
+atom-calculator	science	Protons Neutrons Electrons Calculator	how to calculate protons neutrons and electrons	Z, A, charge -> p n e; element list
+foil-thickness-calculator	science	Aluminum Foil Thickness Calculator	how do you calculate the thickness of aluminum foil	t = m / (rho x L x W); 2.70 g/cm3; atoms thick
+stress-calculator	science	Stress & Yield Strength Calculator	how to calculate yield stress	stress = F/A; strain; modulus; ultimate tensile
+uncertainty-calculator	science	Uncertainty Calculator	how to calculate uncertainty in physics	absolute, relative, percent; propagation for + and x
+speed-calculator	science	Speed Distance Time Calculator	what two measurements are necessary for calculating speed	solve any; pace; unit conversion
+age-calculator	time	Age Calculator	how old are you calculator	birth date -> years months days; age on date; next birthday
+days-between-dates-calculator	time	Days Between Dates Calculator	how many days apart calculator	days, weeks, months; add/subtract days
+time-duration-calculator	time	Time Duration Calculator	how much time has passed calculator	date-time to date-time -> d h m; since a date
+time-card-calculator	time	Time Card Calculator	how to calculate hours and minutes worked	week rows in/out/break -> hours, decimal, pay
+birthday-calculator	time	Birthday Countdown Calculator	how many days until my birthday calculator	days until, half birthday, day of week born
+anniversary-calculator	time	Marriage Anniversary Calculator	how long have you been married calculator	years months days, anniversary gift by year
+day-of-week-calculator	time	Day of the Week Calculator	how to calculate the weekday for any date	Zeller / doomsday; weekday
+business-days-calculator	time	Business Days Calculator	how many working days until retirement calculator	weekdays between dates minus US federal holidays
+puppy-age-calculator	everyday	Puppy Age Calculator	how old is my puppy calculator	birth date -> weeks/months, human years, milestones (vaccines, teething)
+dog-years-calculator	everyday	Dog Years Calculator	how old is my dog in human years calculator	AVMA size-based and 16 ln(age)+31 epigenetic
+puppy-weight-calculator	everyday	Puppy Weight Calculator	how big will my puppy get calculator	current weight, age weeks, size class -> adult weight estimate
+tip-calculator	everyday	Tip Calculator	how to calculate a 20 percent tip	bill, %, people -> tip, per person; tip table
+split-bill-calculator	everyday	Bill Split Calculator	how to split bills with spouse calculator	equal or proportional to income
+discount-calculator	everyday	Discount Calculator	how to calculate 25 off	% off, double discounts, sale price, savings
+unit-price-calculator	everyday	Unit Price Calculator	how to calculate per ounce price	compare 2-3 items price per oz/unit
+suit-size-calculator	everyday	Suit Size Calculator	what is my suit size calculator	chest, height, weight -> jacket size & length (S/R/L), drop
+tithe-calculator	everyday	Tithe Calculator	how to calculate tithe from salary	10% gross or net per period
+candy-jar-calculator	everyday	Candy in a Jar Calculator	how many candies in a jar calculator	jar volume x packing 0.64 / candy volume
+party-food-calculator	everyday	Party Food Calculator	how many pieces of chicken for 50 guests calculator	guests -> prime rib lb, chicken pieces, salad, fruit, drinks
+life-path-number-calculator	everyday	Life Path Number Calculator	how to calculate numerology number	digit reduction, master numbers; for entertainment
+sourdough-hydration-calculator	everyday	Sourdough Hydration Calculator	how to calculate sourdough hydration	flour, water, starter at 100% -> hydration %; baker's %
+dpi-calculator	everyday	DPI Calculator	how to calculate dpi	pixels / inches; print size; pixels to inches
+cubic-inches-calculator	everyday	Cubic Inches Calculator	how to calculate cubic inches for shipping	box L W H -> in3, ft3; cm3
+golf-handicap-calculator	sports	Golf Handicap Calculator	how to calculate golf handicap	HOT. WHS: rows score/rating/slope -> differentials, best 8 of 20 index; course handicap; 9-hole
+bowling-handicap-calculator	sports	Bowling Handicap Calculator	how to calculate bowling handicap	(basis - avg) x %; average from games
+era-calculator	sports	ERA Calculator	how is era calculated in baseball	ER x 9 / IP (thirds), 7-inning softball; WHIP
+ops-calculator	sports	OPS Calculator	how to calculate ops in baseball	OBP + SLG; batting average
+passer-rating-calculator	sports	Passer Rating Calculator	how to calculate a passer rating	NFL formula with caps; NCAA
+volleyball-hitting-percentage-calculator	sports	Hitting Percentage Calculator	how to calculate hitting percentage in volleyball	(K - E)/TA; kill %
+passive-perception-calculator	sports	Passive Perception Calculator	how to calculate passive perception 5e	10 + Wis mod + prof + adv/dis 5
+armor-class-calculator	sports	Armor Class Calculator	how to calculate armor class	armor tables 5e + Dex cap + shield
+dps-calculator	sports	DPS Calculator	how to calculate dps	damage x attacks/s x crit; damage per second
+kd-ratio-calculator	sports	K/D Ratio Calculator	how to calculate kd ratio	kills/deaths; KDA; kills needed to reach target

@@ -1,0 +1,12 @@
+{
+  "name": "calculator-rest",
+  "private": true,
+  "type": "module",
+  "description": "calculator.rest: static, server-rendered calculator site",
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node build.mjs --check",
+    "preview": "node build.mjs && node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
