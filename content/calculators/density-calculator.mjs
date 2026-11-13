@@ -6,7 +6,7 @@ export default {
   h1: 'Density, Mass and Volume Calculator (ρ = m ÷ V)',
   meta: 'Volume = mass ÷ density, so 25.0 g of aluminum (2.70 g/cm³) fills 9.26 cm³. Solve density, mass or volume for cylinders, blocks, rocks and lab samples.',
   keyword: 'how to calculate volume from mass and density',
-  also: ['density calculator', 'how to calculate density of a cylinder', 'how to calculate density of cylinder', 'how do you calculate the density of metal', 'how to calculate the density of a rock', 'how do you calculate the density of a rock', 'how to calculate mass of a cylinder', 'how do we calculate mass'],
+  also: ['density calculator', 'how to calculate density of cylinder', 'how to calculate the density of a cylinder', 'how do you calculate the density of metal', 'how to calculate the density of a rock', 'how do you calculate the density of a rock', 'how do we calculate mass'],
   updated: '2026-11-13',
   inputs: [
     { id: 'solve', label: 'Solve for', type: 'select', value: 'volume', options: [['volume', 'Volume (from mass and density)'], ['density', 'Density (from mass and volume)'], ['mass', 'Mass (from density and volume)']] },

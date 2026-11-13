@@ -2,7 +2,7 @@ export default {
   slug: 'wave-calculator',
   hub: 'science',
   name: 'Wave Period & Frequency Calculator',
-  title: 'Wave Period Calculator: T = 1/f, So 440 Hz Repeats Every 2.273 ms',
+  title: 'Wave Period Calculator: 1 ÷ 440 Hz = 2.273 ms per Cycle',
   h1: 'Wave Period and Frequency Calculator: T = 1/f, v = fλ and Oscilloscope Readings',
   meta: 'Period = 1 ÷ frequency, so a 440 Hz wave repeats every 2.273 ms and is 0.78 m long in air. Also v = fλ, oscilloscope divisions, pendulums and springs.',
   keyword: 'how to calculate period of a wave',
@@ -49,7 +49,7 @@ export default {
     function len(m) {
       if (!isFinite(m)) return '—';
       if (m >= 1000) return p4(m / 1000) + ' km';
-      if (m >= 1) return p4(m) + ' m';
+      if (m >= 0.5) return p4(m) + ' m';
       if (m >= 0.01) return p4(m * 100) + ' cm';
       if (m >= 1e-3) return p4(m * 1000) + ' mm';
       if (m >= 1e-6) return p4(m * 1e6) + ' µm';

@@ -2,7 +2,7 @@ export default {
   slug: 'time-duration-calculator',
   hub: 'time',
   name: 'Time Duration Calculator',
-  title: 'Time Duration Calculator: 9 AM to 5:30 PM Is 8 Hours 30 Minutes',
+  title: 'Time Duration Calculator: 9 AM to 5:30 PM Is 8 h 30 min',
   h1: 'How Much Time Has Passed? Duration Between Two Dates and Times',
   meta: 'Get the days, hours and minutes between two moments, or how much time has passed since a date. 9:00 AM Jan 1 to 5:30 PM Jan 2 is 1 day 8 h 30 min (32.5 hours).',
   keyword: 'how much time has passed calculator',
@@ -69,9 +69,9 @@ export default {
 <p><strong>Across dates:</strong> 9:00 AM Jan 1 to 5:30 PM Jan 2 is 1 day plus 8 h 30 min = <strong>32.5 hours</strong>.</p>`,
   table: {
     title: 'How many hours, minutes and seconds are in common time spans?',
-    intro: 'Each span run through the calculator from midnight on Jan 1, 2026.',
+    intro: 'Each span run through the calculator, midnight to midnight in 2026.',
     head: ['Time span', 'Hours', 'Minutes', 'Seconds'],
-    rows: ({ run, H }) => [['1 hour', '2026-01-01', '01:00'], ['8 hours', '2026-01-01', '08:00'], ['1 day', '2026-01-02', '00:00'], ['1 week', '2026-01-08', '00:00'], ['2 weeks', '2026-01-15', '00:00'], ['January (31 days)', '2026-02-01', '00:00'], ['February 2026 (28 days)', '2026-03-01', '00:00'], ['Quarter (Jan–Mar 2026)', '2026-04-01', '00:00'], ['Year 2026 (365 days)', '2027-01-01', '00:00']].map(([n, d, t]) => { const r = run({ sDate: '2026-01-01', sTime: '00:00', eDate: d, eTime: t }); return [n, r.rows[0][1].replace(' h', ''), r.rows[2][1], r.rows[3][1]]; }),
+    rows: ({ run }) => [['1 hour', '2026-01-01', '2026-01-01', '01:00'], ['8 hours', '2026-01-01', '2026-01-01', '08:00'], ['1 day', '2026-01-01', '2026-01-02', '00:00'], ['1 week', '2026-01-01', '2026-01-08', '00:00'], ['2 weeks', '2026-01-01', '2026-01-15', '00:00'], ['February 2026 (28 days)', '2026-02-01', '2026-03-01', '00:00'], ['January (31 days)', '2026-01-01', '2026-02-01', '00:00'], ['Quarter (Jan–Mar 2026)', '2026-01-01', '2026-04-01', '00:00'], ['Year 2026 (365 days)', '2026-01-01', '2027-01-01', '00:00']].map(([n, s, e, t]) => { const r = run({ sDate: s, sTime: '00:00', eDate: e, eTime: t }); return [n, r.rows[0][1].replace(' h', ''), r.rows[2][1], r.rows[3][1]]; }),
     note: 'A leap year (366 days) has 8,784 hours, 527,040 minutes and 31,622,400 seconds.'
   },
   sections: [
@@ -90,7 +90,7 @@ export default {
     },
     {
       h2: 'Does daylight saving time change the result?',
-      html: `<p>The calculator works in clock time, which is what most people read off a calendar and watch. On the night clocks spring forward (the second Sunday in March in most of the U.S.), 1:00 AM to 4:00 AM on the clock is only 2 hours of real time; on the November fall-back night it is 4 hours. For pay, the Department of Labor counts the hours actually worked, so a night-shift worker on the fall-back night is owed the extra hour.</p>`
+      html: `<p>The calculator works in clock time, which is what most people read off a calendar and watch. On the night clocks spring forward (the second Sunday in March in most of the U.S.), 1:00 AM to 4:00 AM on the clock is only 2 hours of real time; on the November fall-back night it is 4 hours. For pay, the Fair Labor Standards Act counts hours actually worked, so a non-exempt employee on an overnight shift that night works, and must be paid for, one extra hour.</p>`
     }
   ],
   faq: [
