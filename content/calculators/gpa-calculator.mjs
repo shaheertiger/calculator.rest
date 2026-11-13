@@ -109,6 +109,12 @@ export default {
 <p>For a 10-point CGPA or a GPA-to-percent conversion, use the <a href="/gpa-to-percentage-calculator">GPA to percentage calculator</a>.</p>`
     },
     {
+      h2: 'How do I calculate the GPA I need to reach a target?',
+      html: `<p>Work backwards from quality points. Required term GPA = (target GPA × total credits after the term − current GPA × current credits) ÷ credits this term.</p>
+<p>Example: you have a 2.85 GPA over 45 credits and want a 3.0 after a 15-credit semester. You need 3.0 × 60 = 180 quality points in total, and you already have 2.85 × 45 = 128.25, so this term must earn 51.75 points: 51.75 ÷ 15 = <strong>3.45</strong>, roughly a B+/A− average.</p>
+<p>If the answer is above 4.0, the target isn't reachable in one term; spread it over two semesters, or check whether your school's grade-replacement policy lets a retaken class swap out an old F or D. Replacing a 3-credit F with a B adds 9 quality points without adding credits, which moves a 45-credit GPA by 0.20.</p>`
+    },
+    {
       h2: 'What is a good college GPA?',
       html: `<p>Benchmarks most U.S. students run into:</p>
 <ul>
