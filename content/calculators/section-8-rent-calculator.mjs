@@ -2,9 +2,9 @@ export default {
   slug: 'section-8-rent-calculator',
   hub: 'mortgage',
   name: 'Section 8 Rent Calculator',
-  title: 'Section 8 Rent Calculator: $24,000 Income Pays About $574/Month',
+  title: 'Section 8 Rent Calculator: $24K Income Pays $574 a Month',
   h1: 'Section 8 Rent Calculator: Total Tenant Payment and Voucher Share',
-  meta: 'A family of three with $24,000 of income pays about $574 a month toward rent and utilities under HUD\'s 30% rule; the voucher covers the rest. Uses 2027 HOTMA deductions.',
+  meta: 'A family of three earning $24,000 pays about $574 a month toward rent and utilities under HUD\'s 30% rule, and the voucher covers the rest. 2027 HOTMA rules.',
   keyword: 'how is section 8 rent calculated',
   also: ['how to calculate section 8 rent', 'how to calculate rent for section 8', 'how does section 8 calculate rent', 'how is section 8 housing rent calculated', 'how is rent calculated for section 8 housing', 'how do income based apartments calculate rent'],
   updated: '2026-11-13',
@@ -101,8 +101,8 @@ export default {
     },
     {
       h2: 'What income counts for Section 8?',
-      html: `<p>Annual income is the gross income all household members expect to receive over the next 12 months, before taxes. It includes wages and tips, self-employment income, Social Security and SSI, pensions, unemployment, regular child support and alimony, and income from assets. Excluded are the earnings of children under 18, most earned income of full-time students who are dependents above a small amount ($525 in 2027), foster care payments, food assistance, and lump sums such as tax refunds.</p>
-<p>Under HOTMA, assets up to $52,787 in 2026 don't generate imputed income; above that the agency counts actual or imputed returns, and families with net assets above $105,574 can lose eligibility for new assistance. Report income changes promptly, because your agency recalculates the rent at your next interim or annual reexamination.</p>`
+      html: `<p>Annual income is the gross income all household members expect to receive over the next 12 months, before taxes. It includes wages and tips, self-employment income, Social Security and SSI, pensions, unemployment, regular child support and alimony, and income from assets. Excluded are the earnings of children under 18, a dependent full-time student's earnings above $525 a year (2027), foster care payments, food assistance, and lump sums such as tax refunds.</p>
+<p>Under HOTMA, when net family assets are $52,787 or less (2026), only actual income from them counts; above that, the agency imputes income at HUD's passbook rate for assets without a known return. Families with net assets above $105,574 can be denied new assistance. Report income changes promptly, because your agency recalculates the rent at your next interim or annual reexamination.</p>`
     },
     {
       h2: 'What is a payment standard, and can I rent a more expensive unit?',
@@ -116,6 +116,7 @@ export default {
     { q: 'Can a landlord charge more than the payment standard?', a: 'Yes, if the rent is reasonable for the area, but the family pays the amount above the payment standard. At move-in the family\'s total share cannot exceed 40% of adjusted monthly income.' },
     { q: 'Does the Section 8 rent include utilities?', a: 'Yes. The total tenant payment covers rent and tenant-paid utilities. The agency subtracts a utility allowance, and the rest is the rent you pay the landlord.' },
     { q: 'What happens to my Section 8 rent if my income goes up?', a: 'Your share rises at the next reexamination: roughly 30 cents of each extra dollar of adjusted income. Agencies handle increases between annual reviews according to their written policies, so report changes as required.' },
+    { q: 'How do income-based apartments calculate rent?', a: 'It depends on the program. Public housing and project-based Section 8 apartments use the same total tenant payment formula as vouchers, so your rent is about 30% of adjusted income minus a utility allowance. Low-Income Housing Tax Credit apartments work differently: the rent is a fixed maximum set at 30% of an income limit for the unit size, typically 50% or 60% of area median income, so it does not fall if your own income drops.' },
     { q: 'How much would my rent be with no income?', a: 'The TTP would be the agency\'s minimum rent, up to $50, or $0 if the agency has none or grants a hardship exemption. If the utility allowance is larger, the agency pays the difference to you or the utility company.' }
   ],
   related: ['rent-affordability-calculator', 'rent-increase-calculator', 'take-home-pay-calculator', 'dti-calculator'],

@@ -97,7 +97,7 @@ export default {
     { q: 'What is the Epley formula?', a: '1RM = weight × (1 + reps ÷ 30). It was published by strength coach Boyd Epley in 1985 and is the default in many apps and calculators.' },
     { q: 'What is the Brzycki formula?', a: '1RM = weight × 36 ÷ (37 − reps). It was published by Matt Brzycki in 1993 and gives slightly lower estimates than Epley below 10 reps.' },
     { q: 'What percentage of my 1RM can I lift for 10 reps?', a: 'About 75% on the NSCA chart. With a 1RM of 216 lb, that is about 162 lb, or 160 lb rounded to the nearest 5.' },
-    { q: 'How accurate is a 1RM calculator?', a: 'From a hard set of 3–6 reps, most people land within a few percent of their tested max. Estimates from 12 or more reps are much less reliable.' },
+    { q: 'How accurate is a 1RM calculator?', a: 'Closest when the set is heavy: in Reynolds and colleagues\' 2006 study, 5-rep maxes predicted 1RM better than 10- or 20-rep maxes. Estimates from 12 or more reps are much less reliable.' },
     { q: 'Should I use my 1RM to train?', a: 'Use it to set loads, not as a daily lift. Most programs work at 65–90% of 1RM and test or re-estimate the max every few weeks.' },
     { q: 'Do the formulas work for all lifts?', a: 'They are most often used for bench press, squat and deadlift. Lifts that rely more on technique or smaller muscles, and machine exercises, can deviate more, so treat results as a starting point.' }
   ],

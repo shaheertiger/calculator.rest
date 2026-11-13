@@ -57,7 +57,7 @@ export default {
       sub: 'For entertainment. Numerology is a tradition, not a science, and these numbers don\'t predict personality or the future.'
     };
   },
-  quick: ({ r }) => `To calculate your life path number, reduce the month, day and year of birth to single digits, add them, and reduce again, keeping 11, 22 and 33 as master numbers. For Jul 14, 1990: 7, 1 + 4 = 5, and 1 + 9 + 9 + 0 = 19 → 10 → 1. Then 7 + 5 + 1 = 13 → <strong>life path ${r.value}</strong>. It's numerology, so treat it as entertainment.`,
+  quick: ({ r }) => `To calculate your life path number, reduce the month, day and year of birth to single digits, add them, and reduce again, keeping 11, 22 and 33 as master numbers. For Jul 14, 1990: 7, 1 + 4 = 5, and 1 + 9 + 9 + 0 = 19 → 10 → 1. Then 7 + 5 + 1 = 13 → <strong>life path ${r.value}</strong>. Treat it as entertainment.`,
   stepsTitle: 'How to calculate your life path number',
   steps: [
     'Write your birth date as numbers: July 14, 1990 is month 7, day 14, year 1990.',
@@ -84,7 +84,7 @@ export default {
       while (d <= end) { const n = run({ birth: H.iso(d), name: '' }).lp; counts[n] = (counts[n] || 0) + 1; total++; d = H.addDays(d, 1); }
       return [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33].map(n => [String(n), D.meaning[n], H.pct((counts[n] || 0) / total * 100, 1)]);
     },
-    note: 'Reducing month, day and year separately (the method used here) is what makes 11, 22 and 33 possible at the end; master numbers are kept only when the final sum is exactly 11, 22 or 33.'
+    note: 'Master numbers take share away from 2, 4 and 6: totals of 11, 22 and 33 stay as they are instead of reducing to those digits, which is why 2 and 4 are the least common single-digit life paths.'
   },
   sections: [
     {
@@ -116,7 +116,7 @@ export default {
   faq: [
     { q: 'How do I calculate my life path number?', a: 'Reduce your birth month, day and year to single digits (keeping 11, 22 and 33), add them, and reduce the total. Jul 14, 1990 gives 7 + 5 + 1 = 13, and 1 + 3 = 4.' },
     { q: 'What is the life path number for 11/11?', a: 'It depends on the year. Nov 11, 2000 gives 11 + 11 + 2 = 24, and 2 + 4 = 6. Nov 11, 1999 gives 11 + 11 + 1 = 23, which reduces to 5.' },
-    { q: 'Which life path number is the rarest?', a: 'Master number 33 is the rarest by far, followed by 22. Among single digits the shares are fairly even; the table above shows each number\'s share of birthdays from 1950 to 2009.' },
+    { q: 'Which life path number is the rarest?', a: 'Master number 33 is the rarest (about 0.9% of birthdays from 1950 to 2009), followed by 22 (3.1%). Among single digits, 2 and 4 are least common, because many totals that would reduce to them stay as 11 or 22.' },
     { q: 'Why do different calculators give different numbers?', a: 'They use different methods: some add all the digits at once, some keep master numbers only at the end, and name numbers vary between the Pythagorean and Chaldean letter charts.' },
     { q: 'Is Y a vowel in numerology?', a: 'Traditions differ. Some treat Y as a vowel when it sounds like one (as in "Lynn"). This calculator counts Y as a consonant.' },
     { q: 'Can a life path number be 0?', a: 'No. Every birth date adds up to at least 1, so life path numbers run from 1 to 9, plus the master numbers 11, 22 and 33.' },
