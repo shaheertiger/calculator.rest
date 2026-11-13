@@ -4,7 +4,7 @@ export default {
   name: 'Vacancy Rate Calculator',
   title: 'Vacancy Rate Calculator: 3 of 40 Units Empty Is 7.5%',
   h1: 'Vacancy Rate Calculator: Physical Vacancy, Economic Occupancy and Lost Rent',
-  meta: 'With 3 of 40 units empty the vacancy rate is 7.5% and occupancy 92.5%. At $1,500 rents that is $4,500 of lost rent a month. Add collections for economic vacancy.',
+  meta: 'With 3 of 40 units empty, vacancy is 7.5% and occupancy 92.5%. At $1,500 rents that is $4,500 of lost rent a month. Add rent collected for economic vacancy.',
   keyword: 'how to calculate vacancy rate',
   also: ['how to calculate vacancy loss', 'how to calculate occupancy rate', 'vacancy rate calculator', 'how to calculate economic vacancy'],
   updated: '2026-11-13',
