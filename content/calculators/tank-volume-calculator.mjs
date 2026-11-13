@@ -8,7 +8,7 @@ export default {
   name: 'Tank Volume Calculator',
   title: 'Tank Volume Calculator: 48×72 in Tank Holds 564 Gallons',
   h1: 'Tank Volume Calculator: Gallons Full and at Any Fill Height',
-  meta: 'A horizontal 48-in × 72-in cylinder tank holds 564 gallons full and 371 gallons with 30 in of liquid. Find gallons and liters in round, horizontal or rectangular tanks.',
+  meta: 'A horizontal 48 × 72 in cylinder tank holds 564 gallons full and 371 gallons at 30 in deep. Gallons and liters for round, horizontal or box tanks.',
   keyword: 'how to calculate gallons in a tank',
   also: ['how to calculate a tank volume', 'how to calculate tank volume formula', 'how many gallons in a round tank calculator', 'how to calculate water tank capacity in litres', 'how to calculate tank capacity', 'how to calculate fish tank gallons', 'how to calculate gallons of a fish tank', 'horizontal tank volume calculator'],
   updated: '2026-11-13',
@@ -26,7 +26,7 @@ export default {
     var k = { 'in': 1, ft: 12, cm: 1 / 2.54, m: 39.37007874 }[v.unit] || 1;
     var u = v.unit || 'in';
     var full, part, depthMax, dims;
-    var h = v.fill >= 0 ? v.fill * k : NaN;
+    var h = typeof v.fill === 'number' && v.fill >= 0 ? v.fill * k : NaN;
     if (v.shape === 'rect') {
       if (!(v.rl > 0) || !(v.rw > 0) || !(v.rh > 0)) return { error: 'Enter the inside length, width and height.' };
       var L = v.rl * k, W = v.rw * k; depthMax = v.rh * k;
@@ -85,7 +85,7 @@ export default {
     intro: 'Gallons in the 48-in × 72-in horizontal tank above at each 4 in of liquid depth, calculated with the segment formula. Make your own chart by entering your tank and stepping the depth.',
     head: ['Liquid depth', 'Gallons', 'Percent full'],
     rows: ({ run }) => [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48].map(d => { const r = run({ shape: 'hcyl', unit: 'in', diam: 48, len: 72, fill: d }); return [d + ' in', r.value, r.rows[1][1]]; }),
-    note: 'At half depth (24 in) the tank is exactly half full; the first and last 4 inches each hold only about 30 gallons, while 4 inches across the middle hold about 75.'
+    note: 'At half depth (24 in) the tank is exactly half full; the bottom 4 inches hold only about 22 gallons, while 4 inches across the middle hold about 60.'
   },
   sections: [
     {
@@ -106,8 +106,8 @@ export default {
   faq: [
     { q: 'How do I calculate the gallons in a horizontal tank that is partly full?', a: 'Measure the liquid depth and use the circular-segment formula: V = L × [r² acos((r − h)/r) − (r − h)√(2rh − h²)], then divide cubic inches by 231. The calculator does it for you when you choose a horizontal cylinder.' },
     { q: 'How many gallons per inch are in a tank?', a: 'In a vertical tank or box it is constant: diameter² × 0.0034 per inch of depth for a cylinder, or length × width ÷ 231 for a box. In a horizontal tank it changes with depth, which is why oil and fuel tanks come with dip charts.' },
-    { q: 'How many gallons are in a 1,000-liter tank?', a: '1,000 liters is 264.2 U.S. gallons. IBC totes are usually 1,000 L (264 gal) or 1,250 L (330 gal).' },
-    { q: 'How many gallons is a 55-gallon drum, really?', a: 'A standard steel drum is about 22.5 in inside diameter and 33.5 in tall, which works out to roughly 57 gallons brimful; the 55-gallon rating leaves headspace.' },
+    { q: 'How many gallons are in a 1,000-liter tank?', a: '1,000 liters is 264.2 U.S. gallons. In the U.S., IBC totes are most often sold as 275 gal (about 1,040 L) or 330 gal (about 1,250 L).' },
+    { q: 'How many gallons is a 55-gallon drum, really?', a: 'A standard steel drum is about 22.5 in inside diameter and 33.5 in tall, which works out to roughly 57–58 gallons brimful; the 55-gallon rating leaves headspace.' },
     { q: 'How do I find the volume of a tank in cubic feet?', a: 'Measure in feet and multiply π × r² × length for a cylinder or L × W × H for a box. Multiply cubic feet by 7.48 for gallons. The calculator also lists cubic feet in the results.' },
     { q: 'How much does a full water tank weigh?', a: 'Water weighs about 8.34 lb per gallon, so a 564-gallon tank holds about 4,700 lb of water, plus the tank itself. Check that the floor, slab or stand is rated for it.' }
   ],

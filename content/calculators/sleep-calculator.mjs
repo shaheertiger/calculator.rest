@@ -101,7 +101,7 @@ export default {
     },
     {
       h2: 'What time should a teenager go to bed?',
-      html: `<p>Teens need 8 to 10 hours, but puberty shifts the body clock later, so many cannot fall asleep before about 11 PM. A 6:30 AM alarm then leaves 7.5 hours at best. Working backward with six cycles, a teen who must be up at 6:30 should be asleep by 9:30 PM and in bed by about 9:15 PM; five cycles (10:45 PM bedtime) is the latest that still meets the 8-hour minimum only if they fall asleep quickly.</p>
+      html: `<p>Teens need 8 to 10 hours, but puberty shifts the body clock later, so many cannot fall asleep before about 11 PM. A 6:30 AM alarm then leaves 7.5 hours at best. Working backward with six cycles, a teen who must be up at 6:30 should be asleep by 9:30 PM and in bed by about 9:15 PM; a 10:45 PM bedtime allows only five cycles, or 7.5 hours, which falls short of the teen minimum.</p>
 <p>This mismatch is why the American Academy of Pediatrics recommends that middle and high schools start no earlier than 8:30 AM.</p>`
     }
   ],
