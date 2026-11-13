@@ -8,5 +8,10 @@
     "check": "node build.mjs --check",
     "preview": "node build.mjs && node scripts/serve.mjs"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
 }

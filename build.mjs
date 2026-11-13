@@ -114,6 +114,7 @@ function shell({ title, meta, url, body, graph, robots = 'index,follow,max-image
 <noscript><link rel="stylesheet" href="${FONTS}"></noscript>
 <style>${cssMin}</style>
 ${graph ? `<script type="application/ld+json">${jsonScript({ '@context': 'https://schema.org', '@graph': graph })}</script>` : ''}
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
