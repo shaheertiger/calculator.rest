@@ -83,8 +83,8 @@ export default {
     { q: 'How many face cords are in a full cord?', a: 'With 16-in logs, three face cords make a full cord. With 24-in logs it takes two, and with 12-in logs it takes four.' },
     { q: 'What is half a cord of wood?', a: 'Half a cord is 64 cubic feet, such as a stack 4 ft high, 8 ft long and 2 ft deep, or 16-in wood stacked 4 ft high and 12 ft long.' },
     { q: 'How do I measure a cord of wood that is not stacked?', a: 'Stack it first. Loose wood has large air gaps, and there is no fair way to measure it. The NIST guidance is to stack the wood neatly, then multiply width × height × length; 128 cubic feet is a cord.' },
-    { q: 'How many logs are in a cord of wood?', a: 'Roughly 600 to 800 split pieces for 16-in firewood, but it varies a lot with how thick the splits are. Volume, not piece count, is the legal measure.' },
-    { q: 'How tall is a cord of wood stacked 8 feet long?', a: 'With 4-ft pieces it is 4 ft tall. With typical 16-in firewood, a full cord stacked 8 ft long would need three rows 4 ft high, or one row 12 ft high; in practice it is stacked 4 ft high and 24 ft long.' },
+    { q: 'How many logs are in a cord of wood?', a: 'There is no fixed count: it depends on log length and how thick the splits are, and small splits pack more pieces into the same space. That is why firewood is sold by volume, not by piece count.' },
+    { q: 'How tall is a cord of wood stacked 8 feet long?', a: 'With 4-ft pieces it is 4 ft tall. With typical 16-in firewood, a full cord in an 8-ft-long, 4-ft-high space takes three rows side by side; in a single row it is a stack 4 ft high and 24 ft long.' },
     { q: 'What should I do if I got less than a cord?', a: 'Stack and measure the wood before burning any, photograph the stack next to a tape measure, and contact the seller. If that fails, contact your state weights and measures office.' }
   ],
   related: ['cubic-feet-calculator', 'board-foot-calculator', 'cubic-yards-calculator', 'mulch-calculator'],
