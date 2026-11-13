@@ -87,6 +87,6 @@ export default {
   related: ['split-bill-calculator', 'discount-calculator', 'sales-tax-calculator', 'percentage-calculator'],
   sources: [
     { name: 'Emily Post Institute: General Tipping Guide', url: 'https://emilypost.com/advice/general-tipping-guide' },
-    { name: 'IRS: Tip Recordkeeping and Reporting (Publication 1244)', url: 'https://www.irs.gov/forms-pubs/about-publication-1244' }
+    { name: 'IRS: Tip Recordkeeping and Reporting', url: 'https://www.irs.gov/businesses/small-businesses-self-employed/tip-recordkeeping-and-reporting' }
   ]
 };

@@ -127,6 +127,6 @@ export default {
   sources: [
     { name: 'NCES: High School Transcript Study (NAEP HSTS)', url: 'https://nces.ed.gov/nationsreportcard/hsts/' },
     { name: 'University of California Admissions: GPA requirement', url: 'https://admission.universityofcalifornia.edu/admission-requirements/freshman-requirements/gpa-requirement.html' },
-    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/college-prep/academics/how-to-convert-gpa-4.0-scale' }
+    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/get-started/how-to-calculate-gpa-4.0-scale' }
   ]
 };

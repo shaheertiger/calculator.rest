@@ -113,7 +113,7 @@ export default {
   ],
   related: ['kva-calculator', 'amps-calculator', 'kw-calculator', 'battery-life-calculator', 'wire-size-calculator'],
   sources: [
-    { name: 'U.S. CPSC: Portable Generators', url: 'https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Portable-Generators' },
+    { name: 'U.S. CPSC: Portable Generators', url: 'https://www.cpsc.gov/Safety-Education/Safety-Guides/Carbon-Monoxide-Home/Generators-and-Engine-Driven-Tools' },
     { name: 'Ready.gov: Power Outages', url: 'https://www.ready.gov/power-outages' },
     { name: 'NFPA 70: National Electrical Code (Articles 220, 445 and 702)', url: 'https://www.nfpa.org/codes-and-standards/nfpa-70-standard-development/70' }
   ],

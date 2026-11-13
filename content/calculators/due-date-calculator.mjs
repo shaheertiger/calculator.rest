@@ -4,7 +4,7 @@ export default {
   name: 'Due Date Calculator',
   title: 'Due Date Calculator: LMP Mar 1, 2026 Means Due Dec 6, 2026',
   h1: 'Due Date Calculator: From Your Last Period, Conception Date or IVF Transfer',
-  meta: 'A last period starting Mar 1, 2026 gives an estimated due date of Sunday, Dec 6, 2026 (LMP + 280 days). Adjust for cycle length, conception date, IVF or ultrasound.',
+  meta: 'A last period starting Mar 1, 2026 gives an estimated due date of Sunday, Dec 6, 2026 (LMP + 280 days). Adjust for cycle length, conception, IVF or ultrasound.',
   keyword: 'how to calculate your due date',
   also: ['due date calculator', 'pregnancy due date calculator', 'what to expect ivf calculator', 'ivf due date calculator', 'naegele\'s rule', 'estimated due date'],
   updated: '2026-11-13',

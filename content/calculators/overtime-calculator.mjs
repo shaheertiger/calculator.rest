@@ -160,7 +160,7 @@ export default {
   related: ['overtime-tax-deduction-calculator', 'holiday-pay-calculator', 'salary-to-hourly-calculator', 'gross-pay-calculator', 'time-card-calculator'],
   sources: [
     { name: 'U.S. Department of Labor: Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' },
-    { name: 'DOL Fact Sheet #23: Overtime Pay Requirements of the FLSA', url: 'https://www.dol.gov/agencies/whd/fact-sheets/23-flsa-overtime' },
+    { name: 'DOL Fact Sheet #23: Overtime Pay Requirements of the FLSA', url: 'https://www.dol.gov/agencies/whd/fact-sheets/23-flsa-overtime-pay' },
     { name: 'DOL Fact Sheet #17A: Exemption for Executive, Administrative and Professional Employees', url: 'https://www.dol.gov/agencies/whd/fact-sheets/17a-overtime' },
     { name: 'eCFR: 29 CFR Part 778, Overtime Compensation', url: 'https://www.ecfr.gov/current/title-29/subtitle-B/chapter-V/subchapter-B/part-778' },
     { name: 'California DIR: Overtime FAQ', url: 'https://www.dir.ca.gov/dlse/faq_overtime.htm' }

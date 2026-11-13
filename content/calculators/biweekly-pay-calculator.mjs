@@ -119,6 +119,6 @@ export default {
   sources: [
     { name: 'IRS: Publication 15-T, Federal Income Tax Withholding Methods', url: 'https://www.irs.gov/forms-pubs/about-publication-15-t' },
     { name: 'U.S. Department of Labor: State payday requirements', url: 'https://www.dol.gov/agencies/whd/state/payday' },
-    { name: 'DOL Fact Sheet #23: Overtime Pay Requirements of the FLSA', url: 'https://www.dol.gov/agencies/whd/fact-sheets/23-flsa-overtime' }
+    { name: 'DOL Fact Sheet #23: Overtime Pay Requirements of the FLSA', url: 'https://www.dol.gov/agencies/whd/fact-sheets/23-flsa-overtime-pay' }
   ]
 };

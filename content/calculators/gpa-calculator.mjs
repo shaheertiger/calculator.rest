@@ -139,7 +139,7 @@ export default {
   related: ['high-school-gpa-calculator', 'final-grade-calculator', 'grade-calculator', 'gpa-to-percentage-calculator', 'credit-hours-calculator'],
   sources: [
     { name: 'Federal Student Aid: Satisfactory Academic Progress (SAP)', url: 'https://studentaid.gov/understand-aid/eligibility/staying-eligible' },
-    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/college-prep/academics/how-to-convert-gpa-4.0-scale' },
-    { name: 'LSAC: GPA conversion and academic summary report', url: 'https://www.lsac.org/applying-law-school/jd-application-process/credential-assembly-service/academic-summary-report' }
+    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/get-started/how-to-calculate-gpa-4.0-scale' },
+    { name: 'LSAC: Credential Assembly Service (GPA conversion)', url: 'https://www.lsac.org/applying-law-school/jd-application-process/credential-assembly-service-cas' }
   ]
 };

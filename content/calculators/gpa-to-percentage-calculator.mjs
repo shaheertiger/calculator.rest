@@ -116,7 +116,7 @@ export default {
   ],
   related: ['gpa-calculator', 'high-school-gpa-calculator', 'test-score-calculator', 'percentage-calculator', 'credit-hours-calculator'],
   sources: [
-    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/college-prep/academics/how-to-convert-gpa-4.0-scale' },
+    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/get-started/how-to-calculate-gpa-4.0-scale' },
     { name: 'Central Board of Secondary Education (CBSE)', url: 'https://www.cbse.gov.in/' },
     { name: 'World Education Services (WES): credential evaluation', url: 'https://www.wes.org/' }
   ]
