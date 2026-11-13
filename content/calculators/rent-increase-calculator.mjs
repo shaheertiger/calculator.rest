@@ -43,7 +43,7 @@ export default {
       label: v.mode === 'new' ? 'New monthly rent' : (pct >= 0 ? 'Rent increase' : 'Rent decrease'),
       expr: v.mode === 'new' ? H.money(v.oldRent) + ' × ' + H.num(1 + pct / 100, 4) : '(' + H.money(newRent) + ' − ' + H.money(v.oldRent) + ') ÷ ' + H.money(v.oldRent),
       rows: rows,
-      sub: pct > 10 ? 'Above 10%: higher than the statewide caps in California, Oregon and Washington allow for covered units. Check whether your home is covered.' : pct > 5 ? 'Above 5%: legal in most places, but check state and local caps and the notice required.' : 'Within the range of typical yearly increases.'
+      sub: H.round(pct, 4) > 10 ? 'Above 10%: higher than the statewide caps in California, Oregon and Washington allow for covered units. Check whether your home is covered.' : H.round(pct, 4) > 5 ? 'Above 5%: legal in most places, but check state and local caps and the notice required.' : 'Within the range of typical yearly increases.'
     };
   },
   quick: ({ r }) => `To calculate a rent increase percentage, subtract the old rent from the new rent, divide by the old rent and multiply by 100. Going from <strong>$1,800</strong> to <strong>$1,890</strong> is $90 ÷ $1,800 = <strong>${r.value}</strong>, which costs ${r.rows[1][1].replace('+', '')} more a month and ${r.rows[2][1].replace('+', '')} more a year.`,
@@ -90,7 +90,7 @@ export default {
       html: `<p>Each increase is calculated on the already-raised rent, so they compound. Starting from $1,800:</p>
 <ul>
 <li>Three years at 5%: $1,890, then $1,984.50, then $2,083.73, a total rise of 15.8%.</li>
-<li>Over that three-year stay you pay $3,410 more than if rent had stayed at $1,800.</li>
+<li>Over that three-year stay you pay $6,699 more than if rent had stayed at $1,800.</li>
 <li>Five years at 3%: $2,087, a 15.9% rise, about the same as three years at 5%.</li>
 </ul>
 <p>To find the average yearly increase over several years, use (new rent ÷ old rent)<sup>1 ÷ years</sup> − 1. Rent that went from $1,500 to $1,890 over four years rose 5.95% a year on average. The <a href="/cagr-calculator">CAGR calculator</a> does the same math for any growth rate.</p>`
