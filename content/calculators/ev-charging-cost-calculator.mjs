@@ -6,7 +6,7 @@ export default {
   h1: 'Electric Car Charging Cost Calculator: Cost per Charge and per Mile',
   meta: 'Charging an 80 kWh EV from 20% to 80% at home costs about $9.19 at the U.S. average 17.23¢/kWh, after 10% charging loss. That is 5.2¢ a mile vs 13.3¢ for gas.',
   keyword: 'how to calculate the cost of charging an electric car',
-  also: ['how to calculate ev charging cost', 'ev charging cost calculator', 'cost to charge electric car calculator', 'electric car cost per mile', 'how much does it cost to charge a tesla'],
+  also: ['how to calculate ev charging cost', 'ev charging cost calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'battery', label: 'Battery size (usable)', type: 'number', value: 80, suffix: 'kWh', help: 'From the manufacturer\'s spec sheet; use usable capacity if listed.' },

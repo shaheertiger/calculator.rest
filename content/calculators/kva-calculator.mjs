@@ -6,7 +6,7 @@ export default {
   h1: 'kVA Calculator: Volt-Amps, kVA to Amps and Transformer Size',
   meta: 'kVA = volts × amps ÷ 1,000, times 1.732 on three-phase. 100 A at 208 V 3-phase is 36.03 kVA, so a 45 kVA transformer fits. Also converts kVA to amps and kW.',
   keyword: 'how to calculate kva',
-  also: ['how to calculate volt amps', 'how do you calculate volt amps', 'how do you calculate kva', 'how to calculate the kva', 'how to calculate kva to amps', 'kva to amps calculator'],
+  also: ['how to calculate volt amps', 'how do you calculate volt amps', 'how do you calculate kva', 'how to calculate the kva', 'how to calculate kva to amps'],
   updated: '2026-11-13',
   inputs: [
     { id: 'mode', label: 'Calculate', type: 'select', value: 'va', options: [['va', 'kVA from volts and amps'], ['amps', 'Amps from kVA (full-load current)'], ['kw', 'kVA from kW and power factor']] },

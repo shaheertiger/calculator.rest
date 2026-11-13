@@ -4,7 +4,7 @@ export default {
   name: 'Blood Alcohol (BAC) Calculator',
   title: 'BAC Calculator: 4 Beers in 3 Hours at 180 lb Is About 0.056%',
   h1: 'Blood Alcohol Content Calculator Using the Widmark Formula',
-  meta: 'A 180-lb man who drinks four 12-oz beers over 3 hours has an estimated BAC of about 0.056%, reaching zero in roughly 3¾ hours. An estimate only, never a driving test.',
+  meta: 'A 180-lb man who drinks four 12-oz beers over 3 hours has an estimated BAC of about 0.056%, near zero 3¾ hours later. An estimate, never a driving test.',
   keyword: 'how to calculate blood alcohol content',
   also: ['bac calculator', 'blood alcohol calculator', 'when will i be sober calculator', 'are bac calculators accurate', 'widmark formula calculator', 'how long to get alcohol out of system calculator'],
   updated: '2026-11-13',

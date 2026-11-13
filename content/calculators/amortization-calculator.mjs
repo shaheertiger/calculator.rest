@@ -6,7 +6,7 @@ export default {
   h1: 'Amortization Schedule Calculator: Principal, Interest and Balance by Month',
   meta: 'See how each $601.14 payment on a $30,000, 7.5%, 5-year loan splits between interest and principal, month by month, with yearly totals and balances.',
   keyword: 'how to calculate loan amortization',
-  also: ['amortization schedule calculator', 'how do you calculate amortization', 'how to calculate amortization expense', 'amortization table'],
+  also: ['amortization schedule calculator', 'how do you calculate amortization', 'how to calculate amortization expense'],
   updated: '2026-11-13',
   inputs: [
     { id: 'amount', label: 'Loan amount', type: 'number', value: 30000, prefix: '$' },

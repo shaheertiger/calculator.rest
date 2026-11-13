@@ -6,7 +6,7 @@ export default {
   h1: 'What Size Generator Do I Need? Add Up Running and Starting Watts',
   meta: 'A fridge, sump pump, furnace fan, lights, TV and microwave need 3,975 running and 5,475 starting watts. List your own appliances to size a generator.',
   keyword: 'how to calculate what size generator i need',
-  also: ['generator size calculator', 'what size generator do i need', 'generator wattage calculator', 'how many watts do i need to run my house on a generator', 'starting watts vs running watts'],
+  also: ['generator size calculator'],
   updated: '2026-11-13',
   inputs: [
     {

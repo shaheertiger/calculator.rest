@@ -6,7 +6,7 @@ export default {
   h1: 'How Much Car Can I Afford? A 20/4/10 Budget Calculator',
   meta: 'On a $75,000 salary the 20/4/10 rule allows $625 a month for a car. After $150 of insurance, that buys a $22,843 car at 7.5% over 4 years with 20% down.',
   keyword: 'how much should i spend on a car calculator',
-  also: ['how much car can i afford calculator', 'car affordability calculator', '20/4/10 rule calculator', 'how much car can i afford on my salary'],
+  also: ['how much car can i afford calculator', 'car affordability calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'income', label: 'Gross annual income', type: 'number', value: 75000, prefix: '$', help: 'Before taxes; household income if the car is shared.' },

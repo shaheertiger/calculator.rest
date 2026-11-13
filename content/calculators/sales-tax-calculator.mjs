@@ -6,7 +6,7 @@ export default {
   h1: 'Sales Tax Calculator: Add Tax to a Price or Work It Backwards From a Total',
   meta: '8.25% sales tax on a $120 purchase is $9.90, for a total of $129.90. Add tax to any price, or take a receipt total and find the pre-tax price and tax backwards.',
   keyword: 'how calculate sales tax',
-  also: ['how to calculate sales tax backwards from total', 'how to calculate sales tax from total backwards', 'how do i calculate sales tax in texas', 'how to calculate florida sales tax', 'how to calculate sales tax in excel', 'how to calculate tax paid from total', 'how to calculate taxes on a purchase', 'how to add tax in calculator', 'how to calculate car sales tax'],
+  also: ['how to calculate sales tax backwards from total', 'how to calculate sales tax from total backwards', 'how do i calculate sales tax in texas', 'how to calculate florida sales tax', 'how to calculate sales tax in excel', 'how to calculate tax paid from total', 'how to calculate taxes on a purchase', 'how to add tax in calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'mode', label: 'Calculate', type: 'select', value: 'add', options: [['add', 'Add tax to a price'], ['back', 'Remove tax from a total (backwards)']] },

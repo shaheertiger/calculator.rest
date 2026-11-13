@@ -6,7 +6,7 @@ export default {
   h1: 'Battery Runtime Calculator: How Long Your Battery Will Last',
   meta: 'A 12 V 100 Ah lead-acid battery used to 50% runs a 100 W appliance on a 90% inverter for about 5.4 hours. Enter capacity, load, depth of discharge and losses.',
   keyword: 'how to calculate how long a battery will last',
-  also: ['battery life calculator', 'how long will battery last calculator', 'how to calculate battery run time', 'battery runtime calculator', 'how long will a 100ah battery last'],
+  also: ['battery life calculator', 'how long will battery last calculator', 'how to calculate battery run time'],
   updated: '2026-11-13',
   inputs: [
     { id: 'cap', label: 'Battery capacity', type: 'number', value: 100 },

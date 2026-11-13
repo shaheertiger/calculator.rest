@@ -6,7 +6,7 @@ export default {
   h1: 'Electric Bill Calculator: Cost from Meter Readings or Appliance Watts',
   meta: 'Subtract meter readings to get kWh, then multiply by your rate: 900 kWh at the 2025 U.S. average of 17.23¢ is $155.07. Also prices appliances by watts or amps.',
   keyword: 'how to calculate your electric bill',
-  also: ['how do you calculate your electricity bill', 'electricity cost calculator', 'how to calculate electric meter reading', 'how do you calculate kwh from amps', 'how to calculate kwh from amps', 'cost to run appliance calculator', 'how much does it cost to run a space heater'],
+  also: ['how do you calculate your electricity bill', 'electricity cost calculator', 'how to calculate electric meter reading', 'how do you calculate kwh from amps', 'how to calculate kwh from amps'],
   updated: '2026-11-13',
   inputs: [
     { id: 'mode', label: 'Calculate from', type: 'select', value: 'meter', options: [['meter', 'Meter readings (monthly bill)'], ['watts', 'Appliance watts'], ['amps', 'Appliance amps and volts']] },

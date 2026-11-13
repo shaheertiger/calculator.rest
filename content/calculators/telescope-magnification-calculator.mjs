@@ -4,7 +4,7 @@ export default {
   name: 'Telescope Magnification Calculator',
   title: 'Telescope Magnification Calculator: 1200 mm ÷ 25 mm = 48×',
   h1: 'Telescope Magnification Calculator with Barlow, Exit Pupil and True Field',
-  meta: 'Magnification = telescope focal length ÷ eyepiece focal length: 1200 mm with a 25 mm eyepiece is 48×. Also Barlow lenses, exit pupil, true field and max useful power.',
+  meta: 'Magnification = telescope focal length ÷ eyepiece focal length, so 1200 mm with a 25 mm eyepiece is 48×. Covers Barlows, exit pupil, true field and max power.',
   keyword: 'how to calculate telescope magnification power',
   also: ['how to calculate telescope magnification', 'how to calculate magnification telescope', 'how to calculate magnification of telescope', 'how to calculate magnification of a telescope', 'how do you calculate the magnification of a telescope', 'how to calculate the magnification of a telescope', 'telescope magnification calculator', 'telescope eyepiece calculator'],
   updated: '2026-11-13',
@@ -29,7 +29,7 @@ export default {
       rows.push(['Lowest useful magnification (7 mm pupil)', H.num(minU, 0) + '×']);
       rows.push(['Light gathered vs. the eye', H.num(Math.pow(D / 7, 2), 0) + '×']);
       rows.push(['Resolving limit (Dawes, 116″ ÷ D)', H.num(116 / D, 2) + '″']);
-      sub = M > maxU ? 'Above 50× per inch of aperture: expect a dim, soft image. Use a longer eyepiece.' : xp > 7 ? 'Exit pupil over 7 mm: more light leaves the eyepiece than your pupil can take in. A shorter eyepiece wastes nothing.' : xp >= 2 ? 'A low-to-medium power view, good for star clusters, galaxies and the whole Moon.' : xp >= 0.7 ? 'A high-power view, good for the Moon\'s craters, planets and double stars on steady nights.' : 'Very high power: only useful on the steadiest nights for close double stars and planetary detail.';
+      sub = M > maxU ? 'Above 50× per inch of aperture: expect a dim, soft image. Use a longer eyepiece.' : xp > 7 ? 'Exit pupil over 7 mm: more light leaves the eyepiece than your pupil can take in. A shorter eyepiece wastes nothing.' : xp >= 2 ? 'A low-to-medium power view, good for star clusters, galaxies and the whole Moon.' : xp >= 0.5 ? 'A high-power view, good for the Moon\'s craters, planets and double stars on steady nights.' : 'Very high power: only useful on the steadiest nights for close double stars and planetary detail.';
     }
     if (v.afov > 0) {
       var tf = v.afov / M;
@@ -72,7 +72,7 @@ export default {
       const b = run({ fl: 1200, ap: 203, ep: e, barlow: '2', afov: 52 });
       return [e + ' mm', a.value, b.value, a.xp, a.tf];
     }),
-    note: 'The 4 mm eyepiece (300×) and the shorter eyepieces with a Barlow (above about 400×) exceed what most nights\' air steadiness allows; in practice 150–250× is the everyday upper end for an 8-inch telescope.'
+    note: 'Combinations above 400× (the 5 mm and 4 mm eyepieces with the Barlow) exceed the 50×-per-inch limit, and anything above about 250–350× is more than the air allows on most nights. In practice 150–250× is the everyday upper end for an 8-inch telescope.'
   },
   sections: [
     {

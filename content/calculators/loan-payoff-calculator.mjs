@@ -6,7 +6,7 @@ export default {
   h1: 'Loan Payoff Calculator: When Will My Loan Be Paid Off?',
   meta: 'Owe $12,500 at 8.5% and pay $350 a month? You will be debt-free in 42 months after $1,962.59 of interest. Enter your balance to get your own payoff date.',
   keyword: 'when will my loan be paid off calculator',
-  also: ['how to calculate loan payoff', 'loan payoff calculator', 'how long will it take to pay off my loan', 'loan payoff date calculator'],
+  also: ['how to calculate loan payoff', 'loan payoff calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'balance', label: 'Current loan balance', type: 'number', value: 12500, prefix: '$', help: 'The principal balance on your latest statement.' },

@@ -6,7 +6,7 @@ export default {
   h1: 'Room BTU Calculator: Air Conditioner Size by Square Feet',
   meta: 'A 20 × 25 ft (500 sq ft) room needs about 12,000 BTU per hour of cooling, or 1 ton, by ENERGY STAR\'s chart. Adjusts for sun, shade, occupants and kitchens.',
   keyword: 'how do you calculate btu for a room',
-  also: ['btu calculator', 'how to calculate btu for air conditioner', 'how to calculate aircon btu', 'how do you calculate air conditioner size', 'how to calculate btu per square foot', 'what size air conditioner do i need'],
+  also: ['btu calculator', 'how to calculate btu for air conditioner', 'how to calculate aircon btu', 'how do you calculate air conditioner size'],
   updated: '2026-11-13',
   inputs: [
     { id: 'length', label: 'Room length', type: 'number', value: 25, suffix: 'ft' },

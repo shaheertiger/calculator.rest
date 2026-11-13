@@ -6,7 +6,7 @@ export default {
   h1: 'Credit Card Minimum Payment Calculator: Your Minimum and How Long It Takes',
   meta: 'On a $5,000 card balance at 22% APR, 1% plus interest makes the minimum $141.67. Paying only that takes over 19 years. See your minimum and the 36-month payoff.',
   keyword: 'how is minimum payment calculated',
-  also: ['how do credit cards calculate minimum payment', 'credit card minimum payment calculator', 'how long to pay off credit card with minimum payments', 'minimum payment calculator'],
+  also: ['how do credit cards calculate minimum payment', 'credit card minimum payment calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'balance', label: 'Card balance', type: 'number', value: 5000, prefix: '$' },

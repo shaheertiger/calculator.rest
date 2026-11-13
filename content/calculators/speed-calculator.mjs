@@ -94,7 +94,7 @@ export default {
 <p>Moving speed alone (excluding the stop) = 210 ÷ 3.5 = <strong>60 mph</strong>. Both are correct answers to different questions, so say which one you mean.</p>`,
   table: {
     title: 'How long does it take to drive 100 miles at different speeds?',
-    intro: 'Time = 100 miles ÷ speed, worked out by the calculator. The last column shows how much time each 5 mph bump saves.',
+    intro: 'Time = 100 miles ÷ speed, worked out by the calculator, with the matching pace in minutes and seconds per mile.',
     head: ['Speed', 'km/h', 'Time for 100 miles', 'Minutes per mile'],
     rows: ({ run }) => [25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80].map(s => { const r = run({ solve: 'time', d: 100, du: 'mi', s, su: 'mph' }); return [s + ' mph', r.rows.find(x => x[0] === 'km/h')[1].replace(' km/h', ''), r.value, r.rows.find(x => x[0] === 'Pace per mile')[1].replace(' min/mi', '')]; }),
     note: 'Going from 65 to 75 mph over 100 miles saves about 12 minutes; going from 25 to 35 mph saves almost 69 minutes. Speeding pays off least on the highway, where crash energy is highest.'

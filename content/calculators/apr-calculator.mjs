@@ -6,7 +6,7 @@ export default {
   h1: 'APR Calculator: The True Yearly Cost of a Loan After Points and Fees',
   meta: 'A $300,000, 30-year mortgage at 6.5% with $5,500 of points and lender fees has a 6.679% APR. Enter any rate, points and fees to compare loan offers.',
   keyword: 'how do you calculate apr for a mortgage',
-  also: ['apr calculator', 'how do you calculate apr in excel', 'mortgage apr calculator', 'how to calculate apr with fees'],
+  also: ['apr calculator', 'how do you calculate apr in excel'],
   updated: '2026-11-13',
   inputs: [
     { id: 'amount', label: 'Loan amount', type: 'number', value: 300000, prefix: '$' },

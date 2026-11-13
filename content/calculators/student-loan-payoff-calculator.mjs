@@ -6,7 +6,7 @@ export default {
   h1: 'Student Loan Payoff Calculator: How Fast Extra Payments Clear Your Loans',
   meta: 'Adding $100 a month to a $30,000 student loan at 6.5% pays it off in 7 years 2 months instead of 10 and saves $3,338.09 in interest. Try your own numbers.',
   keyword: 'how to pay off student loans faster calculator',
-  also: ['student loan payoff calculator', 'student loan extra payment calculator', 'should i consolidate my student loans calculator', 'how long to pay off student loans'],
+  also: ['student loan payoff calculator', 'should i consolidate my student loans calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'balance', label: 'Total student loan balance', type: 'number', value: 30000, prefix: '$' },

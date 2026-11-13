@@ -6,7 +6,7 @@ export default {
   h1: 'APY and Effective Interest Rate Calculator (APR to APY and Back)',
   meta: '6% compounded monthly is an effective annual rate of 6.168%, so $10,000 earns $616.78 in a year. Convert any APR to APY, or APY back to APR, at any compounding.',
   keyword: 'how to calculate effective interest rate',
-  also: ['apy calculator', 'how to calculate interest apy', 'how to calculate effective interest rate excel', 'how to calculate effective interest rate in excel', 'how to calculate effective interest rate using excel', 'effective annual rate calculator'],
+  also: ['apy calculator', 'how to calculate interest apy', 'how to calculate effective interest rate excel', 'how to calculate effective interest rate in excel', 'how to calculate effective interest rate using excel'],
   updated: '2026-11-13',
   inputs: [
     { id: 'mode', label: 'Convert', type: 'select', value: 'toapy', options: [['toapy', 'APR (nominal) → APY (effective)'], ['toapr', 'APY (effective) → APR (nominal)']] },

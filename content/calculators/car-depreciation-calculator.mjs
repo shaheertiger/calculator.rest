@@ -2,11 +2,11 @@ export default {
   slug: 'car-depreciation-calculator',
   hub: 'loans',
   name: 'Car Depreciation Calculator',
-  title: 'Car Depreciation Calculator: $40K Car Is Worth $16,704 at 5 Years',
+  title: 'Car Depreciation Calculator: $40K Car Worth $16,704 in 5 Years',
   h1: 'Car Depreciation Calculator: What Your Car Is Worth Year by Year',
-  meta: 'At 20% the first year and 15% a year after, a $40,000 new car is worth about $16,704 after 5 years, a 58% loss. Estimate any car\'s value, loss per year and equity.',
+  meta: 'At 20% the first year and 15% a year after, a $40,000 new car is worth about $16,704 after 5 years, a 58% loss. Estimate value, yearly loss and equity.',
   keyword: 'how to calculate depreciation car',
-  also: ['car depreciation calculator', 'how to calculate the salvage value of a vehicle', 'how to calculate car equity', 'vehicle depreciation calculator', 'how much is my car worth after 5 years'],
+  also: ['car depreciation calculator', 'how to calculate the salvage value of a vehicle', 'how to calculate car equity'],
   updated: '2026-11-13',
   inputs: [
     { id: 'price', label: 'Purchase price', type: 'number', value: 40000, prefix: '$' },
@@ -86,7 +86,7 @@ export default {
   sections: [
     {
       h2: 'How much does a car depreciate per year and per mile?',
-      html: `<p>In dollars, the first year is the worst. On the typical curve a $40,000 car loses $8,000 in year one, $4,800 in year two and $4,080 in year three; by year ten it is losing under $1,300 a year. As a share of what is left, the rate settles into a steady percentage, which is why the curve flattens.</p>
+      html: `<p>In dollars, the first year is the worst. On the typical curve a $40,000 car loses $8,000 in year one, $4,800 in year two and $4,080 in year three; by year ten it is losing about $1,300 a year. As a share of what is left, the rate settles into a steady percentage, which is why the curve flattens.</p>
 <p>Per mile, divide the dollar loss by the miles driven. The $23,296 lost over five years and 60,000 miles is about <strong>39¢ a mile</strong>, often more than fuel. Higher-than-average mileage pushes value down faster; low mileage holds it up. The IRS standard mileage rate for business driving includes an allowance for depreciation for the same reason.</p>`
     },
     {
@@ -107,7 +107,7 @@ export default {
   ],
   faq: [
     { q: 'How much is a 3-year-old $35,000 car worth?', a: 'About $20,230 on the typical curve: 35,000 × 0.80 × 0.85 × 0.85. That is a loss of $14,770, or 42%.' },
-    { q: 'When does a car depreciate the most?', a: 'In the first year, and especially the moment it becomes a used car. On the typical curve a new car loses about a fifth of its value in year one, as much as the next two years combined in percentage terms.' },
+    { q: 'When does a car depreciate the most?', a: 'In the first year, and especially the moment it becomes a used car. On the typical curve a new car loses a fifth of its value in year one, nearly as many dollars as it loses in the next two years combined.' },
     { q: 'What percentage does a car depreciate per year?', a: 'A common estimate is about 20% in year one and roughly 15% a year after that, so a typical new car keeps a bit over 40% of its value at five years. Actual rates vary widely by model, mileage and market conditions.' },
     { q: 'Does buying used avoid depreciation?', a: 'It avoids the steepest part. A two- or three-year-old car has already lost roughly a third or more of its value, so you pay for less depreciation, though the car keeps losing value each year you own it.' },
     { q: 'Which cars hold their value best?', a: 'Vehicles in steady demand with strong reliability reputations, such as many pickups and popular SUVs, tend to depreciate more slowly. Luxury cars with high running costs often depreciate faster. Use slower or faster rates in the calculator to compare.' },
