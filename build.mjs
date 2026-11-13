@@ -317,6 +317,14 @@ for (const b of built) {
   if (wc < 450) warn(s, `body ${wc} words (thin)`);
   if (/what is an? [\w\s]*calculator\?/i.test((d.sections || []).map(x => x.h2).join(' '))) warn(s, 'filler "What is a … calculator?" heading');
 }
+// one query, one owning page: a query may appear as keyword/also on only one page
+{
+  const owner = new Map();
+  for (const b of built) for (const q of [b.def.keyword, ...(b.def.also || [])]) {
+    if (!q) continue; const k = String(q).toLowerCase().trim();
+    if (owner.has(k) && owner.get(k) !== b.def.slug) warn(`${owner.get(k)} ↔ ${b.def.slug}`, `both claim the query "${k}"`); else owner.set(k, b.def.slug);
+  }
+}
 // name-masked 5-gram overlap between pages in the same hub
 function shingles(b) {
   let t = b.text.toLowerCase();
@@ -381,7 +389,7 @@ function homePage() {
   const body = `<div class="wrap">
 <section class="hero-home">
 <div>
-<h1>math, handled<span class="dot">.</span><br><span class="soft">you, rested.</span></h1>
+<h1><span class="eyebrow">free online calculator</span>math, handled<span class="dot">.</span><br><span class="soft">you, rested.</span></h1>
 <p class="lede">A free online calculator and ${calcs.length} specific ones: mortgages, pay, grades, health, home projects. Type it, get the answer, get on with your day.</p>
 <ul class="chips">${chips.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name.replace(/ Calculator$/, '').toLowerCase())}</a></li>`).join('')}</ul>
 <div class="memo"><span class="face" aria-hidden="true"></span>dot remembers your last 20 calcs</div>
