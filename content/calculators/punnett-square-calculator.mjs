@@ -147,6 +147,6 @@ export default {
   sources: [
     { name: 'OpenStax Biology 2e: 12.2 Characteristics and Traits', url: 'https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits' },
     { name: 'OpenStax Biology 2e: 12.3 Laws of Inheritance', url: 'https://openstax.org/books/biology-2e/pages/12-3-laws-of-inheritance' },
-    { name: 'National Human Genome Research Institute: Punnett Square (glossary)', url: 'https://www.genome.gov/genetics-glossary/Punnett-Square' }
+    { name: 'OpenStax Biology 2e: 12.1 Mendel\'s Experiments and the Laws of Probability', url: 'https://openstax.org/books/biology-2e/pages/12-1-mendels-experiments-and-the-laws-of-probability' }
   ]
 };

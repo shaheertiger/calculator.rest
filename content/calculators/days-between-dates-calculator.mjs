@@ -2,7 +2,7 @@ export default {
   slug: 'days-between-dates-calculator',
   hub: 'time',
   name: 'Days Between Dates Calculator',
-  title: 'Days Between Dates Calculator: Jan 1 to Dec 31, 2026 = 364 Days',
+  title: 'Days Between Dates Calculator: Jan 1–Dec 31, 2026 Is 364 Days',
   h1: 'How Many Days Apart? Count Days Between Two Dates or Add Days',
   meta: 'Jan 1 to Dec 31, 2026 is 364 days apart (365 if you count both dates). Count days, weeks and months between any two dates, or add or subtract days.',
   keyword: 'how many days apart calculator',
@@ -116,7 +116,7 @@ export default {
   ],
   related: ['business-days-calculator', 'time-duration-calculator', 'age-calculator', 'day-of-week-calculator'],
   sources: [
-    { name: 'NIST: Walk Through Time (calendars and the Gregorian leap-year rule)', url: 'https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time' },
+    { name: 'NIST: A Walk Through Time (the evolution of calendars and time measurement)', url: 'https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time' },
     { name: 'Federal Rules of Civil Procedure, Rule 6: Computing time', url: 'https://www.law.cornell.edu/rules/frcp/rule_6' }
   ]
 };

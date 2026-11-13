@@ -134,6 +134,6 @@ export default {
   sources: [
     { name: 'OpenStax University Physics Volume 1: 3.1 Position, Displacement, and Average Velocity', url: 'https://openstax.org/books/university-physics-volume-1/pages/3-1-position-displacement-and-average-velocity' },
     { name: 'NIST Special Publication 811: Guide for the Use of the SI (mile, knot, foot conversions)', url: 'https://www.nist.gov/pml/special-publication-811' },
-    { name: 'NIST Handbook 44, Appendix C: General Tables of Units of Measurement', url: 'https://www.nist.gov/pml/owm/publications/nist-handbooks/handbook-44' }
+    { name: 'NIST Handbook 44 (Appendix C: General Tables of Units of Measurement)', url: 'https://www.nist.gov/pml/owm/nist-handbook-44-current-edition' }
   ]
 };

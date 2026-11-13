@@ -101,7 +101,7 @@ export default {
     },
     {
       h2: 'What service level should you choose?',
-      html: `<p>Set it by how much a stockout costs. Many businesses use 90–95% for ordinary items, 97–99% for top sellers or items customers can easily buy elsewhere, and lower levels for slow, expensive parts where holding stock is costly. An ABC analysis (A items get the highest level) is a common way to assign them.</p>
+      html: `<p>Set it by how much a stockout costs. A common approach is 90–95% for ordinary items, 97–99% for top sellers or items customers can easily buy elsewhere, and lower levels for slow, expensive parts where holding stock is costly. An ABC analysis (A items get the highest level) is a common way to assign them.</p>
 <p>Note that a <em>cycle</em> service level of 95% means no stockout in 95% of replenishment cycles. The share of demand filled from stock (fill rate) is usually higher, because even in a cycle that runs out, most orders were already filled.</p>`
     }
   ],

@@ -104,7 +104,7 @@ export default {
     {
       h2: 'What is a good efficiency for common devices?',
       html: `<ul>
-<li><strong>Incandescent bulb:</strong> about 90% of its energy leaves as heat, so roughly 10% becomes light. LED bulbs use at least 75% less energy for the same light (U.S. Department of Energy).</li>
+<li><strong>Incandescent bulb:</strong> about 90% of its energy leaves as heat, so roughly 10% or less becomes light. An LED that gives the same 800 lumens draws about 9 W instead of 60 W.</li>
 <li><strong>Gasoline car:</strong> only a small share of fuel energy, very roughly a fifth to a quarter, reaches the wheels; most is lost as engine heat. Battery electric cars deliver well over three-quarters of grid energy to the wheels (fueleconomy.gov).</li>
 <li><strong>Fossil power plants:</strong> about a third (older steam plants) to about half (combined-cycle gas) of the fuel's heat becomes electricity (EIA heat-rate data; 3,412 BTU per kWh would be 100%).</li>
 <li><strong>Large electric motors and transformers:</strong> typically above 90%.</li>
@@ -128,8 +128,8 @@ export default {
   ],
   related: ['joules-calculator', 'kw-calculator', 'pulley-calculator', 'percentage-calculator', 'electricity-cost-calculator'],
   sources: [
-    { name: 'U.S. Department of Energy, Energy Saver: Lighting Choices to Save You Money', url: 'https://www.energy.gov/energysaver/lighting-choices-save-you-money' },
     { name: 'fueleconomy.gov: Where the Energy Goes, Gasoline Vehicles', url: 'https://www.fueleconomy.gov/feg/atv.shtml' },
+    { name: 'fueleconomy.gov: All-Electric Vehicles (energy efficiency)', url: 'https://www.fueleconomy.gov/feg/atv-ev.shtml' },
     { name: 'U.S. Energy Information Administration: power plant efficiency FAQ', url: 'https://www.eia.gov/tools/faqs/faq.php?id=107&t=3' },
     { name: 'OpenStax College Physics 2e (work, energy, power and efficiency)', url: 'https://openstax.org/details/books/college-physics-2e' }
   ]

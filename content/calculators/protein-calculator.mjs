@@ -96,7 +96,7 @@ export default {
     { q: 'Is 1 gram of protein per pound too much?', a: 'For healthy people who lift, 1 g per pound (2.2 g/kg) is the top of the useful range for muscle gain, not dangerous. Most people get the same results from about 0.7–0.8 g per pound.' },
     { q: 'How much protein do I need to lose weight?', a: 'Aim for at least 1.2–1.6 g/kg, and 1.6–2.2 g/kg if you also lift weights. Higher protein helps protect muscle and keeps you fuller while eating less.' },
     { q: 'How much protein do I need during pregnancy?', a: 'The RDA in pregnancy is 1.1 g per kg of body weight, and at least 71 g a day. Your prenatal care provider can adjust that for twins, low body weight or other conditions.' },
-    { q: 'What does 30 g of protein look like?', a: 'About 4 oz of cooked chicken breast, a 7 oz container of plain Greek yogurt plus a handful of nuts, or 4 large eggs plus a glass of milk. Check labels for exact grams.' },
+    { q: 'What does 30 g of protein look like?', a: 'Roughly 4 oz (113 g) of cooked chicken breast, or 4 large eggs plus a cup of milk. Labels and USDA FoodData Central give exact grams for other foods.' },
     { q: 'Should I use my current weight or goal weight?', a: 'Use current weight if you are near a healthy weight. If you carry a lot of excess body fat, a goal or adjusted weight gives a more realistic target.' }
   ],
   related: ['macro-calculator', 'calorie-calculator', 'calorie-deficit-calculator', 'ideal-weight-calculator', 'one-rep-max-calculator'],

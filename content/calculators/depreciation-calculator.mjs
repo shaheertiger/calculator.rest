@@ -153,7 +153,7 @@ export default {
     }
   ],
   faq: [
-    { q: 'How much does equipment depreciate per year?', a: 'Under straight-line, the same amount every year: (cost − salvage) ÷ life. A $50,000 machine with $5,000 salvage over 5 years depreciates $9,000 a year, or 18% of cost. Accelerated methods take 40% or more in year 1.' },
+    { q: 'How much does equipment depreciate per year?', a: 'Under straight-line, the same amount every year: (cost − salvage) ÷ life. A $50,000 machine with $5,000 salvage over 5 years depreciates $9,000 a year, or 18% of cost. Double-declining balance on a 5-year life takes 40% of cost in year 1.' },
     { q: 'What is the useful life of equipment for tax purposes?', a: 'MACRS assigns recovery periods: computers, office machines, cars and light trucks are 5-year property; office furniture and many kinds of manufacturing machinery are 7-year property. IRS Publication 946, Appendix B lists the class life for each asset type.' },
     { q: 'Does MACRS use salvage value?', a: 'No. MACRS depreciates the full basis down to zero. Salvage value only matters for book depreciation on your financial statements.' },
     { q: 'What is the half-year convention?', a: 'MACRS treats all equipment as placed in service halfway through the year, so year 1 gets half a year of depreciation and an extra year is added at the end. If more than 40% of the year\'s purchases were placed in service in the last three months, the mid-quarter convention applies instead.' },

@@ -92,7 +92,7 @@ export default {
     },
     {
       h2: 'Why did the wind chill formula change in 2001?',
-      html: `<p>The original index, from Siple and Passel's 1940s experiments cooling water bottles in Antarctica, exaggerated the chill in strong winds. The 2001 version is based on a model of heat flow through human facial skin, tested on volunteers in a chilled wind tunnel, and it uses wind at face height rather than at the 33-foot level of weather instruments (the formula adjusts for that internally).</p>
+      html: `<p>The original index, from Siple and Passel's 1940s experiments cooling water bottles in Antarctica, exaggerated the chill in strong winds. The 2001 version is based on a model of heat flow through human facial skin, checked against volunteers walking in a chilled wind tunnel, and it uses wind at face height rather than at the 33-foot level of weather instruments (the formula adjusts for that internally).</p>
 <p>The result is milder numbers in most conditions: the old index called 0 °F with a 15 mph wind about −31 °F; the current one gives −19 °F.</p>`
     },
     {
