@@ -32,13 +32,15 @@
     var out = $('#result');
     var inputs = C.inputs || [];
     var byId = {}; inputs.forEach(function (c) { byId[c.id] = c; });
+    // look fields up by name attribute: form.elements[id] breaks for ids like "length" or "item"
+    function field(id) { return form.querySelector('[name="' + id + '"]'); }
 
     // prefill from URL (?id=value)
     try {
       var qs = new URLSearchParams(location.search);
       inputs.forEach(function (c) {
         if (c.type === 'rows' || !qs.has(c.id)) return;
-        var el = form.elements[c.id]; if (!el) return;
+        var el = field(c.id); if (!el) return;
         if (c.type === 'checkbox') el.checked = qs.get(c.id) === '1'; else el.value = qs.get(c.id);
       });
     } catch (e) { }
@@ -53,7 +55,7 @@
             return o;
           });
         } else {
-          v[c.id] = readField(form.elements[c.id], c);
+          v[c.id] = readField(field(c.id), c);
         }
       });
       return v;

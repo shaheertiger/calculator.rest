@@ -2,9 +2,9 @@ export default {
   slug: 'wheel-offset-calculator',
   hub: 'electrical',
   name: 'Wheel Offset Calculator',
-  title: 'Wheel Offset Calculator: 8 in. Wheel, 5.5 in. Backspace = +25 mm',
+  title: 'Wheel Offset Calculator: 8 in. Wheel, 5.5 in. BS = +25 mm',
   h1: 'Wheel Offset and Backspacing Calculator: Compare Old and New Wheels',
-  meta: 'An 8 in. wide wheel (9 in. overall) with 5.5 in. of backspacing has a +25.4 mm offset. Convert backspacing to offset and see how far new wheels poke out or tuck in.',
+  meta: 'An 8 in. wheel (9 in. overall) with 5.5 in. of backspacing has a +25.4 mm offset. Convert backspacing to offset and see how far new wheels poke out.',
   keyword: 'how to calculate wheel offset',
   also: ['how to calculate offset on wheels', 'how to calculate offset wheels', 'wheel offset calculator', 'backspacing to offset calculator', 'wheel backspacing calculator'],
   updated: '2026-11-13',
@@ -42,7 +42,7 @@ export default {
       rows.push(['New wheel backspacing', H.num(bs2, 3) + ' in', true]);
       rows.push(['Inner edge moves', (Math.abs(inner) < 0.005 ? 'no change' : H.num(Math.abs(inner), 2) + ' in (' + H.num(Math.abs(inner) * 25.4, 1) + ' mm) ' + (inner > 0 ? 'away from the suspension' : 'closer to the suspension'))]);
       rows.push(['Outer lip moves', (Math.abs(outer) < 0.005 ? 'no change' : H.num(Math.abs(outer), 2) + ' in (' + H.num(Math.abs(outer) * 25.4, 1) + ' mm) ' + (outer > 0 ? 'further out toward the fender' : 'further in')), true]);
-      out.sub = 'Compared with the current wheel, the new one ' + (outer > 0.005 ? 'pokes out ' + H.num(outer, 2) + ' in. more' : 'sits ' + H.num(Math.abs(outer), 2) + ' in. further in') + ' at the fender and ' + (inner < -0.005 ? 'gains ' + H.num(-inner, 2) + ' in. toward the strut.' : 'clears the strut by ' + H.num(Math.abs(inner), 2) + ' in. more.');
+      out.sub = 'Compared with the current wheel, the new one ' + (outer > 0.005 ? 'pokes out ' + H.num(outer, 2) + ' in. more' : 'sits ' + H.num(Math.abs(outer), 2) + ' in. further in') + ' at the fender and ' + (inner < -0.005 ? 'sits ' + H.num(-inner, 2) + ' in. closer to the strut.' : 'clears the strut by ' + H.num(Math.abs(inner), 2) + ' in. more.');
     } else {
       out.sub = 'Add a new wheel width and offset to compare fitment.';
     }

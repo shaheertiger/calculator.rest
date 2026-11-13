@@ -4,7 +4,7 @@ export default {
   name: 'Coefficient of Variation Calculator',
   title: 'Coefficient of Variation Calculator: SD ÷ Mean = 2.57% CV',
   h1: 'Coefficient of Variation (CV, %RSD) Calculator With Excel Formula',
-  meta: 'Six replicate readings averaging 10.033 with SD 0.258 have a CV of 2.57%. Paste data or enter a mean and SD for the CV (relative standard deviation) and an Excel formula.',
+  meta: 'Six replicate readings averaging 10.033 with SD 0.258 have a CV of 2.57%. Paste data or a mean and SD to get the CV (%RSD) and the matching Excel formula.',
   keyword: 'how to calculate cv in excel',
   also: ['coefficient of variation calculator', 'cv calculator', 'relative standard deviation calculator', 'rsd calculator', 'how to calculate coefficient of variation', 'percent rsd calculator'],
   updated: '2026-11-13',

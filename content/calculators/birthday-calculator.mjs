@@ -2,9 +2,9 @@ export default {
   slug: 'birthday-calculator',
   hub: 'time',
   name: 'Birthday Countdown Calculator',
-  title: 'Birthday Countdown: Days Until Your Birthday + Half Birthday',
+  title: 'Birthday Countdown: Days Until Your Birthday, Weekday in 2027',
   h1: 'How Many Days Until My Birthday? Countdown, Weekday and Half Birthday',
-  meta: 'Count the days until your next birthday, see which weekday it lands on and find your half birthday. A March 8 birthday falls on a Monday in 2027; the half birthday is Sep 8.',
+  meta: 'Count the days to your next birthday, its weekday and your half birthday. A March 8 birthday falls on a Monday in 2027, and its half birthday is Sep 8.',
   keyword: 'how many days until my birthday calculator',
   also: ['birthday countdown', 'days until my birthday', 'how to calculate half birthday', 'what\'s my half birthday calculator', 'what is my half birthday calculator', 'what day is my birthday this year', 'how many sleeps until my birthday'],
   updated: '2026-11-13',
@@ -43,7 +43,7 @@ export default {
       label: until === 0 ? 'Happy birthday! You turn ' + age + ' today' : 'Until your birthday on ' + H.fmtDate(next),
       expr: H.fmtDate(t) + ' → ' + H.fmtDate(next),
       rows: rows,
-      sub: 'Your half birthday is on ' + halfMD.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric' }) + ' each year.'
+      sub: 'Your half birthday is on ' + (halfMD.getUTCMonth() === 1 && bd > 28 ? 'the last day of February' : halfMD.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric' })) + ' each year.'
     };
   },
   quick: ({ r, v, H }) => `Counting from ${H.fmtDate(v.today)}, a <strong>March 8</strong> birthday is <strong>${r.value}</strong> away: it falls on ${r.rows[0][1]}, when someone born in 1995 turns ${r.rows[1][1]}. To count by hand, add the days left in this month, the days in each full month between, and the birthday's date. A March 8 half birthday is September 8.`,

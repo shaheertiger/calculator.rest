@@ -4,7 +4,7 @@ export default {
   name: 'Countertop Square Footage Calculator',
   title: 'Countertop Square Footage Calculator: L + Island = 60.5 Sq Ft',
   h1: 'Countertop Calculator: Square Feet and Cost From Inch Measurements',
-  meta: 'Measure each countertop piece in inches to get square feet and cost. A 120" and 84" L-run at 25.5" deep, a 72" × 36" island and a 4" backsplash total 60.5 sq ft.',
+  meta: 'Measure each countertop piece in inches for square feet and cost. A 120" and 84" L-run at 25.5" deep, a 72" × 36" island and a 4" backsplash total 60.5 sq ft.',
   keyword: 'how do you calculate square footage of a countertop',
   also: ['how do you calculate countertop square footage', 'how do you calculate square footage for countertops', 'how to calculate countertop square footage', 'how to calculate square feet of countertop', 'how to calculate square footage for countertops', 'how to calculate square feet for countertops', 'how to calculate square feet of a countertop', 'how to calculate countertop sq ft', 'how to calculate marble in square feet'],
   updated: '2026-11-13',
@@ -48,7 +48,7 @@ export default {
       sub: 'Sink and cooktop cutouts are not subtracted: fabricators price the full slab area they cut from.'
     };
   },
-  quick: ({ r }) => `To calculate countertop square footage, multiply each piece's length by its depth in inches and divide by 144. An L-shaped kitchen with a 120 × 25.5 in run (21.25 sq ft), an 84 × 25.5 in run (14.88 sq ft) and a 72 × 36 in island (18 sq ft) is 54.13 sq ft; a 4-inch backsplash adds 6.38, for <strong>${r.value}</strong>.`,
+  quick: ({ r }) => `To calculate countertop square footage, multiply each piece's length by its depth in inches and divide by 144. An L-shaped kitchen with a 120 × 25.5 in run (21.25 sq ft), an 84 × 25.5 in run (14.875 sq ft) and a 72 × 36 in island (18 sq ft) is 54.125 sq ft; a 4-inch backsplash adds 6.375, for <strong>${r.value}</strong>.`,
   stepsTitle: 'How to calculate countertop square footage',
   steps: [
     'Split the countertop into rectangles: each straight run, the island, any peninsula or bar top.',
@@ -62,8 +62,8 @@ export default {
     vars: [['length, depth', 'piece dimensions in inches, including overhang'], ['144', 'square inches in one square foot'], ['Σ', 'sum over all pieces']]
   },
   example: `<p>The default kitchen: the sink wall runs 120 in along the back wall, including the corner. The side run is 84 in measured from the front edge of the sink run, so the corner isn't counted twice. Both are 25.5 in deep. The island is 72 × 36 in.</p>
-<p>Sink run 120 × 25.5 = 3,060 sq in. Side run 84 × 25.5 = 2,142 sq in. Island 72 × 36 = 2,592 sq in. Total 7,794 sq in ÷ 144 = <strong>54.13 sq ft</strong>.</p>
-<p>Backsplash: 120 in on the back wall plus 25.5 + 84 = 109.5 in on the side wall is 229.5 in × 4 in = 918 sq in = 6.38 sq ft. Total = <strong>60.5 sq ft</strong>. At an example installed price of $60 per sq ft, that is $3,630.</p>`,
+<p>Sink run 120 × 25.5 = 3,060 sq in. Side run 84 × 25.5 = 2,142 sq in. Island 72 × 36 = 2,592 sq in. Total 7,794 sq in ÷ 144 = <strong>54.125 sq ft</strong>.</p>
+<p>Backsplash: 120 in on the back wall plus 25.5 + 84 = 109.5 in on the side wall is 229.5 in × 4 in = 918 sq in = 6.375 sq ft. Total = <strong>60.5 sq ft</strong>. At an example installed price of $60 per sq ft, that is $3,630.</p>`,
   table: {
     title: 'How many square feet are common countertop pieces?',
     intro: 'Square feet for standard depths, computed by the calculator from length × depth ÷ 144.',
