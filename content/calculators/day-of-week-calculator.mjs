@@ -4,7 +4,7 @@ export default {
   name: 'Day of the Week Calculator',
   title: 'Day of the Week Calculator: July 4, 1776 Was a Thursday',
   h1: 'What Day of the Week Was It? Weekday Finder With Zeller and Doomsday',
-  meta: 'Find the weekday of any date, past or future, with the working shown. July 4, 1776 was a Thursday; Christmas 2026 is a Friday. Uses Zeller\'s congruence and Doomsday.',
+  meta: 'Find the weekday of any date, with the working shown. July 4, 1776 was a Thursday and Christmas 2026 is a Friday. Uses Zeller\'s congruence and Doomsday.',
   keyword: 'how to calculate the weekday for any date',
   also: ['day of the week calculator', 'what day of the week was', 'what day of the week is', 'zeller\'s congruence calculator', 'doomsday rule calculator', 'what day was i born'],
   updated: '2026-11-13',

@@ -2,9 +2,9 @@ export default {
   slug: 'ratio-calculator',
   hub: 'math',
   name: 'Ratio Calculator',
-  title: 'Ratio Calculator: 45:60 Simplifies to 3:4 (Solve and Split Too)',
+  title: 'Ratio Calculator: 45:60 Simplifies to 3:4 (Solve & Split Too)',
   h1: 'Ratio Calculator: Simplify Ratios, Solve Proportions and Split Amounts',
-  meta: '45:60 simplifies to 3:4 because both terms divide by 15. Simplify 2- or 3-part ratios, solve A:B = C:x, or split an amount in a ratio, with steps and Excel formulas.',
+  meta: '45:60 simplifies to 3:4 because both terms divide by 15. Simplify 2- or 3-part ratios, solve A:B = C:x or split an amount, with steps and Excel formulas.',
   keyword: 'how do i calculate ratios',
   also: ['ratio calculator', 'how do i calculate ratios in excel', 'how do you calculate ratios in excel', 'how to calculate a ratio in excel', 'how to calculate ratios in excel', 'how to calculate ratio scale', 'proportion calculator'],
   updated: '2026-11-13',
@@ -41,7 +41,7 @@ export default {
       return {
         value: parts.map(f).join(' : '), label: f(v.total) + ' split in the ratio ' + lbl,
         expr: f(v.total) + ' ÷ ' + f(sum) + ' parts = ' + f(v.total / sum) + ' per part',
-        rows: parts.map(function (p, i) { return ['Share ' + 'ABC'.charAt(i) + ' (' + f(t[i]) + ' parts)', f(p) + ' (' + H.pct(t[i] / sum * 100, 2) + ')']; })
+        rows: parts.map(function (p, i) { return ['Share ' + 'ABC'.charAt(i) + ' (' + f(t[i]) + (t[i] === 1 ? ' part)' : ' parts)'), f(p) + ' (' + H.pct(t[i] / sum * 100, 2) + ')']; })
       };
     }
     var k = 0;
@@ -55,7 +55,7 @@ export default {
       steps.push(['Greatest common factor', g.toLocaleString('en-US')]);
       simp = ints.map(function (q) { return (q / g).toLocaleString('en-US'); }).join(' : ');
       steps.push(['Divide every term by ' + g.toLocaleString('en-US'), simp]);
-    } else simp = '1 : ' + t.slice(1).map(function (q) { return f(q / t[0]); }).join(' : ');
+    } else simp = '≈ 1 : ' + t.slice(1).map(function (q) { return f(q / t[0]); }).join(' : ');
     rows.push(['As 1 : n', '1 : ' + t.slice(1).map(function (q) { return f(q / t[0]); }).join(' : ')]);
     if (t.length === 2) {
       rows.push(['As n : 1', f(t[0] / t[1]) + ' : 1']);
@@ -125,6 +125,6 @@ export default {
   sources: [
     { name: 'Wolfram MathWorld: Ratio', url: 'https://mathworld.wolfram.com/Ratio.html' },
     { name: 'Microsoft Support: GCD function', url: 'https://support.microsoft.com/en-us/office/gcd-function-d5107a51-69e3-461f-8e4c-ddfc21b5073a' },
-    { name: 'USGS: Topographic map scales', url: 'https://www.usgs.gov/faqs/what-are-scales-topographic-maps' }
+    { name: 'Khan Academy: Pre-algebra (ratios, rates and proportions)', url: 'https://www.khanacademy.org/math/pre-algebra' }
   ]
 };

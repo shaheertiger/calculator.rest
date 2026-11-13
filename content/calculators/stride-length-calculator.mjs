@@ -2,7 +2,7 @@ export default {
   slug: 'stride-length-calculator',
   hub: 'health',
   name: 'Stride Length Calculator',
-  title: 'Stride Length Calculator: 5\'5" Woman ≈ 26.8 in, 2,360 Steps/Mile',
+  title: 'Stride Length Calculator: 26.8 in at 5\'5", 2,360 Steps a Mile',
   h1: 'Stride Length Calculator: From Your Height or a Measured Walk',
   meta: 'A 5 ft 5 in woman has an estimated walking stride (step) of 26.8 in, about 2,360 steps per mile. Use height or a measured walk to get steps per mile and km.',
   keyword: 'how do i calculate stride length',
@@ -37,7 +37,7 @@ export default {
     var cm = stepIn * 2.54;
     var perMile = 63360 / stepIn, perKm = 100000 / cm;
     return {
-      value: us ? H.num(stepIn, 1) + ' in' : H.num(cm, 1) + ' cm',
+      value: us ? H.fix(stepIn, 1) + ' in' : H.fix(cm, 1) + ' cm',
       label: 'Step length (what Fitbit and most pedometers call stride length)',
       expr: how,
       rows: [
@@ -67,7 +67,7 @@ export default {
   },
   example: `<p><strong>Height method:</strong> a 6 ft 0 in (72-inch) man: 72 × 0.415 = <strong>29.9 in</strong> (75.9 cm). Steps per mile = 63,360 ÷ 29.88 = <strong>2,120</strong>.</p>
 <p><strong>Measured method:</strong> on a 400 m track he counts 520 steps walking. Step length = 40,000 cm ÷ 520 = <strong>76.9 cm</strong> (30.3 in), close to the estimate. Running the same lap takes 330 steps, a 121.2 cm (47.7 in) step and only about 1,330 steps per mile.</p>
-<p>His 9,000 daily steps at the walking length cover 9,000 ÷ 2,093 ≈ <strong>4.3 miles</strong>.</p>`,
+<p>His 9,000 daily steps at the walking length cover 9,000 ÷ 2,092 ≈ <strong>4.3 miles</strong>.</p>`,
   table: {
     title: 'What is the average stride length by height?',
     intro: 'Estimated walking step length and steps per mile by height, using the 0.413 (women) and 0.415 (men) ratios in the calculator above.',
@@ -103,7 +103,7 @@ export default {
     }
   ],
   faq: [
-    { q: 'What is the average stride length for a woman?', a: 'Using height × 0.413, a woman of average U.S. height (63.5 inches, per CDC data) has a walking step of about 26.2 inches, or roughly 2,420 steps per mile.' },
+    { q: 'What is the average stride length for a woman?', a: 'Using height × 0.413, a woman of average U.S. height (63.5 inches, per CDC data) has a walking step of about 26.2 inches, or about 2,416 steps per mile.' },
     { q: 'What is the average stride length for a man?', a: 'Using height × 0.415, a man of average U.S. height (68.9 inches) has a walking step of about 28.6 inches, roughly 2,216 steps per mile.' },
     { q: 'How do I calculate stride length from steps and distance?', a: 'Divide the distance by the number of steps, in the same units. 1,200 inches (100 feet) in 45 steps is 26.7 inches per step.' },
     { q: 'How many miles is 10,000 steps?', a: 'Usually 4 to 5 miles. Divide 10,000 by your steps per mile: at 2,360 steps per mile, 10,000 steps is about 4.2 miles.' },
