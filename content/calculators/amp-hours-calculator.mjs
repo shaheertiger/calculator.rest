@@ -105,7 +105,7 @@ export default {
     { q: 'How many amp hours does a 100 W load use?', a: 'On 12 V, 100 W draws 8.33 A, so it uses 8.33 Ah every hour, or 200 Ah in 24 hours.' },
     { q: 'What is the difference between Ah and mAh?', a: 'Only scale: 1 Ah = 1,000 mAh. Ah is used for vehicle and solar batteries, mAh for phones, power banks and small cells.' },
     { q: 'Do two 100Ah batteries make 200Ah?', a: 'Yes, if wired in parallel at the same voltage. In series they make a 100 Ah battery at double the voltage.' },
-    { q: 'What does C-rate mean?', a: 'C-rate is discharge current relative to capacity. For a 100 Ah battery, 1C is 100 A, C/10 is 10 A and C/20 is 5 A. Capacity ratings are only valid at the C-rate they were tested at.' },
+    { q: 'What does C-rate mean?', a: 'C-rate is discharge current relative to capacity. For a 100 Ah battery, 1C is 100 A, C/10 is 10 A and C/20 is 5 A. A capacity rating only applies at the C-rate it was rated at.' },
     { q: 'How many amp hours is a car battery?', a: 'Most passenger-car starting batteries hold roughly 40 to 80 Ah, but they are designed for short, high-current bursts, not deep cycling. Use a deep-cycle battery for running loads.' }
   ],
   related: ['watt-hours-calculator', 'battery-life-calculator', 'solar-panel-calculator', 'amps-calculator'],

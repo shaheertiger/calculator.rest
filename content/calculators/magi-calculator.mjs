@@ -128,7 +128,7 @@ export default {
     { q: 'How much can I put in a Roth IRA for 2026?', a: 'Up to $7,500, or $8,600 if you are 50 or older, but no more than your taxable compensation, and less if your MAGI is in the phase-out range. The limit is shared with any traditional IRA contributions.' },
     { q: 'Does Social Security count in MAGI for a Roth IRA?', a: 'Only the taxable part, because that is what is in AGI. The ACA version of MAGI also adds back the nontaxable part.' },
     { q: 'When is the deadline for a 2026 Roth IRA contribution?', a: 'April 15, 2027, the tax-filing deadline, not including extensions. You can contribute for 2026 from January 1, 2026 until then.' },
-    { q: 'What if my spouse has no income?', a: 'A spousal IRA lets a non-working spouse contribute based on the working spouse\'s pay if you file jointly. Your joint MAGI is tested against the $242,000–$252,000 range.' }
+    { q: 'What if my spouse has no income?', a: 'A spousal IRA lets a non-working spouse contribute based on the working spouse\'s pay if you file jointly. Your joint MAGI is compared with the $242,000–$252,000 range.' }
   ],
   related: ['401k-contribution-calculator', 'income-tax-calculator', 'retirement-calculator', 'capital-gains-tax-calculator', 'social-security-calculator'],
   sources: [

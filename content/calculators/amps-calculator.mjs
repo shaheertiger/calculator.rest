@@ -106,6 +106,11 @@ export default {
 <li><strong>Chargers and power supplies:</strong> a laptop brick rated 65 W at the output pulls a little more from the wall because of conversion losses and a power factor below 1.</li></ul>`
     },
     {
+      h2: 'How do you calculate amps for a motor from horsepower?',
+      html: `<p>Convert horsepower to watts of shaft output (1 hp = 746 W), then divide by efficiency as well as power factor: I = hp × 746 ÷ (V × efficiency × PF), with an extra √3 in the denominator for three-phase. A 10 hp motor on 460 V three-phase at 90% efficiency and 0.85 PF draws about 7,460 ÷ (1.732 × 460 × 0.90 × 0.85) = <strong>12.2 A</strong>.</p>
+<p>For wire and breaker sizing, electricians do not use that estimate. NEC Article 430 requires the full-load current tables instead, which are deliberately conservative: Table 430.250 lists 14 A for a 10 hp, 460 V three-phase motor (28 A at 230 V), and Table 430.248 lists 16 A for a 1 hp single-phase motor at 115 V. Use the nameplate FLA for overload protection and the table value for conductors.</p>`
+    },
+    {
       h2: 'How do you calculate total amps in a breaker panel?',
       html: `<p>Not by adding the breaker handles. A typical 200 A panel can easily hold breakers that sum to 400 A or more, because circuits rarely run at full load together. Electricians size a service with the load calculation in NEC Article 220: general lighting at 3 volt-amperes per square foot, small-appliance and laundry circuits, fixed appliances, the larger of heating or cooling, and demand factors that discount loads unlikely to run at once.</p>
 <p>For a quick reality check, add the watts of everything that could realistically run at the same moment, divide by 240 V, and compare the result with your main breaker. A house drawing 9,600 W at once is pulling 40 A per leg on 240 V service. The NEC sets 100 A as the minimum service for a one-family dwelling, and 200 A is common for homes with electric heat, an electric range and an EV charger. Use the calculation as a planning number and have a licensed electrician confirm it before adding big loads.</p>`

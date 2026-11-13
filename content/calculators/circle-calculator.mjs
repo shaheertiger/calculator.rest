@@ -39,7 +39,7 @@ export default {
       ? { value: f(a) + u2, label: 'Area of the circle', expr: 'π × ' + f(r) + '²', rows: rows }
       : { value: f(r) + u, label: 'Radius', expr: how, rows: rows };
   },
-  quick: ({ r }) => `The radius is half the diameter: r = d ÷ 2. A circle with a 10-inch diameter has a radius of <strong>${r.value}</strong>. From the same circle you get a circumference of π × 10 = 31.4159 inches and an area of π × 5² = 78.5398 square inches. Starting from circumference instead, divide by 2π (6.2832) to get the radius.`,
+  quick: ({ r }) => `The radius is half the diameter: r = d ÷ 2. A circle with a 10-inch diameter has a radius of <strong>5 inches</strong>. From the same circle you get a circumference of π × 10 = 31.4159 inches and an area of π × 5² = 78.5398 square inches. Starting from circumference instead, divide by 2π (6.2832) to get the radius.`,
   stepsTitle: 'How to calculate radius from diameter (or any other measurement)',
   steps: [
     'Choose which measurement you have: diameter (straight across through the center), radius (center to edge), circumference (distance around) or area.',

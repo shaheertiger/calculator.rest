@@ -79,8 +79,8 @@ export default {
     },
     {
       h2: 'How do you calculate EV cost per mile?',
-      html: `<p>Multiply your electricity price by the car's efficiency. The Department of Energy's example: at 10.7¢/kWh, a car using 27 kWh per 100 miles costs about 3¢ a mile (0.107 × 0.27 = $0.029). At the 2025 average of 17.23¢ and 30 kWh/100 mi, it is 5.2¢.</p>
-<p>For a gas car, divide the price per gallon by mpg: $4.00 ÷ 30 mpg = 13.3¢ a mile. EIA's weekly survey had U.S. regular gasoline at $3.995 on Nov 9, 2026. To compare trips in a gas car, the <a href="/trip-gas-cost-calculator">trip gas cost calculator</a> does the same arithmetic for a route.</p>
+      html: `<p>Multiply your electricity price by the car's efficiency. The Department of Energy's example: at 10.7¢/kWh, a car using 27 kWh per 100 miles costs about 3¢ a mile (0.107 × 0.27 = 2.9¢). At the 2025 average of 17.23¢ and 30 kWh/100 mi, it is 5.2¢.</p>
+<p>For a gas car, divide the price per gallon by mpg: $4.00 ÷ 30 mpg = 13.3¢ a mile. EIA's weekly survey had U.S. regular gasoline just under $4.00 a gallon on Nov 9, 2026. To compare trips in a gas car, the <a href="/trip-gas-cost-calculator">trip gas cost calculator</a> does the same arithmetic for a route.</p>
 <p>Efficiency drops in winter, when the car spends energy heating the cabin and battery, and at sustained highway speeds, so real-world kWh per 100 miles can be well above the EPA figure. If your car shows its own average consumption, enter that instead for a truer cost per mile.</p>`
     },
     {

@@ -6,7 +6,7 @@ export default {
   h1: 'Kilowatt Calculator: kW from Volts and Amps, Horsepower or kWh',
   meta: 'Real power in kW = volts × amps × power factor ÷ 1,000 (× 1.732 for 3-phase). A 480 V motor at 40 A and 0.85 PF uses 28.27 kW. Also converts hp and kWh.',
   keyword: 'how to calculate kw',
-  also: ['how do you calculate kw', 'how calculate kw', 'how to calculate kw from amps', 'how to calculate kw to kwh', 'how to calculate kw to hp', 'how do i calculate kilowatt hours', 'how to calculate kwh from amps'],
+  also: ['how do you calculate kw', 'how calculate kw', 'how to calculate kw from amps', 'how to calculate kw to kwh', 'how to calculate kw to hp', 'how do i calculate kilowatt hours'],
   updated: '2026-11-13',
   inputs: [
     { id: 'from', label: 'Calculate kW from', type: 'select', value: 'amps', options: [['amps', 'Volts, amps and power factor'], ['hp', 'Motor horsepower'], ['kwh', 'Energy (kWh) over a time period']] },

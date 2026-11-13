@@ -24,7 +24,7 @@ export default {
     var kda = d > 0 ? (k + aw) / d : k + aw;
     var rows = [
       ['KDA ' + (v.kda === 'half' ? '(K + ½A) ÷ D' : '(K + A) ÷ D'), H.fix(kda, 2), true],
-      ['Kills per death, as a share', H.pct(k + d > 0 ? k / (k + d) * 100 : 0, 1) + ' of fights won'],
+      ['Kill share: kills ÷ (kills + deaths)', H.pct(k + d > 0 ? k / (k + d) * 100 : 0, 1)],
       ['Kills minus deaths (+/−)', (k - d >= 0 ? '+' : '−') + H.int(Math.abs(k - d))]
     ];
     var sub;
@@ -80,7 +80,7 @@ export default {
     {
       h2: 'What is a good K/D ratio?',
       html: `<p>A <strong>1.0</strong> K/D means you get one kill for every death, which is roughly the midpoint in most team shooters: every kill is someone else's death, so the average across all players is close to 1.0 (a little lower once self-inflicted and environmental deaths are counted). Rough guide for public matchmaking:</p>
-<ul><li><strong>Under 0.8:</strong> learning the game</li><li><strong>0.8–1.2:</strong> average</li><li><strong>1.2–2.0:</strong> above average to very good</li><li><strong>2.0+:</strong> excellent, often top few percent in casual playlists</li></ul>
+<ul><li><strong>Under 0.8:</strong> learning the game</li><li><strong>0.8–1.2:</strong> average</li><li><strong>1.2–2.0:</strong> above average to very good</li><li><strong>2.0+:</strong> excellent</li></ul>
 <p>Skill-based matchmaking pulls most players toward 1.0, so a stable 1.1 against tough lobbies can mean more than a 2.0 against new players. Objective modes also push K/D down for players who spend time capturing points instead of hunting kills.</p>`
     },
     {
@@ -90,7 +90,7 @@ export default {
     },
     {
       h2: 'Why does K/D rise so slowly?',
-      html: `<p>Because each new game is a tiny share of your career totals. With 1,000 deaths, a perfect 10-kill, 0-death game moves you from 1.25 to 1.26. To move a career K/D noticeably you have to play many games <em>above</em> your target ratio: from 1.25 to 1.50 at a 2.0 pace takes 500 more deaths, about as many games as it took to die the first 500 times.</p>
+      html: `<p>Because each new game is a tiny share of your career totals. With 1,000 deaths, a perfect 10-kill, 0-death game moves you from 1.25 to 1.26. To move a career K/D noticeably you have to play many games <em>above</em> your target ratio: from 1.25 to 1.50 at a 2.0 pace takes 500 more deaths, half again as many as your whole history so far.</p>
 <p>Recent form is a better measure of improvement. Track your last 20 or 50 matches separately: if they average 1.6, your career number will creep toward 1.6 over time but never pass it.</p>`
     }
   ],
