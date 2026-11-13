@@ -6,7 +6,7 @@ export default {
   h1: 'Customer Lifetime Value Calculator: Repeat-Purchase and Churn-Based CLV',
   meta: 'A customer who spends $60 four times a year for 3 years at a 50% margin is worth $360 in gross profit. Get CLV, LTV:CAC and CAC payback, or use monthly churn.',
   keyword: 'how to calculate clv',
-  also: ['how to calculate cltv', 'how do you calculate customer lifetime value', 'customer lifetime value calculator', 'ltv calculator', 'how to calculate cac payback', 'ltv to cac ratio'],
+  also: ['how do you calculate customer lifetime value', 'customer lifetime value calculator', 'clv formula', 'how to calculate cac payback', 'ltv to cac ratio'],
   updated: '2026-11-13',
   inputs: [
     { id: 'method', label: 'Business model', type: 'select', value: 'simple', wide: true, options: [['simple', 'Repeat purchases (order value × frequency × lifespan)'], ['churn', 'Subscription (monthly revenue and churn rate)']] },
