@@ -18,7 +18,7 @@ const ONLY = args.only ? new Set(String(args.only).split(',').map(x => x.trim())
 const CHECK = !!args.check;
 const PLAN_ROWS = fs.readFileSync(path.join(ROOT, 'content/plan.tsv'), 'utf8').split('\n').slice(1).map(l => l.split('\t')).filter(r => r[0]);
 const PLAN = new Set(PLAN_ROWS.map(r => r[0]));
-const HOT = new Set(PLAN_ROWS.filter(r => /\bHOT/.test(r[4] || '')).map(r => r[0]));
+const HOT = new Set(PLAN_ROWS.filter(r => /\bHOT\b/.test(r[4] || '')).map(r => r[0]));
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const helpersSrc = read('src/helpers.js');
