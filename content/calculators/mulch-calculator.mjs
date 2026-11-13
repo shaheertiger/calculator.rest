@@ -4,7 +4,7 @@ export default {
   name: 'Mulch Calculator',
   title: 'Mulch Calculator: 152 Sq Ft at 3" Deep = 19 Bags (1.41 Yd³)',
   h1: 'Mulch Calculator: Bags or Cubic Yards for Every Bed',
-  meta: 'Add your garden beds and depth to get bags or cubic yards of bark mulch. Two beds totaling 152 sq ft at 3 inches need 38 cu ft: 19 bags of 2 cu ft or 1.41 yards.',
+  meta: 'Add your garden beds and depth to get bags or yards of bark mulch. Two beds totaling 152 sq ft at 3 inches need 38 cu ft: 19 bags of 2 cu ft or 1.41 yards.',
   keyword: 'how to calculate bark mulch coverage',
   also: ['how much mulch do i need calculator', 'how to calculate cubic feet for mulch', 'how to calculate cubic yards of mulch', 'how do i calculate how much rubber mulch is required', 'mulch calculator bags', 'how many bags of mulch in a yard'],
   updated: '2026-11-13',

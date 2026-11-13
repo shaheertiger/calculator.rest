@@ -74,7 +74,7 @@ export default {
   sections: [
     {
       h2: 'Where does the government get the numbers?',
-      html: `<p>From the Current Population Survey (CPS), a monthly survey of about 60,000 eligible households run by the Census Bureau for the Bureau of Labor Statistics. Interviewers ask each household member about their work status in the week that includes the 12th of the month. BLS weights the sample up to the national population and publishes the result on the first Friday of the following month in the Employment Situation report.</p>
+      html: `<p>From the Current Population Survey (CPS), a monthly survey of about 60,000 eligible households run by the Census Bureau for the Bureau of Labor Statistics. Interviewers ask each household member about their work status in the week that includes the 12th of the month. BLS weights the sample up to the national population and publishes the result, usually on the first Friday of the following month, in the Employment Situation report.</p>
 <p>It is not a count of people claiming unemployment insurance. Many unemployed people never file a claim or have used up their benefits, and some claimants work part-time, so UI claims and the unemployment rate measure different things.</p>`
     },
     {

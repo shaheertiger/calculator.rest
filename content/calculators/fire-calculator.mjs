@@ -78,7 +78,7 @@ export default {
     },
     {
       h2: 'Is 4% the right withdrawal rate for early retirement?',
-      html: `<p>The 4% rule was tested on 30-year retirements. Someone retiring at 40 may need the money to last 50 years or more, so many people in the FIRE community plan on 3.25–3.5%. That raises the target from 25 to about 29–31 times spending: $40,000 a year needs $1,142,857 at 3.5% instead of $1,000,000. In the example, the extra $142,857 takes Sam 1 year 8 months longer to reach.</p>
+      html: `<p>The research behind the 4% rule looked at 30-year retirements. Someone retiring at 40 may need the money to last 50 years or more, so many people in the FIRE community plan on 3.25–3.5%. That raises the target from 25 to about 29–31 times spending: $40,000 a year needs $1,142,857 at 3.5% instead of $1,000,000. In the example, the extra $142,857 takes Sam 1 year 8 months longer to reach.</p>
 <p>Flexibility can substitute for a lower rate. If you are willing to cut spending after a bad market year or earn some income, 4% is more defensible.</p>`
     },
     {

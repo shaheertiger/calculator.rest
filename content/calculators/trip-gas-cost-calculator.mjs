@@ -68,7 +68,7 @@ export default {
   sections: [
     {
       h2: 'How do you calculate gas cost per mile?',
-      html: `<p>Divide the price of a gallon by your miles per gallon. At $3.19 and 28 mpg, gas costs $3.19 ÷ 28 = <strong>$0.114 a mile</strong>, or $11.39 per 100 miles. A 20 mpg pickup at the same price costs 16¢ a mile.</p>
+      html: `<p>Divide the price of a gallon by your miles per gallon. At $3.19 and 28 mpg, gas costs $3.19 ÷ 28 = <strong>11.4¢ a mile</strong>, or $11.39 per 100 miles. A 20 mpg pickup at the same price costs 16¢ a mile.</p>
 <p>That figure covers fuel only. The full cost of running a car includes depreciation, insurance, tires and maintenance, which is why the IRS business standard mileage rate is much higher: 72.5¢ a mile for January–June 2026 and 76¢ from July 1, 2026. If someone is reimbursing you for business driving, the IRS rate is the usual benchmark; for splitting a road trip with friends, gas cost per mile is the fairer number.</p>`
     },
     {

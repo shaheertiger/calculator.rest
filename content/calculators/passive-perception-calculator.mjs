@@ -64,14 +64,14 @@ export default {
   table: {
     title: 'What is my passive Perception by Wisdom score and level?',
     intro: 'Passive scores from the calculator with no advantage, disadvantage or other bonuses.',
-    head: ['Wisdom', 'Not proficient', 'Proficient, lvl 1–4', 'Proficient, lvl 5–8', 'Proficient, lvl 9–12', 'Proficient, lvl 17–20', 'Expertise, lvl 5–8'],
-    rows: ({ run }) => [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(w => [String(w), run({ wis: w, level: 1, prof: 'none', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 1, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 5, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 9, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 17, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 5, prof: 'exp', adv: 'none', bonus: 0 }).value]),
+    head: ['Wisdom', 'Not proficient', 'Proficient, lvl 1–4', 'Proficient, lvl 5–8', 'Proficient, lvl 9–12', 'Proficient, lvl 13–16', 'Expertise, lvl 5–8'],
+    rows: ({ run }) => [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(w => [String(w), run({ wis: w, level: 1, prof: 'none', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 1, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 5, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 9, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 13, prof: 'prof', adv: 'none', bonus: 0 }).value, run({ wis: w, level: 5, prof: 'exp', adv: 'none', bonus: 0 }).value]),
     note: 'Add 5 to any cell for advantage or subtract 5 for disadvantage.'
   },
   sections: [
     {
       h2: 'How does advantage or disadvantage change passive Perception?',
-      html: `<p>Advantage adds a flat <strong>+5</strong> and disadvantage a flat <strong>−5</strong>, because rolling two d20s and keeping the higher one is worth about 5 points on average. If you have both, they cancel and you use the normal score.</p>
+      html: `<p>Advantage adds a flat <strong>+5</strong> and disadvantage a flat <strong>−5</strong>, which roughly matches what rolling two d20s and keeping the better one is worth when you need a middling roll. If you have both, they cancel and you use the normal score.</p>
 <p>Common sources in the SRD rules:</p>
 <ul><li><strong>Dim light</strong> (a lightly obscured area): disadvantage on Perception checks that rely on sight, so −5 to passive Perception for spotting things. Darkvision lets you treat darkness as dim light, so the −5 still applies in the dark.</li>
 <li><strong>Fast travel pace:</strong> −5 to passive Perception in the 2014 rules; disadvantage on Perception checks in the 2024 rules. Same result.</li>
@@ -82,7 +82,7 @@ export default {
       h2: 'When does the DM use passive Perception?',
       html: `<p>The DM uses your passive score whenever you aren't actively searching: to see whether you notice a hidden creature, a trap, a secret door or an ambush as you travel. When a creature hides, the DM compares its Dexterity (Stealth) check against the passive Perception of everyone who might spot it.</p>
 <p>Passive Perception also keeps the DM from tipping players off. Asking for a Perception roll tells everyone something is there; checking passive scores in secret doesn't.</p>
-<p>If you say you're looking for something, you make an active Wisdom (Perception) check instead, rolling a d20. Passive Perception is a floor in practice, not a cap: the roll can beat it or fall short of it.</p>`
+<p>If you say you're looking for something, you make an active Wisdom (Perception) check instead, rolling a d20. That roll can come out higher or lower than your passive score.</p>`
     },
     {
       h2: 'Is passive Perception the same as passive Investigation or Insight?',
@@ -91,7 +91,7 @@ export default {
     },
     {
       h2: 'What is a good passive Perception?',
-      html: `<p>Most monsters in the SRD sit between 9 and 15, while big threats such as adult dragons reach the 20s. For a party, at least one character with passive Perception <strong>15 or higher</strong> catches most ambushes and traps at low levels. By level 9 a Wisdom-focused character with proficiency usually has 17–19, and a rogue or bard with Expertise can pass 20. The highest normal score without magic is 10 + 5 (Wisdom 20) + 12 (Expertise at level 17+) = <strong>27</strong>, or 32 with advantage.</p>`
+      html: `<p>Many low-level SRD monsters have a passive Perception around 9 to 13 (the goblin is 9), while big threats such as adult dragons reach the 20s. For a party, at least one character with passive Perception <strong>15 or higher</strong> catches most ambushes and traps at low levels. By level 9 a Wisdom-focused character with proficiency usually has 17–19, and a rogue or bard with Expertise can pass 20. The highest normal score without magic is 10 + 5 (Wisdom 20) + 12 (Expertise at level 17+) = <strong>27</strong>, or 32 with advantage.</p>`
     }
   ],
   faq: [
@@ -101,7 +101,7 @@ export default {
     { q: 'Does Expertise apply to passive Perception?', a: 'Yes. Expertise doubles your proficiency bonus on Perception checks, and passive Perception includes everything that applies to the check, so it doubles there too.' },
     { q: 'Does Jack of All Trades add to passive Perception?', a: 'By the rules text, yes, if you aren\'t proficient: a passive check is a kind of ability check, and Jack of All Trades adds half your proficiency bonus (rounded down) to ability checks that don\'t already include it. Some tables rule otherwise, so ask your DM.' },
     { q: 'Does guidance or Bardic Inspiration add to passive Perception?', a: 'No. Bonuses that are rolled for a single check, such as the d4 from guidance or a Bardic Inspiration die, apply only to active rolls.' },
-    { q: 'Does passive Perception work while asleep?', a: 'Under the 2014 rules a sleeping creature is unconscious and automatically fails checks relying on sight, so it generally won\'t notice threats by sight. Many DMs let a loud noise wake a sleeper; that is a table ruling.' }
+    { q: 'Does passive Perception work while asleep?', a: 'The rules don\'t define ordinary sleep in detail. Many DMs let a sleeping character notice loud noises with passive Perception at disadvantage (−5). A creature put to sleep by magic is unconscious, which makes it unaware of its surroundings.' }
   ],
   related: ['armor-class-calculator', 'dps-calculator', 'kd-ratio-calculator', 'average-calculator'],
   sources: [

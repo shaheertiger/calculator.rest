@@ -122,7 +122,7 @@ export default {
     {
       h2: 'What if the market drops early in retirement?',
       html: `<p>This calculator uses a steady average return. Real portfolios bounce around, and the order of returns matters once you are withdrawing: a 20% fall in the first two years forces you to sell more shares at low prices, and the portfolio may never recover even if the long-run average is the same. Planners call this sequence-of-returns risk.</p>
-<p>Ways to soften it: keep one to three years of withdrawals in cash or short-term bonds, trim spending by 5–10% after a bad year, and delay Social Security to get a larger, inflation-adjusted benefit. Run the calculator at a return one or two points lower than you expect to see a stress-tested answer.</p>`
+<p>Ways to soften it: keep one to three years of withdrawals in cash or short-term bonds, trim spending by 5–10% after a bad year, and delay Social Security to get a larger, inflation-adjusted benefit. Run the calculator at a return one or two points lower than you expect to see a more cautious answer.</p>`
     }
   ],
   faq: [

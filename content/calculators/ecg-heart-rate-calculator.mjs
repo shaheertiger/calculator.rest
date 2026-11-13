@@ -74,7 +74,7 @@ export default {
     rows: ({ run }) => [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 10].map(n => {
       const a = run({ method: 'large', large: n, speed: '25' });
       const b = run({ method: 'large', large: n, speed: '50' });
-      return [String(n), String(n * 5), (n * 0.2).toFixed(2) + ' s', a.value, b.value];
+      return [String(n), String(n * 5), (n * 0.2).toFixed(2) + ' s', a.value, b.value || '— (over 400)'];
     }),
     note: 'Between the memorized values, use the 1500 method for precision: 3.5 large boxes is 17.5 small boxes and 85.7 bpm.'
   },

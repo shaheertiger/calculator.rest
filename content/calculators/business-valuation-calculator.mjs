@@ -37,7 +37,7 @@ export default {
     var rows = [
       ['Seller\'s discretionary earnings (SDE)', H.money0(sde), basis === 'sde'],
       ['Adjusted EBITDA', H.money0(ebitda), basis === 'ebitda'],
-      ['Range at ' + H.num(mult - 0.5, 2) + '× to ' + H.num(mult + 0.5, 2) + '×', H.money0(base * Math.max(mult - 0.5, 0)) + ' to ' + H.money0(base * (mult + 0.5))]
+      ['Range at ' + H.num(mult * 0.8, 2) + '× to ' + H.num(mult * 1.2, 2) + '× (±20%)', H.money0(base * mult * 0.8) + ' to ' + H.money0(base * mult * 1.2)]
     ];
     if (v.revenue > 0) {
       rows.push(['Implied revenue multiple', H.num((value) / v.revenue, 2) + '×']);

@@ -66,7 +66,7 @@ export default {
     ].concat(extra);
     if (low) rows.push(['Cells with expected count < 5', low + ' of ' + cells]);
     return {
-      value: 'χ² = ' + H.fix(chi, 3), label: v.mode === 'ind' ? 'Chi-square test of independence' : 'Chi-square goodness-of-fit statistic',
+      value: 'χ² = ' + H.num(chi, 3), label: v.mode === 'ind' ? 'Chi-square test of independence' : 'Chi-square goodness-of-fit statistic',
       expr: 'Σ (O − E)² ÷ E, df = ' + df,
       rows: rows, table: table,
       sub: (p < a ? (v.mode === 'ind' ? 'The two variables appear to be related (p < α).' : 'The observed counts differ from the expected pattern more than chance would explain (p < α).') : (v.mode === 'ind' ? 'No evidence the two variables are related at this α.' : 'The counts are consistent with the expected pattern at this α.')) + (low ? ' Some expected counts are below 5, so the p-value may be unreliable; consider combining categories or Fisher\'s exact test.' : ''),

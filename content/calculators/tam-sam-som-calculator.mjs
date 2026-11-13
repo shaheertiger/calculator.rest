@@ -72,7 +72,7 @@ export default {
   example: `<p>A startup sells scheduling software to U.S. physical therapy clinics. Bottom-up, it estimates 40,000 clinics could use the product at $2,400 a year.</p>
 <p>TAM = 40,000 × $2,400 = <strong>$96 million</strong>.</p>
 <p>It only integrates with two billing systems used by 45% of clinics, so SAM = $96M × 45% = <strong>$43.2 million</strong>.</p>
-<p>Against three established competitors it targets 8% of SAM in five years: SOM = $43.2M × 8% = <strong>$3.456 million</strong>, which is 1,440 clinics.</p>`,
+<p>Against three established competitors it targets 8% of SAM in five years: SOM = $43.2M × 8% = <strong>$3,456,000</strong>, which is 1,440 clinics.</p>`,
   table: {
     title: 'How big is SOM at different serviceable and capture shares?',
     intro: 'SOM in dollars for a $600 million TAM. Read across for the share of TAM you can serve and down for the share of SAM you win.',
