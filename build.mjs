@@ -49,6 +49,8 @@ for (const f of files) {
     calcs.push(def);
   } catch (e) { err(f, 'failed to import: ' + e.message.split('\n')[0]); }
 }
+const planIndex = new Map([...PLAN].map((s, i) => [s, i]));
+calcs.sort((a, b) => (planIndex.get(a.slug) ?? 1e9) - (planIndex.get(b.slug) ?? 1e9)); // demand order from plan.tsv, never alphabetical
 const bySlug = new Map(calcs.map(c => [c.slug, c]));
 const hubById = new Map(hubs.map(h => [h.id, h]));
 

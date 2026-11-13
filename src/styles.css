@@ -231,7 +231,8 @@ aside .side { position: sticky; top: 20px; display: flex; flex-direction: column
 /* hub page */
 .hub-hero { padding: 8px 0 28px; max-width: 760px; }
 .hub-hero p { font-size: 18px; color: var(--muted); }
-.hub-table td:nth-child(2) { font: 700 15px var(--f); color: var(--ink); white-space: nowrap; }
+.hub-table td:nth-child(2) { font: 700 15px var(--f); color: var(--ink); }
+@media (max-width: 640px) { .hub-table th:nth-child(3), .hub-table td:nth-child(3) { display: none; } .hub-table td { padding: 10px 8px; } }
 .prose { max-width: 740px; padding-bottom: 64px; }
 .prose h2 { font: 800 28px/1.15 var(--f); letter-spacing: -.03em; color: var(--ink); margin: 36px 0 12px; }
 
