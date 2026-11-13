@@ -1,0 +1,17 @@
+# After Vercel finishes a production deploy, tell Bing & co. (IndexNow) which URLs changed.
+name: IndexNow
+on: deployment_status
+jobs:
+  indexnow:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node build.mjs --quiet
+      - run: node scripts/indexnow.mjs --changed

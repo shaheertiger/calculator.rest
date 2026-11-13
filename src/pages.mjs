@@ -15,7 +15,7 @@ export default [
 <li><strong>Real dates.</strong> The "Updated" date on a page changes only when we change the calculator or its facts.</li>
 </ul>
 <h2>Who makes it</h2>
-<p>calculator.rest is built and maintained by a small independent team. We are not a bank, lender, law firm, tax adviser or medical provider. Money calculators follow official IRS and agency figures; health calculators use peer-reviewed equations and cite the organisation behind them. They are planning and learning tools. For decisions about your money, health or legal situation, confirm the result with a qualified professional.</p>
+<p>calculator.rest is built and maintained independently. We are not a bank, lender, law firm, tax adviser or medical provider. Money calculators follow official IRS and agency figures; health calculators use peer-reviewed equations and cite the organisation behind them. They are planning and learning tools. For decisions about your money, health or legal situation, confirm the result with a qualified professional.</p>
 <h2>Meet dot</h2>
 <p>Dot is the pink circle in our logo. Dot does the math, keeps your recent answers, and stays out of the way.</p>
 <h2>Found a wrong number?</h2>
@@ -39,7 +39,7 @@ export default [
 <li><strong>Science and engineering:</strong> NIST constants and reference data, manufacturer data sheets for material densities, and published refrigerant pressure-temperature tables.</li>
 </ul>
 <h2>3. Testing</h2>
-<p>Each formula is checked against at least one published worked example or official table before it goes live. The build process re-runs every calculator with its example inputs and refuses to publish a page whose calculation fails, whose answer line has no number, or whose title or description duplicates another page.</p>
+<p>Each formula follows the source cited on its page, and its worked example is calculated by the same code that runs the tool, so the numbers on the page and the answer you get always agree. The build process re-runs every calculator with its example inputs and refuses to publish a page whose calculation fails, whose answer line has no number, or whose title or description duplicates another page.</p>
 <h2>4. Rounding</h2>
 <p>We calculate at full precision and round only for display: money to the cent, percentages to two decimals, and physical quantities to a sensible number of significant figures. Material quantities (bags, boxes, sheets) are always rounded up.</p>
 <h2>5. Dates and corrections</h2>

@@ -16,7 +16,9 @@ const args = Object.fromEntries(process.argv.slice(2).map(a => { const [k, v] = 
 const STRICT = !args['no-strict'];
 const ONLY = args.only ? new Set(String(args.only).split(',').map(x => x.trim()).filter(Boolean)) : null;
 const CHECK = !!args.check;
-const PLAN = new Set(fs.readFileSync(path.join(ROOT, 'content/plan.tsv'), 'utf8').split('\n').slice(1).map(l => l.split('\t')[0]).filter(Boolean));
+const PLAN_ROWS = fs.readFileSync(path.join(ROOT, 'content/plan.tsv'), 'utf8').split('\n').slice(1).map(l => l.split('\t')).filter(r => r[0]);
+const PLAN = new Set(PLAN_ROWS.map(r => r[0]));
+const HOT = new Set(PLAN_ROWS.filter(r => /\bHOT/.test(r[4] || '')).map(r => r[0]));
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const helpersSrc = read('src/helpers.js');
@@ -124,6 +126,7 @@ ${body}
 </main>
 ${footer()}
 ${scripts}
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>`;
 }
@@ -226,7 +229,7 @@ for (const def of calcs) {
     ...(def.sections || []).map(sec => `<h2>${esc(sec.h2)}</h2>${sec.html}`),
     def.faq && def.faq.length ? `<section class="faq"><h2 id="faq">Frequently asked questions</h2>${def.faq.map(f => `<h3>${esc(f.q)}</h3><p>${f.a}</p>`).join('')}</section>` : '',
     related.length ? `<h2 id="related">Related calculators</h2><ul class="ring">${related.map(x => `<li><a href="/${x}"><b>${esc(bySlug.get(x).name)}</b><span>${esc(cardLine(x))}</span></a></li>`).join('')}</ul>` : '',
-    `<h2 id="sources">Sources and method</h2>${def.sources && def.sources.length ? `<ul class="sources">${def.sources.map(x => `<li><a href="${esc(x.url)}" rel="nofollow noopener" target="_blank">${esc(x.name)}</a></li>`).join('')}</ul>` : ''}<p class="trust">Built and maintained by calculator.rest · Formula checked against the sources above · Last updated ${fmtDay(updated)} · <a href="/methodology">How we build and check calculators</a>${def.disclaimer ? `<br>${def.disclaimer}` : ''}</p>`
+    `<h2 id="sources">Sources and method</h2>${def.sources && def.sources.length ? `<ul class="sources">${def.sources.map(x => `<li><a href="${esc(x.url)}" rel="nofollow noopener" target="_blank">${esc(x.name)}</a></li>`).join('')}</ul>` : ''}<p class="trust">Built and maintained by calculator.rest${def.reviewer ? ` · Reviewed by ${def.reviewer.url ? `<a href="${esc(def.reviewer.url)}">${esc(def.reviewer.name)}</a>` : esc(def.reviewer.name)}, ${esc(def.reviewer.credential)}${def.reviewer.date ? ` on ${fmtDay(def.reviewer.date)}` : ''}` : ''} · Formula follows the sources above · Last updated ${fmtDay(updated)} · <a href="/methodology">How we build and check calculators</a>${def.disclaimer ? `<br>${def.disclaimer}` : ''}</p>`
   ].join('\n');
 
   const inputsLite = (def.inputs || []).map(c => ({ id: c.id, type: c.type, showIf: c.showIf, max: c.max, fields: c.fields && c.fields.map(f => ({ id: f.id, type: f.type, value: f.value, blank: f.blank })) }));
@@ -261,7 +264,7 @@ ${article}
 </div>`;
 
   const graph = [ORG, WEBSITE,
-    { '@type': 'WebPage', '@id': url + '#page', url, name: def.title, description: def.meta, isPartOf: { '@id': SITE + '/#website' }, breadcrumb: { '@id': url + '#breadcrumb' }, inLanguage: 'en-US', datePublished: def.published || '2026-11-13', dateModified: updated, author: { '@id': SITE + '/#org' }, publisher: { '@id': SITE + '/#org' }, mainEntity: { '@id': url + '#app' } },
+    { '@type': 'WebPage', '@id': url + '#page', url, name: def.title, description: def.meta, isPartOf: { '@id': SITE + '/#website' }, breadcrumb: { '@id': url + '#breadcrumb' }, inLanguage: 'en-US', datePublished: def.published || '2026-11-13', dateModified: updated, author: { '@id': SITE + '/#org' }, publisher: { '@id': SITE + '/#org' }, mainEntity: { '@id': url + '#app' }, ...(def.reviewer ? { reviewedBy: { '@type': 'Person', name: def.reviewer.name, jobTitle: def.reviewer.credential, ...(def.reviewer.url ? { url: def.reviewer.url } : {}) }, ...(def.reviewer.date ? { lastReviewed: def.reviewer.date } : {}) } : {}) },
     crumbsLd(url, [['Home', SITE + '/'], [hub.name, `${SITE}/${hub.slug}`], [def.name, url]]),
     { '@type': 'WebApplication', '@id': url + '#app', name: def.name, url, description: def.meta, applicationCategory: APP_CAT[def.hub] || 'UtilitiesApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript for live updates; default answer works without it', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@id': SITE + '/#org' } },
     def.steps ? { '@type': 'HowTo', '@id': url + '#howto', name: stepsTitle, step: def.steps.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, text: strip(t) })) } : null,
@@ -314,7 +317,10 @@ for (const b of built) {
   if (!d.sources || !d.sources.length) (MONEY_HEALTH.has(d.hub) ? err : warn)(s, 'no sources');
   const wc = words(b.text);
   b.words = wc;
-  if (wc < 450) warn(s, `body ${wc} words (thin)`);
+  if (HOT.has(s) && wc < 1500) warn(s, `HOT page has ${wc} words (playbook: 1,500–2,200)`);
+  else if (wc < 500) warn(s, `body ${wc} words (playbook: 500–800 minimum for small tools)`);
+  if (/[$€£]\s?\d{1,3}\.\d{3}\.\d{3}/.test(b.text)) err(s, 'European-style money format (use $1,000,000)'); else if (/\$\d{1,3}\.\d{3}(?![\d%])/.test(b.text)) warn(s, 'possible wrong-locale number like $10.412 (US uses $10,412)');
+  if (/\b(tested|we tested|our testing|hands-on)\b/i.test(b.text)) warn(s, 'mentions testing; keep only claims that are literally true');
   if (/what is an? [\w\s]*calculator\?/i.test((d.sections || []).map(x => x.h2).join(' '))) warn(s, 'filler "What is a … calculator?" heading');
 }
 // one query, one owning page: a query may appear as keyword/also on only one page
