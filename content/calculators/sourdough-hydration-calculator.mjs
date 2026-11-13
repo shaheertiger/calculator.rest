@@ -2,7 +2,7 @@ export default {
   slug: 'sourdough-hydration-calculator',
   hub: 'everyday',
   name: 'Sourdough Hydration Calculator',
-  title: 'Sourdough Hydration Calculator: 500 g Flour + 350 g Water = 72.7%',
+  title: 'Sourdough Hydration Calculator: 350 g Water + Starter = 72.7%',
   h1: 'Sourdough Hydration and Baker\'s Percentages, Starter Included',
   meta: '500 g flour, 350 g water and 100 g of 100% starter is 72.7% true hydration, not 70%. Count the starter, get baker\'s percentages and hit a target hydration.',
   keyword: 'how to calculate sourdough hydration',
@@ -69,7 +69,7 @@ export default {
     title: 'What hydration do different water amounts give?',
     intro: 'True hydration for 500 g flour plus 100 g of 100% starter, computed by the calculator above.',
     head: ['Water added', 'Ignoring starter', 'True hydration', 'What the dough is like'],
-    rows: ({ run }) => [300, 325, 350, 375, 400, 425, 450].map(w => {
+    rows: ({ run }) => [275, 300, 325, 350, 375, 400, 425, 450].map(w => {
       const r = run({ flour: 500, water: w, starter: 100, sh: 100, salt: 10, target: NaN });
       return [w + ' g', r.rows[0][1], r.value, r.sub.split(':')[0]];
     }),
