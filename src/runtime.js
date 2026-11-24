@@ -72,7 +72,9 @@
       var v = values(), r;
       visibility(v);
       try { r = C.compute(v, H, C.data); } catch (e) { r = { error: 'Check your inputs and try again.' }; }
-      out.innerHTML = renderResult(r, H);
+      out.innerHTML = renderResult(r, H, C.notes);
+      var sm = $('#summary');
+      if (sm) sm.innerHTML = r && r.error ? H.esc(r.error) : (r && r.sub ? r.sub : sm.innerHTML);
       clearTimeout(saveTimer);
       if (r && !r.error) saveTimer = setTimeout(function () { save(v, r); }, 1800);
     }
@@ -121,7 +123,7 @@
     if (reset) reset.addEventListener('click', function () { location.href = location.pathname; });
     var copy = $('[data-copy]');
     if (copy) copy.addEventListener('click', function () {
-      var t = $('.value', out), l = $('.rlabel', out), ex = $('.expr', out);
+      var t = $('.r-value', out), l = $('.r-label', out), ex = $('.r-expr', out);
       var text = (l ? l.textContent + ': ' : '') + (t ? t.textContent : '') + (ex ? ' (' + ex.textContent + ')' : '') + ' — ' + location.href;
       var done = function () { copy.textContent = 'copied ✓'; setTimeout(function () { copy.textContent = 'copy result'; }, 1600); };
       if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done); else done();

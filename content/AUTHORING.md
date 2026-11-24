@@ -11,30 +11,42 @@ The page list, hubs and primary keywords are in `content/plan.tsv` (slug, hub, n
 Real search queries are in the keyword CSV (path given in your task). Grep it for your topic to find the
 follow-up questions people actually ask; use them for H2s and FAQs.
 
-## The SEO playbook rules you must follow (non-negotiable)
+## Page template (modeled on the best-ranking calculator pages, e.g. bank/broker tax calculators)
 
-1. **Title (≤ 62 chars):** query first, page type ("Calculator"), then the answer/number/year.
-   Good: `Overtime Calculator: Time and a Half on $20/hr Is $30` · `RMD Calculator 2026: IRS Uniform Lifetime Table`.
-   The title should carry a real number whenever possible.
-2. **Meta (110–160 chars), hand-written:** the answer or a worked number + who it's for. Never repeat the title.
-3. **H1:** tool name + the job. Different wording from the title.
-4. **Quick answer (40–70 words):** the first line answers the main query with numbers, quotable on its own,
-   naming the entity ("A 20% tip on a $64 bill is $12.80…"). It may use `${r.value}` from the default result.
-   Must match the default inputs' computed result exactly.
-5. **H2s are real searcher questions** (from the CSV / People Also Ask) or the tool's steps. Never label
-   headings ("Overview", "Introduction") and never filler like "What is a {X} calculator?".
-6. **Something nobody else has:** a computed table (via `table.rows` using `run()`), a benchmark table,
-   worked examples with real numbers.
-7. **Length from real follow-ups, not filler:** 700–1,300 words of body for most tools; 500–800 for small
-   ones; 1,500–2,200 for pages marked HOT in plan.tsv. Every paragraph must answer something.
-8. **Truthful sources:** money/tax/health pages must cite official sources (IRS, SSA, CFPB, HUD, BLS, CDC,
-   NIH/StatPearls, ACOG, OSHA, NIST, manufacturer data). Only cite URLs you are confident exist; prefer the
-   agency's landing page over a deep link you are unsure of. Use 2026 figures where the law sets them
-   (see notes in plan.tsv). Never invent credentials, testing, statistics or surveys.
-9. **One query, one page:** don't duplicate a sibling's job. Link to it instead. Keep wording distinct
-   from sibling pages (the build fails at > 35% shared 5-word phrases within a hub).
-10. **US formatting:** `$1,234.56`, `1,000,000`, dates "Nov 13, 2026". (Non-US tools: use that market's
-    currency symbol via `H.cur(x, '₹')` etc.)
+Every page follows the same layout. The build renders it; you supply the content fields.
+
+1. **SEO title and H1 are generated:** title = `2026 {name} | calculator.rest`, H1 = `2026 {name}`. Do not set
+   `title` or `h1` in the module (delete them if present). Make `name` read well after "2026 ".
+2. **Meta (110–160 chars), template style:** `Estimate … with our free … calculator. See your A, B and C.`
+   Name the concrete outputs the tool shows. Never repeat the title.
+3. **`intro` (one or two sentences under the H1):** "Plug in … and we'll show you …". Plain, no numbers needed.
+4. **Calculator:** every input has a `help` line (one sentence: what to enter, where to find it). It is shown
+   between the label and the box. Defaults are a realistic example.
+5. **Results panel ("Your results"):** the big value + `rows`. Add `notes: { 'Row label': 'one-line meaning' }`
+   so every row explains itself ("Total tax divided by total income."). Keys must equal the row label text
+   (HTML stripped). Rows whose label contains numbers can't be matched; give those a fixed label instead.
+6. **Summary:** the build shows `quick` (40–70 words, the answer for the defaults with numbers, must match
+   compute exactly) as the Summary paragraph; in the browser it is replaced by `r.sub` after edits, so `sub`
+   must be a complete sentence that reads well alone. `assumptions`: one or two sentences on what the
+   estimate assumes, shown under the Summary.
+7. **Article order (rendered by the build):** reference `table` (H2 is a question; computed rows) → formula
+   (`formulaTitle` "How is X calculated?" + `formula` + `example`) → `sections` → "Explore other retirement
+   calculators" (automatic: `related` first, then the hub) → "FAQs" → sources.
+8. **`sections` (4–7):** H2s are real searcher questions or explainer topics. Use H3 subsections inside `html`
+   like the template: the first section should usually be **"Understanding your inputs"** with one `<h3>`
+   per input explaining what to enter and the common mistake; later sections group related concepts
+   ("Other income to understand in retirement" → H3 per concept). No `steps` (delete if present; fold the
+   useful content into the inputs section).
+9. **FAQs: 10–15**, real questions from the keyword CSVs / People Also Ask, answer in the first sentence with
+   a number where possible. Numbers must come from running compute.
+10. **Truthful sources:** money/tax pages cite official sources (IRS, SSA, CMS, BLS, CFPB, investor.gov).
+    Only URLs you are confident exist. Use 2026 figures. Never invent credentials, testing, statistics.
+11. **One query, one page:** don't duplicate a sibling's job; link to it. The build fails at > 35% shared
+    5-word phrases within a hub.
+12. **US formatting:** `$1,234.56`, dates "Nov 13, 2026".
+
+Reference page already converted to this template:
+`content/calculators/how-long-will-money-last-calculator.mjs` — match its structure.
 
 ## Module shape
 
@@ -43,22 +55,22 @@ export default {
   slug: 'overtime-calculator',            // = filename, from plan.tsv
   hub: 'pay',                             // from plan.tsv
   name: 'Overtime Calculator',            // short name used in links/cards
-  title: '…',  h1: '…',  meta: '…',
+  meta: '…',  intro: '…',              // title/h1 are generated: "2026 {name}"
   keyword: 'how to calculate overtime',   // primary query from plan.tsv (must be unique)
   also: ['overtime pay calculator', …],   // other real queries from the CSV this page owns
   updated: '2026-11-13',
   inputs: [ … ],                          // see below; defaults = a realistic example
   data: { … },                            // optional JSON data (tables) passed to compute as 3rd arg
   compute(v, H, D) { … return { value, label, expr, rows, sub, table } },
-  quick: ({ v, r, H, D, run }) => `…`,    // build-time only; HTML string
-  stepsTitle: 'How to calculate overtime pay',   // optional, default "How to use the {name}"
-  steps: ['…', '…', '…'],                 // 3–6 numbered steps (HTML allowed); name the step people get wrong
+  notes: { 'Row label': 'what it means' }, // one line per result row
+  assumptions: '…',                       // shown under the Summary
+  quick: ({ v, r, H, D, run }) => `…`,    // Summary text for the defaults; build-time only; HTML string
   formulaTitle: 'What is the overtime formula?', // optional
   formula: { expr: 'HTML', vars: [['symbol','meaning'], …], note: 'optional HTML' },
   example: 'HTML worked example with real numbers',
   table: { title: 'Question-style H2?', intro: '…', head: ['…'], rows: ({ run, H, D, v }) => [[…], …], note: '…' },
-  sections: [{ h2: 'Real question?', html: '<p>…</p>' }, …],   // 3–5
-  faq: [{ q: '…?', a: 'Answer in the first sentence…' }, …],   // 6–8, answers in plain text or simple HTML
+  sections: [{ h2: 'Understanding your inputs', html: '<p>…</p><h3>…</h3><p>…</p>' }, …],   // 4–7, H3s inside
+  faq: [{ q: '…?', a: 'Answer in the first sentence…' }, …],   // 10–15, plain text or simple HTML
   related: ['slug', 'slug', 'slug'],      // 3–5 true siblings; MUST exist in content/plan.tsv
   sources: [{ name: 'IRS: Topic 409 Capital Gains', url: 'https://www.irs.gov/…' }],
   disclaimer: 'optional one-line note shown under sources (e.g. not medical advice)'

@@ -2,19 +2,18 @@ export default {
   slug: 'how-long-will-money-last-calculator',
   hub: 'income',
   name: 'How Long Will My Money Last Calculator',
-  title: 'How Long Will My Money Last? $500K at $3,000/mo Lasts 18 Years',
-  h1: 'How Long Will Your Savings Last? Withdrawal and Drawdown Calculator',
-  meta: '$500,000 drawn at $3,000 a month, raised 3% a year for inflation and earning 6%, lasts 18 years. Enter your savings, withdrawals, return and taxes.',
+  meta: 'Estimate how long your retirement savings will last with our free calculator. See the age it runs out, the withdrawal that lasts 30 years and each year\'s balance.',
+  intro: 'Plug in your savings, what you plan to spend each month, your expected return and inflation, and we\'ll show you how long your money will last, the age it runs out and the monthly withdrawal that makes it last 30 years.',
   keyword: 'how long will my money last calculator',
   also: ['how long will my savings last calculator', 'how long will my money last retirement calculator', 'how long will my savings last calculator with inflation', 'how long retirement savings last calculator', 'how long will my money last calculator with taxes', 'how much can i withdraw without touching principal calculator', 'how long will retirement last calculator', 'how long will 500k last in retirement', 'how long will my 401k last calculator'],
-  updated: '2026-11-13',
+  updated: '2026-11-24',
   inputs: [
-    { id: 'savings', label: 'Savings today', type: 'number', value: 500000, prefix: '$' },
-    { id: 'withdraw', label: 'Monthly withdrawal (spending)', type: 'number', value: 3000, prefix: '$', help: 'What you need to spend each month, after tax.' },
-    { id: 'ret', label: 'Annual return on savings', type: 'number', value: 6, suffix: '%' },
+    { id: 'savings', label: 'Savings today', type: 'number', value: 500000, prefix: '$', help: '401(k), IRA, brokerage and cash you plan to spend down. Leave out your emergency fund.' },
+    { id: 'withdraw', label: 'Monthly withdrawal (spending)', type: 'number', value: 3000, prefix: '$', help: 'Your monthly spending minus Social Security, pensions and other income.' },
+    { id: 'ret', label: 'Annual return on savings', type: 'number', value: 6, suffix: '%', help: 'Average yearly growth before inflation. A balanced portfolio is often modeled at 5–7%.' },
     { id: 'infl', label: 'Raise withdrawals each year by (inflation)', type: 'number', value: 3, suffix: '%', help: 'Use 0 for a fixed withdrawal.' },
     { id: 'tax', label: 'Tax rate on withdrawals', type: 'number', value: 0, suffix: '%', help: 'For pre-tax 401(k)/IRA money; the calculator grosses up each withdrawal.' },
-    { id: 'age', label: 'Your age now (optional)', type: 'number', value: 65, placeholder: 'e.g. 65' }
+    { id: 'age', label: 'Your age now (optional)', type: 'number', value: 65, placeholder: 'e.g. 65', help: 'Used only to show the age your savings run out.' }
   ],
   compute(v, H) {
     var S = v.savings, W = v.withdraw;
@@ -60,15 +59,17 @@ export default {
       table: { head: ['Year', 'Start balance', 'Withdrawn', 'End balance'], rows: s.yr.slice(0, 60), caption: 'Year-by-year drawdown' }
     };
   },
+  notes: {
+    'Money runs out at about age': 'Your age now plus the time your savings last.',
+    'Total you withdraw (after tax)': 'Every monthly withdrawal added up, before it runs out.',
+    'Investment growth earned': 'Returns earned on the balance while you withdraw.',
+    'Monthly withdrawal in the final year': 'Your monthly withdrawal after all the yearly inflation raises.',
+    'Monthly withdrawal that lasts 30 years': 'The starting withdrawal that empties savings in exactly 30 years.',
+    'Gross monthly withdrawal in year 1': 'What you take out so the after-tax amount covers your spending.',
+    'First-year withdrawal rate': 'First-year gross withdrawals divided by savings. 4% is a common benchmark.'
+  },
+  assumptions: 'These calculations are estimates. They assume a steady return every year, withdrawals at the start of each month and inflation raises once a year. Real markets vary, so test a lower return too.',
   quick: ({ r }) => `<strong>$500,000</strong> lasts about <strong>${r.value}</strong> if you withdraw <strong>$3,000 a month</strong>, raise it 3% each year for inflation and earn 6% a year on what is left. A 65-year-old would run out around age 83. Cutting spending to <strong>$2,097 a month</strong> makes the same savings last 30 years.`,
-  stepsTitle: 'How to work out how long your money will last',
-  steps: [
-    'Enter your total savings that will fund withdrawals (401(k), IRA, brokerage and cash you plan to spend down). Leave out your emergency fund.',
-    'Enter the monthly amount you need from savings: your spending minus Social Security, pensions and other income. This is the number that matters, not total spending.',
-    'Set a realistic return. A balanced stock and bond portfolio is often modeled at 5–7% a year before inflation; cash and CDs earn less.',
-    'Keep inflation on. The most common mistake is holding withdrawals flat for decades: at 3% inflation, $3,000 of spending today costs about $5,100 a month in 18 years.',
-    'If the money is in a pre-tax 401(k) or traditional IRA, add your tax rate so each withdrawal is grossed up to cover the tax.'
-  ],
   formulaTitle: 'How does the calculator work it out?',
   formula: {
     expr: 'Each month: Balance = (Balance − Withdrawal ÷ (1 − tax)) × (1 + i)<br>i = (1 + annual return)<sup>1/12</sup> − 1 · Withdrawal × (1 + inflation) every 12 months',
@@ -87,6 +88,20 @@ export default {
     note: '"100+ yrs" means growth keeps up with inflation-adjusted withdrawals indefinitely at that return. Scale the savings and withdrawal together: $1,000,000 at $6,000 a month lasts as long as $500,000 at $3,000.'
   },
   sections: [
+    {
+      h2: 'Understanding your inputs',
+      html: `<p>Five numbers decide how long savings last. Getting each one roughly right matters more than precision.</p>
+<h3>Savings today</h3>
+<p>Count the money you will actually draw down: 401(k) and 403(b) balances, traditional and Roth IRAs, brokerage accounts and spare cash. Leave out your emergency fund and your home equity unless you plan to sell.</p>
+<h3>Monthly withdrawal</h3>
+<p>This is the gap savings must fill, not your total budget. Start with monthly spending, then subtract Social Security, any pension, rental income and part-time pay. If you spend $5,500 and Social Security pays $2,500, enter $3,000.</p>
+<h3>Annual return</h3>
+<p>Use the average yearly growth you expect before inflation. A balanced stock and bond portfolio is often modeled at 5–7%; mostly bonds and cash, 2–4%. Overestimating the return is the fastest way to run out early, so test a figure one or two points lower too.</p>
+<h3>Inflation raise</h3>
+<p>Keep this on. Holding withdrawals flat for decades is the most common planning mistake: at 3% inflation, $3,000 of spending today costs about $5,100 a month in 18 years.</p>
+<h3>Tax rate on withdrawals</h3>
+<p>Money from a traditional 401(k) or IRA is taxed as ordinary income, so the calculator grosses each withdrawal up to cover the tax. Use 0% for Roth money and a blended rate if your savings are a mix.</p>`
+    },
     {
       h2: 'How long will $1 million last in retirement?',
       html: `<p>It depends mostly on how much you take out each month. With withdrawals raised 3% a year for inflation:</p>
@@ -133,6 +148,10 @@ export default {
     { q: 'What return should I assume in retirement?', a: 'Many planners use 4–6% a year for a balanced portfolio before inflation, and 2–4% for mostly bonds and cash. Use a conservative figure; overestimating the return is the fastest way to run out early.' },
     { q: 'How long should I plan for my money to last?', a: 'Plan for at least age 90 to 95. The Social Security Administration estimates that about one in three 65-year-olds today will live past 90, and one in seven past 95.' },
     { q: 'Does this calculator include required minimum distributions?', a: 'No. RMDs force money out of tax-deferred accounts but do not force you to spend it. If you reinvest what you don\'t need, how long your money lasts is unchanged apart from taxes.' },
+    { q: 'How long will my 401(k) last?', a: 'Enter the balance as savings and your tax rate on withdrawals. A $400,000 401(k) paying $2,500 a month after tax, with 3% inflation raises, a 5% return and a 12% tax rate, lasts about 13 years 6 months, because each month you must withdraw about $2,841 to net $2,500.' },
+    { q: 'How long will $800,000 last in retirement?', a: 'Withdrawing $4,000 a month with 3% yearly raises, $800,000 lasts about 23 years 1 month at a 6% return and 20 years 5 months at 5%. To make it last 30 years at 6%, start at about $3,356 a month.' },
+    { q: 'What withdrawal makes my money last exactly 30 years?', a: 'The calculator shows it as "Monthly withdrawal that lasts 30 years". For $500,000 at 6% with 3% inflation raises it is about $2,097 a month, or roughly 5% of savings in the first year. The <a href="/retirement-withdrawal-calculator">retirement withdrawal calculator</a> solves this for any number of years.' },
+    { q: 'Can my savings last forever?', a: 'Yes, if you only spend the real return: your return minus inflation. At 6% growth and 3% inflation that is about 2.9% a year, or roughly $1,200 a month on $500,000 to start, raised with inflation each year.' },
     { q: 'Is it better to withdraw monthly or annually?', a: 'The difference is small. Withdrawing a year\'s spending at once means less money stays invested, so monthly withdrawals typically last a few months longer over a long retirement.' }
   ],
   related: ['retirement-withdrawal-calculator', 'monte-carlo-retirement-calculator', 'retirement-tax-calculator', 'retirement-income-calculator', 'social-security-calculator'],

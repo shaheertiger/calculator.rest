@@ -79,7 +79,7 @@ function fnSource(fn) {
 }
 
 /* ---------------- shared layout ---------------- */
-const FONTS = 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap';
+const FONTS = 'https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap';
 const cssMin = read('src/styles.css').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}').trim();
 const appJs = helpersSrc + '\n' + renderSrc + '\n' + runtimeSrc;
 const appHash = crypto.createHash('md5').update(appJs).digest('hex').slice(0, 8);
@@ -95,7 +95,7 @@ function shell({ title, meta, url, body, graph, robots = 'index,follow,max-image
 <meta name="description" content="${esc(meta)}">
 <link rel="canonical" href="${url}">
 <meta name="robots" content="${robots}">
-<meta name="theme-color" content="#1a2390">
+<meta name="theme-color" content="#fbfaf8">
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="${BRAND}">
 <meta property="og:title" content="${esc(title)}">
@@ -186,14 +186,38 @@ function fieldsHtml(def, v) {
     }
     if (c.type === 'checkbox') return `<div class="field${c.wide ? ' wide' : ''}" data-field="${c.id}"${hidden}><label class="check">${inputHtml(c, v[c.id])} ${esc(c.label)}</label>${c.help ? `<small>${c.help}</small>` : ''}</div>`;
     const wide = c.wide || (c.type === 'text' && c.multiline);
-    return `<div class="field${wide ? ' wide' : ''}" data-field="${c.id}"${hidden}><label for="f-${c.id}">${esc(c.label)}</label>${inputHtml(c, v[c.id])}${c.help ? `<small>${c.help}</small>` : ''}</div>`;
+    return `<div class="field${wide ? ' wide' : ''}" data-field="${c.id}"${hidden}><label for="f-${c.id}">${esc(c.label)}</label>${c.help ? `<small id="h-${c.id}">${c.help}</small>` : ''}${inputHtml(c, v[c.id])}</div>`;
   }).join('\n');
+}
+
+/* ---------------- calculator block (inputs left, results right) ---------------- */
+function calcBlock(def, v, r, summary, opts = {}) {
+  const inputsLite = (def.inputs || []).map(c => ({ id: c.id, type: c.type, showIf: c.showIf, max: c.max, fields: c.fields && c.fields.map(f => ({ id: f.id, type: f.type, value: f.value, blank: f.blank })) }));
+  const notes = def.notes || null;
+  const script = `<script>window.CALC={slug:${jsonScript(def.slug)},name:${jsonScript(def.name)},inputs:${jsonScript(inputsLite)},notes:${notes ? jsonScript(notes) : 'null'},data:${def.data ? jsonScript(def.data) : 'null'},compute:${fnSource(def.compute)}};</script>\n<script src="${APP_URL}" defer></script>`;
+  const html = `<section class="calc" aria-label="${esc(def.name)}">
+<form id="calc-form" class="calc-in" data-calc autocomplete="off" novalidate>
+${opts.inputsTitle ? `<h2 class="calc-h">${esc(opts.inputsTitle)}</h2>` : ''}
+${fieldsHtml(def, v)}
+<div class="actions"><button type="button" data-copy>Copy result</button><button type="button" data-share>Share</button><button type="button" data-reset>Reset</button></div>
+</form>
+<div class="calc-out">
+<h2 class="calc-h">Your results</h2>
+<output id="result" for="calc-form" aria-live="polite">${renderResult(r, H, notes)}</output>
+<div class="summary"><h3>Summary</h3><p id="summary">${summary}</p>${def.assumptions ? `<p class="assume">${def.assumptions}</p>` : ''}</div>
+<p class="privacy-note">Calculated on your device. Nothing you enter is sent or stored.</p>
+</div>
+</section>`;
+  return { html, script };
 }
 
 /* ---------------- calculator pages ---------------- */
 const built = []; // {def, r, url, text}
+const YEAR = '2026';
 for (const def of calcs) {
   const s = def.slug;
+  def.title = def.seoTitle || `${YEAR} ${def.name} | ${BRAND}`;
+  def.h1 = def.seoH1 || `${YEAR} ${def.name}`;
   if (!hubById.has(def.hub)) err(s, `unknown hub "${def.hub}"`);
   const v = defaultsOf(def.inputs);
   let r;
@@ -215,67 +239,49 @@ for (const def of calcs) {
   const url = `${SITE}/${s}`;
   const hub = hubById.get(def.hub) || hubs[0];
   const updated = def.updated || '2026-11-13';
-  const stepsTitle = def.stepsTitle || `How to use the ${def.name}`;
   const related = (def.related || []).filter(x => {
     if (!PLAN.has(x)) { err(s, `related slug not in content/plan.tsv: ${x}`); return false; }
     if (!bySlug.has(x)) { if (!ONLY) warn(s, `related calculator not written yet: ${x}`); return false; }
     return x !== s;
   });
   if (!PLAN.has(s)) warn(s, 'slug is not in content/plan.tsv');
-  const siblings = calcs.filter(c => c.hub === def.hub && c.slug !== s && !related.includes(c.slug)).slice(0, 8);
 
   const formula = def.formula ? `<div class="formula"><div class="expr-big">${def.formula.expr}</div>${def.formula.vars ? `<dl>${def.formula.vars.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>` : ''}</div>${def.formula.note ? `<p>${def.formula.note}</p>` : ''}` : '';
+  const explore = [...related, ...calcs.filter(c => c.hub === def.hub && c.slug !== s && !related.includes(c.slug)).map(c => c.slug)];
   const article = [
-    def.steps ? `<h2 id="how">${esc(stepsTitle)}</h2><ol class="steps">${def.steps.map(t => `<li>${t}</li>`).join('')}</ol>` : '',
-    (def.formula || def.example) ? `<h2 id="formula">${esc(def.formulaTitle || 'What formula does it use?')}</h2>${formula}${def.example ? `<h3>Worked example</h3><div class="example">${def.example}</div>` : ''}` : '',
     def.table && tableRows.length ? `<h2 id="table">${esc(def.table.title)}</h2>${def.table.intro ? `<p>${def.table.intro}</p>` : ''}<div class="twrap"><table><thead><tr>${def.table.head.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${tableRows.map(row => `<tr>${row.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${def.table.note ? `<p class="tnote">${def.table.note}</p>` : ''}` : '',
+    (def.formula || def.example) ? `<h2 id="formula">${esc(def.formulaTitle || 'How is it calculated?')}</h2>${formula}${def.example ? `<h3>Worked example</h3><div class="example">${def.example}</div>` : ''}` : '',
     ...(def.sections || []).map(sec => `<h2>${esc(sec.h2)}</h2>${sec.html}`),
-    def.faq && def.faq.length ? `<section class="faq"><h2 id="faq">Frequently asked questions</h2>${def.faq.map(f => `<h3>${esc(f.q)}</h3><p>${f.a}</p>`).join('')}</section>` : '',
-    related.length ? `<h2 id="related">Related calculators</h2><ul class="ring">${related.map(x => `<li><a href="/${x}"><b>${esc(bySlug.get(x).name)}</b><span>${esc(cardLine(x))}</span></a></li>`).join('')}</ul>` : '',
+    explore.length ? `<h2 id="explore">Explore other retirement calculators</h2><ul class="explore">${explore.map(x => `<li><a href="/${x}">${esc(bySlug.get(x).name)}</a></li>`).join('')}</ul>` : '',
+    def.faq && def.faq.length ? `<section class="faq"><h2 id="faq">FAQs</h2>${def.faq.map(f => `<h3>${esc(f.q)}</h3><div class="faq-a">${/^\s*</.test(f.a) ? f.a : `<p>${f.a}</p>`}</div>`).join('')}</section>` : '',
     `<h2 id="sources">Sources and method</h2>${def.sources && def.sources.length ? `<ul class="sources">${def.sources.map(x => `<li><a href="${esc(x.url)}" rel="nofollow noopener" target="_blank">${esc(x.name)}</a></li>`).join('')}</ul>` : ''}<p class="trust">Built and maintained by calculator.rest${def.reviewer ? ` · Reviewed by ${def.reviewer.url ? `<a href="${esc(def.reviewer.url)}">${esc(def.reviewer.name)}</a>` : esc(def.reviewer.name)}, ${esc(def.reviewer.credential)}${def.reviewer.date ? ` on ${fmtDay(def.reviewer.date)}` : ''}` : ''} · Formula follows the sources above · Last updated ${fmtDay(updated)} · <a href="/methodology">How we build and check calculators</a>${def.disclaimer ? `<br>${def.disclaimer}` : ''}</p>`
   ].join('\n');
 
-  const inputsLite = (def.inputs || []).map(c => ({ id: c.id, type: c.type, showIf: c.showIf, max: c.max, fields: c.fields && c.fields.map(f => ({ id: f.id, type: f.type, value: f.value, blank: f.blank })) }));
-  const script = `<script>window.CALC={slug:${jsonScript(s)},name:${jsonScript(def.name)},inputs:${jsonScript(inputsLite)},data:${def.data ? jsonScript(def.data) : 'null'},compute:${fnSource(def.compute)}};</script>\n<script src="${APP_URL}" defer></script>`;
-
+  const cb = calcBlock(def, v, r || {}, quick);
+  const script = cb.script;
   const body = `<div class="wrap">
 ${crumbsHtml([['Home', SITE + '/'], [hub.name, `${SITE}/${hub.slug}`], [def.name, url]])}
-<div class="hero-calc">
-<div>
+<header class="page-head">
 <h1>${esc(def.h1)}</h1>
-<p class="quick"><strong>Quick answer:</strong> ${quick}</p>
-<p class="meta-line"><span>Updated ${fmtDay(updated)}</span><span>Free, no sign-up</span><span>Runs in your browser</span></p>
-</div>
-<section class="tool" aria-label="${esc(def.name)}">
-<output id="result" for="calc-form" aria-live="polite">${renderResult(r, H)}</output>
-<form id="calc-form" data-calc autocomplete="off" novalidate>
-${fieldsHtml(def, v)}
-</form>
-<div class="actions"><button type="button" data-copy>copy result</button><button type="button" data-share>share</button><button type="button" data-reset>reset</button></div>
-<p class="privacy-note">dot does the math on your device. nothing is sent or stored on a server.</p>
-</section>
-</div>
-<div class="content">
-<article>
+<p class="intro">${def.intro || quick}</p>
+<p class="meta-line">Updated ${fmtDay(updated)} · Free, no sign-up · Sources: ${esc((def.sources || []).map(x => x.name.split(':')[0]).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3).join(', ') || 'see below')}</p>
+</header>
+${cb.html}
+<article class="article">
 ${article}
 </article>
-<aside><div class="side">
-<div class="side-box dotcard"><span class="face" aria-hidden="true"></span><p>hi, i'm dot. i keep your last 20 answers on the <a href="/">homepage</a>.</p></div>
-<div class="side-box"><h2>More ${esc(hub.short.toLowerCase())} calculators</h2><ul>${siblings.map(c => `<li><a href="/${c.slug}">${esc(c.name)}</a><span class="k">${esc(cardLine(c.slug))}</span></li>`).join('')}</ul><p style="margin:10px 0 0;font-size:14px"><a href="/${hub.slug}">All ${esc(hub.name.toLowerCase())} →</a></p></div>
-</div></aside>
-</div>
 </div>`;
 
   const graph = [ORG, WEBSITE,
     { '@type': 'WebPage', '@id': url + '#page', url, name: def.title, description: def.meta, isPartOf: { '@id': SITE + '/#website' }, breadcrumb: { '@id': url + '#breadcrumb' }, inLanguage: 'en-US', datePublished: def.published || '2026-11-13', dateModified: updated, author: { '@id': SITE + '/#org' }, publisher: { '@id': SITE + '/#org' }, mainEntity: { '@id': url + '#app' }, ...(def.reviewer ? { reviewedBy: { '@type': 'Person', name: def.reviewer.name, jobTitle: def.reviewer.credential, ...(def.reviewer.url ? { url: def.reviewer.url } : {}) }, ...(def.reviewer.date ? { lastReviewed: def.reviewer.date } : {}) } : {}) },
     crumbsLd(url, [['Home', SITE + '/'], [hub.name, `${SITE}/${hub.slug}`], [def.name, url]]),
     { '@type': 'WebApplication', '@id': url + '#app', name: def.name, url, description: def.meta, applicationCategory: APP_CAT[def.hub] || 'UtilitiesApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript for live updates; default answer works without it', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@id': SITE + '/#org' } },
-    def.steps ? { '@type': 'HowTo', '@id': url + '#howto', name: stepsTitle, step: def.steps.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, text: strip(t) })) } : null,
+    def.table && tableRows.length ? { '@type': 'Table', '@id': url + '#table', about: def.table.title } : null,
     def.faq && def.faq.length ? { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: def.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: strip(f.a) } })) } : null
   ].filter(Boolean);
 
   const html = shell({ title: def.title, meta: def.meta, url, body, graph, scripts: script });
-  const text = strip(quick + ' ' + article);
+  const text = strip((def.intro || '') + ' ' + quick + ' ' + article);
   built.push({ def, r: r || {}, url, html, text, quick, tableRows, updated });
 }
 
@@ -311,10 +317,12 @@ for (const b of built) {
   if (!/\d/.test(strip(b.quick))) err(s, 'quick answer has no number');
   if (qw < 25 || qw > 95) warn(s, `quick answer ${qw} words (aim 40–70)`);
   const nf = (d.faq || []).length;
-  if (nf < 5) err(s, `only ${nf} FAQs (need 6–8)`); else if (nf < 6 || nf > 10) warn(s, `${nf} FAQs (aim 6–8)`);
+  if (nf < 5) err(s, `only ${nf} FAQs (need 10–15)`); else if (nf < 10 || nf > 16) warn(s, `${nf} FAQs (aim 10–15)`);
   const ns = (d.sections || []).length;
   if (ns < 2) err(s, `only ${ns} question sections (need 3–4)`); else if (ns < 3) warn(s, `${ns} question sections (aim 3–4)`);
-  if (!d.steps || d.steps.length < 3) warn(s, 'fewer than 3 steps');
+  if (!d.intro) warn(s, 'no intro (one plain sentence under the H1, template style)');
+  for (const c of d.inputs || []) if (c.type !== 'rows' && !c.help) warn(s, `input "${c.id}" has no help text`);
+  if (!d.notes) warn(s, 'no result notes');
   if (!d.table || !b.tableRows.length) warn(s, 'no computed table');
   if ((d.related || []).length < 3) warn(s, 'fewer than 3 related');
   if (!d.sources || !d.sources.length) (MONEY_HEALTH.has(d.hub) ? err : warn)(s, 'no sources');
@@ -368,8 +376,8 @@ ${crumbsHtml([['Home', SITE + '/'], [hub.name, url]])}
 <div class="hub-hero"><h1>${esc(hub.name)} calculators<span class="dot">.</span></h1><p>${list.length} free calculators. ${hub.intro}</p></div>
 <h2 class="section-h">Every ${esc(hub.name.toLowerCase())} calculator, with a worked answer</h2>
 <p class="tnote">Each row shows the answer the calculator gives for its example inputs, so you can see what it does before you open it.</p>
-<div class="twrap"><table class="hub-table"><thead><tr><th scope="col">Calculator</th><th scope="col">Example answer</th><th scope="col">What it solves</th></tr></thead><tbody>
-${list.map(b => `<tr><td><a href="/${b.def.slug}">${esc(b.def.name)}</a></td><td>${esc(strip(b.r.value))}${b.r.label ? `<br><span class="tnote">${esc(strip(b.r.label))}</span>` : ''}</td><td>${esc(b.def.keyword.replace(/^\w/, c => c.toUpperCase()))}${/\?$/.test(b.def.keyword) ? '' : '?'}</td></tr>`).join('\n')}
+<div class="twrap"><table class="hub-table"><thead><tr><th scope="col">Calculator</th><th scope="col">Example answer</th></tr></thead><tbody>
+${list.map(b => `<tr><td><a href="/${b.def.slug}">${esc(b.def.name)}</a></td><td>${esc(strip(b.r.value))}${b.r.label ? `<br><span class="tnote">${esc(strip(b.r.label))}</span>` : ''}</td></tr>`).join('\n')}
 </tbody></table></div>
 <div class="prose">
 <h2>Common questions</h2>
@@ -395,25 +403,16 @@ function homePage() {
   const title = `Retirement Calculator: How Long Will Your Money Last? | calculator.rest`;
   const meta = `Free retirement calculators that run your real numbers: how long savings last, safe withdrawals, Monte Carlo odds, 401(k), Social Security and 2026 taxes.`;
   const fd = feat.def, fv = defaultsOf(fd.inputs);
-  const inputsLite = (fd.inputs || []).map(c => ({ id: c.id, type: c.type, showIf: c.showIf, max: c.max, fields: c.fields && c.fields.map(f => ({ id: f.id, type: f.type, value: f.value, blank: f.blank })) }));
-  const script = `<script>window.CALC={slug:${jsonScript(fd.slug)},name:${jsonScript(fd.name)},inputs:${jsonScript(inputsLite)},data:${fd.data ? jsonScript(fd.data) : 'null'},compute:${fnSource(fd.compute)}};</script>\n<script src="${APP_URL}" defer></script>`;
+  const cb = calcBlock(fd, fv, feat.r, feat.quick);
+  const script = cb.script;
   const body = `<div class="wrap">
-<section class="hero-calc home-calc">
-<div>
-<h1><span class="eyebrow">free retirement calculators</span>will your money last<span class="dot">?</span></h1>
-<p class="lede">Retirement math with your numbers, not a rule of thumb. Enter your savings and what you spend: see how many years it lasts, the withdrawal that lasts 30 years, and the year-by-year balance. Every tool shows its formula and cites the IRS or SSA.</p>
-<ul class="chips">${chips.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name.replace(/ Calculator$/, '').toLowerCase())}</a></li>`).join('')}</ul>
-<p class="tnote">Want more detail? Open the <a href="/${fd.slug}">full money-last calculator</a> with the worked example, formula and year-by-year table.</p>
-</div>
-<section class="tool" aria-label="${esc(fd.name)}">
-<output id="result" for="calc-form" aria-live="polite">${renderResult(feat.r, H)}</output>
-<form id="calc-form" data-calc autocomplete="off" novalidate>
-${fieldsHtml(fd, fv)}
-</form>
-<div class="actions"><button type="button" data-copy>copy result</button><button type="button" data-share>share</button><button type="button" data-reset>reset</button></div>
-<p class="privacy-note">dot does the math on your device. nothing is sent or stored on a server.</p>
-</section>
-</section>
+<header class="page-head home-head">
+<p class="eyebrow">Free retirement calculators · 2026</p>
+<h1>Retirement calculator: how long will your money last?</h1>
+<p class="intro">Plug in your savings and what you spend, and we'll show you how many years it lasts, the monthly withdrawal that lasts 30 years and your balance year by year. Every tool shows its formula and cites the IRS or SSA.</p>
+<ul class="chips">${chips.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name.replace(/ Calculator$/, ''))}</a></li>`).join('')}</ul>
+</header>
+${cb.html}
 <section id="history-wrap" hidden><h2 class="section-h">your last calcs</h2><ul id="history"></ul><button class="linkbtn" id="history-clear" type="button">clear history</button></section>
 <section id="calculators">
 <h2 class="section-h">${calcs.length} retirement calculators, one question each</h2>
