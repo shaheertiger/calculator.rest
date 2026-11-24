@@ -2,23 +2,22 @@ export default {
   slug: 'magi-calculator',
   hub: 'rules',
   name: 'MAGI Calculator for Roth IRA',
-  title: 'MAGI Calculator for Roth IRA 2026: Phase-Out $153K–$168K',
-  h1: 'Roth IRA MAGI Calculator: Modified AGI and Your 2026 Contribution Limit',
-  meta: 'An AGI of $158,000 plus a $2,500 student loan interest deduction is a $160,500 Roth MAGI, so a single filer can put in $3,750 for 2026 instead of $7,500.',
+  meta: 'Estimate your modified adjusted gross income with our free MAGI calculator. See your Roth IRA MAGI, the 2026 phase-out range and how much you can contribute.',
+  intro: 'Plug in your adjusted gross income, any Roth conversion income and the deductions the IRS adds back, and we\'ll show you your MAGI for Roth IRA purposes and the most you can contribute to a Roth IRA for 2026.',
   keyword: 'how to calculate magi for roth ira',
   also: ['how to calculate your magi', 'how to calculate magi from agi', 'how to calculate the agi', 'how is magi calculated for irmaa', 'how is magi calculated for medicare premiums', 'roth ira income limit 2026'],
-  updated: '2026-11-13',
+  updated: '2026-11-24',
   inputs: [
-    { id: 'status', label: 'Filing status', type: 'select', value: 'single', options: [['single', 'Single, head of household, or married filing separately and lived apart all year'], ['mfj', 'Married filing jointly or qualifying surviving spouse'], ['mfs', 'Married filing separately, lived with spouse']], wide: true },
-    { id: 'agi', label: 'Adjusted gross income (Form 1040)', type: 'number', value: 158000, prefix: '$' },
+    { id: 'status', label: 'Filing status', type: 'select', value: 'single', options: [['single', 'Single, head of household, or married filing separately and lived apart all year'], ['mfj', 'Married filing jointly or qualifying surviving spouse'], ['mfs', 'Married filing separately, lived with spouse']], wide: true, help: 'Your 2026 filing status; it sets which income range applies.' },
+    { id: 'agi', label: 'Adjusted gross income (Form 1040)', type: 'number', value: 158000, prefix: '$', help: 'Total income minus Schedule 1 adjustments. Before you file, estimate it from pay stubs and other income.' },
     { id: 'conv', label: 'Roth conversion or rollover income included in AGI', type: 'number', value: 0, prefix: '$', help: 'Subtracted: converting to a Roth does not count against you.' },
     { id: 'ira', label: 'Traditional IRA deduction', type: 'number', value: 0, prefix: '$', help: 'Schedule 1. Added back.' },
     { id: 'sli', label: 'Student loan interest deduction', type: 'number', value: 2500, prefix: '$', help: 'Schedule 1. Added back.' },
     { id: 'feie', label: 'Foreign earned income and housing exclusion or deduction', type: 'number', value: 0, prefix: '$', help: 'Form 2555. Added back.' },
     { id: 'other', label: 'Excluded savings bond interest and employer adoption benefits', type: 'number', value: 0, prefix: '$', help: 'Forms 8815 and 8839. Added back.' },
     { id: 'comp', label: 'Taxable compensation (wages, self-employment income)', type: 'number', value: 150000, prefix: '$', help: 'You cannot contribute more than you earned. A spouse\'s pay counts if filing jointly.' },
-    { id: 'age50', label: 'Age 50 or older by Dec 31, 2026', type: 'checkbox', value: false },
-    { id: 'trad', label: 'Already contributed to traditional IRAs for 2026', type: 'number', value: 0, prefix: '$' }
+    { id: 'age50', label: 'Age 50 or older by Dec 31, 2026', type: 'checkbox', value: false, help: 'Tick to add the $1,100 catch-up, for an $8,600 limit.' },
+    { id: 'trad', label: 'Already contributed to traditional IRAs for 2026', type: 'number', value: 0, prefix: '$', help: 'Traditional and Roth IRAs share one limit, so this reduces your Roth room.' }
   ],
   data: { lo: { single: 153000, mfj: 242000, mfs: 0 }, span: { single: 15000, mfj: 10000, mfs: 10000 }, limit: 7500, catchup: 1100 },
   compute(v, H, D) {
@@ -58,18 +57,19 @@ export default {
       label: 'MAGI for Roth IRA purposes',
       expr: H.money(v.agi, 0) + (z(v.conv) ? ' − ' + H.money(z(v.conv), 0) : '') + ' + ' + H.money(addbacks, 0) + ' add-backs',
       rows: rows,
-      sub: sub
+      sub: 'Your MAGI for Roth IRA purposes is ' + H.money(magi, 0) + ', so you can contribute up to ' + H.money(allowed, 0) + ' for 2026. ' + sub
     };
   },
+  notes: {
+    'Most you can put in a Roth IRA for 2026': 'Your limit after the income test, your compensation and any traditional IRA contributions.',
+    '2026 phase-out range': 'The MAGI range where the Roth limit shrinks to zero for your filing status.',
+    'Add-backs to AGI': 'Deductions and exclusions the IRS adds back to AGI.',
+    'Conversion income removed': 'Roth conversion and rollover income subtracted from AGI.',
+    'Limit before the income test': '$7,500 ($8,600 at 50+), or your compensation if lower.',
+    'Share of the range used': 'How far your MAGI is into the phase-out range.'
+  },
+  assumptions: 'These calculations are estimates. They follow IRS Publication 590-A Worksheets 2-1 and 2-2 for 2026 and assume the AGI and deductions you enter match your tax return.',
   quick: ({ r, v, run }) => `To calculate MAGI for a Roth IRA, start with your AGI, subtract any Roth conversion income, and add back the traditional IRA deduction, student loan interest deduction, foreign income exclusions and certain excluded interest. An AGI of $158,000 plus $2,500 of student loan interest is a <strong>${r.value}</strong> MAGI. That is halfway through the 2026 single range of $153,000–$168,000, so the limit is <strong>${run().rows[0][1]}</strong>.`,
-  stepsTitle: 'How to calculate MAGI for a Roth IRA (IRS Worksheet 2-1)',
-  steps: [
-    'Find your AGI on Form 1040. It is gross income minus the adjustments on Schedule 1, Part II.',
-    'Subtract income from converting a traditional IRA to a Roth IRA, or rolling a 401(k) into a Roth IRA. This is the step people get wrong: conversions do not count for Roth eligibility, even though they raise your AGI.',
-    'Add back your traditional IRA deduction and student loan interest deduction from Schedule 1.',
-    'Add back any foreign earned income exclusion, foreign housing exclusion or deduction (Form 2555), excludable savings bond interest (Form 8815) and excluded employer adoption benefits (Form 8839).',
-    'Compare the result with the 2026 phase-out: $153,000–$168,000 single, $242,000–$252,000 joint, $0–$10,000 married filing separately if you lived together. Inside the range, the calculator applies Worksheet 2-2 to find your reduced limit.'
-  ],
   formulaTitle: 'What is the Roth IRA MAGI formula?',
   formula: {
     expr: 'MAGI = AGI − Roth conversion income + IRA deduction + student loan interest deduction + foreign exclusions + excluded bond interest + excluded adoption benefits<br>Reduced limit = Limit × (1 − (MAGI − range start) ÷ range width), rounded up to $10, minimum $200',
@@ -92,43 +92,86 @@ export default {
   },
   sections: [
     {
+      h2: 'Understanding your inputs',
+      html: `<p>The calculator follows IRS Worksheet 2-1 in Publication 590-A: start from AGI, take out conversion income, add back a short list of deductions and exclusions, then apply Worksheet 2-2 if you land inside the phase-out.</p>
+<h3>Filing status</h3>
+<p>Your status picks the 2026 phase-out: $153,000–$168,000 single, $242,000–$252,000 joint, and $0–$10,000 if you are married filing separately and lived with your spouse at any time in the year. Separate filers who lived apart all year use the single range.</p>
+<h3>Adjusted gross income</h3>
+<p>Find your AGI on Form 1040. It is gross income minus the adjustments on Schedule 1, Part II. For the current year, estimate it from your pay stubs, interest and other income.</p>
+<h3>Roth conversion or rollover income</h3>
+<p>Subtract income from converting a traditional IRA to a Roth IRA, or rolling a 401(k) into a Roth IRA. This is the step people get wrong: conversions do not count for Roth eligibility, even though they raise your AGI. A $20,000 conversion on top of the default example leaves MAGI at $160,500.</p>
+<h3>Traditional IRA deduction</h3>
+<p>Added back. Deducting a traditional IRA contribution lowers AGI but not Roth MAGI; in the default example, a $7,500 IRA deduction would push MAGI to $168,000 and the Roth limit to $0.</p>
+<h3>Student loan interest deduction</h3>
+<p>Added back. Use the deduction you claim on Schedule 1, up to $2,500, not the interest you paid.</p>
+<h3>Foreign income exclusions</h3>
+<p>Add back any foreign earned income exclusion, foreign housing exclusion or deduction from Form 2555.</p>
+<h3>Savings bond interest and adoption benefits</h3>
+<p>Add back excludable savings bond interest used for education (Form 8815) and excluded employer adoption benefits (Form 8839).</p>
+<h3>Taxable compensation</h3>
+<p>You can't contribute more than you earned from work. Wages and self-employment income count; pensions, Social Security and investment income don't. On a joint return, the working spouse's pay can cover both.</p>
+<h3>Age 50 or older</h3>
+<p>Tick this to add the $1,100 catch-up for an $8,600 limit. The phase-out cuts the larger limit in the same proportion: $4,300 instead of $3,750 in the default example.</p>
+<h3>Traditional IRA contributions already made</h3>
+<p>Traditional and Roth IRA contributions share one yearly limit, so whatever you put into a traditional IRA for 2026 comes off your Roth room.</p>`
+    },
+    {
       h2: 'How do you calculate AGI before you get to MAGI?',
-      html: `<p>Adjusted gross income is your total income minus "above-the-line" adjustments. Total income includes wages (after pre-tax 401(k), 403(b), HSA payroll and health premium deductions), interest, dividends, capital gains, business income, IRA and pension distributions, the taxable part of Social Security, rental income and unemployment.</p>
+      html: `<p>Adjusted gross income is your total income minus "above-the-line" adjustments.</p>
+<h3>Total income</h3>
+<p>Total income includes wages (after pre-tax 401(k), 403(b), HSA payroll and health premium deductions), interest, dividends, capital gains, business income, IRA and pension distributions, the taxable part of Social Security, rental income and unemployment.</p>
+<h3>Adjustments</h3>
 <p>The adjustments on Schedule 1, Part II include deductible IRA contributions, student loan interest, HSA contributions made outside payroll, half of self-employment tax, self-employed health insurance, SEP and solo 401(k) contributions, educator expenses and alimony under pre-2019 divorce agreements.</p>
-<p>Example: $150,000 of wages plus $10,500 of interest and capital gains is $160,500 total income. Subtract a $2,500 student loan interest deduction and AGI is $158,000. The standard or itemized deduction comes <em>after</em> AGI, so it never lowers MAGI.</p>`
+<h3>Example</h3>
+<p>$150,000 of wages plus $10,500 of interest and capital gains is $160,500 total income. Subtract a $2,500 student loan interest deduction and AGI is $158,000. The standard or itemized deduction comes <em>after</em> AGI, so it never lowers MAGI.</p>`
     },
     {
       h2: 'Is MAGI calculated the same way for IRMAA and Medicare premiums?',
       html: `<p>No. There is no single MAGI; each program defines its own.</p>
-<ul><li><strong>Roth IRA:</strong> AGI minus conversion income plus the add-backs above.</li>
-<li><strong>Medicare IRMAA:</strong> AGI plus tax-exempt interest. Social Security uses your tax return from two years earlier, so 2026 Part B and Part D premiums are based on 2024 income. The surcharge starts above $109,000 single or $218,000 joint, where the standard 2026 Part B premium of $202.90 rises. Roth conversions <em>do</em> count here.</li>
-<li><strong>ACA marketplace subsidies:</strong> AGI plus nontaxable Social Security benefits, tax-exempt interest and excluded foreign income.</li>
-<li><strong>Traditional IRA deduction:</strong> similar to the Roth version but without subtracting conversions; the 2026 range for a single filer covered by a workplace plan is $81,000–$91,000.</li></ul>
-<p>Because a Roth conversion raises IRMAA MAGI two years later, people 63 and older often size conversions to stay below an IRMAA tier.</p>`
+<h3>Roth IRA</h3>
+<p>AGI minus conversion income plus the add-backs above. This is what the calculator shows.</p>
+<h3>Medicare IRMAA</h3>
+<p>AGI plus tax-exempt interest. Social Security uses your tax return from two years earlier, so 2026 Part B and Part D premiums are based on 2024 income. The surcharge starts above $109,000 single or $218,000 joint, where the standard 2026 Part B premium of $202.90 rises. Roth conversions <em>do</em> count here, so people 63 and older often size conversions to stay below an IRMAA tier.</p>
+<h3>ACA marketplace subsidies</h3>
+<p>AGI plus nontaxable Social Security benefits, tax-exempt interest and excluded foreign income.</p>
+<h3>Traditional IRA deduction</h3>
+<p>Similar to the Roth version but without subtracting conversions; the 2026 range for a single filer covered by a workplace plan is $81,000–$91,000.</p>
+<h3>Senior deduction</h3>
+<p>For the $6,000 deduction for people 65 and older, MAGI is AGI plus certain income excluded because it was earned abroad or in a U.S. territory, figured on Schedule 1-A. For most retirees it equals AGI. The <a href="/retirement-tax-calculator">retirement tax calculator</a> applies the phase-out above $75,000 single or $150,000 joint.</p>`
     },
     {
       h2: 'How can you lower MAGI to qualify for a Roth IRA?',
-      html: `<p>Anything that lowers AGI without being added back works:</p>
-<ul><li>Raise pre-tax 401(k) or 403(b) deferrals (up to $24,500 in 2026). See the <a href="/401k-contribution-calculator">401(k) paycheck calculator</a>.</li>
-<li>Contribute to an HSA if you have a high-deductible health plan.</li>
-<li>Self-employed: fund a SEP IRA or solo 401(k).</li>
-<li>Harvest capital losses (up to $3,000 a year against ordinary income).</li></ul>
-<p>A traditional IRA deduction does <em>not</em> help, because it is added back. If MAGI is still over the limit, the backdoor Roth is legal: make a nondeductible traditional IRA contribution and convert it. If you hold other pre-tax IRA money, the pro-rata rule makes part of the conversion taxable.</p>`
+      html: `<p>Anything that lowers AGI without being added back works.</p>
+<h3>Raise pre-tax deferrals</h3>
+<p>Increase pre-tax 401(k) or 403(b) deferrals (up to $24,500 in 2026). See the <a href="/401k-contribution-calculator">401(k) paycheck calculator</a>. In the default example, $8,000 more in deferrals brings MAGI under $153,000 and restores the full $7,500.</p>
+<h3>Other adjustments that aren't added back</h3>
+<p>Contribute to an HSA if you have a high-deductible health plan. If you are self-employed, fund a SEP IRA or solo 401(k). Harvest capital losses (up to $3,000 a year against ordinary income). A traditional IRA deduction does <em>not</em> help, because it is added back.</p>
+<h3>The backdoor Roth</h3>
+<p>If MAGI is still over the limit, the backdoor Roth is legal: make a nondeductible traditional IRA contribution and convert it. If you hold other pre-tax IRA money, the pro-rata rule makes part of the conversion taxable. The <a href="/roth-ira-calculator">Roth IRA calculator</a> shows what the contributions could grow to.</p>`
     },
     {
       h2: 'What happens if you contribute too much to a Roth IRA?',
-      html: `<p>An excess contribution is charged a 6% excise tax for every year it stays in the account. To avoid it, withdraw the excess plus any earnings on it by your tax-filing deadline, including extensions; the earnings are taxable. You can also recharacterize the contribution as a traditional IRA contribution by the same deadline. If your MAGI ends up higher than you expected, for example from a year-end bonus, check this calculator again before you file.</p>`
+      html: `<h3>The 6% excise tax</h3>
+<p>An excess contribution is charged a 6% excise tax for every year it stays in the account. On a $3,750 excess, that is $225 a year until it's fixed.</p>
+<h3>Fixing it</h3>
+<p>Withdraw the excess plus any earnings on it by your tax-filing deadline, including extensions; the earnings are taxable. You can also recharacterize the contribution as a traditional IRA contribution by the same deadline. If your MAGI ends up higher than you expected, for example from a year-end bonus, check this calculator again before you file.</p>`
     }
   ],
   faq: [
+    { q: 'How do I calculate my modified adjusted gross income?', a: 'For a Roth IRA, start with AGI, subtract Roth conversion income and add back the traditional IRA deduction, student loan interest deduction, foreign income exclusions and excluded savings bond interest or adoption benefits. An AGI of $158,000 plus a $2,500 student loan interest deduction is a $160,500 MAGI.' },
     { q: 'What is the Roth IRA income limit for 2026?', a: 'For 2026 the contribution phases out between $153,000 and $168,000 of MAGI for single and head-of-household filers, and between $242,000 and $252,000 for married couples filing jointly. Married filing separately (lived together) phases out from $0 to $10,000.' },
+    { q: 'How much can I contribute to a Roth IRA with a MAGI of $160,500?', a: 'A single filer under 50 can contribute $3,750 for 2026, half the $7,500 limit, because $160,500 is halfway through the $153,000–$168,000 range. At 50 or older the limit is $4,300.' },
     { q: 'Is MAGI the same as AGI?', a: 'For many people they are identical or nearly so. MAGI for a Roth IRA differs from AGI only if you have Roth conversion income, a traditional IRA or student loan interest deduction, foreign income exclusions, or excluded savings bond interest or adoption benefits.' },
+    { q: 'Is AGI calculated after the standard deduction?', a: 'No. AGI is total income minus Schedule 1 adjustments; the standard or itemized deduction is subtracted later to get taxable income. So $158,000 of AGI stays $158,000 for MAGI, whatever your deductions.' },
+    { q: 'How do I calculate my AGI from my W-2?', a: 'Start with box 1 wages, which already exclude pre-tax 401(k) and health deductions, add interest, dividends, capital gains and other income, then subtract Schedule 1 adjustments such as student loan interest. $150,000 of wages plus $10,500 of investment income minus a $2,500 deduction is a $158,000 AGI.' },
+    { q: 'How is MAGI calculated for IRMAA?', a: 'For Medicare IRMAA, MAGI is AGI plus tax-exempt interest, taken from your tax return two years earlier. Surcharges start above $109,000 single or $218,000 joint, and Roth conversions count.' },
     { q: 'Do 401(k) contributions reduce MAGI?', a: 'Yes, pre-tax 401(k), 403(b) and 457 deferrals reduce your W-2 wages, so they lower both AGI and MAGI. Roth 401(k) deferrals do not.' },
     { q: 'Does a Roth conversion count toward MAGI?', a: 'Not for Roth IRA contribution eligibility: conversion income is subtracted. It does count toward MAGI for Medicare IRMAA, ACA subsidies and other tests.' },
     { q: 'How much can I put in a Roth IRA for 2026?', a: 'Up to $7,500, or $8,600 if you are 50 or older, but no more than your taxable compensation, and less if your MAGI is in the phase-out range. The limit is shared with any traditional IRA contributions.' },
     { q: 'Does Social Security count in MAGI for a Roth IRA?', a: 'Only the taxable part, because that is what is in AGI. The ACA version of MAGI also adds back the nontaxable part.' },
     { q: 'When is the deadline for a 2026 Roth IRA contribution?', a: 'April 15, 2027, the tax-filing deadline, not including extensions. You can contribute for 2026 from January 1, 2026 until then.' },
-    { q: 'What if my spouse has no income?', a: 'A spousal IRA lets a non-working spouse contribute based on the working spouse\'s pay if you file jointly. Your joint MAGI is compared with the $242,000–$252,000 range.' }
+    { q: 'What if my spouse has no income?', a: 'A spousal IRA lets a non-working spouse contribute based on the working spouse\'s pay if you file jointly. Your joint MAGI is compared with the $242,000–$252,000 range; at $247,000 each spouse could put in $3,750.' },
+    { q: 'What if I contributed to a Roth IRA and my MAGI was too high?', a: 'Withdraw the excess and its earnings, or recharacterize it as a traditional IRA contribution, by your tax-filing deadline including extensions. Otherwise a 6% excise tax applies each year the excess stays in the account.' }
   ],
   related: ['roth-ira-calculator', '401k-contribution-calculator', 'retirement-tax-calculator', '401k-retirement-calculator'],
   sources: [
