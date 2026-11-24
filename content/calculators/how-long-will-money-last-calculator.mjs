@@ -2,7 +2,7 @@ export default {
   slug: 'how-long-will-money-last-calculator',
   hub: 'income',
   name: 'How Long Will My Money Last Calculator',
-  meta: 'Estimate how long your retirement savings will last with our free calculator. See the age it runs out, the withdrawal that lasts 30 years and each year\'s balance.',
+  meta: 'Estimate how long your retirement savings will last with our free calculator. See when it runs out, the withdrawal that lasts 30 years and each year\'s balance.',
   intro: 'Plug in your savings, what you plan to spend each month, your expected return and inflation, and we\'ll show you how long your money will last, the age it runs out and the monthly withdrawal that makes it last 30 years.',
   keyword: 'how long will my money last calculator',
   also: ['how long will my savings last calculator', 'how long will my money last retirement calculator', 'how long will my savings last calculator with inflation', 'how long retirement savings last calculator', 'how long will my money last calculator with taxes', 'how much can i withdraw without touching principal calculator', 'how long will retirement last calculator', 'how long will 500k last in retirement', 'how long will my 401k last calculator'],
