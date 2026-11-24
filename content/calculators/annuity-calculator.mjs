@@ -2,22 +2,21 @@ export default {
   slug: 'annuity-calculator',
   hub: 'income',
   name: 'Retirement Annuity Calculator',
-  title: 'Retirement Annuity Calculator: $250,000 Pays $1,650 a Month',
-  h1: 'Annuity Payout Calculator: Turn a Lump Sum Into Monthly Retirement Income',
-  meta: '$250,000 in a 20-year annuity at 5% pays $1,650 a month, about twice a 4% withdrawal. Find the payout for a term or to an age, or the premium you need.',
+  meta: 'Estimate the monthly income a retirement annuity pays with our free calculator. See your payout, payout rate, total interest and how it compares with 4%.',
+  intro: 'Plug in a lump sum, how long payments should last and the interest rate, and we\'ll show you the monthly annuity payout, or the lump sum you need for the income you want, side by side with the 4% rule.',
   keyword: 'retirement annuity calculator',
   also: ['annuity calculator for retirement', 'retirement annuity payout calculator', 'annuity calculations for retirement', 'how to calculate annuity payments', 'calculate annuity payments for retirement', 'how to calculate retirement annuity', 'retirement income annuity calculator', 'present value of retirement annuity calculator'],
   updated: '2026-11-24',
   published: '2026-11-24',
   inputs: [
-    { id: 'mode', label: 'What do you want to work out?', type: 'select', value: 'income', options: [['income', 'Monthly income from a lump sum'], ['cost', 'Lump sum needed for a monthly income']], wide: true },
-    { id: 'premium', label: 'Lump sum (premium)', type: 'number', value: 250000, prefix: '$', showIf: { mode: ['income'] } },
-    { id: 'want', label: 'Monthly income you want', type: 'number', value: 1500, prefix: '$', showIf: { mode: ['cost'] } },
-    { id: 'term', label: 'Payout length', type: 'select', value: 'period', options: [['period', 'A fixed number of years'], ['life', 'To an age you choose (life estimate)']] },
-    { id: 'years', label: 'Payout period', type: 'number', value: 20, suffix: 'years', showIf: { term: ['period'] } },
-    { id: 'age', label: 'Age when payments start', type: 'number', value: 65, suffix: 'years', showIf: { term: ['life'] } },
+    { id: 'mode', label: 'What do you want to work out?', type: 'select', value: 'income', options: [['income', 'Monthly income from a lump sum'], ['cost', 'Lump sum needed for a monthly income']], wide: true, help: 'Income from money you have, or the premium needed for an income you want.' },
+    { id: 'premium', label: 'Lump sum (premium)', type: 'number', value: 250000, prefix: '$', showIf: { mode: ['income'] }, help: 'The amount you would pay the insurer, from savings or a 401(k) rollover.' },
+    { id: 'want', label: 'Monthly income you want', type: 'number', value: 1500, prefix: '$', showIf: { mode: ['cost'] }, help: 'For example, your budget minus Social Security and any pension.' },
+    { id: 'term', label: 'Payout length', type: 'select', value: 'period', options: [['period', 'A fixed number of years'], ['life', 'To an age you choose (life estimate)']], help: 'A fixed term pays for set years; a life estimate spreads the money to an age.' },
+    { id: 'years', label: 'Payout period', type: 'number', value: 20, suffix: 'years', showIf: { term: ['period'] }, help: 'How many years of monthly payments, often 10 to 30.' },
+    { id: 'age', label: 'Age when payments start', type: 'number', value: 65, suffix: 'years', showIf: { term: ['life'] }, help: 'Your age at the first payment.' },
     { id: 'until', label: 'Plan for payments until age', type: 'number', value: 90, suffix: 'years', showIf: { term: ['life'] }, help: 'Use your life expectancy or older. Payments from an insurer\'s life annuity continue past it.' },
-    { id: 'rate', label: 'Interest rate the annuity earns', type: 'number', value: 5, suffix: '% a year' },
+    { id: 'rate', label: 'Interest rate the annuity earns', type: 'number', value: 5, suffix: '% a year', help: 'The rate credited by the contract. Use a quoted rate if you have one.' },
     { id: 'grow', label: 'Yearly payment increase', type: 'number', value: 0, suffix: '%', help: '0 for level payments; 2–3% for an inflation-style rider.' }
   ],
   compute(v, H) {
@@ -47,14 +46,14 @@ export default {
     var lenTxt = life ? 'from ' + H.num(v.age, 1) + ' to ' + H.num(v.until, 1) : 'for ' + H.plural(yrs, 'year');
     var rows = [];
     if (cost) {
-      rows.push(['Lump sum for ' + H.money0(P) + '/mo with the 4% rule', H.money0(P * 12 / 0.04)]);
+      rows.push(['Lump sum for the same income with the 4% rule', H.money0(P * 12 / 0.04)]);
       rows.push(['Annuity cost as share of the 4% rule amount', H.pct(L / (P * 12 / 0.04) * 100, 1), true]);
     } else {
       rows.push(['Yearly income', H.money0(P * 12)]);
       rows.push(['Payout rate (first-year income ÷ premium)', H.pct(P * 12 / L * 100, 2), true]);
       rows.push(['4% withdrawal from the same lump sum', H.money0(L * 0.04 / 12) + '/mo']);
     }
-    rows.push(['Total paid out ' + lenTxt, H.money0(total)]);
+    rows.push(['Total paid out', H.money0(total)]);
     rows.push(['Of which interest', H.money0(total - L)]);
     if (g > 0) rows.push(['Monthly payment in the final year', H.money0(P * Math.pow(1 + g, Math.ceil(n / 12) - 1))]);
     rows.push(['Left for heirs at the end: annuity vs 4% withdrawals', '$0 vs ' + H.money0(b)]);
@@ -64,17 +63,22 @@ export default {
       expr: (cost ? H.money0(P) + '/mo' : H.money0(L)) + ' · ' + H.num(n, 0) + ' payments @ ' + H.pct(rate, 2) + (g ? ' +' + H.pct(g * 100, 2) + '/yr' : ''),
       rows: rows,
       P: P, L: L,
-      sub: life ? 'An insurer\'s life annuity would keep paying past ' + H.num(v.until, 1) + '; quotes differ because insurers use mortality tables and charge for that guarantee.' : 'A fixed-period annuity is a loan in reverse: the balance and its interest are paid back to you in ' + H.num(n, 0) + ' equal monthly installments' + (g ? ' that rise each year' : '') + '.'
+      sub: (cost ? 'You need about ' + H.money0(L) + ' to buy ' + H.money0(P) + ' a month ' + lenTxt + ' at ' + H.pct(rate, 2) + ', against ' + H.money0(P * 12 / 0.04) + ' with the 4% rule' : 'A ' + H.money0(L) + ' annuity at ' + H.pct(rate, 2) + ' pays ' + H.money0(P) + ' a month ' + lenTxt + (g ? ' to start' : '') + ', with nothing left at the end') + (life ? '; an insurer\'s life annuity would keep paying past ' + H.num(v.until, 1) + ', so real quotes differ.' : '.')
     };
   },
+  notes: {
+    'Yearly income': 'Twelve monthly annuity payments in the first year.',
+    'Payout rate (first-year income ÷ premium)': 'Not an investment return: part of each payment is your own money back.',
+    '4% withdrawal from the same lump sum': 'What the 4% rule would pay from the same money, for comparison.',
+    'Lump sum for the same income with the 4% rule': 'Savings needed to fund this income with 4% withdrawals instead.',
+    'Annuity cost as share of the 4% rule amount': 'The annuity premium divided by the 4% rule lump sum.',
+    'Total paid out': 'Every monthly payment added up over the payout period.',
+    'Of which interest': 'Total paid out minus the premium.',
+    'Monthly payment in the final year': 'The payment after all the yearly increases.',
+    'Left for heirs at the end: annuity vs 4% withdrawals': 'The annuity is used up; 4% withdrawals at the same rate leave this balance.'
+  },
+  assumptions: 'These calculations are estimates. They assume a fixed interest rate, payments at the end of each month and no fees or surrender charges; an insurer\'s life annuity uses mortality tables, so real quotes differ.',
   quick: ({ r, run }) => `A <strong>$250,000</strong> retirement annuity credited at 5% a year pays <strong>${r.value.replace('/mo', ' a month')}</strong> for 20 years: 240 payments totaling $395,973. That is a 7.92% payout rate, about double the $833 a month a 4% withdrawal would give, but nothing is left at the end. Stretching payments to age 90 from 65 lowers it to ${run({ term: 'life' }).value.replace('/mo', ' a month')}.`,
-  stepsTitle: 'How to estimate annuity income for retirement',
-  steps: [
-    'Choose the direction: income from a lump sum you have, or the lump sum needed for an income you want.',
-    'Pick the payout length. A fixed term (period-certain) pays for a set number of years. For lifetime income, enter your starting age and an age you are unlikely to outlive; the calculator spreads the money to that age.',
-    'Enter the interest rate the contract credits. Use a quoted rate if you have one; this is the number that moves the answer most.',
-    'Add a yearly payment increase only if the contract has one. The common mistake is comparing a level annuity with an inflation-adjusted withdrawal: the first payment of a rising annuity starts noticeably lower.'
-  ],
   formulaTitle: 'How do you calculate annuity payments?',
   formula: {
     expr: 'Payment = Premium × i ÷ (1 − (1 + i)<sup>−n</sup>)<br>Premium needed = Payment × (1 − (1 + i)<sup>−n</sup>) ÷ i',
@@ -94,14 +98,36 @@ export default {
   },
   sections: [
     {
+      h2: 'Understanding your inputs',
+      html: `<p>An annuity payout depends on four things: how much goes in, how long it pays, the rate it credits and whether payments rise.</p>
+<h3>What you want to work out</h3>
+<p>Choose the direction: income from a lump sum you have, or the lump sum needed for an income you want. The second option is useful for pricing a target, such as the gap between your budget and Social Security.</p>
+<h3>Lump sum or monthly income</h3>
+<p>Enter the premium you would hand to the insurer, or the monthly income you want to buy. If the money is coming from an IRA or 401(k), remember the payments will be taxable.</p>
+<h3>Payout length</h3>
+<p>A fixed term (period-certain) pays for a set number of years. For lifetime income, enter your starting age and an age you are unlikely to outlive; the calculator spreads the money to that age. The SSA's life expectancy calculator helps pick it.</p>
+<h3>Interest rate</h3>
+<p>Enter the rate the contract credits. Use a quoted rate if you have one; this is the number that moves the answer most. One point either way changes the default payout from $1,515 to $1,791 a month.</p>
+<h3>Yearly payment increase</h3>
+<p>Add an increase only if the contract has one. The common mistake is comparing a level annuity with an inflation-adjusted withdrawal: the first payment of a rising annuity starts noticeably lower, $1,403 instead of $1,650 a month with a 2% increase.</p>`
+    },
+    {
       h2: 'Is an annuity better than the 4% rule?',
-      html: `<p>It pays more per dollar because it spends your principal as well as the interest. In the default example the annuity pays $1,650 a month against $833 from 4% withdrawals, and buying $1,500 a month of income costs $227,288 instead of $450,000.</p>
-<p>What you give up: the money is no longer yours to dip into for a roof or a medical bill, early-surrender charges can apply, and with a life-only contract nothing goes to heirs. The 4% approach keeps control and, in this example, still has $335,632 after 20 years, but the income is not guaranteed and a bad market can shrink it. A common middle path is to annuitize enough to cover essential bills alongside Social Security and keep the rest invested. The <a href="/retirement-withdrawal-calculator">retirement withdrawal calculator</a> sizes the invested part, and the <a href="/retirement-income-calculator">retirement income calculator</a> adds everything up.</p>`
+      html: `<h3>Why an annuity pays more</h3>
+<p>It pays more per dollar because it spends your principal as well as the interest. In the default example the annuity pays $1,650 a month against $833 from 4% withdrawals, and buying $1,500 a month of income costs $227,288 instead of $450,000.</p>
+<h3>What you give up</h3>
+<p>The money is no longer yours to dip into for a roof or a medical bill, early-surrender charges can apply, and with a life-only contract nothing goes to heirs. The 4% approach keeps control and, in this example, still has $335,632 after 20 years, but the income is not guaranteed and a bad market can shrink it.</p>
+<h3>A middle path</h3>
+<p>A common approach is to annuitize enough to cover essential bills alongside Social Security and keep the rest invested. The <a href="/retirement-withdrawal-calculator">retirement withdrawal calculator</a> sizes the invested part, and the <a href="/retirement-income-calculator">retirement income calculator</a> adds everything up.</p>`
     },
     {
       h2: 'How is a life annuity different from a fixed-period annuity?',
-      html: `<p>A fixed-period (period-certain) annuity is plain math: the formula above, with payments to you or your beneficiary for exactly the term. A life annuity pays as long as you live, however long that is. The insurer can do this because it pools many buyers: those who die early fund those who live long. That pooling is why a life annuity can pay more than you could safely withdraw yourself for an open-ended retirement.</p>
-<p>This calculator does not have an insurer's mortality tables, so its "to an age you choose" option is an estimate: it spreads the premium evenly to that age. From 65 to 90 at 5%, $250,000 gives $1,461 a month. A real quote may be higher or lower depending on the insurer's rates, fees and pricing, and it will keep paying past 90. Use the result as a sanity check on a quote, not as one. The SSA's life expectancy calculator (linked below) helps pick the age.</p>`
+      html: `<h3>Fixed-period annuities</h3>
+<p>A fixed-period (period-certain) annuity is plain math: the formula above, with payments to you or your beneficiary for exactly the term.</p>
+<h3>Life annuities and pooling</h3>
+<p>A life annuity pays as long as you live, however long that is. The insurer can do this because it pools many buyers: those who die early fund those who live long. That pooling is why a life annuity can pay more than you could safely withdraw yourself for an open-ended retirement.</p>
+<h3>How this calculator estimates life income</h3>
+<p>This calculator does not have an insurer's mortality tables, so its "to an age you choose" option is an estimate: it spreads the premium evenly to that age. From 65 to 90 at 5%, $250,000 gives $1,461 a month; planning to 95 lowers it to $1,342. A real quote may be higher or lower depending on the insurer's rates, fees and pricing, and it will keep paying past the age you chose. Use the result as a sanity check on a quote, not as one.</p>`
     },
     {
       h2: 'What is the difference between this and a pension lump sum calculator?',
@@ -110,16 +136,25 @@ export default {
     },
     {
       h2: 'How are retirement annuity payments taxed?',
-      html: `<p>It depends on the money used to buy it. If the annuity is bought inside an IRA or 401(k) (a qualified annuity), each payment is generally taxable as ordinary income, just like any other withdrawal from those accounts. If it is bought with after-tax savings, part of each payment is a tax-free return of your premium and only the earnings portion is taxed. Withdrawals from a deferred annuity before 59½ can also face a 10% additional tax.</p>
+      html: `<h3>Qualified annuities</h3>
+<p>If the annuity is bought inside an IRA or 401(k), each payment is generally taxable as ordinary income, just like any other withdrawal from those accounts.</p>
+<h3>Annuities bought with after-tax money</h3>
+<p>If it is bought with after-tax savings, part of each payment is a tax-free return of your premium and only the earnings portion is taxed. Withdrawals from a deferred annuity before 59½ can also face a 10% additional tax.</p>
+<h3>Fees and guarantees to check</h3>
 <p>Before buying, ask about surrender charges, annual fees and the cost of riders such as inflation increases. Guarantees depend on the insurance company's ability to pay, so check its financial strength.</p>`
     }
   ],
   faq: [
+    { q: 'How do you calculate annuity payments?', a: 'Payment = premium × i ÷ (1 − (1 + i)<sup>−n</sup>), where i is the monthly rate and n the number of payments. $250,000 at 5% for 240 months gives $1,650 a month.' },
     { q: 'How much does a $100,000 annuity pay per month?', a: 'About $660 a month for 20 years at a 5% interest rate, or $1,061 a month for 10 years. See the table above for other rates and terms.' },
+    { q: 'How much does a $200,000 annuity pay per month?', a: 'About $1,320 a month for 20 years at 5%. Paid over 20 years at 4%, it would be about $1,212 a month.' },
     { q: 'How much does a $500,000 annuity pay per month?', a: 'At 5% for 20 years it pays $3,300 a month. Over 30 years the same rate would give about $2,684 a month.' },
-    { q: 'How much do I need in an annuity to get $2,000 a month?', a: 'About $303,051 for a 20-year payout at 5%. For $1,000 a month, half that: $151,525.' },
+    { q: 'How much does a $1 million annuity pay per month?', a: 'About $6,600 a month for 20 years at 5%, or $79,195 a year. Over a longer term or at a lower rate the payment is smaller.' },
+    { q: 'How much do I need in an annuity to get $2,000 a month?', a: 'About $303,051 for a 20-year payout at 5%. For $1,000 a month, half that: $151,525. For $3,000 a month, about $454,576.' },
     { q: 'What is an annuity payout rate?', a: 'It is the first year\'s income divided by the premium. $19,799 a year from $250,000 is a 7.92% payout rate. It is not an investment return, because part of every payment is your own money coming back.' },
+    { q: 'How much would a $250,000 annuity pay for life from age 65?', a: 'Spreading it evenly to age 90 at 5% gives about $1,461 a month, and to 95 about $1,342. An insurer\'s life annuity uses mortality tables and keeps paying however long you live, so real quotes differ.' },
     { q: 'Do annuity payments rise with inflation?', a: 'Only if the contract includes an increase. With a 2% yearly increase, $250,000 at 5% for 20 years starts at $1,403 a month and reaches $2,044 in the final year.' },
+    { q: 'Is an annuity a good idea for retirement?', a: 'It can be for essential bills: in the default example an annuity pays $1,650 a month from $250,000, about twice the $833 a 4% withdrawal gives. The trade-off is that the money is locked up and, after 20 years, nothing is left, while the 4% approach would still hold $335,632.' },
     { q: 'What happens to an annuity when I die?', a: 'A life-only annuity stops. A period-certain annuity, or a life annuity with a period-certain or refund option, pays the remaining amount to your beneficiary. Those options lower the monthly payment.' },
     { q: 'What interest rate should I enter?', a: 'Use the rate from an actual quote if you have one. Without one, try a range: at 4% the default example pays $1,515 a month and at 6% it pays $1,791.' }
   ],

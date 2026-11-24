@@ -2,17 +2,16 @@ export default {
   slug: 'retirement-withdrawal-calculator',
   hub: 'income',
   name: 'Retirement Withdrawal Calculator',
-  title: 'Retirement Withdrawal Calculator: $1M = $4,195/Mo for 30 Years',
-  h1: 'How Much Can You Withdraw From Retirement Savings Each Month?',
-  meta: 'A $1,000,000 nest egg earning 6% can fund $4,195 a month for 30 years with 3% yearly raises. Compare that with the 4% rule and plan a safe drawdown.',
+  meta: 'Estimate how much you can withdraw from retirement savings each month with our free calculator. See your withdrawal rate, the 4% rule and each year\'s balance.',
+  intro: 'Plug in your savings, how many years they must last, your expected return and inflation, and we\'ll show you the most you can withdraw each month, your withdrawal rate and how the 4% rule compares.',
   keyword: 'retirement withdrawal calculator',
   also: ['retirement distribution calculator', 'retirement drawdown calculator', 'retirement spend down calculator', 'monthly retirement withdrawal calculator', '4 percent rule retirement calculator', '4 rule retirement calculator', '4 percent retirement withdrawal calculator', 'retirement withdrawal rate calculator', 'safe withdrawal rate retirement calculator', 'how much can i withdraw monthly in retirement calculator', 'retirement withdrawal calculator with inflation', 'retirement calculator with withdrawals'],
   updated: '2026-11-24',
   published: '2026-11-24',
   inputs: [
-    { id: 'savings', label: 'Retirement savings today', type: 'number', value: 1000000, prefix: '$' },
-    { id: 'years', label: 'Years the money must last', type: 'number', value: 30, suffix: 'years' },
-    { id: 'ret', label: 'Annual return on savings', type: 'number', value: 6, suffix: '%' },
+    { id: 'savings', label: 'Retirement savings today', type: 'number', value: 1000000, prefix: '$', help: '401(k), 403(b), IRA, brokerage and cash you will draw from. Leave out your emergency fund.' },
+    { id: 'years', label: 'Years the money must last', type: 'number', value: 30, suffix: 'years', help: 'From 65, 30 years reaches age 95. Retiring at 55 usually needs 40 or more.' },
+    { id: 'ret', label: 'Annual return on savings', type: 'number', value: 6, suffix: '%', help: 'Average yearly growth before inflation. A balanced portfolio is often modeled at 5–7%.' },
     { id: 'infl', label: 'Raise withdrawals each year by (inflation)', type: 'number', value: 3, suffix: '%', help: 'Use 0 for the same dollar amount every year.' },
     { id: 'tax', label: 'Tax rate on withdrawals (optional)', type: 'number', value: 0, suffix: '%', help: 'For pre-tax 401(k) or IRA money. The answer is then what you can spend after tax.' },
     { id: 'leave', label: 'Leave a balance of (optional, today\'s dollars)', type: 'number', value: 0, prefix: '$', help: 'For heirs or a cushion. 0 spends the savings down to nothing.' }
@@ -52,12 +51,12 @@ export default {
     var today = Math.pow(1 + inf / 100, N);
     var rows = [];
     rows.push(['Yearly withdrawal, first year', H.money0(W * 12)]);
-    if (tax > 0) rows.push(['Gross monthly withdrawal before ' + H.pct(tax, 1) + ' tax', H.money0(W * gUp)]);
+    if (tax > 0) rows.push(['Gross monthly withdrawal before tax', H.money0(W * gUp)]);
     rows.push(['First-year withdrawal rate', H.pct(W * 12 * gUp / S * 100, 2), true]);
-    if (inf > 0) rows.push(['Monthly withdrawal in year ' + N + ' (after raises)', H.money0(main.w)]);
-    rows.push(['Total withdrawn over ' + N + ' years', H.money0(main.out)]);
+    if (inf > 0) rows.push(['Monthly withdrawal in the final year', H.money0(main.w)]);
+    rows.push(['Total withdrawn over the whole period', H.money0(main.out)]);
     if (inf !== 0) rows.push(['Flat withdrawal, no inflation raises', H.money0(flatW) + '/mo']);
-    rows.push(['4% rule: ' + H.money0(rule) + '/mo plus inflation', ruleRun.runOut ? 'runs out in year ' + Math.ceil(ruleRun.runOut / 12) : 'leaves ' + H.money0(ruleRun.b / today) + ' in today\'s $']);
+    rows.push(['4% rule, raised with inflation', H.money0(rule) + '/mo: ' + (ruleRun.runOut ? 'runs out in year ' + Math.ceil(ruleRun.runOut / 12) : 'leaves ' + H.money0(ruleRun.b / today) + ' in today\'s $')]);
     rows.push(['Fixed 4% of balance each year', H.money0(S * 0.04 / 12 * (1 - tax / 100)) + '/mo now, ' + H.money0(fx.w) + '/mo in year ' + N]);
     return {
       value: H.money0(W) + '/mo',
@@ -70,15 +69,18 @@ export default {
       table: { head: ['Year', 'Start balance', 'Withdrawn', 'End balance'], rows: main.rows, caption: 'Year-by-year drawdown at the maximum withdrawal' }
     };
   },
+  notes: {
+    'Yearly withdrawal, first year': 'Twelve months of the starting withdrawal you can spend.',
+    'Gross monthly withdrawal before tax': 'What actually leaves the account so the after-tax amount is left to spend.',
+    'First-year withdrawal rate': 'First-year gross withdrawals divided by savings. The 4% rule uses 4%.',
+    'Monthly withdrawal in the final year': 'The starting withdrawal after every yearly inflation raise.',
+    'Total withdrawn over the whole period': 'Every monthly withdrawal you spend, added up over all the years.',
+    'Flat withdrawal, no inflation raises': 'The bigger fixed amount you could take if you never raise it.',
+    '4% rule, raised with inflation': '4% of savings a year, raised with inflation, and how it ends at your return.',
+    'Fixed 4% of balance each year': 'Taking 4% of whatever is left each year: it never runs out, but pay moves with markets.'
+  },
+  assumptions: 'These calculations are estimates. They assume the same return every year, withdrawals at the start of each month and inflation raises once a year, so there is no margin for a bad market early in retirement.',
   quick: ({ r }) => `A <strong>$1,000,000</strong> retirement portfolio earning 6% a year can pay out <strong>${r.value}</strong> ($50,337 in the first year), raised 3% every year for inflation, and run out exactly at the 30-year mark. That is a 5.03% starting withdrawal rate. The 4% rule's $3,333 a month is more cautious and, at a steady 6%, still leaves $485,909 in today's dollars.`,
-  stepsTitle: 'How to work out a sustainable retirement withdrawal',
-  steps: [
-    'Add up the savings you will draw from: 401(k), 403(b), IRAs, brokerage accounts and any cash set aside for spending. Keep your emergency fund out.',
-    'Pick how many years the money has to cover. From 65, 30 years reaches age 95; retiring at 55 needs 40 or more. Choosing too short a horizon is the most common mistake, because the answer looks generous and the money ends while you are still alive.',
-    'Enter a long-run return you could live with being wrong about. A steady figure is a simplification; the <a href="/monte-carlo-retirement-calculator">Monte Carlo retirement calculator</a> shows how bumpy returns change the odds.',
-    'Keep inflation on so the first-year amount keeps its buying power. Set it to 0 only if you are happy to spend the same dollar figure for decades.',
-    'Optional: add a tax rate for pre-tax accounts and a balance you want left at the end, in today\'s dollars.'
-  ],
   formulaTitle: 'How is the maximum withdrawal calculated?',
   formula: {
     expr: 'W = [ S × (1 + i)<sup>n</sup> − T × (1 + π)<sup>N</sup> ] ÷ K<br>K = value after n months of $1 a month taken at the start of each month, grossed up for tax and raised by π each year',
@@ -98,11 +100,30 @@ export default {
   },
   sections: [
     {
+      h2: 'Understanding your inputs',
+      html: `<p>Six numbers set the most you can withdraw. The first four matter most; the last two are optional refinements.</p>
+<h3>Retirement savings today</h3>
+<p>Add up the savings you will draw from: 401(k), 403(b), traditional and Roth IRAs, brokerage accounts and any cash set aside for spending. Keep your emergency fund and home equity out unless you plan to sell.</p>
+<h3>Years the money must last</h3>
+<p>From 65, 30 years reaches age 95; retiring at 55 needs 40 or more. Choosing too short a horizon is the most common mistake, because the answer looks generous and the money ends while you are still alive.</p>
+<h3>Annual return on savings</h3>
+<p>Enter a long-run average return you could live with being wrong about. A balanced stock and bond portfolio is often modeled at 5–7% before inflation; mostly bonds and cash, 2–4%. One point matters: $1,000,000 supports $4,195 a month at 6% but $3,702 at 5%. A steady figure is a simplification; the <a href="/monte-carlo-retirement-calculator">Monte Carlo retirement calculator</a> shows how bumpy returns change the odds.</p>
+<h3>Inflation raise</h3>
+<p>Keep inflation on so the first-year amount keeps its buying power. Set it to 0 only if you are happy to spend the same dollar figure for decades: a flat withdrawal starts higher ($5,865 a month in the default example) but buys less every year.</p>
+<h3>Tax rate on withdrawals</h3>
+<p>Add your expected federal plus state rate if the money is in a pre-tax 401(k), 403(b) or traditional IRA. The answer then becomes what you can spend after tax. Use 0% for Roth money and a blended rate for a mix.</p>
+<h3>Balance to leave</h3>
+<p>Enter a legacy or safety cushion in today's dollars. The calculator grows it with inflation, so the account ends with the same buying power you entered. Leave it at 0 to spend the savings down to nothing.</p>`
+    },
+    {
       h2: 'What is the 4% rule, and is it still a good guide?',
-      html: `<p>The 4% rule says to withdraw 4% of your portfolio in the first year of retirement and then raise that dollar amount each year by inflation. It comes from financial planner William Bengen's 1994 research on historical U.S. stock and bond returns, later extended by the 1998 "Trinity study" from three Trinity University professors. For portfolios with roughly half or more in stocks, a 4% start lasted 30 years in all or nearly all of the historical periods they studied; bond-heavy mixes did worse.</p>
+      html: `<h3>Where the 4% rule comes from</h3>
+<p>The 4% rule says to withdraw 4% of your portfolio in the first year of retirement and then raise that dollar amount each year by inflation. It comes from financial planner William Bengen's 1994 research on historical U.S. stock and bond returns, later extended by the 1998 "Trinity study" from three Trinity University professors. For portfolios with roughly half or more in stocks, a 4% start lasted 30 years in all or nearly all of the historical periods they studied; bond-heavy mixes did worse.</p>
+<h3>How the 4% rule holds up at steady returns</h3>
 <p>On $1,000,000 the rule gives $40,000 a year, or $3,333 a month. Run through this calculator at steady returns:</p>
 <ul><li>At a 4% return it runs out in year 30.</li><li>At 5% it leaves $177,451 in today's dollars.</li><li>At 6% it leaves $485,909 in today's dollars.</li></ul>
-<p>So why does the calculator allow 5.03% at 6%? Because a steady return has no crashes. The 4% rule was sized to survive the worst historical starting years, such as 1966, when poor early returns and high inflation hit together. Treat this page's answer as the ceiling in an average market, and the 4% rule as a cushion for a bad one. To put a probability on the gap, run your plan through the <a href="/monte-carlo-retirement-calculator">Monte Carlo simulator</a>.</p>`
+<h3>Why this calculator allows more than 4%</h3>
+<p>The calculator allows 5.03% at 6% because a steady return has no crashes. The 4% rule was sized to survive the worst historical starting years, such as 1966, when poor early returns and high inflation hit together. Treat this page's answer as the ceiling in an average market, and the 4% rule as a cushion for a bad one. To put a probability on the gap, run your plan through the <a href="/monte-carlo-retirement-calculator">Monte Carlo simulator</a>.</p>`
     },
     {
       h2: 'Fixed-percentage or inflation-adjusted withdrawals: which lasts longer?',
@@ -112,14 +133,25 @@ export default {
 <tr><td>Same dollar amount every year</td><td>$5,865</td><td>$5,865</td><td>Yes, at year 30</td></tr>
 <tr><td>Fixed 4% of the balance each year</td><td>$3,333</td><td>$5,706</td><td>No</td></tr>
 </tbody></table></div>
-<p>Figures for $1,000,000 at a steady 6% and 3% inflation. A flat $5,865 looks better at first, but after 30 years of 3% inflation it buys what about $2,416 does today. The fixed-percentage method can never hit zero because it always takes a slice of what is left, yet your paycheck moves with the market: a 25% drop in the portfolio means a 25% pay cut the next year. The year-30 figure of $5,706 is worth about $2,420 in today's money.</p>
-<p>Many retirees blend the approaches, using inflation-adjusted withdrawals with a rule to skip the raise, or trim 5–10%, after a losing year.</p>`
+<p>Figures for $1,000,000 at a steady 6% and 3% inflation.</p>
+<h3>Inflation-adjusted withdrawals</h3>
+<p>Your spending keeps the same buying power every year, which is what most retirees want. The trade-off is that the dollar draw keeps rising even after a bad year in the markets.</p>
+<h3>The same dollar amount every year</h3>
+<p>A flat $5,865 looks better at first, but by year 30, after 29 yearly price rises of 3%, it buys what about $2,489 does today. It suits people with other income that rises with inflation, such as Social Security, covering most of their needs.</p>
+<h3>A fixed percentage of the balance</h3>
+<p>This method can never hit zero because it always takes a slice of what is left, yet your paycheck moves with the market: a 25% drop in the portfolio means a 25% pay cut the next year. The year-30 figure of $5,706 is worth about $2,421 in today's money.</p>
+<h3>Blending the methods</h3>
+<p>Many retirees use inflation-adjusted withdrawals with a rule to skip the raise, or trim 5–10%, after a losing year. That small flexibility is what lets a starting rate above 4% survive bad markets.</p>`
     },
     {
       h2: 'How much can I withdraw from my 401(k) or IRA each month after tax?',
-      html: `<p>Money from a traditional 401(k), 403(b) or IRA is taxed as ordinary income when it comes out. Enter your expected federal plus state rate and the calculator returns what you can spend; the gross withdrawal stays the same. With $1,000,000 over 30 years at 6%:</p>
+      html: `<h3>Traditional 401(k), 403(b) and IRA money</h3>
+<p>Money from a traditional 401(k), 403(b) or IRA is taxed as ordinary income when it comes out. Enter your expected federal plus state rate and the calculator returns what you can spend; the gross withdrawal stays the same. With $1,000,000 over 30 years at 6%:</p>
 <ul><li>15% tax rate: $3,566 a month to spend, from a $4,195 gross withdrawal.</li><li>22% tax rate: $3,272 a month to spend.</li></ul>
-<p>Roth IRA withdrawals are generally tax-free once you are 59½ and the account has been open five years, so use 0% for Roth money and a blended rate for a mix. Taking money out before 59½ usually adds a 10% additional tax unless an exception applies; the <a href="/early-withdrawal-penalty-calculator">401(k) early withdrawal calculator</a> works that out. From 73 the IRS also sets a floor on what must come out of pre-tax accounts each year, which the <a href="/rmd-calculator">RMD calculator</a> shows. For a fuller picture of your tax bill, including Social Security, use the <a href="/retirement-tax-calculator">retirement tax calculator</a>.</p>`
+<h3>Roth accounts</h3>
+<p>Roth IRA withdrawals are generally tax-free once you are 59½ and the account has been open five years, so use 0% for Roth money and a blended rate for a mix.</p>
+<h3>Early withdrawals and required minimums</h3>
+<p>Taking money out before 59½ usually adds a 10% additional tax unless an exception applies; the <a href="/early-withdrawal-penalty-calculator">401(k) early withdrawal calculator</a> works that out. From 73 the IRS also sets a floor on what must come out of pre-tax accounts each year, which the <a href="/rmd-calculator">RMD calculator</a> shows. For a fuller picture of your tax bill, including Social Security, use the <a href="/retirement-tax-calculator">retirement tax calculator</a>.</p>`
     },
     {
       h2: 'How much can I withdraw and still leave money to my heirs?',
@@ -128,19 +160,26 @@ export default {
     },
     {
       h2: 'What withdrawal rate works for an early retirement?',
-      html: `<p>The longer the horizon, the more the answer depends on growth and the less on principal. At a 5% return with 3% raises, the break-even rate falls from 6.1% for 20 years to 4.44% for 30, 3.63% for 40 and 3.15% for 50 (see the table above). Someone retiring at 50 who plans to age 95 should start well under 4%, before adding any margin for poor markets.</p>
+      html: `<h3>Longer horizons need lower rates</h3>
+<p>The longer the horizon, the more the answer depends on growth and the less on principal. At a 5% return with 3% raises, the break-even rate falls from 6.1% for 20 years to 4.44% for 30, 3.63% for 40 and 3.15% for 50 (see the table above). Someone retiring at 50 who plans to age 95 should start well under 4%, before adding any margin for poor markets.</p>
+<h3>Turning a rate into a target or a timeline</h3>
 <p>If you are still deciding when you could stop work, the <a href="/fire-calculator">FIRE number calculator</a> turns a withdrawal rate into a savings target. And if you already know what you want to spend and only need to know how many years it buys, that is the opposite question, answered by the <a href="/how-long-will-money-last-calculator">how long will my money last calculator</a>.</p>`
     }
   ],
   faq: [
     { q: 'How much can I withdraw monthly from $500,000 in retirement?', a: 'About $2,097 a month to start, raised 3% a year, lasts 30 years at a 6% return. Over 25 years the figure rises to $2,365 a month. Under the 4% rule it would be $1,667.' },
     { q: 'How much can I withdraw from $1 million in retirement?', a: '$4,195 a month at a steady 6% over 30 years with 3% raises, or $3,702 a month at 5%. The 4% rule gives $3,333 a month and leaves room for poor markets.' },
+    { q: 'How much can I withdraw from $1.5 million in retirement?', a: 'About $6,292 a month to start, raised 3% a year, lasts 30 years at a steady 6% return. The 4% rule figure is $5,000 a month.' },
     { q: 'What can $2 million support in retirement?', a: 'At 6% for 30 years with 3% inflation raises, $2,000,000 supports $8,389 a month to start. The 4% rule figure is $6,667 a month.' },
     { q: 'How much monthly income will $300,000 give me?', a: 'About $1,258 a month for 30 years at 6% with 3% yearly raises. $400,000 gives about $1,678 a month on the same assumptions.' },
-    { q: 'What is a retirement drawdown or distribution plan?', a: 'It is the schedule for turning savings into income: how much comes out each month, from which accounts, and how the amount changes each year. This calculator sets the size of the draw; the year-by-year table under the result is the drawdown schedule.' },
+    { q: 'What is the 4% rule on $750,000?', a: '$30,000 in the first year, or $2,500 a month, raised with inflation after that. At a steady 6% return the calculator says $750,000 could support up to $3,146 a month over 30 years.' },
+    { q: 'What is a safe withdrawal rate for a 40-year retirement?', a: 'About 3.6% or less. At a steady 5% return with 3% raises, the break-even starting rate over 40 years is 3.63%, compared with 4.44% over 30 years. Bad early markets call for a lower figure still.' },
+    { q: 'How much can I withdraw from my 401(k) after taxes?', a: 'With $1,000,000 over 30 years at 6% and a 15% tax rate, you can spend $3,566 a month; the gross withdrawal is $4,195. At a 22% rate the spendable amount drops to $3,272 a month.' },
     { q: 'Why does this calculator allow more than 4%?', a: 'It assumes the same return every year, so there is no bad market early in retirement. The 4% rule was set to survive historical worst cases. Use this result as an upper limit and the 4% rule, or a Monte Carlo test, as the cautious figure.' },
-    { q: 'Should I count Social Security in my savings?', a: 'No. Social Security and pensions are separate income streams that keep paying for life. Work out the gap between your spending and that income, then make sure the withdrawal here covers it. The retirement income calculator adds the pieces together.' },
-    { q: 'What is the 4% rule on $750,000?', a: '$30,000 in the first year, or $2,500 a month, raised with inflation after that. At a steady 6% return the calculator says $750,000 could support up to $3,146 a month over 30 years.' }
+    { q: 'What is the best retirement withdrawal strategy?', a: 'There is no single best one, but inflation-adjusted withdrawals that start near 4% and are trimmed after bad years suit most retirees. A fixed percentage of the balance never runs out but makes your income swing with markets; a flat dollar amount loses buying power each year.' },
+    { q: 'What is a retirement drawdown or distribution plan?', a: 'It is the schedule for turning savings into income: how much comes out each month, from which accounts, and how the amount changes each year. This calculator sets the size of the draw; the year-by-year table under the result is the drawdown schedule.' },
+    { q: 'Should I count Social Security in my savings?', a: 'No. Social Security and pensions are separate income streams that keep paying for life. Work out the gap between your spending and that income, then make sure the withdrawal here covers it. The <a href="/retirement-income-calculator">retirement income calculator</a> adds the pieces together.' },
+    { q: 'How much more can I withdraw if I don\'t raise it for inflation?', a: 'On $1,000,000 at 6% over 30 years, a flat withdrawal can be $5,865 a month instead of $4,195 rising 3% a year. The flat amount loses about 3% of its buying power every year.' }
   ],
   related: ['how-long-will-money-last-calculator', 'monte-carlo-retirement-calculator', 'annuity-calculator', 'retirement-income-calculator', 'retirement-tax-calculator'],
   sources: [
