@@ -1,6 +1,6 @@
 export default {
   slug: 'magi-calculator',
-  hub: 'investing',
+  hub: 'rules',
   name: 'MAGI Calculator for Roth IRA',
   title: 'MAGI Calculator for Roth IRA 2026: Phase-Out $153K–$168K',
   h1: 'Roth IRA MAGI Calculator: Modified AGI and Your 2026 Contribution Limit',
@@ -130,7 +130,7 @@ export default {
     { q: 'When is the deadline for a 2026 Roth IRA contribution?', a: 'April 15, 2027, the tax-filing deadline, not including extensions. You can contribute for 2026 from January 1, 2026 until then.' },
     { q: 'What if my spouse has no income?', a: 'A spousal IRA lets a non-working spouse contribute based on the working spouse\'s pay if you file jointly. Your joint MAGI is compared with the $242,000–$252,000 range.' }
   ],
-  related: ['401k-contribution-calculator', 'income-tax-calculator', 'retirement-calculator', 'capital-gains-tax-calculator', 'social-security-calculator'],
+  related: ['roth-ira-calculator', '401k-contribution-calculator', 'retirement-tax-calculator', '401k-retirement-calculator'],
   sources: [
     { name: 'IRS Publication 590-A: Contributions to IRAs (Worksheets 2-1 and 2-2)', url: 'https://www.irs.gov/publications/p590a' },
     { name: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500', url: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500' },

@@ -1,6 +1,6 @@
 export default {
   slug: 'pension-calculator',
-  hub: 'investing',
+  hub: 'income',
   name: 'Pension Lump Sum Calculator',
   title: 'Pension Lump Sum Calculator: $2,000/Mo Is Worth $304,313',
   h1: 'Pension Lump Sum vs. Monthly Payments: Present Value Calculator',
@@ -104,7 +104,7 @@ export default {
     },
     {
       h2: 'How do you value a pension for your net worth?',
-      html: `<p>Use the same present value calculation. A pension that will pay $2,000 a month from 65 is worth about $304,000 at 65 at a 5% rate. If you are 55 and payments start at 65, the value today is lower because you wait 10 years: set "Your age today" to 55 to see it. Add that figure to the assets side of the <a href="/net-worth-calculator">net worth calculator</a>, and label it separately, because you cannot sell it or borrow against it.</p>`
+      html: `<p>Use the same present value calculation. A pension that will pay $2,000 a month from 65 is worth about $304,000 at 65 at a 5% rate. If you are 55 and payments start at 65, the value today is lower because you wait 10 years: set "Your age today" to 55 to see it. Add that figure to the assets side of the net worth calculator, and label it separately, because you cannot sell it or borrow against it.</p>`
     }
   ],
   faq: [
@@ -116,7 +116,7 @@ export default {
     { q: 'Does a lump sum include survivor benefits?', a: 'Yes. Taking the lump sum ends all future payments from the plan, including any survivor benefit. Married participants in private plans usually need their spouse\'s written consent to choose it.' },
     { q: 'Is a pension worth it compared with investing the lump sum?', a: 'It depends on the return you can earn safely. In the default example the lump sum must earn about 5.17% a year to match the pension to age 85, and more if you live longer.' }
   ],
-  related: ['net-worth-calculator', 'social-security-calculator', 'how-long-will-money-last-calculator', 'npv-calculator', 'retirement-calculator'],
+  related: ['annuity-calculator', 'retirement-income-calculator', 'how-long-will-money-last-calculator', 'social-security-calculator'],
   sources: [
     { name: 'IRS: Minimum present value segment rates', url: 'https://www.irs.gov/retirement-plans/minimum-present-value-segment-rates' },
     { name: 'IRS Topic 412: Lump-sum distributions', url: 'https://www.irs.gov/taxtopics/tc412' },

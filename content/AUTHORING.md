@@ -4,8 +4,8 @@ Each calculator is one ES module: `content/calculators/<slug>.mjs`. The build (`
 static, server-rendered page with the working tool, the default answer already in the HTML, JSON-LD and sitemaps.
 
 **Read these two finished examples first and match their depth and tone:**
-- `content/calculators/tip-calculator.mjs` (simple inputs, computed table)
-- `content/calculators/gpa-calculator.mjs` (repeatable rows input, `data`, long hot page)
+- `content/calculators/how-long-will-money-last-calculator.mjs` (simulation, year-by-year table, long hot page)
+- `content/calculators/rmd-calculator.mjs` (IRS table in `data`, computed table)
 
 The page list, hubs and primary keywords are in `content/plan.tsv` (slug, hub, name, keyword, notes).
 Real search queries are in the keyword CSV (path given in your task). Grep it for your topic to find the

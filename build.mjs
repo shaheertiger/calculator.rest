@@ -121,7 +121,7 @@ ${graph ? `<script type="application/ld+json">${jsonScript({ '@context': 'https:
 <div class="wrap">
 <header class="top">
 <a class="brand" href="/" aria-label="calculator.rest home"><i></i>calculator.rest</a>
-<nav class="nav" aria-label="Main"><a class="hide-sm" href="/#calculators">calculators</a><a class="hide-sm" href="/about">about</a><a class="pill" href="/#calculators">all ${calcs.length} tools</a></nav>
+<nav class="nav" aria-label="Main"><a class="hide-sm" href="/#calculators">calculators</a><a class="hide-sm" href="/about">about</a><a class="pill" href="/#calculators">all ${calcs.length} retirement tools</a></nav>
 </header>
 </div>
 <main id="main">
@@ -135,13 +135,13 @@ ${scripts}
 }
 
 function footer() {
-  const top = ['house-affordability-calculator', 'gpa-calculator', 'mortgage-calculator', 'overtime-calculator', 'percentage-calculator', 'square-footage-calculator', 'golf-handicap-calculator', 'how-long-will-money-last-calculator'].filter(s => bySlug.has(s));
+  const top = ['how-long-will-money-last-calculator', 'retirement-withdrawal-calculator', 'monte-carlo-retirement-calculator', 'retirement-calculator', '401k-retirement-calculator', 'retirement-tax-calculator', 'social-security-calculator', 'rmd-calculator'].filter(s => bySlug.has(s));
   return `<footer>
 <div class="wrap">
 <div class="foot">
-<div><a class="brand" href="/"><i></i>calculator.rest</a><p>Math, handled. You, rested. Free calculators that show their formula, run in your browser and never ask you to sign up.</p></div>
-<div><h2>Categories</h2><ul>${hubs.slice(0, 8).map(h => `<li><a href="/${h.slug}">${esc(h.name)}</a></li>`).join('')}</ul></div>
-<div><h2>More</h2><ul>${hubs.slice(8).map(h => `<li><a href="/${h.slug}">${esc(h.name)}</a></li>`).join('')}</ul></div>
+<div><a class="brand" href="/"><i></i>calculator.rest</a><p>Retirement math, handled. You, rested. Free retirement calculators that show their formula, cite the IRS and SSA, run in your browser and never ask you to sign up.</p></div>
+<div><h2>Categories</h2><ul>${hubs.map(h => `<li><a href="/${h.slug}">${esc(h.name)}</a></li>`).join('')}</ul></div>
+<div><h2>Site</h2><ul><li><a href="/about">About</a></li><li><a href="/methodology">Methodology</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
 <div><h2>Popular</h2><ul>${top.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name)}</a></li>`).join('')}</ul></div>
 </div>
 <div class="fine"><span>© 2026 calculator.rest · <a href="/about">About</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy</a></span><span>nothing you type leaves your browser</span></div>
@@ -153,7 +153,7 @@ const ORG = { '@type': 'Organization', '@id': SITE + '/#org', name: BRAND, url: 
 const WEBSITE = { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: BRAND, publisher: { '@id': SITE + '/#org' }, inLanguage: 'en-US' };
 const crumbsLd = (url, items) => ({ '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it[0], item: it[1] })) });
 const crumbsHtml = items => `<ol class="crumbs" aria-label="Breadcrumb">${items.map((it, i) => i < items.length - 1 ? `<li><a href="${it[1].replace(SITE, '') || '/'}">${esc(it[0])}</a></li>` : `<li aria-current="page">${esc(it[0])}</li>`).join('')}</ol>`;
-const APP_CAT = { mortgage: 'FinanceApplication', loans: 'FinanceApplication', investing: 'FinanceApplication', pay: 'FinanceApplication', business: 'BusinessApplication', health: 'HealthApplication', education: 'EducationalApplication', statistics: 'EducationalApplication', math: 'EducationalApplication', science: 'EducationalApplication' };
+const APP_CAT = { income: 'FinanceApplication', planning: 'FinanceApplication', rules: 'FinanceApplication' };
 
 /* ---------------- inputs ---------------- */
 function inputHtml(c, val, inRow) {
@@ -292,7 +292,7 @@ function cardLine(slug) {
 
 /* ---------------- checks ---------------- */
 const seen = { title: new Map(), meta: new Map(), h1: new Map(), keyword: new Map() };
-const MONEY_HEALTH = new Set(['mortgage', 'loans', 'investing', 'pay', 'health']);
+const MONEY_HEALTH = new Set(['income', 'planning', 'rules']);
 for (const b of built) {
   const d = b.def, s = d.slug;
   for (const k of ['name', 'title', 'h1', 'meta', 'keyword', 'hub']) if (!d[k]) err(s, `missing ${k}`);
@@ -390,46 +390,52 @@ ${(hub.faq || []).map(([q, a]) => `<h3>${esc(q)}</h3><p>${a}</p>`).join('')}
 /* ---------------- homepage ---------------- */
 function homePage() {
   const url = SITE + '/';
-  const L = ['AC', '±', '%', '÷', '7', '8', '9', '×', '4', '5', '6', '−', '1', '2', '3', '+', '0', '.', '⌫', '='];
-  const cls = k => k === '=' ? 'eq' : ['÷', '×', '−', '+'].includes(k) ? 'op' : ['AC', '±', '%', '⌫'].includes(k) ? 'fn' : '';
-  const chips = ['tip-calculator', 'discount-calculator', 'percentage-calculator', 'age-calculator', 'gpa-calculator', 'mortgage-calculator'].filter(s => bySlug.has(s));
-  const title = `Free Online Calculator + ${calcs.length} Everyday Calculators | calculator.rest`;
-  const meta = `A free online calculator plus ${calcs.length} calculators for mortgages, pay, taxes, GPA, health, construction and math. Each shows its formula. No sign-up.`;
+  const feat = built.find(b => b.def.slug === 'how-long-will-money-last-calculator');
+  const chips = ['retirement-withdrawal-calculator', 'monte-carlo-retirement-calculator', 'retirement-calculator', '401k-retirement-calculator', 'retirement-tax-calculator', 'social-security-calculator'].filter(s => bySlug.has(s));
+  const title = `Retirement Calculator: How Long Will Your Money Last? | calculator.rest`;
+  const meta = `Free retirement calculators that run your real numbers: how long savings last, safe withdrawals, Monte Carlo odds, 401(k), Social Security and 2026 taxes.`;
+  const fd = feat.def, fv = defaultsOf(fd.inputs);
+  const inputsLite = (fd.inputs || []).map(c => ({ id: c.id, type: c.type, showIf: c.showIf, max: c.max, fields: c.fields && c.fields.map(f => ({ id: f.id, type: f.type, value: f.value, blank: f.blank })) }));
+  const script = `<script>window.CALC={slug:${jsonScript(fd.slug)},name:${jsonScript(fd.name)},inputs:${jsonScript(inputsLite)},data:${fd.data ? jsonScript(fd.data) : 'null'},compute:${fnSource(fd.compute)}};</script>\n<script src="${APP_URL}" defer></script>`;
   const body = `<div class="wrap">
-<section class="hero-home">
+<section class="hero-calc home-calc">
 <div>
-<h1><span class="eyebrow">free online calculator</span>math, handled<span class="dot">.</span><br><span class="soft">you, rested.</span></h1>
-<p class="lede">A free online calculator and ${calcs.length} specific ones: mortgages, pay, grades, health, home projects. Type it, get the answer, get on with your day.</p>
+<h1><span class="eyebrow">free retirement calculators</span>will your money last<span class="dot">?</span></h1>
+<p class="lede">Retirement math with your numbers, not a rule of thumb. Enter your savings and what you spend: see how many years it lasts, the withdrawal that lasts 30 years, and the year-by-year balance. Every tool shows its formula and cites the IRS or SSA.</p>
 <ul class="chips">${chips.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name.replace(/ Calculator$/, '').toLowerCase())}</a></li>`).join('')}</ul>
-<div class="memo"><span class="face" aria-hidden="true"></span>dot remembers your last 20 calcs</div>
+<p class="tnote">Want more detail? Open the <a href="/${fd.slug}">full money-last calculator</a> with the worked example, formula and year-by-year table.</p>
 </div>
-<section class="keypad-card" aria-label="Basic calculator">
-<div class="kp-display"><span class="led"></span><div class="dv"><div class="expr" id="kp-expr">60 − 20%</div><div class="value" id="kp-val" aria-live="polite">48</div></div></div>
-<div class="kp-keys" id="keypad">${L.map(k => `<button type="button" data-k="${k}"${cls(k) ? ` class="${cls(k)}"` : ''} aria-label="${{ '÷': 'divide', '×': 'multiply', '−': 'minus', '+': 'plus', '⌫': 'backspace', 'AC': 'clear', '±': 'plus minus', '%': 'percent', '=': 'equals' }[k] || k}">${k}</button>`).join('')}</div>
+<section class="tool" aria-label="${esc(fd.name)}">
+<output id="result" for="calc-form" aria-live="polite">${renderResult(feat.r, H)}</output>
+<form id="calc-form" data-calc autocomplete="off" novalidate>
+${fieldsHtml(fd, fv)}
+</form>
+<div class="actions"><button type="button" data-copy>copy result</button><button type="button" data-share>share</button><button type="button" data-reset>reset</button></div>
+<p class="privacy-note">dot does the math on your device. nothing is sent or stored on a server.</p>
 </section>
 </section>
 <section id="history-wrap" hidden><h2 class="section-h">your last calcs</h2><ul id="history"></ul><button class="linkbtn" id="history-clear" type="button">clear history</button></section>
 <section id="calculators">
-<h2 class="section-h">${calcs.length} calculators, one tab each</h2>
-<label class="search"><i aria-hidden="true"></i><input id="calc-search" type="search" placeholder="search: mortgage, gpa, concrete, overtime…" aria-label="Search calculators"></label>
+<h2 class="section-h">${calcs.length} retirement calculators, one question each</h2>
+<label class="search"><i aria-hidden="true"></i><input id="calc-search" type="search" placeholder="search: 401k, withdrawal, social security, rmd…" aria-label="Search calculators"></label>
 <p id="search-empty" hidden>No calculator matches that yet.</p>
 <div class="hubs">
 ${hubPages.map(hp => `<div class="hub-card" data-group><h3><a href="/${hp.hub.slug}">${esc(hp.hub.name)}</a></h3><p class="count">${hp.count} calculators</p><ul>${built.filter(b => b.def.hub === hp.hub.id).map(b => `<li data-search="${esc((b.def.name + ' ' + b.def.keyword + ' ' + hp.hub.name).toLowerCase())}"><a href="/${b.def.slug}">${esc(b.def.name)}</a></li>`).join('')}</ul></div>`).join('\n')}
 </div>
 </section>
 <section class="why" aria-label="Why calculator.rest">
-<div><h3>the answer comes first</h3><p>Every page opens with the answer for a real example, then the tool, then the formula and a worked example.</p></div>
-<div><h3>formulas you can check</h3><p>We show the equation and cite the IRS, CDC, BLS or textbook it comes from, so you can verify the number.</p></div>
-<div><h3>private by design</h3><p>All math runs on your device. Nothing you type is uploaded, and there is no account to make.</p></div>
-<div><h3>light and fast</h3><p>Plain HTML pages that load in a blink on a phone. No pop-ups, no paywall, no sign-up.</p></div>
+<div><h3>your numbers, not averages</h3><p>Every tool runs a year-by-year model with your savings, spending, return, inflation and taxes, and shows the table behind the answer.</p></div>
+<div><h3>2026 rules, cited</h3><p>Contribution limits, tax brackets, Social Security thresholds and RMD tables come from the IRS and SSA, with a link to each source.</p></div>
+<div><h3>private by design</h3><p>Your balances never leave your device. There is no account, no email capture and no advisor sales call.</p></div>
+<div><h3>not a sales funnel</h3><p>We don't sell annuities, funds or advice. The calculators exist to give you an honest number.</p></div>
 </section>
 </div>`;
   const graph = [ORG, WEBSITE,
-    { '@type': 'WebPage', '@id': url + '#page', url, name: title, description: meta, isPartOf: { '@id': SITE + '/#website' }, inLanguage: 'en-US', dateModified: built.map(b => b.updated).sort().pop() || '2026-11-13' },
-    { '@type': 'WebApplication', '@id': url + '#app', name: 'calculator.rest online calculator', url, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+    { '@type': 'WebPage', '@id': url + '#page', url, name: title, description: meta, isPartOf: { '@id': SITE + '/#website' }, inLanguage: 'en-US', dateModified: built.map(b => b.updated).sort().pop() || '2026-11-24' },
+    { '@type': 'WebApplication', '@id': url + '#app', name: 'calculator.rest retirement calculator', url, applicationCategory: 'FinanceApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
     { '@type': 'ItemList', '@id': url + '#hubs', itemListElement: hubPages.map((hp, i) => ({ '@type': 'ListItem', position: i + 1, url: hp.url, name: hp.hub.name })) }
   ];
-  return shell({ title, meta, url, body, graph, scripts: `<script src="${APP_URL}" defer></script>` });
+  return shell({ title, meta, url, body, graph, scripts: script });
 }
 
 /* ---------------- static pages ---------------- */

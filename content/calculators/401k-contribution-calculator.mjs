@@ -1,6 +1,6 @@
 export default {
   slug: '401k-contribution-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: '401(k) Paycheck Contribution Calculator',
   title: '401(k) Contribution Calculator: 6% of $85K Is $196.15/Paycheck',
   h1: '401(k) Paycheck Calculator: Your Deferral, Employer Match and 2026 Limit',
@@ -128,7 +128,7 @@ export default {
     { q: 'Who gets the $11,250 super catch-up?', a: 'Workers who turn 60, 61, 62 or 63 during the year and whose plan offers catch-up contributions. At 64 the catch-up drops back to the regular $8,000.' },
     { q: 'Can I contribute to a 401(k) and a Roth IRA?', a: 'Yes. The IRA limit of $7,500 in 2026 ($8,600 at 50+) is separate. Roth IRA eligibility depends on your modified AGI; pre-tax 401(k) deferrals lower it.' }
   ],
-  related: ['magi-calculator', 'retirement-calculator', 'compound-interest-calculator', 'biweekly-pay-calculator', 'social-security-calculator'],
+  related: ['401k-retirement-calculator', '403b-calculator', 'roth-ira-calculator', 'magi-calculator', 'early-withdrawal-penalty-calculator'],
   sources: [
     { name: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500', url: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500' },
     { name: 'IRS: COLA increases for dollar limitations on benefits and contributions', url: 'https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions' },

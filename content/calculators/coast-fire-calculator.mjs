@@ -1,6 +1,6 @@
 export default {
   slug: 'coast-fire-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: 'Coast FIRE Calculator',
   title: 'Coast FIRE Calculator: $181,290 at 30 Coasts to $1M by 65',
   h1: 'Coast FIRE Calculator: How Much You Need Invested to Stop Saving',
@@ -106,7 +106,7 @@ export default {
     { q: 'What is the difference between Coast FIRE and Barista FIRE?', a: 'Coast FIRE means retirement is funded and you work only for current expenses. Barista FIRE means you have left full-time work and part-time income covers the gap your portfolio can\'t yet support.' },
     { q: 'Why does my Coast number go up every year?', a: 'Each year you wait leaves one fewer year of compounding, so you need more invested today. At 5% real, the number rises about 5% a year.' }
   ],
-  related: ['fire-calculator', 'retirement-age-calculator', 'compound-interest-calculator', 'retirement-calculator'],
+  related: ['fire-calculator', 'retirement-age-calculator', '401k-retirement-calculator', 'roth-ira-calculator'],
   sources: [
     { name: 'SEC Investor.gov: Compound Interest Calculator', url: 'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator' },
     { name: 'SEC Investor.gov: Assessing your risk tolerance', url: 'https://www.investor.gov/introduction-investing/getting-started/assessing-your-risk-tolerance' },

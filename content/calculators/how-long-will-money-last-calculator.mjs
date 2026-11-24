@@ -1,12 +1,12 @@
 export default {
   slug: 'how-long-will-money-last-calculator',
-  hub: 'investing',
+  hub: 'income',
   name: 'How Long Will My Money Last Calculator',
   title: 'How Long Will My Money Last? $500K at $3,000/mo Lasts 18 Years',
   h1: 'How Long Will Your Savings Last? Withdrawal and Drawdown Calculator',
   meta: '$500,000 drawn at $3,000 a month, raised 3% a year for inflation and earning 6%, lasts 18 years. Enter your savings, withdrawals, return and taxes.',
   keyword: 'how long will my money last calculator',
-  also: ['how long will my savings last calculator', 'how long will my money last retirement calculator', 'how long will my savings last calculator with inflation', 'how long retirement savings last calculator', 'how long will my money last calculator with taxes', 'how much can i withdraw without touching principal calculator', 'how long will retirement last calculator', 'how long will 500k last in retirement'],
+  also: ['how long will my savings last calculator', 'how long will my money last retirement calculator', 'how long will my savings last calculator with inflation', 'how long retirement savings last calculator', 'how long will my money last calculator with taxes', 'how much can i withdraw without touching principal calculator', 'how long will retirement last calculator', 'how long will 500k last in retirement', 'how long will my 401k last calculator'],
   updated: '2026-11-13',
   inputs: [
     { id: 'savings', label: 'Savings today', type: 'number', value: 500000, prefix: '$' },
@@ -107,7 +107,7 @@ export default {
     {
       h2: 'How does inflation change how long savings last?',
       html: `<p>A lot. Without inflation raises, $500,000 at $3,000 a month and 6% lasts <strong>28 years 3 months</strong>. With 3% yearly raises, it lasts <strong>18 years</strong>, ten years less. Inflation compounds against you: after 18 years at 3%, a $3,000 monthly budget has grown to about $5,100 just to buy the same things.</p>
-<p>With a 0% return (cash under the mattress), the same plan lasts 13 years 11 months with flat withdrawals and only 11 years 9 months with inflation raises. Keeping at least part of retirement savings invested is what buys the extra years. To see how much prices have actually risen in past decades, use the <a href="/inflation-calculator">inflation calculator</a>.</p>`
+<p>With a 0% return (cash under the mattress), the same plan lasts 13 years 11 months with flat withdrawals and only 11 years 9 months with inflation raises. Keeping at least part of retirement savings invested is what buys the extra years. To see how much prices have actually risen in past decades, use the inflation calculator.</p>`
     },
     {
       h2: 'How do taxes affect how long my money lasts?',
@@ -135,7 +135,7 @@ export default {
     { q: 'Does this calculator include required minimum distributions?', a: 'No. RMDs force money out of tax-deferred accounts but do not force you to spend it. If you reinvest what you don\'t need, how long your money lasts is unchanged apart from taxes.' },
     { q: 'Is it better to withdraw monthly or annually?', a: 'The difference is small. Withdrawing a year\'s spending at once means less money stays invested, so monthly withdrawals typically last a few months longer over a long retirement.' }
   ],
-  related: ['retirement-calculator', 'rmd-calculator', 'inflation-calculator', 'social-security-calculator', 'fire-calculator'],
+  related: ['retirement-withdrawal-calculator', 'monte-carlo-retirement-calculator', 'retirement-tax-calculator', 'retirement-income-calculator', 'social-security-calculator'],
   sources: [
     { name: 'Social Security Administration: Life Expectancy Calculator', url: 'https://www.ssa.gov/oact/population/longevity.html' },
     { name: 'CFPB: Planning for retirement', url: 'https://www.consumerfinance.gov/consumer-tools/retirement/' },

@@ -1,7 +1,16 @@
 # calculator.rest
 
-Free calculators that show their formula. ~290 calculator pages + 15 category hubs, built as plain static
-HTML by a zero-dependency Node script and deployed on Vercel.
+Free retirement calculators that show their formula. ~25 calculator pages in 3 hubs (income & withdrawals,
+saving & planning, Social Security / taxes / IRS rules), built as plain static HTML by a zero-dependency Node
+script and deployed on Vercel.
+
+## Niche
+
+In Nov 2026 the site was narrowed from ~290 generic calculators to retirement drawdown and planning. Generic
+"how to calculate X" queries are now answered by Google's AI Overviews; retirement questions need the user's own
+numbers (balance, spending, return, taxes), so a tool still wins the click. Pages that an institution owns
+(pension systems, military, FERS, SSA, brand-name calculators) are deliberately not targeted. Removed pages
+return 404; the old investing and pay/tax hubs 301 to the new hubs.
 
 ## How it works
 
@@ -54,7 +63,7 @@ same hub.
 | 11. Follow-ups only | Word targets: 500–800 small, 800–1,500 main, 1,500–2,200 HOT (build warns) |
 | 13. Source, date, maker, truthfully | Sources on every page, `updated` date set by hand (never the build day), Methodology + About pages; build warns on testing claims |
 | 14. YMYL trust bar | Money pages cite IRS/SSA/CFPB/HUD/BLS figures; health pages cite the original equation and CDC/NIH/ACOG and carry a disclaimer; optional `reviewer` field renders a named credentialed reviewer + `reviewedBy` schema |
-| 17. Hubs, ≤ 3 clicks | 15 hubs with a table of every child and its computed answer; homepage links every calculator |
+| 17. Hubs, ≤ 3 clicks | 3 hubs with a table of every child and its computed answer; homepage links every calculator |
 | 18. Market formatting | US `$1,000,000` formats; build fails on `$1.000.000` |
 | 19 / Bing | IndexNow after every production deploy (changed URLs only), named AI crawlers allowed in robots.txt, year in tax titles |
 | Technical setup | Apex host + www 308, canonical = live URL, `Disallow: /*?`, one sitemap per hub with honest lastmod, one JSON-LD graph per page |

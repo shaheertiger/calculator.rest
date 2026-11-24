@@ -134,50 +134,6 @@
     if (location.search) run();
   }
 
-  /* ---------- homepage keypad calculator ---------- */
-  var pad = $('#keypad');
-  if (pad) {
-    var exprEl = $('#kp-expr'), valEl = $('#kp-val');
-    var expr = '', justEq = false;
-    var show = function (v) { valEl.textContent = v; valEl.classList.toggle('value-md', v.length > 9); valEl.classList.toggle('value-sm', v.length > 14); };
-    var evaluate = function (s) {
-      var t = s.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
-      // percent: "a op b%" → relative for + and -, otherwise /100
-      t = t.replace(/(\d+(?:\.\d+)?)\s*([+\-])\s*(\d+(?:\.\d+)?)%/g, function (m, a, op, b) { return a + op + '(' + a + '*' + b + '/100)'; });
-      t = t.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
-      if (!/^[\d+\-*/().\s]+$/.test(t)) return NaN;
-      try { return Function('"use strict";return (' + t + ')')(); } catch (e) { return NaN; }
-    };
-    var fmt = function (n) { if (!isFinite(n)) return 'nope'; var r = Math.round(n * 1e10) / 1e10; return Math.abs(r) >= 1e15 ? r.toExponential(6) : r.toLocaleString('en-US', { maximumFractionDigits: 10 }); };
-    var press = function (k) {
-      if (k === 'AC') { expr = ''; exprEl.textContent = ' '; show('0'); return; }
-      if (k === '⌫') { expr = expr.slice(0, -1); show(expr || '0'); return; }
-      if (k === '=') {
-        if (!expr) return;
-        var r = evaluate(expr);
-        exprEl.textContent = expr; show(fmt(r)); justEq = true;
-        if (isFinite(r)) {
-          var h = store.get('dot-history', []);
-          h.unshift({ k: 'kp' + Date.now(), n: 'Calculator', e: expr, v: fmt(r), l: '', u: '/', t: Date.now() });
-          store.set('dot-history', h.slice(0, 20)); renderHistory();
-          expr = String(Math.round(r * 1e10) / 1e10);
-        }
-        return;
-      }
-      if (k === '±') { if (/^-?[\d.]+$/.test(expr)) expr = expr[0] === '-' ? expr.slice(1) : '-' + expr; show(expr || '0'); return; }
-      if (justEq && /[\d.]/.test(k)) expr = '';
-      justEq = false;
-      expr += k; show(expr);
-    };
-    pad.addEventListener('click', function (e) { var b = e.target.closest('button[data-k]'); if (b) press(b.getAttribute('data-k')); });
-    document.addEventListener('keydown', function (e) {
-      if (e.target.closest('input,textarea,select')) return;
-      var map = { '*': '×', '/': '÷', '-': '−', 'Enter': '=', 'Backspace': '⌫', 'Escape': 'AC', 'c': 'AC' };
-      var k = map[e.key] || e.key;
-      if (/^[\d.+%]$/.test(k) || ['×', '÷', '−', '=', '⌫', 'AC'].indexOf(k) !== -1) { e.preventDefault(); press(k); }
-    });
-  }
-
   /* ---------- homepage search + history ---------- */
   var search = $('#calc-search');
   if (search) {

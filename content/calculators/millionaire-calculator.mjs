@@ -1,6 +1,6 @@
 export default {
   slug: 'millionaire-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: 'Save a Million Calculator',
   title: 'Save a Million Calculator: $1M in 10 Years Takes $5,846/mo',
   h1: 'How to Save $1 Million: Monthly Savings Needed and Years to Get There',
@@ -78,7 +78,7 @@ export default {
     },
     {
       h2: 'Is $1 million in 10 or 20 years still worth $1 million?',
-      html: `<p>Not in buying power. At 3% inflation, $1,000,000 ten years from now is worth about $744,094 in today's money, and twenty years from now about $553,676. If you want today's $1 million of buying power, set the goal higher: about $1,343,916 in 10 years or $1,806,111 in 20. To see how inflation has eroded the dollar historically, try the <a href="/inflation-calculator">inflation calculator</a>.</p>`
+      html: `<p>Not in buying power. At 3% inflation, $1,000,000 ten years from now is worth about $744,094 in today's money, and twenty years from now about $553,676. If you want today's $1 million of buying power, set the goal higher: about $1,343,916 in 10 years or $1,806,111 in 20. To see how inflation has eroded the dollar historically, try the inflation calculator.</p>`
     },
     {
       h2: 'Where should I invest to save a million?',
@@ -93,7 +93,7 @@ export default {
     { q: 'Is a 7% return realistic?', a: 'As a long-run average for a mostly-stock portfolio before inflation, 7% is a common planning figure, though any single year can be far higher or lower. Use 5% for a more conservative plan.' },
     { q: 'Should I pay off debt before saving for $1 million?', a: 'High-interest debt such as credit cards (often above 20% APR) costs more than investments are likely to earn, so paying it off first usually wins. Low-rate mortgage debt is a closer call.' }
   ],
-  related: ['compound-interest-calculator', 'fire-calculator', 'retirement-calculator', 'roi-calculator', 'net-worth-calculator'],
+  related: ['401k-retirement-calculator', 'fire-calculator', 'retirement-calculator', 'roth-ira-calculator'],
   sources: [
     { name: 'SEC Investor.gov: Savings Goal Calculator', url: 'https://www.investor.gov/financial-tools-calculators/calculators/savings-goal-calculator' },
     { name: 'SEC Investor.gov: Compound Interest Calculator', url: 'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator' },

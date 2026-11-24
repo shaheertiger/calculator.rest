@@ -1,6 +1,6 @@
 export default {
   slug: 'social-security-calculator',
-  hub: 'investing',
+  hub: 'rules',
   name: 'Social Security Benefits Calculator',
   title: 'How Social Security Benefits Are Calculated: 2026 Calculator',
   h1: 'Social Security Benefits Calculator: From AIME to Your Monthly Check',
@@ -150,7 +150,7 @@ export default {
     { q: 'How much was the 2026 Social Security COLA?', a: 'The cost-of-living adjustment was 2.8%, paid starting with January 2026 benefits. COLAs apply from the year you turn 62, whether or not you have claimed.' },
     { q: 'Do WEP and GPO still reduce benefits?', a: 'No. The Social Security Fairness Act, signed in January 2025, repealed the Windfall Elimination Provision and Government Pension Offset for benefits payable after December 2023.' }
   ],
-  related: ['retirement-calculator', 'retirement-age-calculator', 'pension-calculator', '401k-contribution-calculator', 'rmd-calculator'],
+  related: ['retirement-income-calculator', 'retirement-tax-calculator', 'couples-retirement-calculator', 'pension-calculator', 'retirement-age-calculator'],
   sources: [
     { name: 'SSA Office of the Chief Actuary: Benefit formula bend points', url: 'https://www.ssa.gov/oact/cola/bendpoints.html' },
     { name: 'SSA Office of the Chief Actuary: Primary Insurance Amount', url: 'https://www.ssa.gov/oact/cola/piaformula.html' },

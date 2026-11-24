@@ -1,6 +1,6 @@
 export default {
   slug: 'retirement-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: 'Retirement Savings Calculator',
   title: 'How Much Do I Need to Retire? Calculator: $900,000 Example',
   h1: 'Retirement Savings Calculator: Your Target Nest Egg and Monthly Savings',
@@ -110,7 +110,7 @@ export default {
     { q: 'What return should I assume before retirement?', a: 'A stock-heavy portfolio is often modeled at 6–8% a year before inflation over long periods, and less as you shift to bonds. A lower assumption gives a safer monthly savings target.' },
     { q: 'When can I afford to retire?', a: 'Use the when can I retire calculator: it takes your savings and contributions and finds the age at which you reach your target.' }
   ],
-  related: ['retirement-age-calculator', 'how-long-will-money-last-calculator', 'fire-calculator', '401k-contribution-calculator', 'social-security-calculator'],
+  related: ['retirement-age-calculator', 'how-long-will-money-last-calculator', 'retirement-budget-calculator', '401k-retirement-calculator', 'couples-retirement-calculator'],
   sources: [
     { name: 'IRS: 401(k) contribution limits', url: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits' },
     { name: 'IRS: IRA contribution limits', url: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-ira-contribution-limits' },

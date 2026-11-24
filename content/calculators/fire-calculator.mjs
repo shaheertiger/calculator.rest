@@ -1,6 +1,6 @@
 export default {
   slug: 'fire-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: 'FIRE Number Calculator',
   title: 'FIRE Number Calculator: $40,000 a Year Needs $1,000,000',
   h1: 'FIRE Calculator: Your Financial Independence Number and Years to Get There',
@@ -99,7 +99,7 @@ export default {
     { q: 'Can I access retirement accounts if I retire early?', a: 'Yes, with planning. Roth IRA contributions can be withdrawn any time, 401(k)s allow penalty-free withdrawals after leaving a job in or after the year you turn 55, and substantially equal periodic payments (72(t)) avoid the 10% additional tax.' },
     { q: 'Do I need to count my house in my FIRE number?', a: 'No. The FIRE number covers spending. A paid-off house lowers your spending (and so your number) but is not part of the portfolio you withdraw from.' }
   ],
-  related: ['coast-fire-calculator', 'retirement-age-calculator', 'retirement-calculator', 'millionaire-calculator', 'net-worth-calculator'],
+  related: ['coast-fire-calculator', 'retirement-age-calculator', 'retirement-withdrawal-calculator', 'millionaire-calculator', 'monte-carlo-retirement-calculator'],
   sources: [
     { name: 'SEC Investor.gov: Compound Interest Calculator', url: 'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator' },
     { name: 'IRS: Retirement topics, exceptions to tax on early distributions', url: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-exceptions-to-tax-on-early-distributions' },

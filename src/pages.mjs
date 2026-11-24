@@ -2,11 +2,11 @@
 export default [
   {
     slug: 'about', name: 'About', h1: 'About calculator.rest',
-    title: 'About calculator.rest: Free Calculators That Show Their Math',
-    meta: 'Who builds calculator.rest, how the calculators are made, what we promise (free, private, no sign-up) and how to report a wrong number.',
+    title: 'About calculator.rest: Free Retirement Calculators, No Sales Pitch',
+    meta: 'Who builds calculator.rest, how the retirement calculators are made, what we promise (free, private, no sign-up, nothing to sell) and how to report a wrong number.',
     type: 'AboutPage',
     html: ({ calcs, hubs }) => `
-<p><strong>calculator.rest is a free collection of ${calcs.length} calculators across ${hubs.length} categories.</strong> Each one answers a specific question people search for, like how much house they can afford, what GPA they have, or how many yards of gravel a driveway needs, and opens with the answer for a real example before you type anything.</p>
+<p><strong>calculator.rest is a free set of ${calcs.length} retirement calculators across ${hubs.length} categories.</strong> Each one answers a specific question people ask about retiring, like how long their savings will last, how much they can withdraw each month, what their 401(k) will be worth or how much tax they will owe on withdrawals, and opens with the answer for a real example before you type anything.</p>
 <h2>What we promise</h2>
 <ul>
 <li><strong>Free, with no account.</strong> Every calculator works without signing up, and there is no paid tier.</li>
@@ -15,7 +15,7 @@ export default [
 <li><strong>Real dates.</strong> The "Updated" date on a page changes only when we change the calculator or its facts.</li>
 </ul>
 <h2>Who makes it</h2>
-<p>calculator.rest is built and maintained independently. We are not a bank, lender, law firm, tax adviser or medical provider. Money calculators follow official IRS and agency figures; health calculators use peer-reviewed equations and cite the organisation behind them. They are planning and learning tools. For decisions about your money, health or legal situation, confirm the result with a qualified professional.</p>
+<p>calculator.rest is built and maintained independently. We are not a bank, broker, insurance company, financial adviser or tax preparer, and we don't sell annuities, funds or advice. Calculators follow official IRS and Social Security Administration figures and cite them. They are planning tools. For decisions about your money, confirm the result with a fee-only financial planner or tax professional.</p>
 <h2>Meet dot</h2>
 <p>Dot is the pink circle in our logo. Dot does the math, keeps your recent answers, and stays out of the way.</p>
 <h2>Found a wrong number?</h2>
@@ -25,7 +25,7 @@ export default [
   {
     slug: 'methodology', name: 'Methodology', h1: 'How we build and check calculators',
     title: 'Methodology: How calculator.rest Builds and Checks Its Tools',
-    meta: 'How calculator.rest picks calculators, which sources it uses (IRS, BLS, CDC, NIST), how formulas are tested and how dates and corrections work.',
+    meta: 'How calculator.rest picks retirement calculators, which sources it uses (IRS, SSA, BLS), how formulas are tested and how dates and corrections work.',
     html: ({ calcs }) => `
 <p><strong>Every calculator on this site is built the same way: one page per real question, the answer first, the formula shown, and a named source for every number that comes from law or research.</strong></p>
 <h2>1. One calculator per question</h2>
@@ -33,19 +33,17 @@ export default [
 <h2>2. Sources</h2>
 <ul>
 <li><strong>Taxes, retirement accounts and payroll:</strong> IRS revenue procedures, publications and notices for the tax year shown (2026 brackets, standard deductions, contribution limits, RMD tables), and the Social Security Administration for wage bases and benefit formulas.</li>
-<li><strong>Inflation:</strong> U.S. Bureau of Labor Statistics CPI-U, U.S. city average, annual averages.</li>
-<li><strong>Housing:</strong> Consumer Financial Protection Bureau, HUD and Fannie Mae guidelines.</li>
-<li><strong>Health:</strong> CDC, NIH, ACOG, AHA and the original peer-reviewed equations (for example Mifflin-St Jeor 1990 for BMR, Hodgdon & Beckett for the U.S. Navy body fat method).</li>
-<li><strong>Science and engineering:</strong> NIST constants and reference data, manufacturer data sheets for material densities, and published refrigerant pressure-temperature tables.</li>
+<li><strong>Inflation and spending:</strong> U.S. Bureau of Labor Statistics CPI-U and the Consumer Expenditure Survey.</li>
+<li><strong>Market assumptions:</strong> returns and volatility are inputs you control. Defaults are round, conservative planning figures, not forecasts, and each page says what it assumes.</li>
 </ul>
 <h2>3. Testing</h2>
 <p>Each formula follows the source cited on its page, and its worked example is calculated by the same code that runs the tool, so the numbers on the page and the answer you get always agree. The build process re-runs every calculator with its example inputs and refuses to publish a page whose calculation fails, whose answer line has no number, or whose title or description duplicates another page.</p>
 <h2>4. Rounding</h2>
-<p>We calculate at full precision and round only for display: money to the cent, percentages to two decimals, and physical quantities to a sensible number of significant figures. Material quantities (bags, boxes, sheets) are always rounded up.</p>
+<p>We calculate at full precision and round only for display: money to the cent, percentages to two decimals, and physical quantities to a sensible number of significant figures. Ages and years are shown in whole months, and balances that run out mid-year are prorated to the month.</p>
 <h2>5. Dates and corrections</h2>
 <p>The "Updated" date on each page is the date its calculator or facts last changed. We review tax and benefit figures every January and when the IRS or SSA publishes new numbers. Confirmed reader corrections are fixed and re-dated.</p>
 <h2>6. What the calculators are not</h2>
-<p>They are not financial, tax, legal or medical advice. Where a professional judgement matters, the page says so.</p>
+<p>They are not financial, tax or legal advice. Markets do not deliver a steady average return; where that matters, the page says so and the Monte Carlo calculator shows the range.</p>
 <p class="trust">${calcs.length} calculators currently published.</p>`
   },
   {

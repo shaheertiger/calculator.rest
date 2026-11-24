@@ -1,6 +1,6 @@
 export default {
   slug: 'rmd-calculator',
-  hub: 'investing',
+  hub: 'rules',
   name: 'RMD Calculator',
   title: 'RMD Calculator 2026: $500,000 at Age 75 Is $20,325',
   h1: 'Required Minimum Distribution Calculator With the IRS Uniform Lifetime Table',
@@ -135,7 +135,7 @@ export default {
     { q: 'Is the RMD age 73 or 75?', a: 'It is 73 if you were born from 1951 through 1959 and 75 if you were born in 1960 or later, under the SECURE 2.0 Act.' },
     { q: 'Can I reinvest my RMD?', a: 'You cannot put it back into an IRA or roll it over, but you can invest it in a regular taxable brokerage account, or contribute to a Roth IRA if you have earned income.' }
   ],
-  related: ['how-long-will-money-last-calculator', 'retirement-calculator', 'social-security-calculator', 'income-tax-calculator', 'magi-calculator'],
+  related: ['retirement-tax-calculator', 'how-long-will-money-last-calculator', 'social-security-calculator', 'early-withdrawal-penalty-calculator', 'magi-calculator'],
   sources: [
     { name: 'IRS: Retirement topics, required minimum distributions (RMDs)', url: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds' },
     { name: 'IRS Publication 590-B: Distributions from IRAs (Appendix B life expectancy tables)', url: 'https://www.irs.gov/publications/p590b' },

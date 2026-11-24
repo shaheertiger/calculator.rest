@@ -1,6 +1,6 @@
 export default {
   slug: 'retirement-age-calculator',
-  hub: 'investing',
+  hub: 'planning',
   name: 'When Can I Retire Calculator',
   title: 'When Can I Retire Calculator: Saving $1,500/mo at 30 = Age 61',
   h1: 'When Can I Retire? Find Your Earliest Retirement Age',
@@ -104,7 +104,7 @@ export default {
     { q: 'Why are the results in today\'s dollars?', a: 'So you can compare the target with your current budget. The calculator uses the real return (return minus inflation) and shows the inflated balance separately.' },
     { q: 'Should I count my home equity?', a: 'Only if you plan to sell or downsize and invest the proceeds. A home you live in does not produce income, so most planners leave it out of the nest egg.' }
   ],
-  related: ['retirement-calculator', 'fire-calculator', 'coast-fire-calculator', 'social-security-calculator', '401k-contribution-calculator'],
+  related: ['retirement-calculator', 'retirement-countdown-calculator', 'fire-calculator', '401k-retirement-calculator', 'social-security-calculator'],
   sources: [
     { name: 'Social Security Administration: Retirement age and benefit reduction', url: 'https://www.ssa.gov/benefits/retirement/planner/agereduction.html' },
     { name: 'IRS: 401(k) contribution limits', url: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits' },
