@@ -217,7 +217,7 @@ const YEAR = '2026';
 for (const def of calcs) {
   const s = def.slug;
   def.title = def.seoTitle || `${YEAR} ${def.name} | ${BRAND}`;
-  def.h1 = def.seoH1 || `${YEAR} ${def.name}`;
+  def.h1 = def.seoH1 || `${def.name} ${YEAR}`;
   if (!hubById.has(def.hub)) err(s, `unknown hub "${def.hub}"`);
   const v = defaultsOf(def.inputs);
   let r;
@@ -264,6 +264,7 @@ ${crumbsHtml([['Home', SITE + '/'], [hub.name, `${SITE}/${hub.slug}`], [def.name
 <header class="page-head">
 <h1>${esc(def.h1)}</h1>
 <p class="intro">${def.intro || quick}</p>
+${def.intro && quick ? `<div class="answer"><span class="tag">Quick answer</span><p>${quick}</p></div>` : ''}
 <p class="meta-line">Updated ${fmtDay(updated)} · Free, no sign-up · Sources: ${esc((def.sources || []).map(x => x.name.split(':')[0]).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3).join(', ') || 'see below')}</p>
 </header>
 ${cb.html}
@@ -400,8 +401,8 @@ function homePage() {
   const url = SITE + '/';
   const feat = built.find(b => b.def.slug === 'how-long-will-money-last-calculator');
   const chips = ['retirement-withdrawal-calculator', 'monte-carlo-retirement-calculator', 'retirement-calculator', '401k-retirement-calculator', 'retirement-tax-calculator', 'social-security-calculator'].filter(s => bySlug.has(s));
-  const title = `Retirement Calculator: How Long Will Your Money Last? | calculator.rest`;
-  const meta = `Free retirement calculators that run your real numbers: how long savings last, safe withdrawals, Monte Carlo odds, 401(k), Social Security and 2026 taxes.`;
+  const title = `Retirement Calculator 2026: How Long Will Your Money Last?`;
+  const meta = `How long will your money last? $500,000 at $3,000 a month lasts about 18 years. Free calculators for withdrawals, Monte Carlo odds, 401(k) and 2026 taxes.`;
   const fd = feat.def, fv = defaultsOf(fd.inputs);
   const cb = calcBlock(fd, fv, feat.r, feat.quick);
   const script = cb.script;
@@ -410,6 +411,7 @@ function homePage() {
 <p class="eyebrow">Free retirement calculators · 2026</p>
 <h1>Retirement calculator: how long will your money last?</h1>
 <p class="intro">Plug in your savings and what you spend, and we'll show you how many years it lasts, the monthly withdrawal that lasts 30 years and your balance year by year. Every tool shows its formula and cites the IRS or SSA.</p>
+${feat.quick ? `<div class="answer"><span class="tag">Quick answer</span><p>${feat.quick}</p></div>` : ''}
 <ul class="chips">${chips.map(s => `<li><a href="/${s}">${esc(bySlug.get(s).name.replace(/ Calculator$/, ''))}</a></li>`).join('')}</ul>
 </header>
 ${cb.html}
@@ -480,5 +482,22 @@ for (const hub of hubs) families.push([hub.id, built.filter(b => b.def.hub === h
 for (const [name, urls] of families) write(`sitemap-${name}.xml`, sm(urls));
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${families.map(([n]) => `<sitemap><loc>${SITE}/sitemap-${n}.xml</loc><lastmod>${latest}</lastmod></sitemap>`).join('\n')}\n</sitemapindex>\n`);
 write('robots.txt', `# calculator.rest: every crawler, including AI search and assistant crawlers, is welcome\nUser-agent: *\nUser-agent: Googlebot\nUser-agent: Bingbot\nUser-agent: OAI-SearchBot\nUser-agent: ChatGPT-User\nUser-agent: GPTBot\nUser-agent: Claude-SearchBot\nUser-agent: Claude-User\nUser-agent: ClaudeBot\nUser-agent: PerplexityBot\nUser-agent: Perplexity-User\nUser-agent: Applebot\nAllow: /\nDisallow: /*?\n\n# Backlink scrapers\nUser-agent: AhrefsBot\nUser-agent: DataForSeoBot\nUser-agent: SERankingBacklinksBot\nDisallow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+// llms.txt: plain-text facts and every tool's worked answer, for answer engines (AI search, assistants)
+{
+  const plain = x => String(x ?? '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;/g, "'").replace(/\s+/g, ' ').trim();
+  const facts = [
+    '401(k), 403(b) and governmental 457(b) employee deferral limit: $24,500; catch-up at 50+: $8,000; ages 60–63: $11,250.',
+    'IRA and Roth IRA contribution limit: $7,500; catch-up at 50+: $1,100.',
+    'Roth IRA MAGI phase-out: $153,000–$168,000 single, $242,000–$252,000 married filing jointly.',
+    'Social Security PIA formula: 90% of the first $1,286 of AIME, 32% up to $7,749, 15% above. Full retirement age is 67 for anyone born 1960 or later.',
+    'Up to 85% of Social Security is taxable; provisional income thresholds $25,000/$34,000 single, $32,000/$44,000 married filing jointly.',
+    'Senior deduction (2025–2028): $6,000 per person 65+, phasing out above $75,000 MAGI single / $150,000 joint.',
+    'RMDs start at 73 (75 if born 1960 or later). RMD = Dec 31 balance ÷ IRS Uniform Lifetime Table divisor (26.5 at 73, 24.6 at 75, 20.2 at 80).',
+    'Early withdrawals from a 401(k) or IRA before 59½ usually owe a 10% additional tax on top of income tax; 401(k) cash-outs have 20% mandatory federal withholding.',
+    '4% rule: a first-year withdrawal of 4% of savings, raised for inflation, means a nest egg of 25 × yearly spending.'
+  ];
+  const groups = hubs.map(h => [h, built.filter(b => b.def.hub === h.id)]).filter(([, l]) => l.length);
+  write('llms.txt', `# ${BRAND}\n\n> Free US retirement calculators that run your own numbers and show the formula: how long savings last, safe withdrawals, Monte Carlo odds, 401(k), 403(b), 457(b), Roth IRA, RMDs, Social Security and retirement taxes. Figures are for ${YEAR}; sources are the IRS and SSA. No sign-up; nothing entered is stored.\n\n## ${YEAR} retirement figures\n${facts.map(f => '- ' + f).join('\n')}\n\n${groups.map(([h, l]) => `## ${h.name}\n${l.map(b => `- [${b.def.name}](${b.url}): ${plain(b.quick)}`).join('\n')}`).join('\n\n')}\n\n## About\n- [Methodology](${SITE}/methodology): how calculators are built and checked\n- [About](${SITE}/about)\n`);
+}
 write('urls.txt', [SITE + '/', ...hubPages.map(h => h.url), ...staticPages.map(s => s.url), ...built.map(b => b.url)].join('\n') + '\n');
 console.log(`Wrote ${totalPages} pages to dist/`);
