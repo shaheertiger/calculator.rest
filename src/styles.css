@@ -58,6 +58,10 @@ h1 { font: 500 clamp(36px, 5.4vw, 56px)/1.06 var(--serif); letter-spacing: -.02e
 .intro { font-size: 19px; line-height: 1.55; color: var(--muted); margin: 0 0 14px; max-width: 680px; }
 .intro strong { color: var(--ink); font-weight: 600; }
 .meta-line { font-size: 13px; color: var(--faint); margin: 0; }
+.answer { max-width: 680px; margin: 0 0 16px; padding: 14px 18px; background: var(--surface); border-left: 3px solid var(--ink); border-radius: var(--r); }
+.answer .tag { display: block; font: 600 12px/1 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.answer p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--text); }
+.answer strong { color: var(--ink); font-weight: 600; }
 .eyebrow { font: 600 12px/1 var(--f); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; }
 
 /* calculator: inputs left, results right */
