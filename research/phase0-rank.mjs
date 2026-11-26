@@ -86,12 +86,11 @@ for (const q of queries) { const o = owner(q.q); q.owner = o; if (!o) continue; 
 // ---- niche (Phase 0 step 3): school maths, everyday percentages/averages, grades, word problems, unit and rate maths ----
 const NICHE_HUBS = new Set(['math', 'education', 'everyday', 'science', 'time', 'sports']);
 const EXCLUDE = { // in a niche hub but out of scope, or out of hub but in scope
-  'due-date-calculator': 'health', 'income-tax-calculator': 'money advice (tax)', 'cogs-calculator': 'business accounting (open decision)',
-  'telescope-magnification-calculator': 'hobby optics, not school or everyday maths', 'life-path-number-calculator': 'numerology',
+  'due-date-calculator': 'health', 'income-tax-calculator': 'money advice (tax)', 'telescope-magnification-calculator': 'hobby optics, not school or everyday maths', 'life-path-number-calculator': 'numerology',
   'sourdough-hydration-calculator': 'cooking ratio, no school use', 'safety-stock-calculator': 'inventory operations', 'break-even-calculator': 'business finance',
   'profit-margin-calculator': 'business finance', 'cagr-calculator': 'investing', 'npv-calculator': 'corporate finance', 'irr-calculator': 'corporate finance', 'wacc-calculator': 'corporate finance'
 };
-const INCLUDE_OUT_OF_HUB = { 'car-depreciation-calculator': 'exponential decay word problems (Phase 3 solver)', 'compound-interest-calculator': 'exponential growth word problems (school algebra)', 'tip-calculator': 'everyday percentage', 'split-bill-calculator': 'everyday division and percentage', 'time-card-calculator': 'time arithmetic', 'ev-charging-cost-calculator': 'unit-rate maths (kWh × price)', 'moving-average-calculator': 'averages' };
+const INCLUDE_OUT_OF_HUB = { 'cogs-calculator': 'accounting-class formula (owner decision, Nov 26)', 'car-depreciation-calculator': 'exponential decay word problems (Phase 3 solver)', 'compound-interest-calculator': 'exponential growth word problems (school algebra)', 'tip-calculator': 'everyday percentage', 'split-bill-calculator': 'everyday division and percentage', 'time-card-calculator': 'time arithmetic', 'ev-charging-cost-calculator': 'unit-rate maths (kWh × price)', 'moving-average-calculator': 'averages' };
 function niche(d) {
   if (EXCLUDE[d.slug]) return [false, EXCLUDE[d.slug]];
   if (INCLUDE_OUT_OF_HUB[d.slug]) return [true, INCLUDE_OUT_OF_HUB[d.slug]];

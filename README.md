@@ -2,7 +2,7 @@
 
 Calculators that show the work, for school and everyday math. Every page solves the reader's exact numbers step
 by step, the way a teacher would: formula → substitution → each arithmetic step → answer with units and the
-rounding rule. ~23 calculator pages in 4 hubs, built as plain static HTML by a zero-dependency Node script and
+rounding rule. 24 calculator pages in 4 hubs, built as plain static HTML by a zero-dependency Node script and
 deployed on Vercel.
 
 The Nov 2026 reset that produced this scope (data, launch set, rollout rules) is in

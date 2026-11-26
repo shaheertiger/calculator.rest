@@ -7,8 +7,8 @@ export default [
     id: 'everyday', slug: 'everyday-calculators', name: 'Percentages & Everyday Maths', short: 'Percentages',
     h1: 'Percentages and everyday maths',
     title: 'Percentage & Everyday Maths Calculators (With Steps)',
-    meta: 'Percentages, tips, bill splits, party food and time sums, each solved step by step with your numbers. 30% of 150 is 45: multiply 150 by 0.30.',
-    intro: 'Percent of a number, tips, splitting a bill, food for a crowd and adding up hours, each worked out step by step.'
+    meta: 'Percentages, tips, bill splits, party food, time sums and COGS, each solved step by step with your numbers. 30% of 150 is 45: multiply 150 by 0.30.',
+    intro: 'Percent of a number, tips, splitting a bill, food for a crowd, adding up hours and cost of goods sold, each worked out step by step.'
   },
   {
     id: 'school', slug: 'school-calculators', name: 'Grades & Averages', short: 'Grades',

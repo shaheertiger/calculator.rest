@@ -1,32 +1,3 @@
-# Nov 2026 reset: the pre-pivot URLs this release restores (404 → 200). Submitted to IndexNow ONCE,
-# by the production deploy of the merge commit (the workflow only submits when this file changes).
-# Homepage, about and methodology were never 404 and are not listed. Retirement pages are noindex: never list them.
-# hubs (pre-pivot hub URLs, restored)
-https://calculator.rest/everyday-calculators
-https://calculator.rest/school-calculators
-https://calculator.rest/math-calculators
-https://calculator.rest/science-calculators
-# calculators, in order of Nov 14–21 impressions
-https://calculator.rest/car-depreciation-calculator
-https://calculator.rest/efficiency-calculator
-https://calculator.rest/tip-calculator
-https://calculator.rest/percentage-calculator
-https://calculator.rest/average-calculator
-https://calculator.rest/exponent-calculator
-https://calculator.rest/dps-calculator
-https://calculator.rest/test-score-calculator
-https://calculator.rest/grade-calculator
-https://calculator.rest/party-food-calculator
-https://calculator.rest/speed-calculator
-https://calculator.rest/compound-interest-calculator
-https://calculator.rest/split-bill-calculator
-https://calculator.rest/time-duration-calculator
-https://calculator.rest/root-calculator
-https://calculator.rest/scientific-notation-calculator
-https://calculator.rest/gpa-calculator
-https://calculator.rest/slope-calculator
-https://calculator.rest/ph-calculator
-https://calculator.rest/final-grade-calculator
-https://calculator.rest/ev-charging-cost-calculator
-https://calculator.rest/time-card-calculator
-https://calculator.rest/moving-average-calculator
+# Nov 26 follow-up release: COGS calculator added (owner decision, same day as the reset).
+# The 27 reset URLs were already submitted once on Nov 26; only the new URL is listed here.
+https://calculator.rest/cogs-calculator

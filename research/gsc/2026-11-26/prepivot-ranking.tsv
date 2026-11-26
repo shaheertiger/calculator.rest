@@ -17,7 +17,7 @@ rank	slug	old_hub	impressions	clicks	avg_position	matched_top_query	top_query_im
 16	debt-to-equity-calculator	business	31	0	72.81	debt to equity ratio calculator	4	92	0	404	no	hub: business	impressions only at > 25
 17	watt-hours-calculator	electrical	30	0	58.03	watt hour calculator	4	92	1	404	no	hub: electrical	impressions only at > 25
 18	grade-calculator	education	29	0	14.86	will earned the following grades in his math class. using the averages and the weights, calculate his final course percentage. category grade weight (%) 15 20 65 earned average (%) 91 85 homework quizzes exams 82 will's final course percentage = (round to nearest whole number) which of the following may be a symptom of a food allergy? (select all that	2	9.5	2	404	yes	hub: education	LAUNCH
-19	cogs-calculator	business	25	0	8.32				0	404	no	business accounting (open decision)	signal, out of niche
+19	cogs-calculator	business	25	0	8.32				0	404	yes	accounting-class formula (owner decision, Nov 26)	LAUNCH
 20	inflation-calculator	investing	25	0	30.28	"304.702" cpi "2023" "292" "2022" average	10	29.2	1	404	no	hub: investing	impressions only at > 25
 21	kva-calculator	electrical	25	0	77.64	kva calculator	13	93.23	0	404	no	hub: electrical	impressions only at > 25
 22	credit-card-minimum-payment-calculator	loans	23	0	63.74	minimum payment calculator	6	102.33	0	404	no	hub: loans	impressions only at > 25
