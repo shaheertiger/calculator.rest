@@ -1,53 +1,67 @@
-// Static pages: about, methodology, privacy.
+// Static pages: about, methodology (indexable), privacy (noindex).
 export default [
   {
-    slug: 'about', name: 'About', h1: 'About calculator.rest',
-    title: 'About calculator.rest: Free Retirement Calculators, No Sales Pitch',
-    meta: 'Who builds calculator.rest, how the retirement calculators are made, what we promise (free, private, no sign-up, nothing to sell) and how to report a wrong number.',
+    slug: 'about', name: 'About', h1: 'About calculator.rest', updated: '2026-11-26',
+    title: 'About calculator.rest: Calculators That Show the Work',
+    meta: 'calculator.rest solves school and everyday maths with your own numbers and shows every step. Who makes it, what it promises and how to report a wrong step.',
     type: 'AboutPage',
     html: ({ calcs, hubs }) => `
-<p><strong>calculator.rest is a free set of ${calcs.length} retirement calculators across ${hubs.length} categories.</strong> Each one answers a specific question people ask about retiring, like how long their savings will last, how much they can withdraw each month, what their 401(k) will be worth or how much tax they will owe on withdrawals, and opens with the answer for a real example before you type anything.</p>
+<p><strong>calculator.rest is ${calcs.length} free calculators for school and everyday maths, in ${hubs.length} groups.</strong> Each one solves your exact numbers and writes out the work the way a teacher would on the board: the formula, your numbers put into it, each piece of arithmetic, and the answer with its units and how it was rounded.</p>
+<p>It exists because most online calculators give you a number and nothing else. That is fine for a tip, but not when you need to check homework, understand where a grade came from, or show your method on a test.</p>
 <h2>What we promise</h2>
 <ul>
-<li><strong>Free, with no account.</strong> Every calculator works without signing up, and there is no paid tier.</li>
-<li><strong>Private.</strong> The math runs in your browser. What you type is not sent to us or anyone else. The only thing stored is your last 20 results, in your own browser, so dot can show them on the homepage.</li>
-<li><strong>Formulas you can check.</strong> Every page shows its formula, a worked example and the sources it follows, such as the IRS, CDC, BLS, HUD or a standard textbook.</li>
-<li><strong>Real dates.</strong> The "Updated" date on a page changes only when we change the calculator or its facts.</li>
+<li><strong>Your numbers, every step.</strong> The steps change when you change the inputs. They are never a canned example.</li>
+<li><strong>Works without JavaScript.</strong> Every page loads with its example already solved, steps included.</li>
+<li><strong>Free, with no account.</strong> No sign-up, no paid tier, no email capture.</li>
+<li><strong>Private.</strong> The maths runs in your browser. What you type is not sent to us. Your last 20 answers are kept in your own browser so the homepage can show them.</li>
+<li><strong>Named formulas.</strong> Each page says which standard formula it uses and links to a textbook-level source where one helps.</li>
+<li><strong>Real dates.</strong> A page's "Updated" date changes only when its calculator or text changes.</li>
 </ul>
 <h2>Who makes it</h2>
-<p>calculator.rest is built and maintained independently. We are not a bank, broker, insurance company, financial adviser or tax preparer, and we don't sell annuities, funds or advice. Calculators follow official IRS and Social Security Administration figures and cite them. They are planning tools. For decisions about your money, confirm the result with a fee-only financial planner or tax professional.</p>
+<p>calculator.rest is built and maintained independently. It is not run by a school, a publisher or a tutoring company, and the pages are not written or reviewed by certified teachers. The steps follow the standard formulas taught in school maths and science courses, and <a href="/methodology">the methodology page</a> explains exactly how they are produced and checked. If your teacher or textbook uses a different method or rounding rule, follow theirs.</p>
 <h2>Meet dot</h2>
-<p>Dot is the pink circle in our logo. Dot does the math, keeps your recent answers, and stays out of the way.</p>
-<h2>Found a wrong number?</h2>
-<p>If a result doesn't match your official document, email <a href="mailto:hello@calculator.rest">hello@calculator.rest</a> with the page, the inputs and what you expected. We check every report against the cited source and fix confirmed errors, then update the page's date.</p>
-<p>Read <a href="/methodology">how we build and check calculators</a> or our <a href="/privacy">privacy policy</a>.</p>`
+<p>Dot is the pink circle in the logo. Dot does the arithmetic, keeps your recent answers, and stays out of the way.</p>
+<h2 id="report">Found a wrong step?</h2>
+<p>Email <a href="mailto:hello@calculator.rest">hello@calculator.rest</a> with the page, the numbers you typed, and the step you think is wrong. We work the problem by hand against the formula named on the page, fix any confirmed error in the calculator itself (so the answer and every step change together), and update the page's date.</p>
+<p>Read <a href="/methodology">how steps are produced and checked</a> or the <a href="/privacy">privacy policy</a>.</p>`
   },
   {
-    slug: 'methodology', name: 'Methodology', h1: 'How we build and check calculators',
-    title: 'Methodology: How calculator.rest Builds and Checks Its Tools',
-    meta: 'How calculator.rest picks retirement calculators, which sources it uses (IRS, SSA, BLS), how formulas are tested and how dates and corrections work.',
+    slug: 'methodology', name: 'Methodology', h1: 'How the steps are produced and checked', updated: '2026-11-26',
+    title: 'Methodology: How calculator.rest Shows and Checks Steps',
+    meta: 'How calculator.rest writes out each step, which formulas and standards it follows, how it rounds, what the build checks before publishing, and how errors are fixed.',
     html: ({ calcs }) => `
-<p><strong>Every calculator on this site is built the same way: one page per real question, the answer first, the formula shown, and a named source for every number that comes from law or research.</strong></p>
-<h2>1. One calculator per question</h2>
-<p>We build a page only when people actually search for that calculation, and we never publish two pages for the same question. If two searches share one formula, they share one page.</p>
-<h2>2. Sources</h2>
-<ul>
-<li><strong>Taxes, retirement accounts and payroll:</strong> IRS revenue procedures, publications and notices for the tax year shown (2026 brackets, standard deductions, contribution limits, RMD tables), and the Social Security Administration for wage bases and benefit formulas.</li>
-<li><strong>Inflation and spending:</strong> U.S. Bureau of Labor Statistics CPI-U and the Consumer Expenditure Survey.</li>
-<li><strong>Market assumptions:</strong> returns and volatility are inputs you control. Defaults are round, conservative planning figures, not forecasts, and each page says what it assumes.</li>
-</ul>
-<h2>3. Testing</h2>
-<p>Each formula follows the source cited on its page, and its worked example is calculated by the same code that runs the tool, so the numbers on the page and the answer you get always agree. The build process re-runs every calculator with its example inputs and refuses to publish a page whose calculation fails, whose answer line has no number, or whose title or description duplicates another page.</p>
+<p><strong>Every calculator on this site follows the same rule: one page per tool, the answer first, and every step of the working shown with your numbers.</strong></p>
+<h2>1. One calculation, one piece of code</h2>
+<p>The answer and the steps under it are produced by the same function, in the same pass. The steps are not a separate template filled in afterwards, so they cannot disagree with the answer. The function runs in your browser as you type, and the build runs it once with the page's example, so the solved example and its steps are already in the page before any script loads.</p>
+<h2>2. What a step list contains</h2>
+<ol>
+<li><strong>Formula</strong>: the standard formula, with letters.</li>
+<li><strong>Substitution</strong>: your numbers in place of the letters.</li>
+<li><strong>Arithmetic</strong>: each operation on its own line, in the order a student would do it (powers before multiplication, brackets first).</li>
+<li><strong>Answer</strong>: the result with its units and the rounding rule used.</li>
+</ol>
+<h2>3. Formulas and sources</h2>
+<p>Pages use the formulas found in standard school maths and science courses: percent as part ÷ whole × 100, the arithmetic mean, the laws of exponents, half-life decay V = V₀ × (½)<sup>t/h</sup>, compound interest A = P(1 + r/n)<sup>nt</sup>, slope (y₂ − y₁) ÷ (x₂ − x₁), pH = −log₁₀[H⁺], efficiency = useful output ÷ input × 100, and speed = distance ÷ time. Units and unit symbols follow the <a href="https://www.nist.gov/pml/special-publication-811" rel="nofollow noopener" target="_blank">NIST Guide for the Use of the International System of Units (SP 811)</a>. Where a page links a source, it is a page we read and that states the formula used; we do not cite sources for decoration.</p>
 <h2>4. Rounding</h2>
-<p>We calculate at full precision and round only for display: money to the cent, percentages to two decimals, and physical quantities to a sensible number of significant figures. Ages and years are shown in whole months, and balances that run out mid-year are prorated to the month.</p>
-<h2>5. Dates and corrections</h2>
-<p>The "Updated" date on each page is the date its calculator or facts last changed. We review tax and benefit figures every January and when the IRS or SSA publishes new numbers. Confirmed reader corrections are fixed and re-dated.</p>
-<h2>6. What the calculators are not</h2>
-<p>They are not financial, tax or legal advice. Markets do not deliver a steady average return; where that matters, the page says so and the Monte Carlo calculator shows the range.</p>
+<p>Everything is calculated at full precision and rounded once, at the end, unless the problem says otherwise. Each page states its rounding rule in the Key facts box and in the last step: money to the cent, percentages to two decimals, and word problems to whatever the question asks for (the car depreciation solver, for example, rounds to the nearest hundred dollars because that is how the textbook problem is worded). Rounding in the middle of a calculation is listed as a common mistake wherever it changes the answer.</p>
+<h2>5. What the build refuses to publish</h2>
+<p>The site is generated by a script that stops with an error, and publishes nothing, if any page:</p>
+<ul>
+<li>has a title without a worked number, or no one-sentence answer under the heading;</li>
+<li>fails to show a solved example with numbered steps in the page itself, starting with the formula and ending with the answer;</li>
+<li>is shorter than 600 or longer than 1,100 words;</li>
+<li>shares more than 30% of its wording with another calculator page;</li>
+<li>is the same tool as another page with different numbers (we never publish one page per numeric variant);</li>
+<li>links to a calculator that does not exist.</li>
+</ul>
+<h2>6. How examples are checked</h2>
+<p>Each written example and word problem on a page is worked through with the page's own calculator, and the numbers in the text are compared with its steps before the page is published. When a reader reports an error, we redo the problem by hand from the formula named on the page; a confirmed error is fixed in the calculator, which corrects the answer and every step at once, and the page's date is updated.</p>
+<h2>7. What the calculators are not</h2>
+<p>They are study and everyday tools, not financial, medical or legal advice. They do not replace your teacher's method: if a class rounds differently or uses a different convention, use the class's rule.</p>
 <p class="trust">${calcs.length} calculators currently published.</p>`
   },
   {
-    slug: 'privacy', name: 'Privacy', h1: 'Privacy policy',
+    slug: 'privacy', name: 'Privacy', h1: 'Privacy policy', index: false,
     title: 'Privacy Policy | calculator.rest',
     meta: 'calculator.rest does its math in your browser. We do not collect what you type, require no account, and store only your recent results on your own device.',
     html: () => `
@@ -57,11 +71,11 @@ export default [
 <h2>Local history</h2>
 <p>Your last 20 results are saved in your browser's local storage so they appear on the homepage. You can clear them at any time with the "clear history" button or by clearing your browser data.</p>
 <h2>Hosting and analytics</h2>
-<p>The site is hosted on Vercel, which processes standard request data (such as IP address and user agent) to deliver pages and protect against abuse. We may use privacy-friendly, cookie-free aggregate analytics to count page views. We do not sell data, run ad trackers or build user profiles.</p>
+<p>The site is hosted on Vercel, which processes standard request data (such as IP address and user agent) to deliver pages and protect against abuse. We use Vercel Web Analytics, which is cookie-free, to count page views in aggregate. We do not sell data, run ad trackers or build user profiles.</p>
 <h2>Fonts</h2>
 <p>Pages load fonts from Google Fonts, which receives your IP address when the font files are requested.</p>
 <h2>Contact</h2>
 <p>Questions about privacy: <a href="mailto:hello@calculator.rest">hello@calculator.rest</a>.</p>
-<p class="trust">Last updated Nov 13, 2026</p>`
+<p class="trust">Last updated Nov 26, 2026</p>`
   }
 ];

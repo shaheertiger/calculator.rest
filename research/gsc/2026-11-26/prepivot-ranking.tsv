@@ -1,0 +1,293 @@
+rank	slug	old_hub	impressions	clicks	avg_position	matched_top_query	top_query_impressions	top_query_position	impressions_on_matched_queries_at_pos_le_25	status_2026-11-26	niche_fit	niche_reason	decision
+1	car-depreciation-calculator	loans	317	0	18.86	car depreciation calculator	45	37.27	172	404	yes	exponential decay word problems (Phase 3 solver)	LAUNCH
+2	efficiency-calculator	science	152	0	8.05	a particular electric car is supplied with 300 kj of chemical energy by the battery. of this, a total of 70.5 kj of energy is wasted as heat. calculate the overall efficiency of the electric car. hint: first work out the useful output energy. you do not need to convert from kilojoules (kj) to joules (j).	2	11	5	404	yes	hub: science	LAUNCH
+3	tip-calculator	everyday	152	0	31.47	tip calculator	48	42.88	46	404	yes	everyday percentage	LAUNCH
+4	percentage-calculator	math	126	0	16.04	150 x 0.30	9	8.67	32	404	yes	hub: math	LAUNCH
+5	mortgage-payoff-calculator	mortgage	126	0	36.22	mortgage payment calculator with extra payments	8	30.62	11	404	no	hub: mortgage	signal, out of niche
+6	average-calculator	math	91	0	16.29	average test	5	39	9	404	yes	hub: math	LAUNCH
+7	exponent-calculator	math	84	0	16.1	2¹⁰	33	8.3	44	404	yes	hub: math	LAUNCH
+8	bmr-calculator	health	61	0	41.72	mifflin st jeor calculator	9	41.11	2	404	no	hub: health	impressions only at > 25
+9	dps-calculator	sports	56	0	15.45	damage per second calculator	2	73.5	1	404	yes	hub: sports	LAUNCH
+10	test-score-calculator	education	46	0	15.91	test score calculator	2	24.5	3	404	yes	hub: education	LAUNCH
+11	income-tax-calculator	pay	45	0	15.84	if i made 38000 how much federal taxes	7	16.29	9	404	no	money advice (tax)	signal, out of niche
+12	credit-card-interest-calculator	loans	43	0	41.02	credit card interest calculator	11	48.82	0	404	no	hub: loans	impressions only at > 25
+13	401k-contribution-calculator	investing	35	0	57.37	401k paycheck deduction calculator	3	71.67	0	200	no	hub: investing	impressions only at > 25
+14	due-date-calculator	health	34	0	17.15	lmp may 14 due date	2	23	3	404	no	health	signal, out of niche
+15	apy-calculator	loans	31	0	38.94	apy calculator	3	45.33	0	404	no	hub: loans	impressions only at > 25
+16	debt-to-equity-calculator	business	31	0	72.81	debt to equity ratio calculator	4	92	0	404	no	hub: business	impressions only at > 25
+17	watt-hours-calculator	electrical	30	0	58.03	watt hour calculator	4	92	1	404	no	hub: electrical	impressions only at > 25
+18	grade-calculator	education	29	0	14.86	will earned the following grades in his math class. using the averages and the weights, calculate his final course percentage. category grade weight (%) 15 20 65 earned average (%) 91 85 homework quizzes exams 82 will's final course percentage = (round to nearest whole number) which of the following may be a symptom of a food allergy? (select all that	2	9.5	2	404	yes	hub: education	LAUNCH
+19	cogs-calculator	business	25	0	8.32				0	404	no	business accounting (open decision)	signal, out of niche
+20	inflation-calculator	investing	25	0	30.28	"304.702" cpi "2023" "292" "2022" average	10	29.2	1	404	no	hub: investing	impressions only at > 25
+21	kva-calculator	electrical	25	0	77.64	kva calculator	13	93.23	0	404	no	hub: electrical	impressions only at > 25
+22	credit-card-minimum-payment-calculator	loans	23	0	63.74	minimum payment calculator	6	102.33	0	404	no	hub: loans	impressions only at > 25
+23	p-value-calculator	statistics	22	0	52.18	p value calculator	4	79.5	0	404	no	hub: statistics	impressions only at > 25
+24	social-security-calculator	investing	22	0	57.68	social security calculator	4	53.25	1	200	no	hub: investing	impressions only at > 25
+25	words-per-minute-calculator	education	22	0	76.41	word per minute calculator	8	77.25	0	404	yes	hub: education	impressions only at > 25
+26	accounts-receivable-turnover-calculator	business	22	0	86.45	accounts receivable turnover calculator	7	95.86	0	404	no	hub: business	impressions only at > 25
+27	holiday-pay-calculator	pay	21	0	44.76	holiday pay calculator	5	73.2	0	404	no	hub: pay	impressions only at > 25
+28	semi-monthly-pay-calculator	pay	20	0	29.05	semi monthly payroll calculator	1	56	0	404	no	hub: pay	impressions only at > 25
+29	high-school-gpa-calculator	education	20	0	58	high school gpa calculator	4	64.5	0	404	yes	hub: education	impressions only at > 25
+30	coefficient-of-variation-calculator	statistics	19	0	75.58	coefficient of variation calculator	7	89.57	0	404	no	hub: statistics	impressions only at > 25
+31	cfm-calculator	electrical	18	0	47.44	cfm calculator	9	50.33	2	404	no	hub: electrical	impressions only at > 25
+32	party-food-calculator	everyday	17	0	16.29	how many whole chickens to feed 50 people	1	8	1	404	yes	hub: everyday	LAUNCH
+33	raise-calculator	pay	16	0	30.56	84000*1.03	2	6.5	5	404	no	hub: pay	signal, out of niche
+34	weighted-average-calculator	math	16	0	52.56	weighted average calculator	6	45.33	0	404	yes	hub: math	impressions only at > 25
+35	chi-square-calculator	statistics	15	0	74.6	chi square table calculator	2	92	0	404	no	hub: statistics	impressions only at > 25
+36	depreciation-calculator	business	14	0	38.93	depreciation calculator for taxes	3	30	0	404	no	hub: business	impressions only at > 25
+37	speed-calculator	science	13	0	8.15	john drives 150 miles in 2.5 hours. what is his speed?	1	10	1	404	yes	hub: science	LAUNCH
+38	loan-payoff-calculator	loans	12	0	39.58	payoff date	5	39	0	404	no	hub: loans	impressions only at > 25
+39	ltv-calculator	mortgage	12	0	59.25	cltv	4	32.75	0	404	no	hub: mortgage	impressions only at > 25
+40	clv-calculator	business	12	0	66.58	clv calculator	6	93.5	0	404	no	hub: business	impressions only at > 25
+41	compound-interest-calculator	investing	11	0	7.91	how long will it take $5,500.00 to become $10,500.00 at 6.25% compounded weekly? (round your answer to two decimal places.) it will take _(_())_(_()) years.	2	8.5	3	404	yes	exponential growth word problems (school algebra)	LAUNCH
+42	split-bill-calculator	everyday	11	0	17.91				0	404	yes	everyday division and percentage	LAUNCH
+43	days-of-supply-calculator	business	11	0	42.91	average stock days	5	59.6	0	404	no	hub: business	impressions only at > 25
+44	current-ratio-calculator	business	11	0	82	current ratio calculator	7	85.43	0	404	no	hub: business	impressions only at > 25
+45	amps-calculator	electrical	10	0	29.6	1500 watts to amps	2	37	3	404	no	hub: electrical	impressions only at > 25
+46	self-employment-tax-calculator	pay	10	0	47.5				0	404	no	hub: pay	impressions only at > 25
+47	safety-stock-calculator	business	9	0	9.33				0	404	no	inventory operations	signal, out of niche
+48	time-duration-calculator	time	9	0	19.67				0	404	yes	hub: time	LAUNCH
+49	loan-calculator	loans	9	0	20.33				0	404	no	hub: loans	signal, out of niche
+50	solar-panel-calculator	electrical	9	0	53.78	solar power calculator	3	62.67	0	404	no	hub: electrical	impressions only at > 25
+51	retirement-calculator	investing	8	0	51.75				0	200	no	hub: investing	impressions only at > 25
+52	rental-property-calculator	mortgage	8	0	71.5	calculator.net rental property calculator	2	87	0	404	no	hub: mortgage	impressions only at > 25
+53	psat-score-calculator	education	8	0	85.5	psat score calculator	4	87.25	0	404	yes	hub: education	impressions only at > 25
+54	root-calculator	math	7	0	14.71				0	404	yes	hub: math	LAUNCH
+55	scientific-notation-calculator	math	7	0	19.14				0	404	yes	hub: math	LAUNCH
+56	average-inventory-calculator	business	7	0	48.86	calculate average inventory	1	19	1	404	no	hub: business	impressions only at > 25
+57	heloc-payment-calculator	mortgage	7	0	58	60000 heloc payment	2	44	0	404	no	hub: mortgage	impressions only at > 25
+58	body-fat-calculator	health	6	0	5.5				0	404	no	hub: health	signal, out of niche
+59	macro-calculator	health	6	0	7.17				0	404	no	hub: health	signal, out of niche
+60	gpa-calculator	education	6	0	10.83	gpa calculator for elementary school	1	39	0	404	yes	hub: education	LAUNCH
+61	overtime-calculator	pay	6	0	38.5	32 an hour overtime	2	81	1	404	no	hub: pay	impressions only at > 25
+62	payback-period-calculator	business	6	0	59.5				0	404	no	hub: business	impressions only at > 25
+63	slope-calculator	math	5	0	8.4	slope calculator	3	9.33	3	404	yes	hub: math	LAUNCH
+64	break-even-calculator	business	5	0	12.8				0	404	no	business finance	signal, out of niche
+65	retirement-age-calculator	investing	5	0	41.6	retirement age calculator	1	65	0	200	no	hub: investing	impressions only at > 25
+66	debt-to-asset-ratio-calculator	business	5	0	61	debt to total asset ratio calculator	2	97.5	0	404	no	hub: business	impressions only at > 25
+67	house-affordability-calculator	mortgage	5	0	72	how much house can i afford with 160k salary	4	77.25	0	404	no	hub: mortgage	impressions only at > 25
+68	ph-calculator	science	4	0	7.25				0	404	yes	hub: science	LAUNCH
+69	telescope-magnification-calculator	science	4	0	8				0	404	no	hobby optics, not school or everyday maths	signal, out of niche
+70	cagr-calculator	investing	4	0	11				0	404	no	investing	signal, out of niche
+71	outlier-calculator	statistics	4	0	27.5				0	404	no	hub: statistics	impressions only at > 25
+72	life-path-number-calculator	everyday	4	0	42.75				0	404	no	numerology	impressions only at > 25
+73	cd-calculator	investing	4	0	49.25				0	404	no	hub: investing	impressions only at > 25
+74	final-grade-calculator	education	3	0	14.33	points grade calculator	1	41	0	404	yes	hub: education	LAUNCH
+75	ev-charging-cost-calculator	electrical	3	0	17				0	404	yes	unit-rate maths (kWh × price)	LAUNCH
+76	calorie-calculator	health	3	0	17.33				0	404	no	hub: health	signal, out of niche
+77	mulch-calculator	construction	3	0	42.67				0	404	no	hub: construction	impressions only at > 25
+78	sourdough-hydration-calculator	everyday	3	0	58.33	dough hydration calculator	2	40.5	0	404	no	cooking ratio, no school use	impressions only at > 25
+79	generator-size-calculator	electrical	2	0	6				0	404	no	hub: electrical	signal, out of niche
+80	time-card-calculator	time	2	0	7				0	404	yes	time arithmetic	LAUNCH
+81	mortgage-calculator	mortgage	2	0	7.5	additional mortgage payment calculator	3	36.67	0	404	no	hub: mortgage	signal, out of niche
+82	amortization-calculator	loans	2	0	11				0	404	no	hub: loans	signal, out of niche
+83	npv-calculator	investing	2	0	13				0	404	no	corporate finance	signal, out of niche
+84	wacc-calculator	investing	2	0	13.5				0	404	no	corporate finance	signal, out of niche
+85	stair-calculator	construction	2	0	19.5				0	404	no	hub: construction	signal, out of niche
+86	concrete-calculator	construction	2	0	21				0	404	no	hub: construction	signal, out of niche
+87	cardiac-output-calculator	health	2	0	36	normal cardiac output per minute	1	62	0	404	no	hub: health	impressions only at > 25
+88	net-worth-calculator	investing	2	0	50	bankrate net worth calculator	1	52	0	404	no	hub: investing	impressions only at > 25
+89	profit-margin-calculator	business	1	0	4				0	404	no	business finance	signal, out of niche
+90	property-tax-calculator	mortgage	1	0	6				0	404	no	hub: mortgage	signal, out of niche
+91	dti-calculator	mortgage	1	0	7				0	404	no	hub: mortgage	signal, out of niche
+92	irr-calculator	investing	1	0	8				0	404	no	corporate finance	signal, out of niche
+93	moving-average-calculator	statistics	1	0	8				0	404	yes	averages	LAUNCH
+94	tile-calculator	construction	1	0	15				0	404	no	hub: construction	signal, out of niche
+95	roas-calculator	business	1	0	25				0	404	no	hub: business	signal, out of niche
+96	student-loan-payoff-calculator	loans	1	0	86				0	404	no	hub: loans	impressions only at > 25
+97	acreage-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+98	age-calculator	time	0	0		average social security check at age 65 calculator	1	84	0	404	yes	hub: time	no impressions
+99	amp-hours-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+100	anc-calculator	health	0	0					0	404	no	hub: health	no impressions
+101	anniversary-calculator	time	0	0					0	404	yes	hub: time	no impressions
+102	apr-calculator	loans	0	0		24 apr on 1000	1	65	0	404	no	hub: loans	no impressions
+103	armor-class-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+104	asphalt-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+105	atom-calculator	science	0	0					0	404	yes	hub: science	no impressions
+106	attendance-percentage-calculator	education	0	0					0	404	yes	hub: education	no impressions
+107	bac-calculator	health	0	0					0	404	no	hub: health	no impressions
+108	battery-life-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+109	beta-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+110	binary-hex-calculator	math	0	0					0	404	yes	hub: math	no impressions
+111	birthday-calculator	time	0	0					0	404	yes	hub: time	no impressions
+112	biweekly-pay-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+113	bmi-calculator	health	0	0					0	404	no	hub: health	no impressions
+114	board-foot-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+115	bowling-handicap-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+116	breast-milk-calculator	health	0	0					0	404	no	hub: health	no impressions
+117	btu-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+118	business-days-calculator	time	0	0					0	404	yes	hub: time	no impressions
+119	business-valuation-calculator	business	0	0					0	404	no	hub: business	no impressions
+120	calorie-deficit-calculator	health	0	0					0	404	no	hub: health	no impressions
+121	calories-burned-calculator	health	0	0					0	404	no	hub: health	no impressions
+122	can-light-spacing-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+123	candy-jar-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+124	cap-rate-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+125	capital-gains-tax-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+126	capm-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+127	car-affordability-calculator	loans	0	0					0	404	no	hub: loans	no impressions
+128	car-loan-calculator	loans	0	0		rental loan calculator	1	50	0	404	no	hub: loans	no impressions
+129	circle-calculator	math	0	0					0	404	yes	hub: math	no impressions
+130	class-rank-calculator	education	0	0					0	404	yes	hub: education	no impressions
+131	coast-fire-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+132	commercial-rent-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+133	compression-ratio-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+134	conception-calculator	health	0	0					0	404	no	hub: health	no impressions
+135	concrete-block-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+136	confidence-interval-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+137	conversion-rate-calculator	business	0	0					0	404	no	hub: business	no impressions
+138	correlation-coefficient-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+139	countertop-square-footage-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+140	credit-hours-calculator	education	0	0					0	404	yes	hub: education	no impressions
+141	cubic-feet-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+142	cubic-inches-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+143	cubic-yards-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+144	cubic-yards-to-tons-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+145	cylinder-volume-calculator	math	0	0					0	404	yes	hub: math	no impressions
+146	day-of-week-calculator	time	0	0					0	404	yes	hub: time	no impressions
+147	days-between-dates-calculator	time	0	0					0	404	yes	hub: time	no impressions
+148	density-calculator	science	0	0					0	404	yes	hub: science	no impressions
+149	dilution-calculator	science	0	0					0	404	yes	hub: science	no impressions
+150	dimensional-weight-calculator	business	0	0					0	404	no	hub: business	no impressions
+151	discount-calculator	everyday	0	0		clv calculator with discount rate	1	91	0	404	yes	hub: everyday	no impressions
+152	dividend-payout-ratio-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+153	dog-years-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+154	dollar-value-calculator	investing	0	0		depreciated value calculator	2	41.5	1	404	no	hub: investing	no impressions
+155	doubling-time-calculator	science	0	0					0	404	yes	hub: science	no impressions
+156	dpi-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+157	drywall-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+158	ecg-heart-rate-calculator	health	0	0					0	404	no	hub: health	no impressions
+159	electricity-cost-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+160	engine-displacement-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+161	eps-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+162	era-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+163	factor-pair-calculator	math	0	0					0	404	yes	hub: math	no impressions
+164	field-of-view-calculator	science	0	0					0	404	yes	hub: science	no impressions
+165	fire-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+166	firewood-cord-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+167	flooring-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+168	foil-thickness-calculator	science	0	0					0	404	yes	hub: science	no impressions
+169	force-calculator	science	0	0					0	404	yes	hub: science	no impressions
+170	fraction-calculator	math	0	0					0	404	yes	hub: math	no impressions
+171	framing-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+172	fuel-surcharge-calculator	business	0	0					0	404	no	hub: business	no impressions
+173	gear-ratio-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+174	golf-handicap-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+175	gpa-to-percentage-calculator	education	0	0					0	404	yes	hub: education	no impressions
+176	gpm-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+177	graduation-year-calculator	education	0	0					0	404	yes	hub: education	no impressions
+178	gratuity-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+179	gravel-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+180	gross-pay-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+181	half-life-calculator	science	0	0					0	404	yes	hub: science	no impressions
+182	home-sale-proceeds-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+183	how-long-will-money-last-calculator	investing	0	0		how long will $300 000 last in retirement calculator	1	50	0	200	no	hub: investing	no impressions
+184	ideal-weight-calculator	health	0	0					0	404	no	hub: health	no impressions
+185	iv-drip-rate-calculator	health	0	0					0	404	no	hub: health	no impressions
+186	joules-calculator	science	0	0					0	404	yes	hub: science	no impressions
+187	kd-ratio-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+188	kw-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+189	ldl-cholesterol-calculator	health	0	0					0	404	no	hub: health	no impressions
+190	lease-calculator	loans	0	0					0	404	no	hub: loans	no impressions
+191	leave-loading-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+192	linear-feet-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+193	log-calculator	math	0	0					0	404	yes	hub: math	no impressions
+194	lost-wages-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+195	luteal-phase-calculator	health	0	0					0	404	no	hub: health	no impressions
+196	magi-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+197	map-calculator	health	0	0					0	404	no	hub: health	no impressions
+198	margin-of-error-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+199	markup-calculator	business	0	0					0	404	no	hub: business	no impressions
+200	max-heart-rate-calculator	health	0	0					0	404	no	hub: health	no impressions
+201	microscope-magnification-calculator	science	0	0					0	404	yes	hub: science	no impressions
+202	midpoint-calculator	math	0	0					0	404	yes	hub: math	no impressions
+203	millionaire-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+204	moles-calculator	science	0	0					0	404	yes	hub: science	no impressions
+205	mpg-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+206	net-carbs-calculator	health	0	0					0	404	no	hub: health	no impressions
+207	nominal-gdp-calculator	business	0	0					0	404	no	hub: business	no impressions
+208	ohms-law-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+209	one-rep-max-calculator	health	0	0					0	404	no	hub: health	no impressions
+210	ops-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+211	orbital-period-calculator	science	0	0					0	404	yes	hub: science	no impressions
+212	overtime-tax-deduction-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+213	ovulation-calculator	health	0	0					0	404	no	hub: health	no impressions
+214	passer-rating-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+215	passive-perception-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+216	pe-ratio-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+217	pension-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+218	percentage-change-calculator	math	0	0					0	404	yes	hub: math	no impressions
+219	pipe-volume-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+220	point-estimate-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+221	pool-chlorine-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+222	pool-volume-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+223	population-growth-calculator	science	0	0					0	404	yes	hub: science	no impressions
+224	pregnancy-weeks-calculator	health	0	0					0	404	no	hub: health	no impressions
+225	productivity-calculator	business	0	0					0	404	no	hub: business	no impressions
+226	protein-calculator	health	0	0					0	404	no	hub: health	no impressions
+227	pto-accrual-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+228	pulley-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+229	pump-head-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+230	punnett-square-calculator	science	0	0					0	404	yes	hub: science	no impressions
+231	puppy-age-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+232	puppy-weight-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+233	quilt-backing-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+234	r-squared-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+235	ratio-calculator	math	0	0		httpswww.inovotools.comtoolsdebt-to-equity-ratio-calculator	9	78.11	0	404	yes	hub: math	no impressions
+236	refinance-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+237	rent-affordability-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+238	rent-increase-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+239	rent-or-sell-house-calculator	mortgage	0	0		"cash flow forecast" liquidity or working or capital or restructuring or refinancing or covenant -software -template -course -job -hiring -career -crypto -personal -finance	1	25	1	404	no	hub: mortgage	no impressions
+240	right-triangle-calculator	math	0	0					0	404	yes	hub: math	no impressions
+241	rmd-calculator	investing	0	0					0	200	no	hub: investing	no impressions
+242	roi-calculator	investing	0	0					0	404	no	hub: investing	no impressions
+243	rolling-offset-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+244	roof-pitch-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+245	roofing-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+246	salary-to-hourly-calculator	pay	0	0		401k salary calculator	1	77	0	404	no	hub: pay	no impressions
+247	sales-tax-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+248	section-8-rent-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+249	shark-tank-valuation-calculator	business	0	0					0	404	no	hub: business	no impressions
+250	simple-interest-calculator	loans	0	0					0	404	no	hub: loans	no impressions
+251	sleep-calculator	health	0	0					0	404	no	hub: health	no impressions
+252	specific-heat-calculator	science	0	0					0	404	yes	hub: science	no impressions
+253	square-footage-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+254	square-meters-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+255	standard-deviation-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+256	stress-calculator	science	0	0					0	404	yes	hub: science	no impressions
+257	stride-length-calculator	health	0	0					0	404	no	hub: health	no impressions
+258	subcooling-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+259	suit-size-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+260	superheat-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+261	t-critical-value-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+262	take-home-pay-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+263	tam-sam-som-calculator	business	0	0					0	404	no	hub: business	no impressions
+264	tank-volume-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+265	target-heart-rate-calculator	health	0	0					0	404	no	hub: health	no impressions
+266	temperature-converter	science	0	0					0	404	yes	hub: science	no impressions
+267	theoretical-yield-calculator	science	0	0					0	404	yes	hub: science	no impressions
+268	tidal-volume-calculator	health	0	0					0	404	no	hub: health	no impressions
+269	tithe-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+270	titration-calculator	science	0	0					0	404	yes	hub: science	no impressions
+271	torque-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+272	total-cost-calculator	business	0	0					0	404	no	hub: business	no impressions
+273	trip-gas-cost-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+274	trir-calculator	business	0	0					0	404	no	hub: business	no impressions
+275	uncertainty-calculator	science	0	0					0	404	yes	hub: science	no impressions
+276	unemployment-rate-calculator	business	0	0					0	404	no	hub: business	no impressions
+277	unit-price-calculator	everyday	0	0					0	404	yes	hub: everyday	no impressions
+278	utilization-rate-calculator	business	0	0					0	404	no	hub: business	no impressions
+279	vacancy-rate-calculator	mortgage	0	0					0	404	no	hub: mortgage	no impressions
+280	vo2-max-calculator	health	0	0					0	404	no	hub: health	no impressions
+281	volleyball-hitting-percentage-calculator	sports	0	0					0	404	yes	hub: sports	no impressions
+282	wallpaper-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+283	water-intake-calculator	health	0	0					0	404	no	hub: health	no impressions
+284	wave-calculator	science	0	0					0	404	yes	hub: science	no impressions
+285	weibull-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions
+286	what-grade-calculator	education	0	0					0	404	yes	hub: education	no impressions
+287	wheel-offset-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+288	wind-chill-calculator	science	0	0					0	404	yes	hub: science	no impressions
+289	wire-size-calculator	electrical	0	0					0	404	no	hub: electrical	no impressions
+290	yarn-calculator	construction	0	0					0	404	no	hub: construction	no impressions
+291	ytd-income-calculator	pay	0	0					0	404	no	hub: pay	no impressions
+292	z-score-calculator	statistics	0	0					0	404	no	hub: statistics	no impressions

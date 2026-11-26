@@ -1,4 +1,5 @@
-# After Vercel finishes a production deploy, tell Bing & co. (IndexNow) which URLs changed.
+# After a production deploy, submit scripts/indexnow-release.txt to IndexNow, but only if that file changed in
+# the deployed commit. Ordinary deploys submit nothing: no mass resubmits.
 name: IndexNow
 on: deployment_status
 jobs:
@@ -14,4 +15,4 @@ jobs:
         with:
           node-version: 22
       - run: node build.mjs --quiet
-      - run: node scripts/indexnow.mjs --changed
+      - run: node scripts/indexnow.mjs --if-release-changed

@@ -1,6 +1,7 @@
 /* Result renderer shared by the build (server HTML) and the browser runtime.
    Depends on H (helpers.js). Produces an HTML string.
-   notes: optional { 'Row label': 'one-line explanation' } shown under each result row. */
+   notes: optional { 'Row label': 'one-line explanation' } shown under each result row.
+   r.steps: optional array of HTML strings, rendered as the numbered "Show the work" list. */
 var renderResult = function (r, H, notes) {
   if (!r || typeof r !== 'object') r = { error: 'Enter your numbers to see your results.' };
   if (r.error) {
@@ -23,6 +24,11 @@ var renderResult = function (r, H, notes) {
       out += '<div' + (row[2] ? ' class="hl"' : '') + '><dt>' + row[0] + (note ? '<small>' + note + '</small>' : '') + '</dt><dd>' + row[1] + '</dd></div>';
     }
     out += '</dl>';
+  }
+  if (r.steps && r.steps.length) {
+    out += '<div class="work"><h3 class="work-h">Show the work</h3><ol class="work-steps">';
+    for (var k = 0; k < r.steps.length; k++) out += '<li class="ws">' + r.steps[k] + '</li>';
+    out += '</ol></div>';
   }
   if (r.table && r.table.rows && r.table.rows.length) {
     out += '<div class="twrap rtable"><table>';
