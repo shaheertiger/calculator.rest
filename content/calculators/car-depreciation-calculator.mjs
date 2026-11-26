@@ -1,124 +1,123 @@
 export default {
   slug: 'car-depreciation-calculator',
-  hub: 'loans',
+  hub: 'math',
   name: 'Car Depreciation Calculator',
-  title: 'Car Depreciation Calculator: $40K Car Worth $16,704 in 5 Years',
-  h1: 'Car Depreciation Calculator: What Your Car Is Worth Year by Year',
-  meta: 'At 20% the first year and 15% a year after, a $40,000 new car is worth about $16,704 after 5 years, a 58% loss. Estimate value, yearly loss and equity.',
-  keyword: 'how to calculate depreciation car',
-  also: ['car depreciation calculator', 'how to calculate the salvage value of a vehicle', 'how to calculate car equity'],
-  updated: '2026-11-13',
+  title: 'Car Depreciation Calculator: Halves Every 3.5 Years (Steps)',
+  meta: 'A $27,000 car that halves in value every 3.5 years is worth about $3,700 after 10 years. Solve half-life and percent-per-year depreciation problems with steps.',
+  keyword: 'car depreciation calculator',
+  also: ['a new car is purchased for $27,000 and over time its value depreciates by one half every 3.5 years', 'exponential decay calculator', 'half-life depreciation', 'vehicle depreciation calculator', 'auto depreciation calculator'],
+  updated: '2026-11-26',
+  answer: ({ r }) => `A $27,000 car that loses half its value every 3.5 years is worth about <strong>${r.value}</strong> after 10 years: 27,000 × (1/2)<sup>10 ÷ 3.5</sup>.`,
   inputs: [
-    { id: 'price', label: 'Purchase price', type: 'number', value: 40000, prefix: '$' },
-    { id: 'bought', label: 'Bought the car', type: 'select', value: 'new', options: [['new', 'New'], ['used', 'Used']] },
-    { id: 'years', label: 'Years of ownership', type: 'number', value: 5, suffix: 'years' },
-    { id: 'first', label: 'First-year depreciation', type: 'number', value: 20, suffix: '%', showIf: { bought: ['new'] } },
-    { id: 'later', label: 'Depreciation in later years', type: 'number', value: 15, suffix: '% a year' },
-    { id: 'owed', label: 'Loan balance (optional)', type: 'number', value: '', prefix: '$', placeholder: 'for equity', help: 'Your loan payoff amount, to see whether you have equity or are upside down.' }
+    { id: 'mode', label: 'The problem says', type: 'select', value: 'half', wide: true, options: [['half', 'Halves every N years: find the value'], ['halfTime', 'Halves every N years: how long until $X'], ['pct', 'Loses r% a year: find the value'], ['pctTime', 'Loses r% a year: how long until $X']] },
+    { id: 'v0', label: 'Purchase price (V₀)', type: 'number', value: 27000, prefix: '$' },
+    { id: 'h', label: 'Halves every (h)', type: 'number', value: 3.5, suffix: 'years', showIf: { mode: ['half', 'halfTime'] } },
+    { id: 'rate', label: 'Loses each year (r)', type: 'number', value: 15, suffix: '%', showIf: { mode: ['pct', 'pctTime'] } },
+    { id: 't', label: 'Years after purchase (t)', type: 'number', value: 10, suffix: 'years', showIf: { mode: ['half', 'pct'] } },
+    { id: 'target', label: 'Target value (V)', type: 'number', value: 3100, prefix: '$', showIf: { mode: ['halfTime', 'pctTime'] } },
+    { id: 'round', label: 'Round the value to the nearest', type: 'select', value: '100', options: [['100', 'hundred dollars'], ['1', 'dollar'], ['0.01', 'cent']], showIf: { mode: ['half', 'pct'] } },
+    { id: 'tround', label: 'Round the time to the nearest', type: 'select', value: '0.1', options: [['0.1', 'tenth of a year'], ['1', 'whole year'], ['0.01', 'hundredth of a year']], showIf: { mode: ['halfTime', 'pctTime'] } }
   ],
   compute(v, H) {
-    if (!(v.price > 0)) return { error: 'Enter what you paid for the car.' };
-    if (!(v.years > 0) || v.years > 40) return { error: 'Enter how many years you have owned it (up to 40).' };
-    var isNew = v.bought !== 'used';
-    var f = isNew ? (v.first >= 0 && v.first < 100 ? v.first / 100 : NaN) : null;
-    var s = v.later >= 0 && v.later < 100 ? v.later / 100 : NaN;
-    if ((isNew && !(f >= 0)) || !(s >= 0)) return { error: 'Enter depreciation rates between 0% and 99%.' };
-    function valAt(y) {
-      if (!isNew) return v.price * Math.pow(1 - s, y);
-      if (y <= 1) return v.price * Math.pow(1 - f, y);
-      return v.price * (1 - f) * Math.pow(1 - s, y - 1);
+    var m = v.mode;
+    if (!(v.v0 > 0)) return { error: 'Enter the purchase price.' };
+    var isHalf = m === 'half' || m === 'halfTime';
+    if (isHalf && !(v.h > 0)) return { error: 'Enter how many years it takes to lose half its value.' };
+    if (!isHalf && !(v.rate > 0 && v.rate < 100)) return { error: 'Enter a yearly loss between 0% and 100%.' };
+    var r = v.rate / 100, b = isHalf ? 0.5 : 1 - r;
+    var money = function (x) { return H.money(x, 2); };
+    var p = function (x) { return H.num(x, 6); };
+    var formula = isHalf ? 'V = V₀ × (1/2)<sup>t ÷ h</sup>' : 'V = V₀ × (1 − r)<sup>t</sup>';
+    if (m === 'half' || m === 'pct') {
+      if (!(v.t >= 0)) return { error: 'Enter the number of years.' };
+      var e = isHalf ? v.t / v.h : v.t, f = Math.pow(b, e), val = v.v0 * f;
+      var step = Number(v.round) || 100, rounded = Math.round(val / step) * step;
+      var unit = step === 100 ? 'hundred dollars' : step === 1 ? 'dollar' : 'cent';
+      var shown = step === 0.01 ? money(rounded) : H.money(rounded, 0);
+      var steps = ['<b>Formula:</b> ' + formula];
+      if (isHalf) {
+        steps.push('<b>Substitute:</b> V = ' + H.num(v.v0, 2) + ' × (1/2)<sup>' + H.num(v.t, 4) + ' ÷ ' + H.num(v.h, 4) + '</sup>');
+        steps.push('<b>Exponent (number of half-lives):</b> ' + H.num(v.t, 4) + ' ÷ ' + H.num(v.h, 4) + ' = ' + p(e));
+        steps.push('<b>Power:</b> (1/2)<sup>' + p(e) + '</sup> = 0.5<sup>' + p(e) + '</sup> = ' + p(f));
+      } else {
+        steps.push('<b>Substitute:</b> V = ' + H.num(v.v0, 2) + ' × (1 − ' + H.num(r, 6) + ')<sup>' + H.num(v.t, 4) + '</sup>');
+        steps.push('<b>Subtract:</b> 1 − ' + H.num(r, 6) + ' = ' + H.num(b, 6) + ' (the share of its value the car keeps each year)');
+        steps.push('<b>Power:</b> ' + H.num(b, 6) + '<sup>' + H.num(v.t, 4) + '</sup> = ' + p(f));
+      }
+      steps.push('<b>Multiply:</b> ' + H.num(v.v0, 2) + ' × ' + p(f) + ' = ' + money(val));
+      steps.push('<b>Answer:</b> the car is worth ' + shown + ' after ' + H.plural(v.t, 'year') + ', rounded to the nearest ' + unit + ' (' + money(val) + ' before rounding).');
+      return {
+        value: shown,
+        label: 'Value after ' + H.plural(v.t, 'year'),
+        rows: [['Value lost', money(v.v0 - val)], ['Share of the price left', H.pct(f * 100, 2)], [isHalf ? 'Same as losing, each year' : 'Half its value is gone after', isHalf ? H.pct((1 - Math.pow(0.5, 1 / v.h)) * 100, 2) : H.num(Math.log(0.5) / Math.log(b), 2) + ' years']],
+        steps: steps
+      };
     }
-    var val = valAt(v.years);
-    var lost = v.price - val;
-    var rows = [
-      ['Total depreciation', H.money0(lost), true],
-      ['Share of value lost', H.pct(lost / v.price * 100, 1)],
-      ['Average loss per year', H.money0(lost / v.years)],
-      ['Average loss per month', H.money0(lost / v.years / 12)],
-      ['Estimated value one year later', H.money0(valAt(v.years + 1))]
-    ];
-    if (v.owed >= 0) {
-      var eq = val - v.owed;
-      rows.push([eq >= 0 ? 'Equity (value − loan)' : 'Negative equity (upside down)', H.money0(Math.abs(eq)), true]);
-    }
-    var tr = [], prev = v.price, last = Math.max(5, Math.ceil(v.years));
-    for (var y = 1; y <= Math.min(last, 15); y++) {
-      var x = valAt(y);
-      tr.push(['Year ' + y, H.money0(x), H.money0(prev - x), H.pct((1 - x / v.price) * 100, 1)]);
-      prev = x;
-    }
+    if (!(v.target > 0) || v.target >= v.v0) return { error: 'Enter a target value above $0 and below the purchase price.' };
+    var ratio = v.target / v.v0, lr = Math.log10(ratio), lb = Math.log10(b), n = lr / lb, T = isHalf ? v.h * n : n;
+    var ts = Number(v.tround) || 0.1, Tr = Math.round(T / ts) * ts, dp = ts === 1 ? 0 : ts === 0.1 ? 1 : 2;
+    var tunit = ts === 1 ? 'whole year' : ts === 0.1 ? 'tenth of a year' : 'hundredth of a year';
+    var st = ['<b>Formula:</b> ' + formula + '. Solve for t by taking the log of both sides: ' + (isHalf ? 't = h × log(V ÷ V₀) ÷ log(1/2)' : 't = log(V ÷ V₀) ÷ log(1 − r)'),
+      '<b>Substitute:</b> t = ' + (isHalf ? H.num(v.h, 4) + ' × ' : '') + 'log(' + H.num(v.target, 2) + ' ÷ ' + H.num(v.v0, 2) + ') ÷ log(' + H.num(b, 6) + ')',
+      '<b>Divide:</b> ' + H.num(v.target, 2) + ' ÷ ' + H.num(v.v0, 2) + ' = ' + p(ratio),
+      '<b>Logs (base 10):</b> log(' + p(ratio) + ') = ' + p(lr) + ' and log(' + H.num(b, 6) + ') = ' + p(lb),
+      '<b>Divide the logs:</b> ' + p(lr) + ' ÷ ' + p(lb) + ' = ' + p(n) + (isHalf ? ' half-lives' : ' years')];
+    if (isHalf) st.push('<b>Multiply by the half-life:</b> ' + H.num(v.h, 4) + ' × ' + p(n) + ' = ' + p(T) + ' years');
+    st.push('<b>Answer:</b> about ' + H.num(Tr, dp) + ' years, rounded to the nearest ' + tunit + ' (' + p(T) + ' before rounding).');
     return {
-      value: H.money0(val),
-      label: 'Estimated value after ' + H.plural(v.years, 'year'),
-      expr: isNew ? H.money0(v.price) + ' × ' + H.num(1 - f, 2) + (v.years > 1 ? ' × ' + H.num(1 - s, 2) + '^' + H.num(v.years - 1, 2) : '') : H.money0(v.price) + ' × ' + H.num(1 - s, 2) + '^' + H.num(v.years, 2),
-      rows: rows,
-      sub: 'An estimate from average depreciation rates. Mileage, condition, accident history and the model\'s demand can move the real value a lot either way.',
-      table: { head: ['End of', 'Value', 'Lost that year', 'Total lost'], rows: tr, caption: 'Year-by-year value' }
+      value: H.num(Tr, dp) + ' years',
+      label: 'Time until it is worth ' + money(v.target),
+      rows: [['Share of the price left then', H.pct(ratio * 100, 2)]],
+      steps: st
     };
   },
-  quick: ({ r }) => `To calculate car depreciation, apply a yearly percentage loss to the car's value. A commonly used estimate is about 20% in the first year and 15% a year after that. A <strong>$40,000</strong> new car is then worth 40,000 × 0.80 × 0.85<sup>4</sup> = <strong>${r.value}</strong> after five years, a $23,296 (58%) loss, or about $388 a month.`,
-  stepsTitle: 'How to estimate how much your car has depreciated',
-  steps: [
-    'Enter the price you paid, including options but not tax, registration or loan costs.',
-    'Choose whether you bought it new or used. A used car has already taken the steep first-year drop, so the calculator applies the later-year rate from day one.',
-    'Enter the years you have owned it (decimals are fine: 2.5 for two and a half years).',
-    'Adjust the rates if you know your model holds value better or worse than average. Treating depreciation as a flat dollar amount each year instead of a percentage of the remaining value is the most common mistake: cars lose the most dollars early.',
-    'Optionally enter your loan payoff to see your equity.'
-  ],
-  formulaTitle: 'What is the formula for car depreciation?',
-  formula: {
-    expr: 'New car: V = P × (1 − f) × (1 − s)<sup>t − 1</sup><br>Used car: V = P × (1 − s)<sup>t</sup><br>Depreciation = P − V',
-    vars: [['V', 'estimated value after t years'], ['P', 'purchase price'], ['f', 'first-year depreciation rate'], ['s', 'yearly depreciation rate after year one'], ['t', 'years owned']],
-    note: 'This is the declining-balance method: each year the car loses a percentage of what it is still worth. Business owners writing off a vehicle on a tax return use IRS rules instead (MACRS, with annual dollar limits for passenger cars), which are not the same as market value.'
+  facts: {
+    formula: 'Halves every h years: V = V₀ × (1/2)<sup>t ÷ h</sup><br>Loses r per year: V = V₀ × (1 − r)<sup>t</sup><br>Time to reach V: t = h × log(V ÷ V₀) ÷ log(1/2)',
+    vars: [['V', 'value after t years'], ['V₀', 'purchase price'], ['h', 'years it takes to lose half its value (the half-life)'], ['r', 'yearly loss as a decimal: 15% = 0.15'], ['t', 'years since purchase']],
+    rounding: 'keep every digit until the end, then round as the question asks: values usually to the nearest hundred dollars, times to the nearest tenth of a year.',
+    note: 'This is exponential decay, the same model used for radioactive half-life. Real cars do not lose value at one steady rate; the formula is the model homework and textbooks use.'
   },
-  example: `<p>A car bought new for $32,000 and kept 3 years, using 20% for year one and 15% a year after.</p>
-<p>After year 1: 32,000 × 0.80 = <strong>$25,600</strong> (lost $6,400).</p>
-<p>After year 2: 25,600 × 0.85 = <strong>$21,760</strong> (lost $3,840).</p>
-<p>After year 3: 21,760 × 0.85 = <strong>$18,496</strong> (lost $3,264).</p>
-<p>Total depreciation = $13,504, or 42% of the price. If $14,000 is still owed on the loan, equity is $18,496 − $14,000 = <strong>$4,496</strong>.</p>`,
-  table: {
-    title: 'How much is a $40,000 car worth after each year?',
-    intro: 'Estimated value of a $40,000 new car by age under slow, typical and fast depreciation profiles (first-year rate / later-year rate).',
-    head: ['Age', 'Slow (15% / 10%)', 'Typical (20% / 15%)', 'Fast (25% / 20%)'],
-    rows: ({ run }) => [1, 2, 3, 4, 5, 6, 7, 8, 10, 12].map(y => ['Year ' + y, ...[[15, 10], [20, 15], [25, 20]].map(p => run({ price: 40000, bought: 'new', years: y, first: p[0], later: p[1], owed: NaN }).value)]),
-    note: 'These are modeled curves, not price-guide data. Check a current pricing guide or get dealer offers before selling, trading in or settling an insurance claim.'
+  example: {
+    h2: 'Worked example: a $16,000 car that halves every 7 years',
+    html: `<p><strong>Problem:</strong> A new car is purchased for $16,000 and over time its value depreciates by one half every 7 years. What is the value of the car 12 years after it was purchased, to the nearest hundred dollars?</p>
+<p><strong>1.</strong> "Depreciates by one half every 7 years" is a half-life, so V = V₀ × (1/2)<sup>t ÷ h</sup> with V₀ = 16,000, h = 7 and t = 12.</p>
+<p><strong>2.</strong> Number of half-lives: 12 ÷ 7 = 1.714286.</p>
+<p><strong>3.</strong> Power: 0.5<sup>1.714286</sup> = 0.304753.</p>
+<p><strong>4.</strong> Multiply: 16,000 × 0.304753 = $4,876.05.</p>
+<p><strong>Answer:</strong> $4,900 to the nearest hundred dollars. Sense check: after 7 years the car is worth $8,000 and after 14 years $4,000, so 12 years must land between them, closer to $4,000.</p>`
   },
-  sections: [
+  variants: [
     {
-      h2: 'How much does a car depreciate per year and per mile?',
-      html: `<p>In dollars, the first year is the worst. On the typical curve a $40,000 car loses $8,000 in year one, $4,800 in year two and $4,080 in year three; by year ten it is losing about $1,300 a year. As a share of what is left, the rate settles into a steady percentage, which is why the curve flattens.</p>
-<p>Per mile, divide the dollar loss by the miles driven. The $23,296 lost over five years and 60,000 miles is about <strong>39¢ a mile</strong>, often more than fuel. Higher-than-average mileage pushes value down faster; low mileage holds it up. The IRS standard mileage rate for business driving includes an allowance for depreciation for the same reason.</p>`
+      h2: 'A new car is purchased for $27,000 and depreciates by one half every 3.5 years…',
+      html: `<p>For this homework problem, use V = 27,000 × (1/2)<sup>t ÷ 3.5</sup> and put in the number of years your question asks about. After 10 years: 10 ÷ 3.5 = 2.857143 half-lives, 0.5<sup>2.857143</sup> = 0.138011, and 27,000 × 0.138011 = $3,726.30, which is <strong>$3,700</strong> to the nearest hundred dollars.</p>
+<div class="twrap"><table><thead><tr><th>Years after purchase</th><th>Exact value</th><th>Nearest $100</th></tr></thead><tbody>
+<tr><td>5</td><td>$10,030.46</td><td>$10,000</td></tr><tr><td>10</td><td>$3,726.30</td><td>$3,700</td></tr><tr><td>12</td><td>$2,507.62</td><td>$2,500</td></tr><tr><td>15</td><td>$1,384.32</td><td>$1,400</td></tr><tr><td>20</td><td>$514.27</td><td>$500</td></tr>
+</tbody></table></div>
+<p>Versions with other prices or half-lives ($28,000 every 3 years, $37,000 every 6 years) work the same way: change V₀ and h in the calculator.</p>`
     },
     {
-      h2: 'How do you calculate car equity?',
-      html: `<p>Equity = the car's current market value − the loan payoff amount. If the result is negative, you are "upside down": selling or trading the car would not clear the loan. Using the default car, a $16,704 value against an $18,000 payoff is about $1,296 of negative equity.</p>
-<p>Depreciation is fastest early while the loan balance falls slowly, so long loans and small down payments are the usual cause. The CFPB explains that lenders measure this as the loan-to-value ratio, and that negative equity rolled into a new car loan raises what you owe. If you plan to trade in, see how a payoff above the trade-in value changes your next loan in the <a href="/car-loan-calculator">car loan calculator</a>.</p>`
+      h2: 'How long until the car is worth a given amount?',
+      html: `<p>Some versions ask the reverse: "A new car is purchased for $40,000 and its value depreciates by one half every 6.5 years. How long, to the nearest tenth of a year, until the value is $3,100?" Solve for t with logs: t = 6.5 × log(3,100 ÷ 40,000) ÷ log(0.5). Here 3,100 ÷ 40,000 = 0.0775, log(0.0775) = −1.110698 and log(0.5) = −0.301030, so t = 6.5 × 3.689690 = 23.98, or <strong>24.0 years</strong>. Pick "how long" in the calculator to get these steps for your numbers.</p>`
     },
     {
-      h2: 'How do you calculate the salvage value of a vehicle?',
-      html: `<p>"Salvage value" has two meanings. In <strong>accounting</strong>, it is the value you expect the vehicle to have at the end of its useful life. With straight-line depreciation, yearly depreciation = (cost − salvage value) ÷ useful life: a $40,000 work truck expected to be worth $8,000 after 8 years depreciates $4,000 a year. The <a href="/depreciation-calculator">depreciation calculator</a> handles straight-line and other book methods.</p>
-<p>In <strong>insurance</strong>, it is what a damaged, totaled vehicle is worth to a salvage buyer. The insurer pays the car's actual cash value before the loss; if you keep the wreck, the insurer typically deducts its salvage value from the payout. That amount varies with the damage and local salvage prices, so ask the adjuster for the figure.</p>`
-    },
-    {
-      h2: 'Can you deduct car depreciation on your taxes?',
-      html: `<p>Only for the business-use share of a vehicle. You either take the IRS standard mileage rate, which already includes depreciation, or deduct actual expenses including depreciation under MACRS, where cars are 5-year property and passenger vehicles are subject to annual dollar caps. If business use is 50% or less, you must use the slower straight-line alternative system. Personal-use depreciation is never deductible, and losing money when you sell a personal car is not a deductible loss.</p>
-<p>IRS Publication 946 covers depreciation methods, and Publication 463 covers the car rules, including the yearly limits.</p>`
+      h2: 'What if the car loses a percentage every year?',
+      html: `<p>"For each consecutive year, the value of the car depreciated by 7%" is percentage decay, not a half-life. Use V = V₀ × (1 − r)<sup>t</sup>. A car bought in 2001 for $22,000 is worth 22,000 × 0.93<sup>4</sup> = $16,457.14 in 2005, or <strong>$16,500</strong> to the nearest hundred. Count t as the years between the dates (2005 − 2001 = 4), not the number of years listed.</p>`
     }
   ],
+  mistakes: [
+    '<strong>Mixing up half-life and percentage decay.</strong> "Half every 3.5 years" is not 50% ÷ 3.5 = 14.3% a year. The equivalent yearly loss is 1 − 0.5<sup>1/3.5</sup> = 17.97%.',
+    '<strong>Dividing the wrong way in the exponent.</strong> The exponent is years ÷ half-life (10 ÷ 3.5), not half-life ÷ years.',
+    '<strong>Subtracting half the price each period.</strong> Each half-life halves what is left, not the original price. After two half-lives a $27,000 car is worth $6,750, not $0.',
+    '<strong>Rounding the exponent early.</strong> Using 2.86 instead of 2.857143 moves the value by several dollars and can change the rounded answer.'
+  ],
+  related: ['compound-interest-calculator', 'exponent-calculator', 'percentage-calculator', 'scientific-notation-calculator'],
   faq: [
-    { q: 'How much is a 3-year-old $35,000 car worth?', a: 'About $20,230 on the typical curve: 35,000 × 0.80 × 0.85 × 0.85. That is a loss of $14,770, or 42%.' },
-    { q: 'When does a car depreciate the most?', a: 'In the first year, and especially the moment it becomes a used car. On the typical curve a new car loses a fifth of its value in year one, nearly as many dollars as it loses in the next two years combined.' },
-    { q: 'What percentage does a car depreciate per year?', a: 'A common estimate is about 20% in year one and roughly 15% a year after that, so a typical new car keeps a bit over 40% of its value at five years. Actual rates vary widely by model, mileage and market conditions.' },
-    { q: 'Does buying used avoid depreciation?', a: 'It avoids the steepest part. A two- or three-year-old car has already lost roughly a third or more of its value, so you pay for less depreciation, though the car keeps losing value each year you own it.' },
-    { q: 'Which cars hold their value best?', a: 'Vehicles in steady demand with strong reliability reputations, such as many pickups and popular SUVs, tend to depreciate more slowly. Luxury cars with high running costs often depreciate faster. Use slower or faster rates in the calculator to compare.' },
-    { q: 'How can I slow my car\'s depreciation?', a: 'Keep mileage reasonable, follow the maintenance schedule and keep records, fix damage properly, avoid unusual modifications and keep the interior clean. A documented service history supports a higher resale price.' }
+    { q: 'What yearly percentage is the same as halving every 3.5 years?', a: 'About 17.97% a year. The car keeps 0.5<sup>1/3.5</sup> = 0.8203 of its value each year, so it loses 1 − 0.8203 = 0.1797.' },
+    { q: 'How do you write the depreciation formula for a car that halves every N years?', a: 'V = V₀ × (1/2)<sup>t/N</sup>, where V₀ is the purchase price and t is the years since purchase. Some textbooks write it as V = V₀(0.5)<sup>t/N</sup>; it is the same formula.' },
+    { q: 'How much does a car depreciate per year?', a: 'There is no single rate: it depends on the model, mileage and condition. Homework problems give you either a half-life or a yearly percentage, and the calculator handles both.' },
+    { q: 'Why round to the nearest hundred dollars?', a: 'Because the question says so, and a car\'s value is not known to the cent. Round only the final value, never the exponent or the power.' }
   ],
-  related: ['car-loan-calculator', 'car-affordability-calculator', 'lease-calculator', 'depreciation-calculator'],
   sources: [
-    { name: 'IRS: Publication 946, How to Depreciate Property', url: 'https://www.irs.gov/publications/p946' },
-    { name: 'IRS: Publication 463, Travel, Gift, and Car Expenses', url: 'https://www.irs.gov/publications/p463' },
-    { name: 'IRS: Standard mileage rates', url: 'https://www.irs.gov/tax-professionals/standard-mileage-rates' },
-    { name: 'CFPB: What is a loan-to-value ratio in an auto loan?', url: 'https://www.consumerfinance.gov/ask-cfpb/what-is-a-loan-to-value-ratio-in-an-auto-loan-en-769/' }
-  ],
-  disclaimer: 'Depreciation rates are averages for estimating, not an appraisal of any specific vehicle.'
+    { name: 'OpenStax College Algebra 2e: Exponential and Logarithmic Models', url: 'https://openstax.org/books/college-algebra-2e/pages/6-7-exponential-and-logarithmic-models' }
+  ]
 };

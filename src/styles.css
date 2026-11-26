@@ -214,3 +214,35 @@ footer a:hover { color: var(--ink); text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 code { font: 400 .88em/1.5 var(--mono); background: var(--surface); padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; word-break: break-word; }
 .article p, .article li, .example, .formula { overflow-wrap: break-word; }
+
+/* show-the-work template */
+.v2-head { padding: 18px 0 20px; }
+.v2-head h1 { margin-bottom: 10px; }
+.answer-line { font-size: 19px; line-height: 1.5; color: var(--ink); margin: 0; max-width: 700px; }
+.answer-line strong { font-weight: 650; }
+@media (max-width: 520px) { .v2-head { padding: 12px 0 14px; } .v2-head h1 { font-size: 31px; } .answer-line { font-size: 17px; } }
+.calc-v2 { margin-bottom: 40px; }
+.work { margin-top: 18px; }
+.work-h { font: 600 13px/1 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.work-steps { margin: 0; padding: 0 0 0 26px; font-size: 15px; line-height: 1.55; color: var(--text); }
+.work-steps li { padding: 6px 0; border-bottom: 1px dashed var(--line-2); overflow-wrap: anywhere; }
+.work-steps li:last-child { border-bottom: 0; }
+.work-steps li::marker { font-weight: 600; color: var(--muted); }
+.work-steps b, .work-steps strong { color: var(--ink); }
+.facts { background: var(--surface); border-radius: var(--r); padding: 18px 20px; margin: 0 0 8px; border-left: 3px solid var(--dot); }
+.article .facts h2 { font: 600 13px/1 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.facts .expr-big { font: 500 17px/1.7 var(--f); color: var(--ink); overflow-wrap: break-word; }
+.calc-out .actions { margin-top: 16px; }
+.facts dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 12px 0 0; font-size: 15px; }
+.facts dt { font: 600 14px var(--mono); color: var(--ink); } .facts dd { margin: 0; color: var(--muted); }
+.facts-r { font-size: 15px; margin: 10px 0 0; }
+.mistakes li { margin: 8px 0; }
+@media (max-width: 520px) {
+  .calc-v2 .calc-in { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; padding: 16px 14px; }
+  .calc-v2 .calc-out { padding: 16px 14px; }
+  .calc-v2 .field label { font-size: 14px; }
+  .calc-v2 input[type=text], .calc-v2 select { padding: 10px; font-size: 16px; }
+  .calc-v2 .inp .pre, .calc-v2 .inp .suf { padding: 0 6px; font-size: 14px; }
+  .calc-v2 .actions { padding-top: 0; }
+  .calc-v2 .r-value { font-size: 44px; }
+}

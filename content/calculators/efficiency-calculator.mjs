@@ -2,135 +2,141 @@ export default {
   slug: 'efficiency-calculator',
   hub: 'science',
   name: 'Efficiency Calculator',
-  title: 'Efficiency Calculator: 900 J Out of 1,200 J In Is 75%',
-  h1: 'Efficiency Calculator: Useful Output ÷ Input for Energy, Power and Motors',
-  meta: 'A device that turns 1,200 J of input into 900 J of useful work is 75% efficient and wastes 300 J. Solve for efficiency, output or input, or rate a motor.',
-  keyword: 'how do we calculate efficiency',
-  also: ['efficiency calculator', 'how to calculate efficiency', 'how to calculate efficiency of energy transfer', 'how to calculate energy efficiency', 'how to calculate the efficiency of an electric motor', 'how to calculate motor efficiency', 'efficiency formula physics'],
-  updated: '2026-11-13',
+  title: 'Efficiency Calculator: 5000 J of 6500 J In = 76.92% (Steps)',
+  meta: '6500 J put into a machine that gives 5000 J of useful work is 76.92% efficient. Find efficiency from input and output or wasted energy, or the energy lost.',
+  keyword: 'efficiency calculator',
+  also: ['how to calculate efficiency', 'efficiency formula physics', 'useful output energy', 'energy wasted as heat', 'calculate the overall efficiency'],
+  updated: '2026-11-26',
+  answer: ({ r }) => `A machine that is given 6,500 J of energy and does 5,000 J of useful work is <strong>${r.value}</strong> efficient: 5,000 ÷ 6,500 × 100.`,
   inputs: [
-    { id: 'solve', label: 'Find', type: 'select', value: 'eff', options: [['eff', 'Efficiency from output and input'], ['out', 'Useful output from input and efficiency'], ['in', 'Input needed from output and efficiency'], ['motor', 'Electric motor efficiency (hp, volts, amps)']] },
-    { id: 'out', label: 'Useful output', type: 'number', value: 900, showIf: { solve: ['eff', 'in'] } },
-    { id: 'inp', label: 'Total input', type: 'number', value: 1200, showIf: { solve: ['eff', 'out'] } },
-    { id: 'pct', label: 'Efficiency', type: 'number', value: 75, suffix: '%', showIf: { solve: ['out', 'in'] } },
-    { id: 'unit', label: 'Unit (same for both)', type: 'select', value: 'J', options: [['J', 'joules (J)'], ['kJ', 'kilojoules (kJ)'], ['kWh', 'kilowatt-hours (kWh)'], ['W', 'watts (W)'], ['kW', 'kilowatts (kW)'], ['BTU', 'BTU'], ['cal', 'calories']], showIf: { solve: ['eff', 'out', 'in'] } },
-    { id: 'hp', label: 'Rated output (shaft power)', type: 'number', value: 5, suffix: 'hp', showIf: { solve: ['motor'] } },
-    { id: 'volts', label: 'Supply voltage', type: 'number', value: 460, suffix: 'V', showIf: { solve: ['motor'] } },
-    { id: 'amps', label: 'Measured current', type: 'number', value: 6.6, suffix: 'A', showIf: { solve: ['motor'] } },
-    { id: 'phase', label: 'Phase', type: 'select', value: '3', options: [['3', 'Three-phase'], ['1', 'Single-phase']], showIf: { solve: ['motor'] } },
-    { id: 'pf', label: 'Power factor', type: 'number', value: 0.85, help: 'From the nameplate; 0.8–0.9 is typical at full load. Use 1 for DC motors.', showIf: { solve: ['motor'] } }
+    { id: 'mode', label: 'The question gives', type: 'select', value: 'out', wide: true, options: [['out', 'Total input and useful output: find the efficiency'], ['waste', 'Total input and energy wasted: find the efficiency'], ['fromIn', 'Total input and efficiency: find the useful output'], ['fromOut', 'Useful output and efficiency: find the energy lost']] },
+    { id: 'inp', label: 'Total energy input', type: 'number', value: 6500, showIf: { mode: ['out', 'waste', 'fromIn'] } },
+    { id: 'out', label: 'Useful energy output', type: 'number', value: 5000, showIf: { mode: ['out', 'fromOut'] } },
+    { id: 'waste', label: 'Energy wasted', type: 'number', value: 1500, showIf: { mode: ['waste'] } },
+    { id: 'eff', label: 'Efficiency', type: 'number', value: 85, suffix: '%', showIf: { mode: ['fromIn', 'fromOut'] } },
+    { id: 'unit', label: 'Unit', type: 'select', value: 'J', options: [['J', 'J (joules)'], ['kJ', 'kJ (kilojoules)'], ['MJ', 'MJ (megajoules)'], ['kWh', 'kWh (kilowatt-hours)'], ['W', 'W (watts, for power)'], ['kW', 'kW (kilowatts)']] }
   ],
   compute(v, H) {
-    var u = v.unit || 'J', out, inp, e;
-    if (v.solve === 'motor') {
-      if (!(v.hp > 0)) return { error: 'Enter the motor output in horsepower.' };
-      if (!(v.volts > 0) || !(v.amps > 0)) return { error: 'Enter the supply voltage and current.' };
-      var pf = v.pf > 0 && v.pf <= 1 ? v.pf : 1;
-      var k = v.phase === '3' ? Math.sqrt(3) : 1;
-      inp = k * v.volts * v.amps * pf; out = v.hp * 745.7; e = out / inp * 100;
-      if (e > 100) return { error: 'Output is larger than electrical input (' + H.int(inp) + ' W). Check the current, voltage or power factor.' };
+    var u = ' ' + (v.unit || 'J');
+    var f = function (x) { return H.num(x, 10); };
+    var p6 = function (x) { return H.num(x, 6); };
+    var pc = function (x) {
+      var r = H.round(x, 2);
+      return { s: H.num(r, 2) + '%', note: Math.abs(r - x) < 1e-9 ? 'exact, no rounding needed' : 'rounded to 2 decimal places', whole: Math.round(x) + '%' };
+    };
+    var en = function (x) {
+      return Math.abs(H.round(x, 4) - x) < 1e-9 ? { s: H.num(x, 4), note: 'exact' } : { s: H.sig(x, 3), note: 'to 3 significant figures' };
+    };
+    var m = v.mode, steps, inp, out, w, e, d;
+    if (m === 'fromIn' || m === 'fromOut') {
+      if (!(v.eff > 0 && v.eff <= 100)) return { error: 'Enter an efficiency above 0% and no more than 100%.' };
+      var dec = v.eff / 100;
+      if (m === 'fromIn') {
+        if (!(v.inp > 0)) return { error: 'Enter the total energy input.' };
+        inp = v.inp; out = inp * dec; w = inp - out;
+        var uo = en(out), wo = en(w);
+        return {
+          value: uo.s + u,
+          label: 'Useful energy output',
+          rows: [['Energy wasted', wo.s + u], ['Total input', f(inp) + u]],
+          steps: [
+            '<b>Formula:</b> useful output = total input × (efficiency ÷ 100), and energy wasted = total input − useful output',
+            '<b>Substitute:</b> useful output = ' + f(inp) + u + ' × (' + f(v.eff) + ' ÷ 100)',
+            '<b>Turn the percent into a decimal:</b> ' + f(v.eff) + ' ÷ 100 = ' + f(dec),
+            '<b>Multiply:</b> ' + f(inp) + u + ' × ' + f(dec) + ' = ' + p6(out) + u,
+            '<b>Subtract to find the waste:</b> ' + f(inp) + u + ' − ' + p6(out) + u + ' = ' + p6(w) + u,
+            '<b>Answer:</b> the useful output is ' + uo.s + u + ' (' + uo.note + ') and ' + wo.s + u + ' is wasted (' + wo.note + ').'
+          ]
+        };
+      }
+      if (!(v.out > 0)) return { error: 'Enter the useful energy output.' };
+      out = v.out; inp = out / dec; w = inp - out;
+      var io = en(inp), lo = en(w);
       return {
-        value: H.pct(e, 1), label: 'Motor efficiency',
-        expr: H.num(out, 0) + ' W ÷ ' + H.num(inp, 0) + ' W',
-        rows: [['Shaft output', H.num(out, 0) + ' W (' + H.num(v.hp, 2) + ' hp × 745.7)'], ['Electrical input', H.num(inp, 0) + ' W', true], ['Losses as heat', H.num(inp - out, 0) + ' W'], ['Input formula', (v.phase === '3' ? '√3 × ' : '') + 'V × A × PF']],
-        sub: e >= 90 ? 'High efficiency: typical of a modern premium-efficiency motor near full load.' : e >= 80 ? 'Reasonable for a small or older motor; efficiency also drops when a motor runs well below its rated load.' : 'Low. Small motors and lightly loaded motors are often this inefficient, or the measured current includes other loads.'
+        value: lo.s + u,
+        label: 'Energy lost to the surroundings',
+        rows: [['Total input needed', io.s + u], ['Useful output', f(out) + u]],
+        steps: [
+          '<b>Formula:</b> total input = useful output ÷ (efficiency ÷ 100), then energy lost = total input − useful output',
+          '<b>Substitute:</b> total input = ' + f(out) + u + ' ÷ (' + f(v.eff) + ' ÷ 100)',
+          '<b>Turn the percent into a decimal:</b> ' + f(v.eff) + ' ÷ 100 = ' + f(dec),
+          '<b>Divide:</b> ' + f(out) + u + ' ÷ ' + f(dec) + ' = ' + p6(inp) + u + ' (the total input)',
+          '<b>Subtract:</b> ' + p6(inp) + u + ' − ' + f(out) + u + ' = ' + p6(w) + u,
+          '<b>Answer:</b> ' + lo.s + u + ' is lost to the surroundings (' + lo.note + '), from a total input of ' + io.s + u + '.'
+        ]
       };
     }
-    if (v.solve === 'eff') {
-      if (!(v.inp > 0)) return { error: 'Enter the total input, greater than zero.' };
-      if (!(v.out >= 0)) return { error: 'Enter the useful output.' };
-      out = v.out; inp = v.inp; e = out / inp * 100;
-      if (e > 100) return { error: 'Useful output cannot exceed total input. Swap the numbers or check your units.' };
-    } else if (v.solve === 'out') {
-      if (!(v.inp > 0)) return { error: 'Enter the total input.' };
-      if (!(v.pct > 0 && v.pct <= 100)) return { error: 'Efficiency must be between 0 and 100%.' };
-      inp = v.inp; e = v.pct; out = inp * e / 100;
+    if (!(v.inp > 0)) return { error: 'Enter the total energy input, greater than 0.' };
+    inp = v.inp;
+    steps = [];
+    if (m === 'waste') {
+      if (!(v.waste >= 0) || v.waste > inp) return { error: 'Enter the energy wasted: at least 0 and no more than the input.' };
+      w = v.waste; out = inp - w;
+      steps.push('<b>Formula:</b> efficiency = (useful output ÷ total input) × 100%, where useful output = total input − energy wasted');
+      steps.push('<b>Find the useful output first:</b> ' + f(inp) + u + ' − ' + f(w) + u + ' = ' + f(out) + u);
     } else {
-      if (!(v.out > 0)) return { error: 'Enter the useful output you need.' };
-      if (!(v.pct > 0 && v.pct <= 100)) return { error: 'Efficiency must be between 0 and 100%.' };
-      out = v.out; e = v.pct; inp = out / (e / 100);
+      if (!(v.out >= 0)) return { error: 'Enter the useful energy output.' };
+      if (v.out > inp) return { error: 'The useful output cannot be more than the total input. Check you have not swapped them.' };
+      out = v.out; w = inp - out;
+      steps.push('<b>Formula:</b> efficiency = (useful output ÷ total input) × 100%');
     }
-    var waste = inp - out;
-    var rows = [
-      ['Useful output', H.num(out, 3) + ' ' + u, v.solve === 'out'],
-      ['Total input', H.num(inp, 3) + ' ' + u, v.solve === 'in'],
-      ['Wasted (mostly heat)', H.num(waste, 3) + ' ' + u + ' (' + H.pct(100 - e, 1) + ')'],
-      ['Efficiency as a decimal', H.num(e / 100, 4)],
-      ['Input per 1 unit of useful output', H.num(inp / Math.max(out, 1e-300), 3)]
-    ];
-    var res = v.solve === 'eff' ? { value: H.pct(e, 1), label: 'Efficiency', expr: H.num(out, 3) + ' ÷ ' + H.num(inp, 3) + ' × 100' }
-      : v.solve === 'out' ? { value: H.num(out, 3) + ' ' + u, label: 'Useful output', expr: H.num(inp, 3) + ' × ' + H.pct(e, 2) }
-        : { value: H.num(inp, 3) + ' ' + u, label: 'Input required', expr: H.num(out, 3) + ' ÷ ' + H.num(e / 100, 4) };
-    res.rows = rows;
-    res.sub = 'Of every 100 ' + u + ' supplied, ' + H.num(e, 1) + ' do the job you want and ' + H.num(100 - e, 1) + ' are lost to the surroundings.';
-    return res;
+    d = out / inp; e = d * 100;
+    var a = pc(e);
+    steps.push('<b>Substitute:</b> efficiency = (' + f(out) + u + ' ÷ ' + f(inp) + u + ') × 100%');
+    steps.push('<b>Divide:</b> ' + f(out) + u + ' ÷ ' + f(inp) + u + ' = ' + p6(d) + '. The' + u + ' cancel, so efficiency has no unit.');
+    steps.push('<b>Multiply by 100%:</b> ' + p6(d) + ' × 100% = ' + p6(e) + '%');
+    steps.push('<b>Answer:</b> the efficiency is ' + a.s + ' (' + a.note + '; ' + a.whole + ' to the nearest whole percent)' + (m === 'waste' ? '.' : ', and ' + f(w) + u + ' is wasted.'));
+    return {
+      value: a.s,
+      label: 'Efficiency',
+      rows: [['Useful output', f(out) + u], ['Energy wasted', f(w) + u], ['As a decimal', p6(d)]],
+      steps: steps
+    };
   },
-  quick: ({ r }) => `To calculate efficiency, divide the useful energy (or power) out by the total energy (or power) in and multiply by 100. A motor that takes in 1,200 J and lifts a load with 900 J of useful work is 900 ÷ 1,200 × 100 = <strong>${r.value}</strong> efficient; the other 300 J is wasted, mostly as heat. Efficiency can never exceed 100%.`,
-  stepsTitle: 'How to calculate efficiency',
-  steps: [
-    'Identify the <strong>useful</strong> output: the energy in the form you wanted (light from a bulb, lift from a crane, heat in the water for a kettle). Sound and heat from a motor are not useful outputs.',
-    'Find the total input: all the energy supplied, usually electrical (watts × seconds) or chemical (fuel).',
-    'Put both in the same unit. Joules over joules or watts over watts both work; mixing kWh and joules does not.',
-    'Divide useful output by total input, then multiply by 100 for a percentage.',
-    'Sanity-check: the answer must be between 0 and 100%. Above 100% means the output and input are swapped or a unit is wrong.'
-  ],
-  formulaTitle: 'What is the efficiency formula?',
-  formula: {
-    expr: 'Efficiency = (useful output ÷ total input) × 100%<br>Wasted = input − useful output<br>Input needed = useful output ÷ efficiency',
-    vars: [['useful output', 'energy (J) or power (W) delivered in the wanted form'], ['total input', 'energy or power supplied, in the same unit'], ['efficiency', 'written as a decimal (0.75) or a percentage (75%)']],
-    note: 'For motors, use power: input = V × I × PF for single-phase or √3 × V × I × PF for three-phase; output = horsepower × 745.7 W.'
+  facts: {
+    formula: 'Efficiency = (useful output ÷ total input) × 100%<br>Useful output = total input × efficiency<br>Wasted = total input − useful output',
+    vars: [['Total input', 'all the energy supplied: chemical energy from a battery, electrical energy from the mains'], ['Useful output', 'the energy that does the job you want: motion, sound, lifting'], ['Wasted', 'energy passed to the surroundings, usually as heat'], ['Efficiency', 'a percent from 0% to 100%, or a decimal from 0 to 1']],
+    rounding: 'keep full precision, then round the percent to 2 decimal places or to the whole percent the question asks for; round energies to 3 significant figures.',
+    note: 'Input and output must be in the same unit. The units cancel when you divide, so efficiency itself has no unit.'
   },
-  example: `<p><strong>Kettle.</strong> A 2,000 W kettle runs for 3 minutes and heats 1.0 kg of water from 20 °C to 100 °C. How efficient is it?</p>
-<p>Input energy = 2,000 W × 180 s = <strong>360,000 J</strong>. Useful energy in the water = m c ΔT = 1,000 g × 4.184 × 80 = <strong>334,720 J</strong>.</p>
-<p>Efficiency = 334,720 ÷ 360,000 × 100 = <strong>93.0%</strong>. The missing 25,280 J warmed the kettle body and the air around it.</p>`,
-  table: {
-    title: 'How much input do you need for 1,000 J of useful output?',
-    intro: 'The lower the efficiency, the faster the required input climbs. Computed with input = output ÷ efficiency.',
-    head: ['Efficiency', 'Input needed', 'Wasted energy', 'Input per useful joule'],
-    rows: ({ run }) => [5, 10, 20, 25, 33, 40, 50, 60, 75, 85, 90, 95, 99].map(p => { const r = run({ solve: 'in', out: 1000, pct: p, unit: 'J' }); return [p + '%', r.value, r.rows[2][1].replace(/ \(.*/, ''), r.rows[4][1]]; }),
-    note: 'Going from 20% to 25% efficiency saves 1,000 J of input per 1,000 J of useful work; going from 90% to 95% saves only about 59 J. Gains matter most at the bottom of the scale.'
+  example: {
+    h2: 'Worked example: the overall efficiency of an electric car',
+    html: `<p><strong>Problem:</strong> A particular electric car is supplied with 300 kJ of chemical energy by the battery. Of this, a total of 70.5 kJ of energy is wasted as heat. Calculate the overall efficiency of the electric car. Hint: first work out the useful output energy.</p>
+<p><strong>1.</strong> Useful output = total input − wasted = 300 kJ − 70.5 kJ = 229.5 kJ.</p>
+<p><strong>2.</strong> Efficiency = (useful output ÷ total input) × 100% = (229.5 kJ ÷ 300 kJ) × 100%.</p>
+<p><strong>3.</strong> Divide: 229.5 ÷ 300 = 0.765. The kJ cancel.</p>
+<p><strong>4.</strong> Multiply by 100%: 0.765 × 100% = 76.5%.</p>
+<p><strong>Answer:</strong> the electric car is 76.5% efficient (about 77% to the nearest whole percent). Sense check: 75 kJ would be exactly a quarter of 300 kJ, and 70.5 kJ is a little less, so the efficiency should be a little more than 75%.</p>`
   },
-  sections: [
+  variants: [
     {
-      h2: 'How do you calculate the efficiency of energy transfer?',
-      html: `<p>Draw (or picture) a Sankey diagram: one arrow in, split into a useful arrow and a wasted arrow. Efficiency is the useful arrow divided by the input arrow. Energy is conserved, so useful + wasted always equals the input.</p>
-<p>Example: a phone charger draws 25 J from the wall each second and puts 20 J into the battery. Efficiency = 20 ÷ 25 = 0.80 = <strong>80%</strong>, and 5 J per second warms the charger. If you know only the waste, subtract first: a light bulb wasting 54 J of every 60 J has 6 J useful, 10% efficient.</p>`
+      h2: 'If 6500 J of energy is put into a machine and it produces 5000 J of useful work, what is the efficiency?',
+      html: `<p>The machine is <strong>76.92%</strong> efficient, or 77% to the nearest whole percent. Divide useful work by energy in: 5,000 J ÷ 6,500 J = 0.769231. Multiply by 100% to get 76.923077%, which is 76.92% to 2 decimal places. The remaining 6,500 J − 5,000 J = 1,500 J is wasted, mostly as heat from friction.</p>`
     },
     {
-      h2: 'How do you calculate the efficiency of an electric motor?',
-      html: `<p>Motor efficiency = mechanical output power ÷ electrical input power. Output comes from the rated or measured shaft power (1 hp = 745.7 W). Input comes from measured volts and amps times the power factor, and for three-phase motors also times √3 ≈ 1.732.</p>
-<p>A 5 hp three-phase motor on 460 V drawing 6.6 A at a power factor of 0.85 takes in 1.732 × 460 × 6.6 × 0.85 = <strong>4,470 W</strong> and delivers 5 × 745.7 = <strong>3,729 W</strong>, so it is 83.4% efficient. Pick "Electric motor efficiency" above to run your own nameplate numbers. For torque and horsepower from rpm, use the <a href="/torque-calculator">torque calculator</a>.</p>`
+      h2: 'A vacuum cleaner has an energy input of 6.5 kWh and an output of 5.8 kWh: what is its efficiency?',
+      html: `<p>To the nearest percentage, the efficiency is <strong>89%</strong>. Both values are in kWh, so no conversion is needed: 5.8 kWh ÷ 6.5 kWh = 0.892308, and 0.892308 × 100% = 89.23%, which rounds to 89%. The vacuum cleaner wastes 6.5 − 5.8 = 0.7 kWh.</p>`
     },
     {
-      h2: 'What is a good efficiency for common devices?',
-      html: `<ul>
-<li><strong>Incandescent bulb:</strong> about 90% of its energy leaves as heat, so roughly 10% or less becomes light. An LED that gives the same 800 lumens draws about 9 W instead of 60 W.</li>
-<li><strong>Gasoline car:</strong> only a small share of fuel energy, very roughly a fifth to a quarter, reaches the wheels; most is lost as engine heat. Battery electric cars deliver well over three-quarters of grid energy to the wheels (fueleconomy.gov).</li>
-<li><strong>Fossil power plants:</strong> about a third (older steam plants) to about half (combined-cycle gas) of the fuel's heat becomes electricity (EIA heat-rate data; 3,412 BTU per kWh would be 100%).</li>
-<li><strong>Large electric motors and transformers:</strong> typically above 90%.</li>
-<li><strong>Human muscles:</strong> roughly 20–25% of food energy becomes mechanical work.</li>
-</ul>`
-    },
-    {
-      h2: 'Why can\'t efficiency be more than 100%?',
-      html: `<p>The law of conservation of energy says a device cannot put out more energy than it takes in, so useful output ÷ input is at most 1. In practice friction, electrical resistance and sound always waste some, so real machines stay below 100%.</p>
-<p>Heat engines face a tighter limit, the Carnot efficiency 1 − T<sub>cold</sub> ÷ T<sub>hot</sub> with temperatures in kelvins. An engine running between 500 K and 300 K can never beat 1 − 300 ÷ 500 = 40%, however well it is built. Heat pumps quote a coefficient of performance above 1 (often 3 or more), but that measures heat moved, not energy created.</p>`
+      h2: 'The energy output of a blender is 1.4 kWh. If the blender is 85% efficient, how much energy is lost?',
+      html: `<p>About <strong>0.247 kWh</strong> is lost to the surroundings (0.25 kWh to 2 decimal places). The 85% applies to the input, so find the input first: 1.4 kWh ÷ 0.85 = 1.647059 kWh. Then subtract the useful output: 1.647059 kWh − 1.4 kWh = 0.247059 kWh. Choose "useful output and efficiency" in the calculator to see these steps with your own numbers.</p>`
     }
   ],
+  mistakes: [
+    '<strong>Dividing the wrong way round.</strong> 6,500 J ÷ 5,000 J = 1.3, or 130%. No machine is more than 100% efficient, so a result above 100% means input and output are swapped.',
+    '<strong>Using the wasted energy as the output.</strong> In the electric car problem, 70.5 kJ ÷ 300 kJ = 23.5% is the share that is wasted. Subtract it from the input first: 229.5 kJ is the useful output.',
+    '<strong>Taking 15% of the output to find the loss.</strong> For the blender, 1.4 kWh × 0.15 = 0.21 kWh is wrong, because 85% is a share of the input. Find the input (1.647059 kWh) and subtract.',
+    '<strong>Mixing units.</strong> Put input and output in the same unit before dividing. 1 kJ = 1,000 J and 1 kWh = 3,600,000 J.'
+  ],
+  related: ['percentage-calculator', 'ev-charging-cost-calculator', 'scientific-notation-calculator', 'speed-calculator'],
   faq: [
-    { q: 'What is the formula for efficiency in physics?', a: 'Efficiency = useful energy output ÷ total energy input × 100%. The same formula works with power: useful power out ÷ power in × 100%.' },
-    { q: 'How do you calculate efficiency as a decimal?', a: 'Divide useful output by input and stop before multiplying by 100. 900 J out of 1,200 J is 0.75; as a percentage that is 75%.' },
-    { q: 'How do you calculate wasted energy?', a: 'Subtract useful output from total input. A 60 W bulb that is 10% efficient wastes 60 − 6 = 54 W, or 54 J every second.' },
-    { q: 'How do you calculate the efficiency of a pulley system?', a: 'Efficiency = actual mechanical advantage ÷ ideal mechanical advantage × 100, or work out ÷ work in. Lifting 400 N with 125 N of effort on a 4-rope pulley gives AMA = 3.2 and IMA = 4, so 80%. The pulley calculator does this in detail.' },
-    { q: 'How do you calculate transformation efficiency in biology?', a: 'Transformation efficiency = number of colonies ÷ micrograms of DNA actually plated. If 0.1 µg of plasmid is in 1,000 µL and you plate 100 µL (0.01 µg) and get 150 colonies, the efficiency is 150 ÷ 0.01 = 15,000 transformants per µg.' },
-    { q: 'How do I calculate the input energy if I know the efficiency?', a: 'Divide the useful output by the efficiency as a decimal. To get 500 J of useful work from a 25% efficient engine you need 500 ÷ 0.25 = 2,000 J of fuel energy.' },
-    { q: 'Is 100% efficiency possible?', a: 'No real machine reaches it. Electric heaters come closest, because all the electricity ends up as heat, which is the useful output, so a resistance heater is effectively 100% efficient at heating.' }
+    { q: 'Can efficiency be more than 100%?', a: 'No. Energy cannot be created, so the useful output can never be more than the total input. If your answer is above 100%, you have divided input by output.' },
+    { q: 'How do you work out the energy wasted from the efficiency?', a: 'Multiply the input by the share that is not useful: wasted = input × (1 − efficiency). For 300 kJ at 76.5%, that is 300 × 0.235 = 70.5 kJ, which matches the electric car problem.' },
+    { q: 'Does the efficiency formula work for power as well as energy?', a: 'Yes. Efficiency = useful power output ÷ total power input × 100%. A motor that takes 2,000 W and delivers 1,500 W of useful power is 1,500 ÷ 2,000 × 100 = 75% efficient.' },
+    { q: 'Should I give efficiency as a decimal or a percent?', a: 'Either, as long as you are clear. 0.765 and 76.5% mean the same thing. Most school physics questions want a percent, often to the nearest whole number.' }
   ],
-  related: ['joules-calculator', 'kw-calculator', 'pulley-calculator', 'percentage-calculator', 'electricity-cost-calculator'],
   sources: [
-    { name: 'fueleconomy.gov: Where the Energy Goes, Gasoline Vehicles', url: 'https://www.fueleconomy.gov/feg/atv.shtml' },
-    { name: 'fueleconomy.gov: All-Electric Vehicles (energy efficiency)', url: 'https://www.fueleconomy.gov/feg/atv-ev.shtml' },
-    { name: 'U.S. Energy Information Administration: power plant efficiency FAQ', url: 'https://www.eia.gov/tools/faqs/faq.php?id=107&t=3' },
-    { name: 'OpenStax College Physics 2e (work, energy, power and efficiency)', url: 'https://openstax.org/details/books/college-physics-2e' }
+    { name: 'OpenStax College Physics 2e: 7.6 Conservation of Energy (efficiency)', url: 'https://openstax.org/books/college-physics-2e/pages/7-6-conservation-of-energy' },
+    { name: 'NIST Special Publication 811: Guide for the Use of the SI (units)', url: 'https://www.nist.gov/pml/special-publication-811' }
   ]
 };

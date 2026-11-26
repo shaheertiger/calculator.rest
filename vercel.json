@@ -24,13 +24,18 @@
       "permanent": true
     },
     {
-      "source": "/investing-calculators",
-      "destination": "/retirement-planning-calculators",
+      "source": "/retirement-income-calculators",
+      "destination": "/retirement",
       "permanent": true
     },
     {
-      "source": "/pay-tax-calculators",
-      "destination": "/retirement-tax-calculators",
+      "source": "/retirement-planning-calculators",
+      "destination": "/retirement",
+      "permanent": true
+    },
+    {
+      "source": "/retirement-tax-calculators",
+      "destination": "/retirement",
       "permanent": true
     }
   ],
