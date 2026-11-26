@@ -2,147 +2,105 @@ export default {
   slug: 'party-food-calculator',
   hub: 'everyday',
   name: 'Party Food Calculator',
-  title: 'Party Food Calculator: 100 Pieces of Chicken for 50 Guests',
-  h1: 'How Much Food for a Party? Meat, Sides, Salad and Drinks per Guest',
-  meta: 'For 50 guests, plan about 100 pieces of bone-in chicken, 50 cups of salad, 12.5 lb of fruit and 200 drinks over 3 hours. Get a full list for any crowd.',
-  keyword: 'how many pieces of chicken for 50 guests calculator',
-  also: ['how much prime rib per person calculator', 'how much salad for 50 guests calculator', 'party food calculator', 'how much food for a party calculator', 'catering calculator per person'],
-  updated: '2026-11-13',
+  title: 'Party Food Calculator: 13 Whole Chickens Feed 50 People',
+  meta: 'For 50 people, plan 2 pieces of chicken each: 100 pieces, or 13 whole chickens cut in 8. Per-person amounts for meat, sides and drinks, with steps.',
+  keyword: 'how many whole chickens to feed 50 people',
+  also: ['catering calculator per person', 'free catering food calculator usa', 'how much food for a party calculator', 'how many pieces of chicken for 50 guests', 'how much pulled pork for 50 people'],
+  updated: '2026-11-26',
+  answer: ({ r }) => `To feed 50 adults, plan 2 pieces of chicken each: 100 pieces, or <strong>${r.value}</strong> cut into 8 pieces.`,
   inputs: [
     { id: 'adults', label: 'Adults and teens', type: 'number', value: 50, suffix: 'guests' },
-    { id: 'kids', label: 'Children under 12', type: 'number', value: 0, suffix: 'kids', help: 'Counted as about half an adult portion.' },
-    { id: 'type', label: 'Type of party', type: 'select', value: 'meal', options: [['meal', 'Full meal (main + sides)'], ['apps', 'Appetizers only']] },
-    { id: 'main', label: 'Main dish', type: 'select', value: 'chicken', options: [['chicken', 'Bone-in chicken pieces'], ['primerib', 'Prime rib (bone-in)'], ['pork', 'Pulled pork (bone-in shoulder)'], ['brisket', 'Brisket'], ['burgers', 'Burgers'], ['two', 'Chicken + pulled pork']], showIf: { type: ['meal'] } },
+    { id: 'kids', label: 'Children under 12', type: 'number', value: 0, suffix: 'kids', help: 'Each child counts as half an adult portion.' },
+    { id: 'main', label: 'Main dish', type: 'select', value: 'chicken', options: [['chicken', 'Bone-in chicken pieces'], ['pork', 'Pulled pork (raw bone-in shoulder)'], ['brisket', 'Brisket (raw)'], ['burgers', 'Burgers (quarter-pound)'], ['primerib', 'Prime rib (bone-in)']] },
     { id: 'hours', label: 'Party length', type: 'number', value: 3, suffix: 'hours' }
   ],
   compute(v, H) {
     var a = v.adults > 0 ? Math.round(v.adults) : 0, k = v.kids > 0 ? Math.round(v.kids) : 0;
     if (!(a + k > 0)) return { error: 'Enter the number of guests.' };
-    var hrs = v.hours > 0 ? v.hours : 3;
-    var e = a + k * 0.5;
-    var heads = a + k;
-    var items = [], value, label, expr;
-    var lb = function (x) { return H.num(x, 1) + ' lb'; };
-    if (v.type === 'apps') {
-      var pcs = Math.ceil(e * (6 + 4 * Math.max(0, hrs - 1)));
-      value = H.int(pcs) + ' pieces'; label = 'Appetizer bites in total'; expr = H.num(e, 1) + ' adult portions × ' + H.num(6 + 4 * Math.max(0, hrs - 1), 1);
-      items.push(['Appetizer bites', '6 first hour, 4 each hour after', H.int(pcs)]);
-      items.push(['Kinds of appetizer', '6–8 for 50 guests', String(heads <= 20 ? 4 : heads <= 50 ? 6 : 8)]);
+    if (!(v.hours > 0)) return { error: 'Enter how many hours the party lasts.' };
+    var heads = a + k, e = a + k / 2, hrs = v.hours, n = function (x) { return H.num(x, 2); };
+    var main = v.main, value, label, line1, answerBit, steps = [];
+    var per = { chicken: 2, pork: 0.5, brisket: 0.5, burgers: 1.5, primerib: 1 }[main] || 2;
+    var unit = { chicken: 'pieces', pork: 'lb raw', brisket: 'lb raw', burgers: 'patties', primerib: 'lb bone-in' }[main] || 'pieces';
+    var formula = { chicken: 'Pieces = Portions × 2, Whole chickens = Pieces ÷ 8 (round up)', pork: 'Raw pork = Portions × ½ lb (round up to a whole pound), Cooked ≈ Raw × ½', brisket: 'Raw brisket = Portions × ½ lb (round up to a whole pound), Cooked ≈ Raw × ½', burgers: 'Patties = Portions × 1.5 (round up), Beef = Patties × ¼ lb', primerib: 'Prime rib = Portions × 1 lb, Rib bones = Portions ÷ 2 (round up)' }[main];
+    steps.push('<b>Formula:</b> Portions = Adults + ½ × Kids; ' + formula + '; Drinks = Guests × (Hours + 1)');
+    steps.push('<b>Substitute:</b> Portions = ' + a + ' + ½ × ' + k);
+    steps.push('<b>Count the portions:</b> ' + (k ? '½ × ' + k + ' = ' + n(k / 2) + ', and ' : '') + a + ' + ' + n(k / 2) + ' = ' + n(e) + ' adult portions');
+    var amt = e * per;
+    steps.push('<b>Multiply:</b> ' + n(e) + ' × ' + n(per) + ' = ' + n(amt) + ' ' + unit);
+    if (main === 'pork' || main === 'brisket') {
+      var lb = Math.ceil(amt - 1e-9), what = main === 'pork' ? 'pork shoulder' : 'brisket';
+      if (lb !== amt) steps.push('<b>Round up:</b> ' + n(amt) + ' lb → ' + lb + ' lb, because you buy whole pounds');
+      steps.push('<b>Cooked yield:</b> ' + lb + ' × ½ = ' + n(lb / 2) + ' lb of meat after cooking (it loses about half its weight)');
+      value = lb + ' lb ' + what; label = 'Raw ' + what + ' to buy'; line1 = ['Cooked meat', n(lb / 2) + ' lb'];
+      answerBit = lb + ' lb of raw ' + what + (lb !== amt ? ' (rounded up to the next whole pound)' : ' (already a whole number of pounds)');
+    } else if (main === 'burgers') {
+      var p = Math.ceil(amt - 1e-9);
+      if (p !== amt) steps.push('<b>Round up:</b> ' + n(amt) + ' → ' + p + ' patties');
+      steps.push('<b>Ground beef:</b> ' + p + ' × ¼ lb = ' + n(p / 4) + ' lb, plus ' + p + ' buns');
+      value = p + ' burgers'; label = 'Quarter-pound patties'; line1 = ['Ground beef', n(p / 4) + ' lb'];
+      answerBit = p + ' burgers, ' + n(p / 4) + ' lb of beef' + (p !== amt ? ' (rounded up to whole patties)' : ' (whole patties, no rounding needed)');
+    } else if (main === 'primerib') {
+      var ribs = Math.ceil(e / 2 - 1e-9);
+      steps.push('<b>Rib bones:</b> ' + n(e) + ' ÷ 2 = ' + n(e / 2) + (ribs !== e / 2 ? ', rounded up to ' + ribs : '') + ' ribs');
+      value = n(amt) + ' lb prime rib'; label = 'Bone-in prime rib, raw'; line1 = ['Rib bones', String(ribs)];
+      answerBit = n(amt) + ' lb of bone-in prime rib, about ' + ribs + ' ribs' + (ribs !== e / 2 ? ' (rounded up to whole bones)' : ' (no rounding needed)');
     } else {
-      var m = v.main;
-      var share = m === 'two' ? 0.6 : 1;
-      if (m === 'chicken' || m === 'two') {
-        var cp = Math.ceil(e * 2 * share);
-        items.push(['Bone-in chicken', share < 1 ? '1.2 pieces' : '2 pieces', H.int(cp) + ' pieces (' + Math.ceil(cp / 8) + ' whole birds cut in 8)']);
-        if (m === 'chicken') { value = H.int(cp) + ' pieces'; label = 'Pieces of bone-in chicken'; expr = H.num(e, 1) + ' adult portions × 2'; }
-      }
-      if (m === 'pork' || m === 'two') {
-        var pr = e * 0.5 * share;
-        items.push(['Pork shoulder, raw bone-in', share < 1 ? '0.3 lb' : '½ lb', lb(pr) + ' (≈ ' + lb(pr * 0.5) + ' cooked)']);
-        if (m === 'pork') { value = lb(pr); label = 'Raw bone-in pork shoulder'; expr = H.num(e, 1) + ' × ½ lb'; }
-      }
-      if (m === 'two') { value = H.int(Math.ceil(e * 1.2)) + ' pcs + ' + lb(e * 0.3); label = 'Chicken pieces + raw pork shoulder'; expr = 'each meat at 60% of a full portion'; }
-      if (m === 'primerib') {
-        var r = e * 1;
-        items.push(['Prime rib, bone-in, raw', '1 lb (1 rib per 2 people)', lb(r) + ' (' + Math.ceil(e / 2) + ' ribs)']);
-        value = lb(r); label = 'Bone-in prime rib'; expr = H.num(e, 1) + ' × 1 lb';
-      }
-      if (m === 'brisket') {
-        var b = e * 0.5;
-        items.push(['Whole brisket, raw', '½ lb', lb(b) + ' (≈ ' + lb(b * 0.5) + ' cooked)']);
-        value = lb(b); label = 'Raw brisket'; expr = H.num(e, 1) + ' × ½ lb';
-      }
-      if (m === 'burgers') {
-        var bg = Math.ceil(e * 1.5);
-        items.push(['Burger patties, ¼ lb', '1.5', H.int(bg) + ' patties (' + lb(bg / 4) + ' ground beef)']);
-        items.push(['Buns', '1.5', H.int(bg)]);
-        value = H.int(bg) + ' burgers'; label = 'Quarter-pound patties'; expr = H.num(e, 1) + ' × 1.5';
-      }
-      items.push(['Green salad', '1 cup', H.int(Math.ceil(e)) + ' cups (' + lb(e * 1.25 / 16) + ' greens)']);
-      items.push(['Salad dressing', '2 tbsp', H.num(e * 2 / 16, 1) + ' cups']);
-      items.push(['Hot sides (2–3 kinds)', '½ cup each', H.num(e * 0.5, 1) + ' cups of each side']);
-      if (m !== 'burgers') items.push(['Rolls', '1.5', H.int(Math.ceil(e * 1.5))]);
-      items.push(['Appetizers before the meal', '3–4 bites', H.int(Math.ceil(e * 4))]);
+      var birds = Math.ceil(amt / 8 - 1e-9);
+      steps.push('<b>Divide by 8 pieces a bird:</b> ' + n(amt) + ' ÷ 8 = ' + n(amt / 8));
+      if (birds !== amt / 8) steps.push('<b>Round up:</b> ' + n(amt / 8) + ' → ' + birds + ' whole chickens, which gives ' + birds + ' × 8 = ' + (birds * 8) + ' pieces');
+      value = birds + (birds === 1 ? ' whole chicken' : ' whole chickens'); label = 'Whole chickens, each cut into 8'; line1 = ['Pieces needed', n(amt)];
+      answerBit = value + ' for ' + n(amt) + ' pieces' + (birds !== amt / 8 ? ' (rounded up to whole birds)' : ' (no rounding needed)');
     }
-    items.push(['Fruit', '4 oz (½ cup)', lb(e * 0.25)]);
-    items.push(['Dessert', '1 slice or 2 cookies', H.int(Math.ceil(e)) + ' servings']);
-    var drinks = Math.ceil(heads * (2 + Math.max(0, hrs - 1)));
-    items.push(['Drinks', '2 first hour, 1 each hour after', H.int(drinks) + ' drinks']);
-    items.push(['Ice', '1 lb', lb(heads) + ' (' + Math.ceil(heads / 10) + ' 10-lb bags)']);
-    items.push(['Plates / napkins', '1.5 / 3', H.int(Math.ceil(heads * 1.5)) + ' / ' + H.int(heads * 3)]);
-    return {
-      value: value,
-      label: label,
-      expr: expr,
-      rows: [['Guests', a + ' adults' + (k ? ' + ' + k + ' kids' : '')], ['Drinks', H.int(drinks), true], ['Fruit', lb(e * 0.25)]],
-      table: { head: ['Item', 'Per adult', 'Total'], rows: items },
-      sub: 'Planning amounts for a buffet. Add 10–15% if your crowd eats big or if it\'s the only meal of the day; cut back a little for a lunch or a hot afternoon.'
-    };
+    var drinks = Math.ceil(heads * (hrs + 1) - 1e-9);
+    steps.push('<b>Drinks:</b> ' + heads + ' guests × (' + n(hrs) + ' + 1) = ' + n(heads * (hrs + 1)) + (drinks !== heads * (hrs + 1) ? ', rounded up to ' + drinks : '') + ' drinks' + (k ? ' (children count as full guests for drinks)' : ''));
+    steps.push('<b>Answer:</b> buy ' + answerBit + ' and ' + drinks + ' drinks.');
+    var rows = [line1, ['Green salad (1 cup each)', Math.ceil(e - 1e-9) + ' cups'], ['Each side dish (½ cup each)', n(e / 2) + ' cups'], [main === 'burgers' ? 'Buns' : 'Rolls (1.5 each)', String(main === 'burgers' ? Math.ceil(amt - 1e-9) : Math.ceil(e * 1.5 - 1e-9))], ['Drinks', String(drinks), true], ['Ice (1 lb a guest)', heads + ' lb, ' + Math.ceil(heads / 10) + ' ten-pound bags']];
+    return { value: value, label: label, rows: rows, steps: steps };
   },
-  quick: ({ r }) => `For 50 guests, plan 2 pieces of bone-in chicken per adult: <strong>${r.value}</strong>, or about 13 whole chickens cut into 8 pieces. Add 50 cups of salad (about 4 lb of greens), ½ cup of each side per person, 75 rolls and 12.5 lb of fruit. Over a 3-hour party, figure 200 drinks and 50 lb of ice. Prime rib instead? Plan 1 lb bone-in per person.`,
-  stepsTitle: 'How to plan party food quantities',
-  steps: [
-    'Count adults and children separately. Kids under 12 eat roughly half an adult portion; teens eat like adults or more.',
-    'Pick the format. A full meal needs a main, two or three sides, salad and bread; an appetizer-only party needs more bites per person and more variety.',
-    'Size the main dish per adult: 2 bone-in chicken pieces, 1 lb bone-in prime rib, or ½ lb raw pork shoulder or brisket. <strong>Most common mistake:</strong> buying cooked weights as raw weights. Brisket and pork shoulder lose about half their weight cooking.',
-    'Add drinks by the hour: 2 per guest in the first hour and 1 per hour after, plus about 1 lb of ice per guest.',
-    'Round up and keep a backup (frozen rolls, extra chips) rather than buying 30% extra of everything.'
-  ],
-  formulaTitle: 'What are the per-person rules for party food?',
-  formula: {
-    expr: 'Total = (Adults + ½ × Kids) × Per-person amount<br>Drinks = Guests × (2 + Hours − 1)<br>Appetizers only = Guests × (6 + 4 × (Hours − 1)) bites',
-    vars: [['Per-person amount', 'chicken 2 pieces · prime rib 1 lb bone-in · pork or brisket ½ lb raw · salad 1 cup · each side ½ cup · fruit 4 oz · rolls 1.5'], ['Hours', 'length of the party']],
-    note: 'These are common catering rules of thumb for buffets, not official serving sizes. When two meats are served, each is cut to about 60% of a full portion because people take some of both.'
+  facts: {
+    formula: 'Portions = Adults + ½ × Kids<br>Amount = Portions × Per-person amount<br>Drinks = Guests × (Hours + 1)',
+    vars: [['Portions', 'adult-sized servings: each child under 12 counts as half'], ['Per-person amount', 'chicken 2 pieces · pork or brisket ½ lb raw · burgers 1.5 · prime rib 1 lb bone-in · salad 1 cup · each side ½ cup · rolls 1.5'], ['Hours', 'how long the party runs: 2 drinks in the first hour, then 1 an hour']],
+    rounding: 'Always round up to something you can buy: whole chickens, whole pounds, whole patties and whole drinks. Rounding down leaves guests without food.',
+    note: 'The per-person amounts are common buffet planning rules, not official serving sizes. A hungry crowd or the only meal of the day calls for a little more.'
   },
-  example: `<p>A 50-person graduation party serving fried chicken, potato salad, baked beans, green salad and rolls, running 3 hours.</p>
-<p>Chicken: 50 × 2 = <strong>100 pieces</strong> (13 chickens cut in 8). Salad: 50 cups, about 3.9 lb of greens, with 6.3 cups of dressing. Each side: 50 × ½ cup = <strong>25 cups</strong> (about 1½ gallons). Rolls: 75. Fruit: 12.5 lb.</p>
-<p>Drinks: 50 × (2 + 2) = <strong>200</strong>. Ice: 50 lb, or five 10-lb bags.</p>`,
-  table: {
-    title: 'How much food do you need for 10 to 150 guests?',
-    intro: 'Full-meal quantities for adult guests at a 3-hour party, computed by the calculator above.',
-    head: ['Guests', 'Chicken pieces', 'Prime rib (bone-in)', 'Pulled pork (raw)', 'Salad', 'Fruit', 'Drinks'],
-    rows: ({ run }) => [10, 20, 25, 30, 40, 50, 75, 100, 150].map(g => {
-      const c = run({ adults: g, kids: 0, type: 'meal', main: 'chicken', hours: 3 });
-      const sal = c.table.rows.find(x => x[0] === 'Green salad')[2].split(' (')[0];
-      return [String(g), c.value.replace(' pieces', ''), run({ adults: g, kids: 0, type: 'meal', main: 'primerib', hours: 3 }).value, run({ adults: g, kids: 0, type: 'meal', main: 'pork', hours: 3 }).value, sal, c.rows[2][1], c.rows[1][1]];
-    }),
-    note: 'Prime rib is bone-in raw weight (about one rib per two guests); pulled pork is raw bone-in shoulder, which cooks down to about half.'
+  example: {
+    h2: 'Worked example: burgers for 40 adults and 12 kids',
+    html: `<p><strong>Problem:</strong> A graduation party has 40 adults and 12 children and runs 4 hours. Burgers are the main dish. How many quarter-pound patties, how much ground beef and how many drinks are needed?</p>
+<p><strong>1.</strong> Portions: the 12 kids count as ½ × 12 = 6, so 40 + 6 = 46 adult portions.</p>
+<p><strong>2.</strong> Patties: 46 × 1.5 = 69 burgers.</p>
+<p><strong>3.</strong> Beef: 69 × ¼ lb = 17.25 lb of ground beef, plus 69 buns.</p>
+<p><strong>4.</strong> Drinks: all 52 guests count, so 52 × (4 + 1) = 260 drinks.</p>
+<p><strong>Answer:</strong> 69 patties, 17.25 lb of beef and 260 drinks. Sense check: 69 burgers for 52 people is about 1⅓ each, which fits a crowd where adults may take two and kids take one or less.</p>`
   },
-  sections: [
+  variants: [
     {
-      h2: 'How many pieces of chicken do you need for 50 people?',
-      html: `<p>About <strong>100 pieces</strong> when chicken is the only main: 2 pieces per adult. That's 13 whole chickens cut into 8 pieces, or a 100-piece catering order. Go up to 2.5 pieces per person (125 pieces) for a hungry crowd or a mostly-wings-and-drumsticks mix, since those pieces are small.</p>
-<p>If you're serving chicken alongside another meat, plan about 1.2 pieces per person (60 for 50 guests). For boneless chicken breasts or thighs, use about 6 oz raw per adult, which is roughly 19 lb for 50 people.</p>`
+      h2: 'How many whole chickens to feed 50 people?',
+      html: `<p>Plan <strong>13 whole chickens</strong> for 50 adults. At 2 pieces each, 50 people need 100 pieces, and a chicken cut into 8 pieces gives 100 ÷ 8 = 12.5 birds, which rounds up to 13 (104 pieces).</p>
+<div class="twrap"><table><thead><tr><th>Adults</th><th>Pieces</th><th>Whole chickens</th><th>Drinks (3 hours)</th></tr></thead><tbody>
+<tr><td>25</td><td>50</td><td>7</td><td>100</td></tr><tr><td>50</td><td>100</td><td>13</td><td>200</td></tr><tr><td>75</td><td>150</td><td>19</td><td>300</td></tr><tr><td>100</td><td>200</td><td>25</td><td>400</td></tr><tr><td>150</td><td>300</td><td>38</td><td>600</td></tr>
+</tbody></table></div>`
     },
     {
-      h2: 'How much prime rib per person?',
-      html: `<p>Plan <strong>1 lb of bone-in prime rib per person</strong> (raw weight), which works out to about one rib bone for every two guests. A 3-rib roast (about 6–7 lb) feeds 6, a 7-rib full roast about 14. For a boneless rib roast, ½ to ¾ lb per person is enough, because there's no bone weight.</p>
-<p>Cook to temperature, not time. Beef roasts are safe at 145°F with a 3-minute rest, per the USDA; most people pull prime rib around 120–125°F for medium-rare and let carryover heat finish it, which is a quality choice below the USDA safe minimum.</p>`
+      h2: 'Catering calculator per person: how much food for each guest?',
+      html: `<p>Multiply each per-person amount by the number of adult portions. For a buffet, the usual amounts per adult are 2 pieces of bone-in chicken, ½ lb of raw pork shoulder or brisket, 1.5 quarter-pound burgers, or 1 lb of bone-in prime rib; then 1 cup of green salad, ½ cup of each side dish, 1.5 rolls, and 2 drinks in the first hour plus 1 for each hour after. For 50 adults that is 50 cups of salad, 25 cups of each side and 75 rolls.</p>`
     },
     {
-      h2: 'How much salad and sides for 50 guests?',
-      html: `<p>For green salad, plan about <strong>1 cup per person</strong>: 50 cups for 50 guests, which is roughly 4 lb of lettuce and 6 cups of dressing (2 tablespoons each). Pasta or potato salad served as a side runs about ½ cup per person, or 25 cups (just over 1½ gallons) for 50.</p>
-<p>With 3 sides on a buffet, people take less of each, so ½ cup per side per person is plenty. Fruit trays go about 4 oz per person, or 12.5 lb for 50. The USDA Food Buying Guide, which school cafeterias use, lists exact yields if you need to convert pounds of raw produce to cups.</p>`
-    },
-    {
-      h2: 'How long can party food sit out?',
-      html: `<p>No more than <strong>2 hours</strong> at room temperature, or 1 hour above 90°F, according to the FDA and USDA. Keep hot foods at 140°F or above (chafing dishes or slow cookers) and cold foods at 40°F or below (bowls nested in ice).</p>
-<p>For a party longer than 2 hours, put out smaller platters and swap them for fresh ones from the fridge or oven, rather than refilling the same dish. Cook chicken to 165°F and ground beef to 160°F.</p>`
+      h2: 'How much pulled pork for 50 people?',
+      html: `<p>Buy about <strong>25 lb of raw bone-in pork shoulder</strong>: 50 × ½ lb = 25 lb. Shoulder loses about half its weight to bone, fat and moisture as it cooks, so 25 lb raw gives roughly 12.5 lb of pulled pork. That is 12.5 × 16 = 200 ounces, or 4 ounces of cooked meat per person.</p>`
     }
   ],
+  mistakes: [
+    '<strong>Rounding the chickens down.</strong> 100 ÷ 8 = 12.5, and buying 12 birds gives 96 pieces, so two guests go without. Round food up, never down.',
+    '<strong>Counting children as full adults, or skipping them.</strong> 12 kids under 12 eat about 6 adult portions. Counting them as 12 overbuys; leaving them out underbuys.',
+    '<strong>Mixing up raw and cooked weight.</strong> A recipe asking for 12.5 lb of pulled pork means buying about 25 lb of raw shoulder, not 12.5 lb.',
+    '<strong>Giving every hour the same number of drinks.</strong> 50 guests × 3 hours = 150 drinks misses the thirsty first hour. Guests × (Hours + 1) gives 200.'
+  ],
+  related: ['tip-calculator', 'split-bill-calculator', 'percentage-calculator', 'average-calculator'],
   faq: [
-    { q: 'How many pieces of chicken for 50 guests?', a: 'About 100 pieces, at 2 pieces per adult. Plan 125 for a big-eating crowd or 60 if a second meat is served.' },
-    { q: 'How much prime rib per person?', a: 'About 1 lb of bone-in prime rib per person, raw weight, or one rib for every two guests. Boneless needs ½ to ¾ lb per person.' },
-    { q: 'How much salad for 50 guests?', a: 'About 50 cups of green salad, roughly 4 lb of greens, plus 6 cups of dressing.' },
-    { q: 'How much pulled pork for 50 people?', a: 'About 25 lb of raw bone-in pork shoulder, which cooks down to roughly 12–13 lb of pulled meat, or 4 oz cooked per person.' },
-    { q: 'How many appetizers per person?', a: 'Before a meal, 3–4 bites per person. For an appetizer-only party, 6 bites per person in the first hour and 4 per hour after, so 14 per person for 3 hours.' },
-    { q: 'How many drinks per person at a party?', a: 'Plan 2 drinks per guest in the first hour and 1 per hour after. For 50 guests over 3 hours, that is 200 drinks, plus about 50 lb of ice.' },
-    { q: 'How much food do kids eat at a party?', a: 'Children under about 12 eat roughly half an adult portion. The calculator counts each child as half an adult for food but as a full guest for drinks, ice and plates.' }
-  ],
-  related: ['candy-jar-calculator', 'split-bill-calculator', 'unit-price-calculator', 'tip-calculator'],
-  sources: [
-    { name: 'USDA Food and Nutrition Service: Food Buying Guide for Child Nutrition Programs', url: 'https://foodbuyingguide.fns.usda.gov/' },
-    { name: 'FoodSafety.gov: Safe Minimum Internal Temperatures', url: 'https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures' },
-    { name: 'FDA: Safe Food Handling', url: 'https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling' }
+    { q: 'How many pieces of chicken for 100 people?', a: 'About 200 pieces at 2 per adult, which is 200 ÷ 8 = 25 whole chickens cut into 8 pieces each.' },
+    { q: 'How much salad do I need for 50 people?', a: 'About 50 cups of green salad at 1 cup per person. Served as a side, pasta or potato salad runs ½ cup each, or 25 cups for 50 people.' },
+    { q: 'How many drinks per person for a party?', a: 'Hours + 1. Guests drink about 2 in the first hour and 1 an hour after, so a 4-hour party needs 5 drinks per guest.' },
+    { q: 'How much prime rib per person?', a: 'About 1 lb of bone-in prime rib per person, raw weight, or one rib bone for every two guests. For 20 guests that is 20 lb and 10 ribs.' }
   ]
 };
