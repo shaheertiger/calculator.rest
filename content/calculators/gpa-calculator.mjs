@@ -1,145 +1,101 @@
 export default {
   slug: 'gpa-calculator',
-  hub: 'education',
+  hub: 'school',
   name: 'GPA Calculator',
-  title: 'GPA Calculator: How to Calculate GPA on a 4.0 Scale (2026)',
-  h1: 'GPA Calculator: Semester and Cumulative GPA on a 4.0 Scale',
-  meta: 'Add your classes, letter grades and credit hours to get your semester and cumulative GPA. Example: A, B+, B and A− over 13 credits is a 3.48 GPA.',
-  keyword: 'how to calculate gpa',
-  also: ['how do you calculate gpa', 'how do i calculate my gpa', 'gpa calculator', 'how to calculate cumulative gpa', 'how to calculate gpa grades', 'how do i calculate my gpa on a 4.0 scale'],
-  updated: '2026-11-13',
+  title: 'GPA Calculator: A, A−, B+, B = 3.50 GPA (With Steps)',
+  meta: 'Grades of A, A−, B+ and B in four 1-credit classes make a 3.50 GPA: 14 grade points ÷ 4 credits. High school, college or homeschool GPA, with steps.',
+  keyword: 'gpa calculator',
+  also: ['gpa calculator for elementary school', 'highschool gpa cal', 'homeschool gpa calculator', 'weighted gpa calculator', 'how to calculate gpa'],
+  updated: '2026-11-26',
+  answer: ({ r }) => `Grades of A, A−, B+ and B in four 1-credit classes give a <strong>${r.value}</strong> GPA: 14 grade points ÷ 4 credits.`,
   inputs: [
     {
-      id: 'courses', label: 'Your classes this term', type: 'rows', addLabel: '+ add class', max: 30,
+      id: 'courses', label: 'Your classes', type: 'rows', addLabel: '+ add class', max: 12,
       fields: [
-        { id: 'name', label: 'Class (optional)', type: 'text', value: '', blank: true, placeholder: 'e.g. Biology' },
-        { id: 'grade', label: 'Grade', type: 'select', value: 'A', options: [['A+', 'A+'], ['A', 'A'], ['A-', 'A−'], ['B+', 'B+'], ['B', 'B'], ['B-', 'B−'], ['C+', 'C+'], ['C', 'C'], ['C-', 'C−'], ['D+', 'D+'], ['D', 'D'], ['D-', 'D−'], ['F', 'F'], ['P', 'P (pass, not counted)']] },
-        { id: 'credits', label: 'Credits', type: 'number', value: 3 }
+        { id: 'name', label: 'Class', type: 'text', value: '', blank: true, placeholder: 'e.g. Biology' },
+        { id: 'grade', label: 'Grade', type: 'select', value: 'A', options: [['A+', 'A+'], ['A', 'A'], ['A-', 'A−'], ['B+', 'B+'], ['B', 'B'], ['B-', 'B−'], ['C+', 'C+'], ['C', 'C'], ['C-', 'C−'], ['D+', 'D+'], ['D', 'D'], ['D-', 'D−'], ['F', 'F'], ['P', 'Pass (not counted)']] },
+        { id: 'credits', label: 'Credits', type: 'number', value: 1 },
+        { id: 'level', label: 'Level', type: 'select', value: 'reg', options: [['reg', 'Regular'], ['hon', 'Honors +0.5'], ['ap', 'AP/IB +1']] }
       ],
       value: [
-        { name: 'English Composition', grade: 'A', credits: 3 },
-        { name: 'Calculus I', grade: 'B+', credits: 4 },
-        { name: 'Intro to Psychology', grade: 'B', credits: 3 },
-        { name: 'Spanish II', grade: 'A-', credits: 3 }
-      ]
+        { name: 'English', grade: 'A', credits: 1, level: 'reg' },
+        { name: 'Math', grade: 'B+', credits: 1, level: 'reg' },
+        { name: 'Science', grade: 'A-', credits: 1, level: 'reg' },
+        { name: 'History', grade: 'B', credits: 1, level: 'reg' }
+      ],
+      help: 'Honors and AP bonuses differ by school; use Regular for an unweighted GPA.'
     },
-    { id: 'aplus', label: 'A+ counts as', type: 'select', value: '4.0', options: [['4.0', '4.0 (most colleges)'], ['4.33', '4.33']] },
-    { id: 'priorGpa', label: 'Current cumulative GPA', type: 'number', value: '', placeholder: 'optional, e.g. 3.2', help: 'Leave blank for a first-semester GPA.' },
-    { id: 'priorCredits', label: 'Credits already earned', type: 'number', value: '', placeholder: 'e.g. 30' }
+    { id: 'scale', label: 'Grade point scale', type: 'select', value: 'pm', wide: true, options: [['pm', 'Plus/minus: A 4.0, A− 3.7, B+ 3.3, B 3.0 … (A+ = 4.0)'], ['pm433', 'Plus/minus with A+ = 4.33'], ['whole', 'Whole letters only: A 4, B 3, C 2, D 1 (+ and − ignored)']] }
   ],
-  data: { points: { 'A': 4, 'A-': 3.7, 'B+': 3.3, 'B': 3, 'B-': 2.7, 'C+': 2.3, 'C': 2, 'C-': 1.7, 'D+': 1.3, 'D': 1, 'D-': 0.7, 'F': 0 } },
-  compute(v, H, D) {
-    var qp = 0, cr = 0, n = 0;
-    (v.courses || []).forEach(function (c) {
-      if (!(c.credits > 0) || c.grade === 'P') return;
-      var p = c.grade === 'A+' ? Number(v.aplus) : D.points[c.grade];
-      if (p === undefined) return;
-      qp += p * c.credits; cr += c.credits; n++;
+  compute(v, H) {
+    var pmPts = { 'A+': 4, 'A': 4, 'A-': 3.7, 'B+': 3.3, 'B': 3, 'B-': 2.7, 'C+': 2.3, 'C': 2, 'C-': 1.7, 'D+': 1.3, 'D': 1, 'D-': 0.7, 'F': 0 };
+    var wholePts = { A: 4, B: 3, C: 2, D: 1, F: 0 };
+    var bonus = { reg: 0, hon: 0.5, ap: 1 };
+    var f = function (x) { return H.num(x, 4); };
+    var qp = 0, cr = 0, lines = [], terms = [], crs = [], weighted = false;
+    (v.courses || []).forEach(function (c, i) {
+      if (!(c.credits > 0) || c.grade === 'P' || !c.grade) return;
+      var base = v.scale === 'whole' ? wholePts[c.grade.charAt(0)] : (c.grade === 'A+' && v.scale === 'pm433' ? 4.33 : pmPts[c.grade]);
+      if (base === undefined) return;
+      var b = c.grade === 'F' ? 0 : (bonus[c.level] || 0), pts = base + b, q = pts * c.credits;
+      if (b) weighted = true;
+      var nm = c.name ? H.esc(c.name) : 'Class ' + (i + 1);
+      lines.push('<b>' + nm + ':</b> ' + c.grade.replace('-', '−') + ' = ' + f(base) + (b ? ' + ' + f(b) + ' bonus = ' + f(pts) : '') + ' points × ' + f(c.credits) + ' credit' + (c.credits === 1 ? '' : 's') + ' = ' + f(q));
+      qp += q; cr += c.credits; terms.push(f(q)); crs.push(f(c.credits));
     });
     if (!cr) return { error: 'Add at least one graded class with credits.' };
-    var gpa = qp / cr;
-    var rows = [['Quality points', H.num(qp, 2)], ['Graded credits', H.num(cr, 2)], ['Classes counted', String(n)]];
-    var out = { value: H.fix(gpa, 2), label: 'Semester GPA', expr: H.num(qp, 2) + ' pts ÷ ' + H.num(cr, 2) + ' credits', rows: rows };
-    if (v.priorGpa >= 0 && v.priorGpa <= 5 && v.priorCredits > 0) {
-      var cum = (v.priorGpa * v.priorCredits + qp) / (v.priorCredits + cr);
-      out.value = H.fix(cum, 2); out.label = 'New cumulative GPA';
-      out.expr = '(' + H.num(v.priorGpa, 2) + ' × ' + H.num(v.priorCredits, 0) + ' + ' + H.num(qp, 1) + ') ÷ ' + H.num(v.priorCredits + cr, 1);
-      rows.unshift(['Semester GPA', H.fix(gpa, 2), true]);
-      rows.push(['Total credits', H.num(v.priorCredits + cr, 2)]);
-    }
-    var letter = gpa >= 3.85 ? 'A' : gpa >= 3.5 ? 'A−' : gpa >= 3.15 ? 'B+' : gpa >= 2.85 ? 'B' : gpa >= 2.5 ? 'B−' : gpa >= 2.15 ? 'C+' : gpa >= 1.85 ? 'C' : gpa >= 1.5 ? 'C−' : gpa >= 1 ? 'D' : 'F';
-    out.sub = 'This term averages a ' + letter + '. ' + (gpa >= 3.5 ? 'Dean\'s list range at most colleges (3.5+).' : gpa >= 3.0 ? 'Above the 3.0 most scholarships and many grad programs ask for.' : gpa >= 2.0 ? 'Above the 2.0 needed for good academic standing at most colleges.' : 'Below the 2.0 most colleges require for good standing.');
-    return out;
+    var gpa = qp / cr, g2 = H.round(gpa, 2), shown = H.fix(g2, 2);
+    var steps = ['<b>Formula:</b> GPA = (sum of grade points × credits) ÷ (sum of credits)'];
+    if (lines.length > 8) steps.push('<b>Grade points × credits:</b> ' + lines.length + ' classes, ' + terms.join(', '));
+    else steps = steps.concat(lines);
+    steps.push('<b>Add the grade points:</b> ' + terms.join(' + ') + ' = ' + f(qp));
+    steps.push('<b>Add the credits:</b> ' + crs.join(' + ') + ' = ' + f(cr));
+    steps.push('<b>Divide:</b> ' + f(qp) + ' ÷ ' + f(cr) + ' = ' + H.num(gpa, 6));
+    steps.push('<b>Answer:</b> your ' + (weighted ? 'weighted' : 'unweighted') + ' GPA is ' + shown + ' on a 4.0 scale (' + (Math.abs(g2 - gpa) < 1e-9 ? 'exact, shown to 2 decimal places' : 'rounded to 2 decimal places') + ').');
+    return { value: shown, label: (weighted ? 'Weighted' : 'Unweighted') + ' GPA', expr: f(qp) + ' ÷ ' + f(cr), steps: steps };
   },
-  quick: ({ r }) => `To calculate GPA, multiply each class's grade points (A = 4.0, B = 3.0, C = 2.0) by its credit hours, add them up and divide by total credits. An A, B+, B and A− across 13 credits is 45.3 quality points ÷ 13 = <strong>${r.value} GPA</strong>. Pass/fail classes don't count.`,
-  stepsTitle: 'How to calculate your GPA in 4 steps',
-  steps: [
-    'Convert each letter grade to grade points on the 4.0 scale: A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0, and so on (full table below).',
-    'Multiply each class\'s grade points by its credit hours to get <strong>quality points</strong>. A B+ in a 4-credit class is 3.3 × 4 = 13.2.',
-    'Add up all quality points and all credit hours. Leave out pass/fail, withdrawn (W) and audited classes; they carry no grade points.',
-    'Divide total quality points by total credits. For a cumulative GPA, add your earlier quality points (old GPA × old credits) before dividing by all credits.'
-  ],
-  formulaTitle: 'What is the GPA formula?',
-  formula: {
-    expr: 'GPA = Σ (grade points × credits) ÷ Σ credits<br>Cumulative GPA = (old GPA × old credits + new quality points) ÷ (old credits + new credits)',
-    vars: [['grade points', 'value of the letter grade on the 4.0 scale'], ['credits', 'credit (semester) hours for the class'], ['Σ', 'sum over all graded classes']]
+  facts: {
+    formula: 'GPA = Σ(p × c) ÷ Σc',
+    vars: [['p', 'grade points for one class: A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0 on the common plus/minus scale'], ['c', 'credits or hours for that class (1 for most high school classes)'], ['Σ', 'add up over every graded class; pass/fail classes are left out']],
+    rounding: 'add and divide at full precision, then round the GPA to 2 decimal places (some schools truncate instead of rounding).',
+    note: 'Grade point scales vary. Most US schools use the plus/minus 4.0 scale above, but some skip pluses and minuses, give A+ 4.33, or add 0.5 or 1.0 for honors and AP. Use your school\'s own scale.'
   },
-  example: `<p>A student takes English (A, 3 credits), Calculus (B+, 4 credits), Psychology (B, 3 credits) and Spanish (A−, 3 credits).</p>
-<p>Quality points: 4.0 × 3 = 12.0; 3.3 × 4 = 13.2; 3.0 × 3 = 9.0; 3.7 × 3 = 11.1. Total = <strong>45.3</strong> over <strong>13</strong> credits.</p>
-<p>Semester GPA = 45.3 ÷ 13 = <strong>3.48</strong>.</p>
-<p>If they already had a 3.20 GPA over 30 credits: (3.20 × 30 + 45.3) ÷ 43 = (96 + 45.3) ÷ 43 = <strong>3.29 cumulative GPA</strong>.</p>`,
-  table: {
-    title: 'What is each letter grade worth on the 4.0 scale?',
-    intro: 'The standard U.S. college scale with plus and minus grades, and the percentage range most syllabi map to each letter.',
-    head: ['Letter grade', 'Grade points', 'Typical percent', '3-credit class adds'],
-    rows: ({ D, H }) => [['A+', '4.0 (4.33 at some schools)', '97–100%'], ['A', '4.0', '93–96%'], ['A−', '3.7', '90–92%'], ['B+', '3.3', '87–89%'], ['B', '3.0', '83–86%'], ['B−', '2.7', '80–82%'], ['C+', '2.3', '77–79%'], ['C', '2.0', '73–76%'], ['C−', '1.7', '70–72%'], ['D+', '1.3', '67–69%'], ['D', '1.0', '63–66%'], ['D−', '0.7', '60–62%'], ['F', '0.0', 'Below 60%']].map(r => [r[0], r[1], r[2], H.num(parseFloat(r[1]) * 3, 1) + ' pts']),
-    note: 'Schools set their own scales. Some don\'t use A+ or minus grades, and a few count A+ as 4.33. Check your registrar\'s grading policy; the calculator lets you switch A+ between 4.0 and 4.33.'
+  example: {
+    h2: 'Worked example: a college semester with different credit hours',
+    html: `<p><strong>Problem:</strong> Ana takes English (A, 3 credits), Calculus (B+, 4 credits), Psychology (B, 3 credits) and Spanish (A−, 3 credits). What is her semester GPA?</p>
+<p><strong>1.</strong> Grade points × credits: 4.0 × 3 = 12, 3.3 × 4 = 13.2, 3.0 × 3 = 9 and 3.7 × 3 = 11.1.</p>
+<p><strong>2.</strong> Add them: 12 + 13.2 + 9 + 11.1 = 45.3 quality points.</p>
+<p><strong>3.</strong> Add the credits: 3 + 4 + 3 + 3 = 13. Divide: 45.3 ÷ 13 = 3.4846.</p>
+<p><strong>Answer:</strong> Ana's GPA is 3.48. Sense check: her grades range from 3.0 to 4.0, and the 4-credit B+ (3.3) pulls the result a little below the plain average of her four grade points, which is 3.5.</p>`
   },
-  sections: [
+  variants: [
     {
-      h2: 'How do you calculate cumulative GPA?',
-      html: `<p>Cumulative GPA is the average across every term, weighted by credits, not the average of your semester GPAs. Multiply your current cumulative GPA by the credits you've already earned to recover your total quality points, add this term's quality points, and divide by the new credit total.</p>
-<p>Example: a 3.40 GPA over 60 credits is 204 quality points. A 15-credit semester at 3.80 adds 57 points. The new cumulative GPA is (204 + 57) ÷ 75 = <strong>3.48</strong>, not the 3.60 you'd get by averaging 3.40 and 3.80.</p>
-<p>Enter your current cumulative GPA and credits in the optional boxes above and the calculator does this automatically.</p>`
+      h2: 'How do you calculate GPA for elementary school or homeschool?',
+      html: `<p>When every subject counts the same, give each one 1 credit and the GPA is simply the average of the grade points. A, B+, A− and B are 4.0 + 3.3 + 3.7 + 3.0 = 14, and 14 ÷ 4 = <strong>3.50</strong>. Homeschool parents choose the scale, so pick one, write it on the transcript and use it every year. Half-year or lighter courses can be entered as 0.5 credit.</p>`
     },
     {
-      h2: 'How much can one semester raise my GPA?',
-      html: `<p>Less each year, because every new term is a smaller share of your total credits. The table shows the cumulative GPA after a 15-credit semester of straight A's (4.0), starting from a 3.0.</p>
-<div class="twrap"><table><thead><tr><th>Credits already earned</th><th>GPA after a 4.0 term</th><th>Gain</th></tr></thead><tbody>
-<tr><td>15 (end of 1st semester)</td><td>3.50</td><td>+0.50</td></tr>
-<tr><td>30 (end of freshman year)</td><td>3.33</td><td>+0.33</td></tr>
-<tr><td>60 (end of sophomore year)</td><td>3.20</td><td>+0.20</td></tr>
-<tr><td>90 (end of junior year)</td><td>3.14</td><td>+0.14</td></tr>
-</tbody></table></div>
-<p>To reach a target, the GPA you need next term is (target × total credits − current GPA × current credits) ÷ new credits. Going from 3.0 to 3.2 over 60 credits with a 15-credit term needs (3.2 × 75 − 180) ÷ 15 = 4.0.</p>`
+      h2: 'How is a high school GPA calculated, weighted or unweighted?',
+      html: `<p>An unweighted GPA uses the plain 4.0 scale for every class. A weighted GPA adds a bonus for harder classes, often +0.5 for honors and +1.0 for AP or IB, though schools set their own rules. If the B+ in math above were AP, it would count 3.3 + 1 = 4.3, and the GPA would be (4.0 + 4.3 + 3.7 + 3.0) ÷ 4 = 15 ÷ 4 = <strong>3.75</strong>. Colleges often recalculate GPAs their own way, so keep both numbers.</p>`
     },
     {
-      h2: 'Do pass/fail, withdrawn and repeated classes count?',
-      html: `<ul>
-<li><strong>Pass/fail (P/NP, S/U):</strong> credits count toward graduation but not toward GPA. Select "P" in the calculator and the class is left out.</li>
-<li><strong>Withdrawals (W):</strong> no grade points and no GPA credits. A WF (withdraw failing) is counted as an F at some schools.</li>
-<li><strong>Incompletes (I):</strong> left out until the final grade is posted.</li>
-<li><strong>Repeated classes:</strong> many colleges replace the first grade with the new one (grade forgiveness); others average both attempts. Check your registrar's repeat policy before including both.</li>
-<li><strong>Transfer credits:</strong> usually count toward graduation but not your institutional GPA.</li>
-</ul>`
-    },
-    {
-      h2: 'How do you calculate GPA from percentages?',
-      html: `<p>Convert each percentage to a letter grade using your syllabus, then to grade points. On the most common scale, 93% and above is an A (4.0), 90–92% an A− (3.7), 87–89% a B+ (3.3) and so on, as in the table above. A rough shortcut for a single percent grade is (percent − 55) ÷ 10, but it drifts at the edges, so use the letter table for an official figure.</p>
-<p>For a 10-point CGPA or a GPA-to-percent conversion, use the <a href="/gpa-to-percentage-calculator">GPA to percentage calculator</a>.</p>`
-    },
-    {
-      h2: 'How do I calculate the GPA I need to reach a target?',
-      html: `<p>Work backwards from quality points. Required term GPA = (target GPA × total credits after the term − current GPA × current credits) ÷ credits this term.</p>
-<p>Example: you have a 2.85 GPA over 45 credits and want a 3.0 after a 15-credit semester. You need 3.0 × 60 = 180 quality points in total, and you already have 2.85 × 45 = 128.25, so this term must earn 51.75 points: 51.75 ÷ 15 = <strong>3.45</strong>, roughly a B+/A− average.</p>
-<p>If the answer is above 4.0, the target isn't reachable in one term; spread it over two semesters, or check whether your school's grade-replacement policy lets a retaken class swap out an old F or D. Replacing a 3-credit F with a B adds 9 quality points without adding credits, which moves a 45-credit GPA by 0.20.</p>`
-    },
-    {
-      h2: 'What is a good college GPA?',
-      html: `<p>Benchmarks most U.S. students run into:</p>
-<ul>
-<li><strong>2.0:</strong> minimum for good academic standing and to keep federal financial aid (satisfactory academic progress) at most schools.</li>
-<li><strong>3.0:</strong> a B average; a common cutoff for scholarships, internships and many graduate programs.</li>
-<li><strong>3.5:</strong> typical Dean's List threshold for a single semester.</li>
-<li><strong>3.5–3.9:</strong> Latin honors ranges (cum laude, magna cum laude, summa cum laude) at many colleges.</li>
-<li><strong>3.7+:</strong> competitive for medical and law school; the median GPA at top-ranked law schools is above 3.8.</li>
-</ul>`
+      h2: 'How do I calculate my cumulative GPA?',
+      html: `<p>Combine quality points, not GPAs. Multiply your old GPA by your old credits, add this term's quality points, and divide by all credits. A 3.2 over 30 credits is 3.2 × 30 = 96 points; adding Ana's 45.3 points from 13 credits gives (96 + 45.3) ÷ 43 = 141.3 ÷ 43 = <strong>3.29</strong>. Averaging 3.2 and 3.48 directly would give 3.34, too high, because the old credits outnumber the new ones.</p>`
     }
   ],
+  mistakes: [
+    '<strong>Averaging grades without credits.</strong> A 4-credit B+ counts more than a 1-credit A. Multiply each grade by its credits first.',
+    '<strong>Counting pass/fail classes.</strong> A "P" earns credits toward graduation but has no grade points, so leave it out of both sums.',
+    '<strong>Averaging percents instead of grade points.</strong> A 93% and a 79% average to 86%, but the GPA is (4.0 + 2.3) ÷ 2 = 3.15 on the plus/minus scale.',
+    '<strong>Adding honors bonuses to an F.</strong> Most schools give no bonus for a failing grade; an F stays 0.'
+  ],
+  related: ['grade-calculator', 'final-grade-calculator', 'test-score-calculator', 'average-calculator'],
   faq: [
-    { q: 'What GPA is a B+ average?', a: 'A B+ average is a 3.3 GPA on the standard 4.0 scale. A 3.0 is a straight B and a 3.7 is an A−.' },
-    { q: 'Is a 3.5 GPA good?', a: 'Yes. A 3.5 GPA means mostly A− and B+ grades, puts you on the Dean\'s List at most colleges and clears the 3.0 cutoff used by most scholarships and graduate programs.' },
-    { q: 'How do I calculate my GPA with credit hours?', a: 'Multiply each grade\'s points by the class\'s credit hours, add those quality points together, and divide by your total credit hours. Classes with more credits move your GPA more.' },
-    { q: 'Do I include classes I failed?', a: 'Yes. An F counts as 0 grade points but its credits stay in the total, which pulls your GPA down until the class is retaken and the grade is replaced (if your school allows grade forgiveness).' },
-    { q: 'Is cumulative GPA the average of semester GPAs?', a: 'No. Cumulative GPA is weighted by credits: total quality points from all terms divided by total graded credits. Averaging semester GPAs only works if every term had the same number of credits.' },
-    { q: 'What is the difference between weighted and unweighted GPA?', a: 'Unweighted GPA uses the plain 4.0 scale. Weighted GPA adds points for honors, AP or IB classes (often +0.5 or +1.0) and is mainly used in high school. Use the high school GPA calculator for weighted GPA.' },
-    { q: 'How do I calculate GPA in Excel or Google Sheets?', a: 'Put grade points in column B and credits in column C, then use =SUMPRODUCT(B2:B10,C2:C10)/SUM(C2:C10). That is the same weighted average this calculator uses.' },
-    { q: 'Can I raise my GPA from 2.5 to 3.0 in one semester?', a: 'Only early on. With 30 credits at 2.5, a 15-credit semester of 4.0 brings you to 3.0 exactly. With 60 credits at 2.5, the best one semester can do is 2.8.' }
+    { q: 'What is an A− worth in GPA?', a: '3.7 on the common plus/minus 4.0 scale. A B+ is 3.3 and a B− is 2.7. Schools that ignore pluses and minuses count an A− as a full 4.0.' },
+    { q: 'Can a GPA be higher than 4.0?', a: 'An unweighted GPA cannot. A weighted GPA can, because honors and AP bonuses push single classes to 4.5 or 5.0.' },
+    { q: 'What GPA is a B average?', a: 'A 3.0 on the 4.0 scale. A 3.50 sits halfway between a B+ (3.3) and an A− (3.7).' },
+    { q: 'Do I round or truncate my GPA?', a: 'Most schools round to 2 decimal places, so 3.4846 becomes 3.48. A few truncate, which would also give 3.48 here but turns 3.4996 into 3.49 instead of 3.50.' }
   ],
-  related: ['high-school-gpa-calculator', 'final-grade-calculator', 'grade-calculator', 'gpa-to-percentage-calculator', 'credit-hours-calculator'],
   sources: [
-    { name: 'Federal Student Aid: Satisfactory Academic Progress (SAP)', url: 'https://studentaid.gov/understand-aid/eligibility/staying-eligible' },
-    { name: 'College Board BigFuture: How to Convert Your GPA to a 4.0 Scale', url: 'https://bigfuture.collegeboard.org/plan-for-college/get-started/how-to-calculate-gpa-4.0-scale' },
-    { name: 'LSAC: Credential Assembly Service (GPA conversion)', url: 'https://www.lsac.org/applying-law-school/jd-application-process/credential-assembly-service-cas' }
+    { name: 'Wolfram MathWorld: Weighted Mean', url: 'https://mathworld.wolfram.com/WeightedMean.html' }
   ]
 };

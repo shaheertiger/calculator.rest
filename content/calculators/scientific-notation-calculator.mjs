@@ -3,169 +3,161 @@ export default {
   hub: 'math',
   name: 'Scientific Notation Calculator',
   title: 'Scientific Notation Calculator: 45,600,000 = 4.56 × 10⁷',
-  h1: 'Scientific Notation Converter and Calculator (×, ÷, +, − and E-Notation)',
-  meta: '45,600,000 is 4.56 × 10⁷ (4.56E+07): move the decimal point 7 places left. Convert either way, or multiply, divide, add and subtract in scientific notation.',
-  keyword: 'how to calculate scientific notation',
-  also: ['scientific notation calculator', 'scientific notation converter', 'e notation converter'],
-  updated: '2026-11-13',
+  meta: '45,600,000 is 4.56 × 10⁷: move the decimal point 7 places left. Convert to and from scientific notation, or multiply, divide, add and subtract, with steps.',
+  keyword: 'scientific notation calculator',
+  also: ['scientific notation converter', 'how to write a number in scientific notation', 'multiplying scientific notation', 'e notation', 'standard form calculator'],
+  updated: '2026-11-26',
+  answer: ({ r }) => `45,600,000 in scientific notation is <strong>${r.value}</strong>: move the decimal point 7 places left, to just after the 4.`,
   inputs: [
-    { id: 'mode', label: 'What to do', type: 'select', value: 'to', wide: true, options: [['to', 'Convert a number to scientific notation'], ['from', 'Scientific notation to a regular number'], ['mul', 'Multiply (a × 10ⁿ) × (b × 10ᵐ)'], ['div', 'Divide (a × 10ⁿ) ÷ (b × 10ᵐ)'], ['add', 'Add'], ['sub', 'Subtract']] },
-    { id: 'x', label: 'Number', type: 'text', value: '45,600,000', placeholder: 'e.g. 0.00052 or 6.02e23', showIf: { mode: ['to'] }, wide: true },
+    { id: 'mode', label: 'What do you need?', type: 'select', value: 'to', wide: true, options: [['to', 'Write a number in scientific notation'], ['from', 'Scientific notation to a regular number'], ['mul', 'Multiply (a × 10ⁿ) × (b × 10ᵐ)'], ['div', 'Divide (a × 10ⁿ) ÷ (b × 10ᵐ)'], ['add', 'Add (a × 10ⁿ) + (b × 10ᵐ)'], ['sub', 'Subtract (a × 10ⁿ) − (b × 10ᵐ)']] },
+    { id: 'x', label: 'Number', type: 'text', value: '45,600,000', placeholder: 'e.g. 0.00052 or 6.02e23', showIf: { mode: ['to'] } },
     { id: 'a1', label: 'Coefficient a', type: 'number', value: 4.56, showIf: { mode: ['from', 'mul', 'div', 'add', 'sub'] } },
-    { id: 'e1', label: 'Exponent n (power of 10)', type: 'number', value: 7, showIf: { mode: ['from', 'mul', 'div', 'add', 'sub'] } },
+    { id: 'e1', label: 'Power of ten n', type: 'number', value: 7, showIf: { mode: ['from', 'mul', 'div', 'add', 'sub'] } },
     { id: 'a2', label: 'Coefficient b', type: 'number', value: 3, showIf: { mode: ['mul', 'div', 'add', 'sub'] } },
-    { id: 'e2', label: 'Exponent m', type: 'number', value: -4, showIf: { mode: ['mul', 'div', 'add', 'sub'] } },
-    { id: 'sf', label: 'Round to significant figures', type: 'number', value: '', placeholder: 'optional, e.g. 3' }
+    { id: 'e2', label: 'Power of ten m', type: 'number', value: -4, showIf: { mode: ['mul', 'div', 'add', 'sub'] } },
+    { id: 'sf', label: 'Significant figures', type: 'select', value: 'all', options: [['all', 'keep every digit'], ['2', 'round to 2'], ['3', 'round to 3'], ['4', 'round to 4']] }
   ],
   compute(v, H) {
-    var SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
-    function sup(n) { return String(n).split('').map(function (c) { return SUP[c] || c; }).join(''); }
-    var sf = v.sf >= 1 && v.sf <= 15 ? Math.round(v.sf) : 0;
-    function norm(c, e, exact) {
+    function sup(s) { return '<sup>' + String(s).replace(/^-/, '−') + '</sup>'; }
+    function mi(s) { return String(s).replace(/^-/, '−'); }
+    var sf = v.sf === 'all' ? 0 : Number(v.sf) || 0;
+    function norm(c, e) { // c × 10^e, normalized
       if (c === 0) return { m: 0, e: 0, s: '0' };
-      var t = (sf ? Number(c.toPrecision(sf)) : exact ? c : Number(c.toPrecision(12))).toExponential().split('e');
-      var m = Number(t[0]), ee = e + Number(t[1]);
-      return { m: m, e: ee, s: sf ? m.toPrecision(sf) : String(m) };
+      var t = Number(c.toPrecision(12)).toExponential().split('e');
+      return { m: Number(t[0]), e: e + Number(t[1]), s: t[0] };
     }
-    function sci(p) { return p.m === 0 ? '0' : p.s.replace('-', '−') + ' × 10' + sup(p.e); }
+    function rnd(p, k) { k = k || sf; if (!k || p.m === 0) return p; var t = Number(p.s).toExponential(k - 1).split('e'); return { m: Number(t[0]), e: p.e + Number(t[1]), s: t[0] }; }
+    function sci(p) { return p.m === 0 ? '0' : mi(p.s) + ' × 10' + sup(p.e); }
     function enot(p) { var a = Math.abs(p.e); return p.s + 'E' + (p.e < 0 ? '-' : '+') + (a < 10 ? '0' : '') + a; }
-    function expand(p) {
-      if (p.m === 0) return '0';
-      if (Math.abs(p.e) > 40) return 'too long to write out (' + (p.e > 0 ? (p.e + 1) + ' digits' : Math.abs(p.e) - 1 + ' zeros after the point') + ')';
-      var neg = p.s.charAt(0) === '-', d = p.s.replace(/[-.]/g, ''), pos = 1 + p.e, ip, fp;
+    function expand(s, e) { // s = coefficient string, e = power of ten
+      var neg = s.charAt(0) === '-'; s = s.replace('-', '');
+      var parts = s.split('.'), d = parts[0] + (parts[1] || ''), pos = parts[0].length + e, ip, fp;
+      if (Math.abs(e) > 40) return null;
       if (pos <= 0) { ip = '0'; fp = new Array(-pos + 1).join('0') + d; }
       else if (pos >= d.length) { ip = d + new Array(pos - d.length + 1).join('0'); fp = ''; }
       else { ip = d.slice(0, pos); fp = d.slice(pos); }
-      ip = ip.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      ip = ip.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      fp = fp.replace(/0+$/, '');
       return (neg ? '−' : '') + ip + (fp ? '.' + fp : '');
     }
-    function eng(p) {
-      if (p.m === 0) return '0';
-      var e3 = Math.floor(p.e / 3) * 3, c = Number((p.m * Math.pow(10, p.e - e3)).toPrecision(sf || 12));
-      return H.num(c, 12).replace('-', '−') + ' × 10' + sup(e3);
-    }
-    function rowsFor(p) {
-      return [['E-notation (calculators, Excel)', enot(p)], ['Regular decimal number', expand(p)], ['Engineering notation', eng(p)], ['Order of magnitude', '10' + sup(p.e)]];
-    }
-    var steps = [], p, label, expr;
+    function ten(n) { var w = expand('1', n); return w && Math.abs(n) <= 15 ? '10' + sup(n) + ' = ' + w : '10' + sup(n); }
+    function rule(p0) { return sf ? 'rounded to ' + sf + ' significant figures' : 'exact, ' + H.plural(p0.s.replace(/[-.]/g, '').replace(/^0+/, '').length, 'significant figure') + ' kept'; }
+    var p, steps;
     if (v.mode === 'to') {
       var raw = String(v.x || '').trim();
-      var s = raw.replace(/[,\s]/g, '').replace(/[×x*]10\^/i, 'e').replace('−', '-');
-      if (!/^[+-]?(\d+\.?\d*|\.\d+)(e[+-]?\d+)?$/i.test(s)) return { error: 'Enter a number such as 0.00052, 45,600,000 or 6.02e23.' };
-      var val = Number(s);
-      if (!isFinite(val)) return { error: 'That number is outside the range this calculator can handle.' };
-      // significant figures in the entry
-      var mant = s.replace(/^[+-]/, '').split(/e/i)[0], hasPt = mant.indexOf('.') >= 0, digs = mant.replace('.', '').replace(/^0+/, ''), amb = false;
-      if (!hasPt && /0$/.test(digs)) { amb = true; digs = digs.replace(/0+$/, ''); }
-      p = norm(val, 0, true);
-      label = 'Scientific notation';
-      expr = H.esc(raw) + ' = ' + sci(p);
-      var r = rowsFor(p);
-      if (p.m !== 0) r.unshift(['Decimal point moved', Math.abs(p.e) + ' place' + (Math.abs(p.e) === 1 ? '' : 's') + (p.e > 0 ? ' left' : p.e < 0 ? ' right' : '')]);
-      if (digs) r.push(['Significant figures in your entry', digs.length + (amb ? ' to ' + (digs.length + (mant.match(/0+$/) || [''])[0].length) + ' (trailing zeros in a whole number are ambiguous)' : '')]);
-      return { value: sci(p), label: label, expr: expr, rows: r, sub: p.e > 0 ? 'Big numbers get a positive exponent.' : p.e < 0 ? 'Numbers between −1 and 1 get a negative exponent.' : 'Numbers from 1 to 9.99… use 10⁰ = 1.' };
+      var s = raw.replace(/[,\s]/g, '').replace(/[×x*]10\^/i, 'e').replace(/−/g, '-');
+      var mm = /^([+-]?)(\d*)(?:\.(\d*))?(?:e([+-]?\d+))?$/i.exec(s);
+      if (!mm || !(mm[2] || mm[3])) return { error: 'Enter a number such as 0.00052, 45,600,000 or 6.02e23.' };
+      var ip = mm[2] || '', fp = mm[3] || '', ee = Number(mm[4] || 0), d = ip + fp, k = d.search(/[1-9]/);
+      if (k < 0) return { error: 'Zero has no scientific notation form: it is just 0.' };
+      var dig = d.slice(k), coefDigits = fp ? dig : dig.replace(/0+$/, '');
+      if (!coefDigits) coefDigits = dig.charAt(0);
+      var aStr = (mm[1] === '-' ? '-' : '') + coefDigits.charAt(0) + (coefDigits.length > 1 ? '.' + coefDigits.slice(1) : '');
+      var moves = ip.length - 1 - k, n = moves + ee;
+      var p0 = { m: Number(aStr), e: n, s: aStr };
+      p = rnd(p0);
+      var shown = mi(raw.replace(/[−]/g, '-'));
+      steps = ['<b>Formula:</b> N = a × 10' + sup('n') + ', where 1 ≤ a < 10 and n is a whole number',
+        '<b>Find a:</b> put the decimal point just after the first nonzero digit (' + coefDigits.charAt(0) + ') and keep the digits that follow' + (fp ? '' : ', dropping the trailing zeros') + ': a = ' + mi(aStr)];
+      steps.push('<b>Count the moves:</b> ' + (moves === 0 ? 'the decimal point is already just after the first digit, so it does not move' : 'the decimal point moves ' + H.plural(Math.abs(moves), 'place') + ' to the ' + (moves > 0 ? 'left' : 'right')) + (ee ? ', and the ' + mi(ee) + ' already in the exponent is added: n = ' + mi(moves) + ' + ' + (ee < 0 ? '(' + mi(ee) + ')' : ee) + ' = ' + mi(n) : (moves === 0 ? ': n = 0' : ', so n = ') + (moves === 0 ? '' : mi(n)) + (moves > 0 ? ' (moving left makes n positive)' : moves < 0 ? ' (moving right makes n negative)' : '')));
+      if (sf && p.s !== p0.s) steps.push('<b>Round a to ' + sf + ' significant figures:</b> ' + mi(p0.s) + ' → ' + mi(p.s) + (p.e !== p0.e ? ', which carries into the next power: ' + sci(p) : ''));
+      var w0 = expand(p0.s, p0.e);
+      steps.push('<b>Check:</b> ' + (w0 && Math.abs(p0.e) <= 15 ? ten(p0.e) + ', so ' + mi(p0.s) + ' × ' + expand('1', p0.e) + ' = ' + w0 : mi(p0.s) + ' × 10' + sup(p0.e) + (w0 ? ' = ' + w0 : ' moves the decimal point back ' + H.plural(Math.abs(p0.e), 'place'))));
+      steps.push('<b>Answer:</b> ' + H.esc(shown) + ' = ' + sci(p) + ' (' + rule(p0) + '; ' + enot(p) + ' on a calculator).');
+      return { value: sci(p), label: 'Scientific notation', rows: [['E-notation (calculators, Excel)', enot(p)], ['Decimal point moved', moves === 0 ? '0 places' : H.plural(Math.abs(moves), 'place') + (moves > 0 ? ' left' : ' right')]], steps: steps };
     }
-    if (!isFinite(v.a1) || !isFinite(v.e1)) return { error: 'Enter coefficient a and exponent n.' };
-    if (!Number.isInteger(v.e1) || (v.mode !== 'from' && !Number.isInteger(v.e2))) return { error: 'Exponents must be whole numbers.' };
-    var A = norm(v.a1, v.e1, true);
+    if (!isFinite(v.a1) || !isFinite(v.e1)) return { error: 'Enter coefficient a and the power of ten n.' };
+    if (!Number.isInteger(v.e1) || (v.mode !== 'from' && !Number.isInteger(v.e2))) return { error: 'Powers of ten must be whole numbers.' };
+    if (Math.abs(v.e1) > 300 || Math.abs(v.e2 || 0) > 300) return { error: 'Use powers of ten between −300 and 300.' };
+    var fa = mi(H.num(v.a1, 12)), A = norm(v.a1, v.e1);
     if (v.mode === 'from') {
-      p = A;
-      return { value: expand(p), label: 'Regular number', expr: H.num(v.a1, 12) + ' × 10' + sup(v.e1), rows: [['Normalized scientific notation', sci(p)], ['E-notation', enot(p)], ['Engineering notation', eng(p)]], sub: v.e1 > 0 ? 'Move the decimal point ' + v.e1 + ' places right.' : v.e1 < 0 ? 'Move the decimal point ' + (-v.e1) + ' places left.' : '10⁰ = 1, so the number is unchanged.' };
+      p = rnd(A);
+      var as = String(Number(v.a1.toPrecision(12))), e1 = v.e1;
+      if (/e/.test(as)) { as = A.s; e1 = A.e; }
+      var w = expand(sf ? p.s : as, sf ? p.e : e1);
+      steps = ['<b>Formula:</b> a × 10' + sup('n') + ' means move the decimal point of a by n places: right when n is positive, left when n is negative',
+        '<b>Substitute:</b> ' + fa + ' × 10' + sup(v.e1),
+        '<b>Power of ten:</b> ' + ten(v.e1),
+        '<b>Move the decimal point:</b> ' + (v.e1 === 0 ? '10⁰ = 1, so nothing moves' : H.plural(Math.abs(v.e1), 'place') + ' to the ' + (v.e1 > 0 ? 'right' : 'left') + (v.e1 > 0 ? ', filling with zeros' : ', adding zeros in front')) + ': ' + (w || 'too long to write out')];
+      if (sf) steps.push('<b>Round to ' + sf + ' significant figures:</b> ' + sci(p));
+      steps.push('<b>Answer:</b> ' + fa + ' × 10' + sup(v.e1) + ' = ' + (w || sci(p)) + ' (' + (sf ? 'rounded to ' + sf + ' significant figures' : 'exact') + ').');
+      return { value: w || sci(p), label: 'Regular number', rows: [['Normalized scientific notation', sci(p)], ['E-notation', enot(p)]], steps: steps };
     }
-    if (!isFinite(v.a2) || !isFinite(v.e2)) return { error: 'Enter coefficient b and exponent m.' };
-    var fa = H.num(v.a1, 12), fb = H.num(v.a2, 12), sym;
-    if (v.mode === 'mul') {
-      sym = '×';
-      var c = v.a1 * v.a2;
-      steps.push(['Multiply the coefficients', fa + ' × ' + fb + ' = ' + H.num(Number(c.toPrecision(12)), 12)]);
-      steps.push(['Add the exponents', v.e1 + ' + ' + (v.e2 < 0 ? '(' + v.e2 + ')' : v.e2) + ' = ' + (v.e1 + v.e2)]);
-      p = norm(c, v.e1 + v.e2);
-    } else if (v.mode === 'div') {
-      if (v.a2 === 0) return { error: 'You cannot divide by zero.' };
-      sym = '÷';
-      var q = v.a1 / v.a2;
-      steps.push(['Divide the coefficients', fa + ' ÷ ' + fb + ' = ' + H.num(Number(q.toPrecision(12)), 12)]);
-      steps.push(['Subtract the exponents', v.e1 + ' − ' + (v.e2 < 0 ? '(' + v.e2 + ')' : v.e2) + ' = ' + (v.e1 - v.e2)]);
-      p = norm(q, v.e1 - v.e2);
+    if (!isFinite(v.a2) || !isFinite(v.e2)) return { error: 'Enter coefficient b and the power of ten m.' };
+    var fb = mi(H.num(v.a2, 12)), e2t = v.e2 < 0 ? '(' + mi(v.e2) + ')' : String(v.e2);
+    var L = '(' + fa + ' × 10' + sup(v.e1) + ')', R = '(' + fb + ' × 10' + sup(v.e2) + ')', c, eT, sym, p0b;
+    if (v.mode === 'mul' || v.mode === 'div') {
+      var mul = v.mode === 'mul';
+      if (!mul && v.a2 === 0) return { error: 'You cannot divide by zero.' };
+      sym = mul ? '×' : '÷';
+      c = mul ? v.a1 * v.a2 : v.a1 / v.a2; eT = mul ? v.e1 + v.e2 : v.e1 - v.e2;
+      var cs = mi(H.num(Number(c.toPrecision(12)), 12));
+      steps = [mul ? '<b>Formula:</b> (a × 10' + sup('n') + ') × (b × 10' + sup('m') + ') = (a × b) × 10' + sup('n + m') + ': multiply the coefficients, add the powers' : '<b>Formula:</b> (a × 10' + sup('n') + ') ÷ (b × 10' + sup('m') + ') = (a ÷ b) × 10' + sup('n − m') + ': divide the coefficients, subtract the powers',
+        '<b>Substitute:</b> ' + L + ' ' + sym + ' ' + R + ' = (' + fa + ' ' + sym + ' ' + fb + ') × 10' + sup(v.e1 + (mul ? ' + ' : ' − ') + e2t),
+        '<b>' + (mul ? 'Multiply' : 'Divide') + ' the coefficients:</b> ' + fa + ' ' + sym + ' ' + fb + ' = ' + cs,
+        '<b>' + (mul ? 'Add' : 'Subtract') + ' the powers:</b> ' + v.e1 + (mul ? ' + ' : ' − ') + e2t + ' = ' + mi(eT)];
     } else {
-      sym = v.mode === 'add' ? '+' : '−';
-      var hi = v.e1 >= v.e2, eT = hi ? v.e1 : v.e2, k = Math.abs(v.e1 - v.e2);
-      var b2 = v.mode === 'add' ? v.a2 : -v.a2;
-      var sa = hi ? v.a1 : (k > 300 ? 0 : v.a1 / Math.pow(10, k)), sb = hi ? (k > 300 ? 0 : b2 / Math.pow(10, k)) : b2;
+      var add = v.mode === 'add', hi = v.e1 >= v.e2, k2 = Math.abs(v.e1 - v.e2);
+      sym = add ? '+' : '−'; eT = hi ? v.e1 : v.e2;
+      var sa = hi ? v.a1 : v.a1 / Math.pow(10, k2), sb = hi ? v.a2 / Math.pow(10, k2) : v.a2;
       sa = Number(sa.toPrecision(12)); sb = Number(sb.toPrecision(12));
-      steps.push(['Match the exponents (use 10' + sup(eT) + ')', H.num(sa, 15) + ' × 10' + sup(eT) + ' and ' + H.num(Math.abs(sb), 15) + ' × 10' + sup(eT)]);
-      steps.push([(v.mode === 'add' ? 'Add' : 'Subtract') + ' the coefficients', H.num(Number((sa + sb).toPrecision(12)), 15) + ' × 10' + sup(eT)]);
-      p = norm(sa + sb, eT);
+      c = Number((add ? sa + sb : sa - sb).toPrecision(12));
+      var mv = hi ? [fb, v.e2, sb] : [fa, v.e1, sa];
+      steps = ['<b>Formula:</b> a × 10' + sup('n') + ' ' + sym + ' b × 10' + sup('n') + ' = (a ' + sym + ' b) × 10' + sup('n') + ': the powers of ten must match before you ' + (add ? 'add' : 'subtract'),
+        '<b>Substitute:</b> ' + L + ' ' + sym + ' ' + R,
+        '<b>Match the powers:</b> ' + (k2 === 0 ? 'both already use 10' + sup(eT) : 'rewrite ' + mv[0] + ' × 10' + sup(mv[1]) + ' as ' + mi(H.num(mv[2], 15)) + ' × 10' + sup(eT) + ' (decimal point ' + H.plural(k2, 'place') + ' left, power up by ' + k2 + ')'),
+        '<b>' + (add ? 'Add' : 'Subtract') + ' the coefficients:</b> ' + mi(H.num(sa, 15)) + ' ' + sym + ' ' + (sb < 0 ? '(' + mi(H.num(sb, 15)) + ')' : H.num(sb, 15)) + ' = ' + mi(H.num(c, 15))];
     }
-    steps.push(['Write with one digit before the point', sci(p)]);
-    return {
-      value: sci(p), label: 'Result in scientific notation',
-      expr: '(' + fa + ' × 10' + sup(v.e1) + ') ' + sym + ' (' + fb + ' × 10' + sup(v.e2) + ')',
-      rows: rowsFor(p), table: { head: ['Step', 'Work'], rows: steps }
-    };
+    var raw2 = c === 0 ? 0 : Number(c.toPrecision(12)), ok = Math.abs(raw2 - c) <= 1e-14 * Math.abs(c), sfx = sf || (ok ? 0 : 10);
+    p0b = norm(c, eT); p = rnd(p0b, sfx);
+    var sh = p0b.e - eT;
+    if (raw2 !== 0 && sh !== 0) steps.push('<b>Fix the coefficient:</b> ' + mi(H.num(raw2, 15)) + ' is not between 1 and 10, so move its decimal point ' + H.plural(Math.abs(sh), 'place') + (sh > 0 ? ' left and add ' + sh + ' to' : ' right and subtract ' + (-sh) + ' from') + ' the power: ' + sci(p0b));
+    if (sfx && p.s !== p0b.s) steps.push('<b>Round to ' + sfx + ' significant figures:</b> ' + sci(p0b) + ' → ' + sci(p));
+    steps.push('<b>Answer:</b> ' + L + ' ' + sym + ' ' + R + ' = ' + sci(p) + ' (' + (sfx ? 'rounded to ' + sfx + ' significant figures' : 'exact') + ').');
+    return { value: sci(p), label: 'Result in scientific notation', rows: [['E-notation', enot(p)], ['As a regular number', expand(p.s, p.e) || 'too long to write out']], steps: steps };
   },
-  quick: ({ r }) => `To write a number in scientific notation, move the decimal point until one nonzero digit is left in front of it, then multiply by 10 raised to the number of places moved. 45,600,000 needs 7 moves left, so it is <strong>${r.value}</strong> (4.56E+07 on a calculator). Small numbers get negative powers: 0.00052 = 5.2 × 10⁻⁴.`,
-  stepsTitle: 'How to calculate scientific notation',
-  steps: [
-    'Find the first nonzero digit and place the decimal point right after it. For 45,600,000 that gives 4.56; for 0.00052 it gives 5.2.',
-    'Count how many places the point moved. That count is the exponent: positive if the original number was 10 or more, negative if it was smaller than 1. Getting the sign backwards is the usual slip.',
-    'Drop zeros that only held place: 45,600,000 becomes 4.56 × 10⁷. Keep zeros that were measured, which is what the optional significant-figures box is for.',
-    'To go back, move the point right for a positive exponent and left for a negative one, filling gaps with zeros.'
-  ],
-  formulaTitle: 'What is the rule for scientific notation?',
-  formula: {
-    expr: 'N = a × 10ⁿ, with 1 ≤ |a| &lt; 10 and n a whole number<br>(a × 10ⁿ)(b × 10ᵐ) = ab × 10ⁿ⁺ᵐ<br>(a × 10ⁿ) ÷ (b × 10ᵐ) = (a ÷ b) × 10ⁿ⁻ᵐ',
-    vars: [['a', 'coefficient (also called the significand or mantissa)'], ['n', 'exponent: how many places the decimal point moved'], ['10ⁿ', 'the power of ten that sets the size']],
-    note: 'After multiplying or dividing, a coefficient of 10 or more (or below 1) is renormalized: 13.68 × 10³ becomes 1.368 × 10⁴.'
+  facts: {
+    formula: 'N = a × 10ⁿ, with 1 ≤ |a| < 10<br>(a × 10ⁿ)(b × 10ᵐ) = ab × 10ⁿ⁺ᵐ<br>(a × 10ⁿ) ÷ (b × 10ᵐ) = (a ÷ b) × 10ⁿ⁻ᵐ',
+    vars: [['a', 'the coefficient: one nonzero digit before the decimal point'], ['n', 'the power of ten: how many places the decimal point moved'], ['E', 'calculator shorthand for "× 10 to the": 4.56E+07 = 4.56 × 10⁷']],
+    rounding: 'converting does not round: every digit you typed stays in a. Pick a number of significant figures to round the coefficient, as chemistry and physics answers usually ask.',
+    note: 'Big numbers (10 or more) get a positive power; numbers between 0 and 1 get a negative power.'
   },
-  example: `<p>Multiply (4.56 × 10⁷) by (3 × 10⁻⁴).</p>
-<p>Coefficients: 4.56 × 3 = 13.68. Exponents: 7 + (−4) = 3. That gives 13.68 × 10³.</p>
-<p>13.68 is not between 1 and 10, so move the point one place left and add 1 to the exponent: <strong>1.368 × 10⁴</strong>, which is 13,680.</p>`,
-  table: {
-    title: 'How are famous constants written in scientific notation?',
-    intro: 'Exact SI defining values and astronomical lengths, converted by the calculator above.',
-    head: ['Quantity', 'Written out', 'Scientific notation', 'E-notation'],
-    rows: ({ run }) => [['Speed of light (m/s)', '299792458'], ['Astronomical unit (m)', '149597870700'], ['Light-year (m)', '9460730472580800'], ['Avogadro constant (per mol)', '6.02214076e23'], ['Boltzmann constant (J/K)', '1.380649e-23'], ['Elementary charge (C)', '1.602176634e-19'], ['Planck constant (J·s)', '6.62607015e-34'], ['One micrometer (m)', '0.000001']].map(([q, x]) => { const o = run({ mode: 'to', x, sf: NaN }); return [q, o.rows.find(r => r[0].indexOf('Regular') === 0)[1], o.value, o.rows.find(r => r[0].indexOf('E-notation') === 0)[1]]; }),
-    note: 'Since the 2019 SI redefinition the speed of light, Planck constant, elementary charge, Boltzmann constant and Avogadro constant have exact values (NIST CODATA). The light-year is the IAU Julian year (365.25 days) times the speed of light.'
+  example: {
+    h2: 'Worked example: how far light travels in 500 seconds',
+    html: `<p><strong>Problem:</strong> Light travels 3.0 × 10⁸ meters per second. Sunlight takes about 5.0 × 10² seconds to reach Earth. How far is that, in scientific notation?</p>
+<p><strong>1.</strong> Distance = speed × time = (3.0 × 10⁸) × (5.0 × 10²).</p>
+<p><strong>2.</strong> Multiply the coefficients: 3.0 × 5.0 = 15. Add the powers: 8 + 2 = 10. That gives 15 × 10¹⁰.</p>
+<p><strong>3.</strong> 15 is not between 1 and 10, so move its decimal point one place left and raise the power by 1: 1.5 × 10¹¹.</p>
+<p><strong>Answer:</strong> about 1.5 × 10¹¹ meters (2 significant figures, matching the data). Sense check: that is 150,000,000 km, the usual figure for the Earth–Sun distance.</p>`
   },
-  sections: [
+  variants: [
     {
-      h2: 'How do you multiply and divide numbers in scientific notation?',
-      html: `<p>Work on the two parts separately. Multiply (or divide) the coefficients, then add the exponents when multiplying or subtract them when dividing. Finish by renormalizing so one digit sits before the point.</p>
-<ul><li>(3 × 10⁸) × (2 × 10⁻³) = 6 × 10⁵</li><li>(6.4 × 10⁶) ÷ (1.6 × 10²) = 4 × 10⁴</li><li>(5 × 10⁴) × (4 × 10³) = 20 × 10⁷ = 2 × 10⁸</li></ul>
-<p>This is why scientists use the notation: multiplying 300,000,000 by 0.002 by hand invites a misplaced zero, while 3 × 2 and 8 − 3 do not.</p>`
+      h2: 'How do you write a small number in scientific notation?',
+      html: `<p>Move the decimal point right until one nonzero digit sits in front of it, and make the power negative. 0.00052 becomes 5.2 after 4 moves to the right, so 0.00052 = <strong>5.2 × 10⁻⁴</strong>. Count the moves, not the zeros: there are 3 zeros after the point, but the point passes 4 digits (0, 0, 0 and 5).</p>`
     },
     {
-      h2: 'How do you add or subtract in scientific notation?',
-      html: `<p>The exponents must match first. Rewrite the number with the smaller exponent so it uses the larger one, then add or subtract the coefficients.</p>
-<p>4.2 × 10⁵ + 3.1 × 10⁴: rewrite 3.1 × 10⁴ as 0.31 × 10⁵, then 4.2 + 0.31 = <strong>4.51 × 10⁵</strong>. For subtraction, 7.0 × 10⁻³ − 5.5 × 10⁻⁴ = 7.0 × 10⁻³ − 0.55 × 10⁻³ = 6.45 × 10⁻³.</p>
-<p>When the exponents differ by more than your precision (say 10¹² + 3), the smaller number vanishes after rounding, which is fine for measurements but worth knowing.</p>`
+      h2: 'How do you multiply and divide in scientific notation?',
+      html: `<p>Work the coefficients and the powers separately. Multiply: (4.56 × 10⁷) × (3 × 10⁻⁴) = 13.68 × 10³, and since 13.68 is too big, rewrite it as <strong>1.368 × 10⁴</strong>. Divide: (6 × 10⁵) ÷ (2 × 10⁻³) = 3 × 10<sup>5 − (−3)</sup> = <strong>3 × 10⁸</strong>. Subtracting a negative power is where most sign slips happen.</p>`
     },
     {
-      h2: 'What does E mean on a calculator?',
-      html: `<p>An E (or e) in a calculator or spreadsheet display means "times ten to the power." 4.56E7 and 4.56E+07 both mean 4.56 × 10⁷, and 5.2E−4 means 5.2 × 10⁻⁴. It has nothing to do with Euler's number e ≈ 2.718.</p>
-<p>To type a number in this form, use the <strong>EE</strong> or <strong>EXP</strong> key instead of typing "× 10 ^". On a TI-84 the EE function is 2nd + comma, so 4.56 [2nd][EE] 7 enters 4.56 × 10⁷. Typing × 10 ^ 7 by hand usually gives the same value but can break order of operations inside a longer expression.</p>
-<p>Excel and Google Sheets accept 4.56E7 typed into a cell. Choose the Scientific number format to display any value as 4.56E+07; the number of decimals you choose sets the significant figures shown.</p>`
-    },
-    {
-      h2: 'How do significant figures work in scientific notation?',
-      html: `<p>Every digit in the coefficient counts as significant, which removes the guesswork about trailing zeros. A measured 45,600,000 could have three significant figures or eight; writing 4.56 × 10⁷ says three, and 4.5600 × 10⁷ says five.</p>
-<p>Leading zeros never count: 0.00052 has two significant figures (5 and 2), shown plainly as 5.2 × 10⁻⁴. Enter a count in the optional box to round any result, for example 1.368 × 10⁴ to 3 significant figures is 1.37 × 10⁴. For propagating measurement error, use the <a href="/uncertainty-calculator">uncertainty calculator</a>.</p>`
+      h2: 'What does 4.56E+07 mean on a calculator?',
+      html: `<p>It is <strong>4.56 × 10⁷</strong>, or 45,600,000. Calculators and spreadsheets write "E" for "times ten to the", so 5.2E-04 is 5.2 × 10⁻⁴ = 0.00052. On a TI-84, type 4.56, press 2nd then EE (above the comma), then 7. Do not type × 10 ^ 7 inside a longer calculation without brackets.</p>`
     }
   ],
+  mistakes: [
+    '<strong>Getting the sign of the power backwards.</strong> 0.00052 is 5.2 × 10⁻⁴, not 5.2 × 10⁴. Small numbers get negative powers.',
+    '<strong>Leaving the coefficient outside 1 to 10.</strong> 45.6 × 10⁶ equals 45,600,000 but is not scientific notation; write 4.56 × 10⁷.',
+    '<strong>Adding without matching the powers.</strong> 2 × 10³ + 5 × 10² is 2.5 × 10³ (2,000 + 500), not 7 × 10⁵.',
+    '<strong>Multiplying the powers.</strong> 10⁸ × 10² = 10¹⁰: add the powers, never multiply them to get 10¹⁶.'
+  ],
+  related: ['exponent-calculator', 'root-calculator', 'ph-calculator', 'speed-calculator'],
   faq: [
-    { q: 'What is 0.00045 in scientific notation?', a: '0.00045 is 4.5 × 10⁻⁴. The decimal point moves 4 places right to sit after the 4, so the exponent is −4.' },
-    { q: 'What is 6.02 × 10²³ written out?', a: '6.02 × 10²³ is 602,000,000,000,000,000,000,000: the digits 602 followed by 21 zeros.' },
-    { q: 'Can the coefficient be 10 or bigger?', a: 'Not in normalized scientific notation. The coefficient must be at least 1 and less than 10, so 12 × 10³ is rewritten as 1.2 × 10⁴.' },
-    { q: 'Is scientific notation the same as standard form?', a: 'It depends on the country. In the UK, "standard form" means scientific notation. In U.S. classrooms, "standard form" usually means the ordinary written-out number, such as 45,600,000.' },
-    { q: 'What is engineering notation?', a: 'Engineering notation restricts the exponent to multiples of 3, matching SI prefixes such as kilo (10³), mega (10⁶) and micro (10⁻⁶). 45,600,000 is 45.6 × 10⁶, or 45.6 mega-units.' },
-    { q: 'How do you write a negative number in scientific notation?', a: 'Put the minus sign on the coefficient: −320,000 is −3.2 × 10⁵. A negative exponent means a small size, not a negative value.' },
-    { q: 'What is 1 × 10⁰?', a: '1 × 10⁰ is just 1, because any nonzero number raised to the power 0 equals 1. Numbers from 1 up to 9.99… all have an exponent of 0.' }
+    { q: 'What is 6.02 × 10²³ written out?', a: '602,000,000,000,000,000,000,000. Move the decimal point 23 places right: 2 places use up the digits 0 and 2, and 21 zeros fill the rest.' },
+    { q: 'Is 10 × 10³ in scientific notation?', a: 'No. The coefficient must be at least 1 and less than 10, so 10 × 10³ is written 1 × 10⁴ (10,000).' },
+    { q: 'How many significant figures does a number in scientific notation have?', a: 'Count the digits in the coefficient. 4.56 × 10⁷ has 3, and 4.560 × 10⁷ has 4, which is why scientific notation is the clear way to show precision.' },
+    { q: 'Is standard form the same as scientific notation?', a: 'In the UK, yes: standard form means a × 10ⁿ. In US math class, "standard form" usually means the ordinary number, such as 45,600,000.' }
   ],
-  related: ['exponent-calculator', 'log-calculator', 'fraction-calculator', 'binary-hex-calculator'],
   sources: [
-    { name: 'NIST: Fundamental Physical Constants (CODATA)', url: 'https://physics.nist.gov/cuu/Constants/' },
-    { name: 'NIST: Metric (SI) Prefixes', url: 'https://www.nist.gov/pml/owm/metric-si-prefixes' },
     { name: 'Wolfram MathWorld: Scientific Notation', url: 'https://mathworld.wolfram.com/ScientificNotation.html' }
   ]
 };

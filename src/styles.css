@@ -220,7 +220,7 @@ code { font: 400 .88em/1.5 var(--mono); background: var(--surface); padding: 1px
 .v2-head h1 { margin-bottom: 10px; }
 .answer-line { font-size: 19px; line-height: 1.5; color: var(--ink); margin: 0; max-width: 700px; }
 .answer-line strong { font-weight: 650; }
-@media (max-width: 520px) { .v2-head { padding: 12px 0 14px; } .v2-head h1 { font-size: 31px; } .answer-line { font-size: 17px; } }
+@media (max-width: 520px) { .crumbs { margin-top: 12px; } .v2-head { padding: 8px 0 12px; } .v2-head h1 { font-size: 30px; margin-bottom: 8px; } .answer-line { font-size: 17px; } }
 .calc-v2 { margin-bottom: 40px; }
 .work { margin-top: 18px; }
 .work-h { font: 600 13px/1 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
@@ -246,3 +246,4 @@ code { font: 400 .88em/1.5 var(--mono); background: var(--surface); padding: 1px
   .calc-v2 .actions { padding-top: 0; }
   .calc-v2 .r-value { font-size: 44px; }
 }
+sup, sub { white-space: nowrap; }
